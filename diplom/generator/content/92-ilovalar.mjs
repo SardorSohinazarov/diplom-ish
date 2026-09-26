@@ -37,6 +37,16 @@ export const appendix = () => [
     slice(read('NationalChatClient', 'src', 'app', 'features', 'chat', 'data-access', 'chat-realtime.service.ts'), '  async connect(): Promise<void> {', '    this.connection.onclose('),
   ),
   ...testsAppendix(),
+  ...listing(
+    '6-ilova. O‘zbek yozuvlari o‘rtasida transliteratsiya (UzbekTransliterator)',
+    'NationalChat/src/Domain/Text/UzbekTransliterator.cs',
+    read('NationalChat', 'src', 'Domain', 'Text', 'UzbekTransliterator.cs'),
+  ),
+  ...listing(
+    '7-ilova. Maxfiy chatlar kriptografiyasi: kalitlarni chiqarish, shifrlash va ratchet (secret-crypto.ts, parcha)',
+    'NationalChatClient/src/app/features/chat/secret/secret-crypto.ts',
+    slice(read('NationalChatClient', 'src', 'app', 'features', 'chat', 'secret', 'secret-crypto.ts'), 'export async function deriveChains(', 'function associatedData('),
+  ),
 ];
 
 /** The tests live on the feature/unit-tests branch; skip the appendix if that branch is not checked out. */

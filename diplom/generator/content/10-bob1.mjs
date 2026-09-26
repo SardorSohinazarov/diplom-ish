@@ -58,13 +58,15 @@ export const chapter1 = () => [
     [
       ['Egasi (davlat)', 'Telegram (BAA)', 'Meta (AQSh)', 'Signal Foundation (AQSh)', 'Tencent (Xitoy)', 'Mahalliy ishlab chiquvchi'],
       ['Ro‘yxatdan o‘tish', 'Telefon raqami', 'Telefon raqami', 'Telefon raqami', 'Telefon raqami', 'E-pochta kodi, Google'],
-      ['E2E shifrlash', 'Faqat maxfiy chatlarda', 'Sukut bo‘yicha', 'Sukut bo‘yicha', 'Yo‘q', 'Rejalashtirilgan (TLS mavjud)'],
+      ['E2E shifrlash', 'Faqat maxfiy chatlarda', 'Sukut bo‘yicha', 'Sukut bo‘yicha', 'Yo‘q', 'Maxfiy chatlarda (X25519, AES-GCM)'],
       ['Yozishmalar saqlanishi', 'Bulutda (serverda)', 'Qurilmada', 'Qurilmada', 'Serverda', 'O‘z serverida (bulutli)'],
       ['Guruh hajmi', '200 000', '1024', '1000', '500', '200'],
       ['Kanallar, botlar', 'Bor', 'Kanallar bor', 'Yo‘q', 'Bor', 'Kelajakda (sxemasi tayyor)'],
       ['Hikoyalar', 'Bor', 'Bor (Status)', 'Bor', 'Bor', 'Bor'],
       ['Server kodi', 'Yopiq', 'Yopiq', 'Ochiq', 'Yopiq', 'Mahalliy nazoratda'],
       ['Ma’lumotlar joylashuvi', 'Xorijda', 'Xorijda', 'Xorijda', 'Xitoyda', 'Istalgan serverda, jumladan O‘zbekistonda'],
+      ['Lotin/kirill yozuvida ko‘rsatish', 'Yo‘q', 'Yo‘q', 'Yo‘q', 'Yo‘q', 'Bor (qidiruv ham)'],
+      ['Tashkilot tomonidan tasdiqlash', 'Yo‘q', 'Yo‘q', 'Yo‘q', 'Yo‘q', 'E-pochta domeni orqali'],
     ],
     [3, 3, 3, 3, 3, 3.4],
   ),
@@ -88,7 +90,8 @@ export const chapter1 = () => [
   ]),
   ...ps(
     'O‘zbekiston qonunchiligi bu masalalarni tartibga soladi. 2019-yil 2-iyulda qabul qilingan “Shaxsga doir ma’lumotlar to‘g‘risida”gi O‘RQ-547-son Qonun shaxsga doir ma’lumotlarni yig‘ish, saqlash, qayta ishlash va himoya qilish tartibini belgilaydi. Qonunga 2021-yilda kiritilgan qo‘shimchalarga muvofiq, O‘zbekiston fuqarolarining shaxsga doir ma’lumotlarini Internet orqali qayta ishlovchi mulkdorlar va operatorlar ularni respublika hududida joylashgan va davlat ro‘yxatidan o‘tgan ma’lumotlar bazalarida saqlashi shart. “Raqamli O‘zbekiston – 2030” strategiyasi esa milliy dasturiy mahsulotlar va xizmatlarni rivojlantirishni ustuvor yo‘nalish sifatida belgilaydi.',
-    'Milliy messenjer bu talablarga tabiiy ravishda javob beradi. Uning serverlari mamlakat ichidagi data-markazda joylashtirilishi mumkin. Dastur kodi mahalliy mutaxassislar nazoratida bo‘ladi. Xavfsizlik siyosatini esa milliy qonunchilik va ehtiyojlarga moslashtirish mumkin. Masalan, “Milliy chat” tizimida yuklanayotgan fayllar ClamAV antivirusi orqali tekshiriladi. Foydalanuvchi o‘z hisobiga ulangan barcha qurilmalarni ko‘rishi va begona qurilmani masofadan chiqarib yuborishi mumkin. Bir martalik kodlar va refresh tokenlar ma’lumotlar bazasida ochiq holda emas, faqat xesh ko‘rinishida saqlanadi.',
+    'Milliy messenjer bu talablarga tabiiy ravishda javob beradi. Uning serverlari mamlakat ichidagi data-markazda joylashtirilishi mumkin. Dastur kodi mahalliy mutaxassislar nazoratida bo‘ladi. Xavfsizlik siyosatini esa milliy qonunchilik va ehtiyojlarga moslashtirish mumkin. Masalan, “Milliy chat” tizimida yuklanayotgan fayllar ClamAV antivirusi orqali tekshiriladi. Foydalanuvchi o‘z hisobiga ulangan barcha qurilmalarni ko‘rishi va begona qurilmani masofadan chiqarib yuborishi mumkin. Bir martalik kodlar va refresh tokenlar ma’lumotlar bazasida ochiq holda emas, faqat xesh ko‘rinishida saqlanadi. Eng maxfiy yozishmalar uchun esa uchdan-uchgacha shifrlangan maxfiy chatlar mavjud: ularning mazmunini hatto serverning o‘zi ham o‘qiy olmaydi.',
+    'Milliy messenjerning yana bir afzalligi — mahalliy ehtiyojlarni hisobga olish imkoniyati. O‘zbekistonda 1993-yilda lotin yozuviga asoslangan alifbo qabul qilingan bo‘lsa-da, kirill yozuvi hanuzgacha keng qo‘llanadi: katta avlod vakillari, ko‘plab nashrlar va rasmiy hujjatlar kirillda, yoshlar esa asosan lotinda yozadi. Xorijiy messenjerlarda bu ikki yozuv o‘rtasida hech qanday bog‘lanish yo‘q: kirillda yozilgan xabarni lotin alifbosiga o‘rgangan foydalanuvchi qiyinchilik bilan o‘qiydi, lotincha qidiruv esa kirillcha xabarni topmaydi. Shuningdek, ta’lim muassasalari va tashkilotlar uchun a’zoning haqiqatan shu tashkilotga tegishli ekanini tasdiqlash muhim. Telefon raqamiga asoslangan xorijiy messenjerlar buni ta’minlay olmaydi, tashkilotning e-pochta domeni esa bunday tasdiq uchun tabiiy vosita bo‘lib xizmat qiladi.',
     'Axborot xavfsizligining asosiy uch talabi — maxfiylik, yaxlitlik va foydalanish imkoniyati (CIA triadasi) — “Milliy chat” loyihasida quyidagicha ta’minlanadi. Maxfiylik barcha trafikni HTTPS/TLS orqali shifrlash, qisqa muddatli JWT tokenlar va chatga kirish huquqini har bir so‘rovda tekshirish orqali ta’minlanadi. Yaxlitlik ma’lumotlar bazasi darajasidagi cheklovlar, tranzaksiyalar va kiruvchi ma’lumotlarni validatsiya qilish orqali, foydalanish imkoniyati esa holatsiz (stateless) server, konteynerlash va avtomatik qayta ulanadigan real vaqt aloqasi orqali ta’minlanadi.',
   ),
 
@@ -154,7 +157,10 @@ export const chapter1 = () => [
     'chat ichida xabarlarni matn bo‘yicha qidirish va topilgan xabar kontekstiga o‘tish;',
     'yangi xabarlarni, “yozmoqda” holatini, o‘qilganlik belgilarini va suhbatdoshning onlayn holatini sahifani yangilamasdan real vaqtda ko‘rsatish;',
     '24 soat davomida ko‘rinadigan hikoyalar (stories) joylash, ko‘rish va ularni kim ko‘rganini bilish;',
-    'yorug‘ va qorong‘i mavzular hamda mobil qurilmalarga moslashuvchan interfeys.',
+    'yorug‘ va qorong‘i mavzular hamda mobil qurilmalarga moslashuvchan interfeys;',
+    'xabarlarni foydalanuvchi tanlagan yozuvda (asl holida, lotin yoki kirill) ko‘rsatish va yozuvdan qat’i nazar qidirish;',
+    'tashkilot e-pochta domeni orqali foydalanuvchini tasdiqlash, tashkilotning yopiq guruhiga avtomatik qo‘shish va taklif havolalari;',
+    'ikki qurilma o‘rtasida uchdan-uchgacha shifrlangan maxfiy chat: kalitni tekshirish, o‘z-o‘zini o‘chirish taymeri va shifrlangan fayllar.',
   ]),
   h3('Nofunksional talablar:'),
   ...bullets([
@@ -173,6 +179,6 @@ export const chapter1 = () => [
   h2('1-bob bo‘yicha xulosa'),
   ...ps(
     'Birinchi bobda messenjerlarning IRC va ICQ dan boshlab bugungi Telegram, WhatsApp va Signal kabi ilovalargacha bo‘lgan rivojlanish yo‘li ko‘rib chiqildi. Mavjud messenjerlar funksionallik, xavfsizlik modeli va ma’lumotlarni saqlash joyi bo‘yicha taqqoslandi. Ularning barchasi xorijiy kompaniyalar tomonidan boshqarilishi va foydalanuvchi ma’lumotlarini mamlakatdan tashqarida saqlashi aniqlandi. Bu holat “Shaxsga doir ma’lumotlar to‘g‘risida”gi Qonunning lokalizatsiya talablari va “Raqamli O‘zbekiston – 2030” strategiyasi maqsadlari nuqtai nazaridan milliy messenjer yaratish zaruriyatini asoslaydi.',
-    'Real vaqtda aloqa texnologiyalari tahlili asosida WebSocket va unga zaxira transportlarni avtomatik tanlaydigan SignalR kutubxonasi eng maqbul yechim sifatida tanlandi. Bob yakunida tizimning aktorlari, funksional va nofunksional talablari aniqlanib, masala qo‘yildi.',
+    'Real vaqtda aloqa texnologiyalari tahlili asosida WebSocket va unga zaxira transportlarni avtomatik tanlaydigan SignalR kutubxonasi eng maqbul yechim sifatida tanlandi. Bob yakunida tizimning aktorlari, 15 ta funksional va 7 guruh nofunksional talablari aniqlanib, masala qo‘yildi. Talablar orasida faqat milliy messenjer uchun xos bo‘lgan imkoniyatlar — lotin va kirill yozuvlari o‘rtasida avtomatik o‘girish, tashkilot tomonidan tasdiqlash va uchdan-uchgacha shifrlangan maxfiy chatlar ham bor.',
   ),
 ];

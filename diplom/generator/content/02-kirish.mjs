@@ -25,6 +25,9 @@ export const introduction = () => [
     'elektron pochtaga yuboriladigan bir martalik kod, Google hisobi, JWT va refresh token asosida xavfsiz autentifikatsiya va sessiyalarni boshqarish tizimini ishlab chiqish;',
     'shaxsiy va guruh chatlari, xabarlarni tahrirlash va o‘chirish, qidirish, media fayllar yuborish, hikoyalar va onlayn holat funksiyalarini .NET 8 platformasida amalga oshirish;',
     'Angular freymvorkida moslashuvchan (responsive), yorug‘ va qorong‘i mavzuni qo‘llab-quvvatlaydigan foydalanuvchi interfeysini yaratish;',
+    'xabarlarni lotin yoki kirill yozuvida ko‘rsatish va yozuvdan qat’i nazar qidirish imkonini beruvchi transliteratsiya algoritmini ishlab chiqish;',
+    'e-pochta domeni orqali tashkilot a’zolarini tasdiqlash va tashkilotning yopiq guruhlarini avtomatik shakllantirish mexanizmini yaratish;',
+    'brauzerdagi Web Crypto API asosida uchdan-uchgacha shifrlangan maxfiy chatlar protokolini loyihalash va amalga oshirish;',
     'dasturni Docker konteyneri ko‘rinishida bulutli serverga joylashtirish va sinovdan o‘tkazish;',
     'dasturchining ish joyini ergonomik talablar asosida tashkil etish, evakuatsiya tadbirlarini rejalashtirish va favqulodda vaziyatlarda xodimlarning harakatlar tartibini ishlab chiqish.',
   ]),
@@ -36,12 +39,18 @@ export const introduction = () => [
   p(
     'Ishda qiyosiy tahlil, tizimli yondashuv, obyektga yo‘naltirilgan loyihalash, UML yordamida modellashtirish, relatsion ma’lumotlar bazasini normallashtirish hamda dasturiy ta’minotni bosqichma-bosqich (iterativ) ishlab chiqish va sinash usullaridan foydalanildi. Dastur kodi Git versiyalar nazorati tizimida yuritildi. Har bir funksiya alohida tarmoqda (branch) ishlab chiqilib, tekshirilgandan so‘ng asosiy tarmoqqa birlashtirildi.',
   ),
+  h3('Ishning ilmiy-amaliy yangiligi.'),
+  ...bullets([
+    'o‘zbek tilining lotin va kirill yozuvlari o‘rtasida kontekstga bog‘liq qoidalarni hisobga oluvchi transliteratsiya algoritmi ishlab chiqildi. Uning asosida har bir foydalanuvchi xabarlarni o‘zi tanlagan yozuvda ko‘radi, qidiruv esa yozuvga bog‘liq bo‘lmagan normallashtirilgan kalit bo‘yicha ishlaydi. Server va klientdagi amalga oshirishlarning bir xilligi yagona test to‘plami bilan kafolatlanadi;',
+    'tashkilotni oldindan ro‘yxatga olishni talab qilmaydigan, tasdiqlangan e-pochta domeniga asoslangan a’zolikni tasdiqlash va yopiq tashkilot guruhlarini avtomatik shakllantirish usuli taklif etildi. Umumiy pochta xizmatlari foydalanuvchilari bu mexanizmdan chetlashtiriladi;',
+    'faqat brauzerga o‘rnatilgan standart kriptografik primitivlar (X25519, HKDF, HMAC, AES-256-GCM) asosida, uchinchi tomon kutubxonalarisiz, oldinga maxfiylikka ega uchdan-uchgacha shifrlangan maxfiy chat protokoli ishlab chiqildi. Server xabar mazmunini bilmasligi ma’lumotlar bazasi darajasida ko‘rsatib berildi.',
+  ]),
   h3('Ishning amaliy ahamiyati.'),
   p(
-    'Ishlab chiqilgan “Milliy chat” tizimi to‘liq ishlaydigan veb-ilova bo‘lib, uni tashkilotlar, ta’lim muassasalari yoki davlat idoralari o‘z serverlarida joylashtirib, ichki muloqot vositasi sifatida qo‘llashi mumkin. Tizim modulli tuzilgan. Shu sababli unga kanallar, ovozli va video qo‘ng‘iroqlar, stikerlar, botlar kabi yangi imkoniyatlarni qo‘shish oson. Ma’lumotlar bazasi sxemasida bu imkoniyatlar uchun zarur jadvallar oldindan loyihalangan.',
+    'Ishlab chiqilgan “Milliy chat” tizimi to‘liq ishlaydigan veb-ilova bo‘lib, uni tashkilotlar, ta’lim muassasalari yoki davlat idoralari o‘z serverlarida joylashtirib, ichki muloqot vositasi sifatida qo‘llashi mumkin. Tashkilot rejimi tufayli ta’lim muassasasi yoki kompaniya xodimlari o‘z korporativ pochtasi bilan kirishi bilanoq tashkilotning yopiq guruhiga tushadi, maxfiy chatlar esa eng nozik yozishmalarni serverdan ham himoya qiladi. Tizim modulli tuzilgan. Shu sababli unga kanallar, ovozli va video qo‘ng‘iroqlar, stikerlar, botlar kabi yangi imkoniyatlarni qo‘shish oson. Ma’lumotlar bazasi sxemasida bu imkoniyatlar uchun zarur jadvallar oldindan loyihalangan.',
   ),
   h3('Bitiruv malakaviy ishining tuzilishi.'),
   p(
-    'Ish kirish, to‘rt bob, xulosa, foydalanilgan adabiyotlar ro‘yxati va ilovalardan iborat. Birinchi bobda messenjerlarning rivojlanishi, mavjud yechimlar va real vaqtda aloqa texnologiyalari tahlil qilinib, masala qo‘yilgan. Ikkinchi bobda texnologiyalar tanlangan, tizim arxitekturasi, ma’lumotlar bazasi, UML modellari va xavfsizlik mexanizmlari loyihalangan. Uchinchi bobda dasturning server va klient qismlarini ishlab chiqish, joylashtirish va sinash jarayonlari hamda foydalanish yo‘riqnomasi keltirilgan. To‘rtinchi bobda hayot faoliyati xavfsizligi doirasida dasturchining ergonomik ish joyini tashkil etish hamda evakuatsiya tadbirlarini rejalashtirish va avariya, yong‘inlar sodir bo‘lganda xodimlarning harakatlari ko‘rib chiqilgan. Ish 32 ta rasm, 17 ta jadval, 6 ta kod listingi va 5 ta ilovani o‘z ichiga oladi.',
+    'Ish kirish, to‘rt bob, xulosa, foydalanilgan adabiyotlar ro‘yxati va ilovalardan iborat. Birinchi bobda messenjerlarning rivojlanishi, mavjud yechimlar va real vaqtda aloqa texnologiyalari tahlil qilinib, masala qo‘yilgan. Ikkinchi bobda texnologiyalar tanlangan, tizim arxitekturasi, ma’lumotlar bazasi, UML modellari, xavfsizlik mexanizmlari va maxfiy chatlarning kriptografik protokoli loyihalangan. Uchinchi bobda dasturning server va klient qismlarini, shu jumladan transliteratsiya, tashkilot rejimi va maxfiy chatlarni ishlab chiqish, joylashtirish va sinash jarayonlari hamda foydalanish yo‘riqnomasi keltirilgan. To‘rtinchi bobda hayot faoliyati xavfsizligi doirasida dasturchining ergonomik ish joyini tashkil etish hamda evakuatsiya tadbirlarini rejalashtirish va avariya, yong‘inlar sodir bo‘lganda xodimlarning harakatlari ko‘rib chiqilgan. Ish 46 ta rasm, 19 ta jadval, 10 ta kod listingi va 7 ta ilovani o‘z ichiga oladi.',
   ),
 ];
