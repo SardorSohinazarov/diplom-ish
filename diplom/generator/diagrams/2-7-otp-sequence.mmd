@@ -1,0 +1,31 @@
+sequenceDiagram
+  autonumber
+  actor F as Foydalanuvchi
+  participant B as Brauzer (Angular)
+  participant API as AuthController
+  participant S as AuthService
+  participant DB as PostgreSQL
+  participant M as SMTP
+  F->>B: E-pochta manzilini kiritadi
+  B->>API: POST /api/auth/request-code
+  API->>S: RequestSignInCodeAsync(email, IP)
+  S->>DB: Oxirgi kod va so‘rovlar sonini tekshirish
+  Note over S: 1 daqiqada 1 ta, 15 daqiqada 5 tagacha
+  S->>S: 6 xonali kod yaratish, PBKDF2-SHA256 xeshi
+  S->>DB: email_verification_codes (faqat xesh)
+  S->>M: Kodni yuborish
+  API-->>B: 202 Accepted
+  F->>B: Kodni kiritadi
+  B->>API: POST /api/auth/verify-code
+  API->>S: VerifySignInCodeAsync
+  S->>DB: Kod xeshini solishtirish, AttemptCount++
+  alt Yangi foydalanuvchi
+    S-->>B: registrationToken (HMAC imzoli)
+    B->>API: POST /api/auth/register (username, ism)
+    API->>S: RegisterAsync
+    S->>DB: users va sessions yozuvlari
+  else Mavjud foydalanuvchi
+    S->>DB: sessions yozuvi (qurilma, IP)
+  end
+  S-->>API: Access token (JWT) va refresh token
+  API-->>B: JWT (javob tanasida) va HttpOnly cookie (refresh)

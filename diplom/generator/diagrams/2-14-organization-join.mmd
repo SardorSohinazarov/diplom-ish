@@ -1,0 +1,10 @@
+flowchart TB
+  S(["Foydalanuvchi e-pochta kodi yoki<br/>Google orqali tasdiqlangan holda kirdi"]) --> D{"E-pochta domeni<br/>(oxirgi @ dan keyingi qism)"}
+  D -- "gmail.com, mail.ru, umail.uz …<br/>(umumiy pochta)" --> N["Tashkilot yo‘q:<br/>belgi yo‘q, domen guruhiga<br/>faqat taklif havolasi orqali"]
+  D -- "masalan tuit.uz" --> O{"organizations jadvalida<br/>bu domen bormi?"}
+  O -- "yo‘q" --> C["Tashkilot yaratiladi;<br/>foydalanuvchi — Admin"]
+  C --> G["«tuit.uz» yopiq guruhi yaratiladi,<br/>foydalanuvchi — guruh egasi"]
+  O -- "bor" --> M["organization_members:<br/>Member roli, VerifiedAt"]
+  M --> J["Domen guruhiga avtomatik qo‘shiladi,<br/>xizmat xabari va real vaqt hodisasi"]
+  G --> B["Ism yonida «tuit.uz ✓» belgisi"]
+  J --> B

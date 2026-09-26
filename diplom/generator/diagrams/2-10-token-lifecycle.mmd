@@ -1,0 +1,20 @@
+sequenceDiagram
+  autonumber
+  participant B as Brauzer
+  participant I as authInterceptor
+  participant API as API
+  participant DB as sessions jadvali
+  B->>I: Himoyalangan so‘rov
+  I->>API: Authorization: Bearer JWT (15 daqiqa)
+  alt Token amal qiladi
+    API-->>B: 200 OK
+  else Muddati o‘tgan
+    API-->>I: 401 Unauthorized
+    I->>API: POST /api/auth/refresh (HttpOnly cookie)
+    API->>DB: HMAC xesh bo‘yicha sessiyani topish
+    API->>DB: Yangi refresh token xeshi (rotatsiya), LastActiveAt
+    API-->>I: Yangi JWT va yangi cookie (30 kun)
+    I->>API: Asl so‘rovni qayta yuborish
+    API-->>B: 200 OK
+  end
+  Note over B,DB: Chiqish yoki sessiyani yakunlash: RevokedAt belgilanadi, cookie o‘chiriladi

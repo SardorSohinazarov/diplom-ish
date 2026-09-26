@@ -1,0 +1,23 @@
+# Bog'liqliklar (npm install bilan qayta tiklanadi)
+diplom/generator/node_modules/
+
+# Generator keshlari (slides.mjs ikonkalar va slayd PNG'larini shu yerga yozadi)
+diplom/generator/slides-cache/
+
+# Lokal test muhitidagi foydalanuvchilarning access tokenlari (seed.mjs yaratadi)
+diplom/generator/data/seed.json
+
+# Word va PowerPoint ochiq fayl paytida yaratadigan vaqtinchalik fayllar
+~$*
+*.tmp
+
+# Loglar
+*.log
+npm-debug.log*
+
+# Tizim va muharrir fayllari
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

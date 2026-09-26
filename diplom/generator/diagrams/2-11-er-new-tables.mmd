@@ -1,0 +1,66 @@
+erDiagram
+  USERS {
+    int Id PK
+    string Email "unique; domen = tashkilot"
+    int ScriptPreference "1-asl, 2-lotin, 3-kirill"
+  }
+  SESSIONS {
+    int Id PK
+    int UserId FK
+  }
+  MESSAGES {
+    int Id PK
+    text TextContent "asl holida"
+    text SearchText "lotin, kichik harf"
+  }
+  ORGANIZATIONS {
+    int Id PK
+    string Domain "unique, masalan tuit.uz"
+    timestamptz CreatedAt
+  }
+  ORGANIZATION_MEMBERS {
+    int Id PK
+    int OrganizationId FK
+    int UserId FK "unique"
+    int Role "1-a'zo, 2-admin"
+    timestamptz VerifiedAt
+  }
+  GROUPS {
+    int Id PK
+    int ChatId FK
+    int OrganizationId FK "null - oddiy guruh"
+    string InviteLink "128 bitli token"
+  }
+  SECRET_CHATS {
+    int Id PK
+    int InitiatorId FK
+    int InitiatorSessionId FK
+    int ParticipantId FK
+    int ParticipantSessionId FK
+    string InitiatorPublicKey "X25519, 32 bayt"
+    string ParticipantPublicKey "X25519, 32 bayt"
+    int Status "1-kutish, 2-faol, 3-yopiq"
+    bigint InitiatorLastSeq
+    bigint ParticipantLastSeq
+  }
+  SECRET_MESSAGES {
+    bigint Id PK
+    int SecretChatId FK
+    int SenderSessionId FK
+    bigint Seq
+    bytea Ciphertext "server ocha olmaydi"
+    timestamptz CreatedAt
+  }
+  SECRET_FILES {
+    uuid Id PK
+    int SecretChatId FK
+    int UploaderSessionId FK
+    bigint SizeBytes "20 MB gacha"
+  }
+  ORGANIZATIONS ||--o{ ORGANIZATION_MEMBERS : "a'zolari"
+  USERS ||--o| ORGANIZATION_MEMBERS : "tasdiqlangan a'zolik"
+  ORGANIZATIONS ||--o{ GROUPS : "domen guruhi"
+  USERS ||--o{ SESSIONS : "qurilmalari"
+  SESSIONS ||--o{ SECRET_CHATS : "bog'langan qurilma"
+  SECRET_CHATS ||--o{ SECRET_MESSAGES : "yetkazilmagan xabarlar"
+  SECRET_CHATS ||--o{ SECRET_FILES : "shifrlangan fayllar"

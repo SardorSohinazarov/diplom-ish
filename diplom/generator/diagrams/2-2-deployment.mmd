@@ -1,0 +1,23 @@
+flowchart LR
+  U["<b>Foydalanuvchi</b><br/>veb-brauzer<br/>(kompyuter, telefon)"]
+  subgraph FE["Klient serveri"]
+    NG["<b>Angular 22</b><br/>SSR (Node.js, Express)"]
+  end
+  subgraph BE["Server — Docker konteyneri (Render)"]
+    APIH["<b>ASP.NET Core 8</b><br/>REST API: /api/*<br/>SignalR hab: /hubs/chat"]
+  end
+  subgraph DATA["Ma’lumotlarni saqlash"]
+    DB[("PostgreSQL")]
+    FS[("Fayl ombori<br/>wwwroot/uploads")]
+    RD[("Redis<br/>(ixtiyoriy)")]
+  end
+  subgraph EXT["Tashqi xizmatlar"]
+    SMTP["SMTP<br/>(kodlar)"]
+    G["Google Identity"]
+    AV["ClamAV"]
+  end
+  U -- "HTTPS: sahifalar" --> NG
+  U -- "HTTPS: REST so‘rovlar" --> APIH
+  U <-. "WebSocket: real vaqt" .-> APIH
+  APIH --> DATA
+  APIH --> EXT

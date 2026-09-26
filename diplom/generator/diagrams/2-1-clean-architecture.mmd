@@ -1,0 +1,14 @@
+%%{init: {"flowchart": {"wrappingWidth": 900}}}%%
+flowchart TB
+  API["<b>API qatlami</b> — kompozitsiya ildizi va HTTP transport<br/>Controllerlar (Auth, Chat, Group, Message, Profile, Story …) · ChatHub (SignalR)<br/>ExceptionHandlingMiddleware · DI sozlamalari (ServiceCollectionExtensions)"]
+  INF["<b>Infrastructure qatlami</b> — texnik adapterlar<br/>EF Core: ChatDb va *Repository · JWT, PBKDF2, HMAC, Google token tekshiruvi<br/>SMTP · ClamAV · ImageSharp · FFmpeg · Redis / InMemory presence"]
+  APP["<b>Application qatlami</b> — biznes-mantiq (use-case’lar)<br/>Servislar: AuthService, ChatService, GroupService, MessageService …<br/>DTO · Mapper · Factory · FluentValidation · Portlar: I*Repository, IChatRealtimeNotifier"]
+  DOM["<b>Domain qatlami</b> — biznes obyektlari<br/>Entity’lar: User, Session, Chat, ChatMember, Group, Message, Attachment, Story …<br/>Enum’lar: ChatType, ChatMemberRole, MessageServiceAction"]
+  API --> INF
+  API --> APP
+  INF --> APP
+  APP --> DOM
+  classDef layer fill:#ffffff,stroke:#222,stroke-width:1.5px,text-align:center;
+  classDef core fill:#eef2ff,stroke:#3b3f8f,stroke-width:2px;
+  class API,INF,APP layer
+  class DOM core

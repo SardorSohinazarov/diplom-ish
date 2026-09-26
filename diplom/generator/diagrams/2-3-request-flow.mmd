@@ -1,0 +1,16 @@
+%%{init: {"flowchart": {"wrappingWidth": 700}}}%%
+flowchart TB
+  C["<b>Brauzer (Angular)</b>"]
+  CT["<b>MessageController</b> — API qatlami"]
+  SV["<b>MessageService</b> — Application qatlami<br/>validatsiya · chat a’zoligini tekshirish · MessageFactory"]
+  RP["<b>MessageRepository</b> — Infrastructure qatlami (EF Core)"]
+  DB[("PostgreSQL")]
+  NT["<b>IChatRealtimeNotifier</b> → SignalRChatRealtimeNotifier"]
+  O["<b>Chat a’zolarining brauzerlari</b><br/>(user:{id} guruhlari)"]
+  C -- "(1) POST /api/chats/{id}/messages · Bearer JWT" --> CT
+  CT -- "(2) SendAsync()" --> SV
+  SV -- "(3) AddAsync, SaveChanges" --> RP
+  RP -- "(4) INSERT" --> DB
+  SV -- "(5) MessageCreatedAsync()" --> NT
+  NT -- "(6) MessageReceived hodisasi" --> O
+  CT -. "(7) 201 Created + MessageDto" .-> C

@@ -1,0 +1,44 @@
+flowchart LR
+  G(["👤 Mehmon"])
+  U(["👤 Foydalanuvchi"])
+  A(["👤 Guruh admini / egasi"])
+  subgraph SYS["“Milliy chat” tizimi"]
+    direction TB
+    UC1(["E-pochta kodi yoki Google orqali kirish"])
+    UC2(["Ro‘yxatdan o‘tish (username, ism)"])
+    UC3(["Profil va rasmni tahrirlash"])
+    UC4(["Sessiyalarni boshqarish"])
+    UC5(["Foydalanuvchi qidirish, kontaktlar"])
+    UC6(["Shaxsiy chat boshlash"])
+    UC7(["Xabar yuborish, javob berish,<br/>tahrirlash, o‘chirish"])
+    UC8(["Rasm, video, fayl yuborish"])
+    UC9(["Xabarlarni qidirish"])
+    UC10(["Hikoya joylash va ko‘rish"])
+    UC11(["Guruh yaratish, guruhdan chiqish"])
+    UC12(["A’zo qo‘shish / chiqarish"])
+    UC13(["Guruhni tahrirlash, tarixni tozalash"])
+    UC14(["Admin tayinlash, guruhni o‘chirish<br/>(faqat ega)"])
+    UC15(["Xabarlarni lotin yoki kirillda ko‘rish"])
+    UC16(["Maxfiy (E2E) chat boshlash,<br/>kalitni tekshirish, taymer"])
+    UC17(["Taklif havolasi orqali<br/>yopiq guruhga qo‘shilish"])
+    UC18(["Taklif havolasini yaratish / bekor qilish"])
+  end
+  G --> UC1
+  G --> UC2
+  U --> UC3
+  U --> UC4
+  U --> UC5
+  U --> UC6
+  U --> UC7
+  U --> UC8
+  U --> UC9
+  U --> UC10
+  U --> UC11
+  U --> UC15
+  U --> UC16
+  U --> UC17
+  A --> UC12
+  A --> UC13
+  A --> UC14
+  A --> UC18
+  A -. "foydalanuvchining barcha<br/>imkoniyatlariga ega" .-> U

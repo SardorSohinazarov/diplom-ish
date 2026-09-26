@@ -1,0 +1,21 @@
+sequenceDiagram
+  autonumber
+  participant A as Jo‘natuvchi brauzeri
+  participant API as MessageController
+  participant S as MessageService
+  participant DB as PostgreSQL
+  participant H as ChatHub (SignalR)
+  participant B as Qabul qiluvchi brauzeri
+  B->>H: WebSocket ulanish (JWT), JoinChat(chatId)
+  A->>API: POST /api/chats/{chatId}/messages
+  API->>S: SendAsync(userId, chatId, matn)
+  S->>DB: Validatsiya, a’zolikni tekshirish
+  S->>DB: INSERT messages
+  S->>H: MessageCreatedAsync(xabar, a’zolar)
+  H-->>B: MessageReceived (user:{id} guruhi)
+  API-->>A: 201 Created (MessageDto)
+  B->>H: MarkMessagesRead(chatId, [id])
+  H->>DB: INSERT message_views
+  H-->>A: MessagesRead → “o‘qildi” (✓✓)
+  B->>H: SetTyping(chatId, true)
+  H-->>A: TypingChanged → “yozmoqda…”

@@ -1,0 +1,12 @@
+%%{init: {"flowchart": {"wrappingWidth": 620, "nodeSpacing": 70, "rankSpacing": 40}}}%%
+flowchart TD
+  A(["Yong‘in, tutun yoki kuyish hidi aniqlandi"]) --> B["Xabarlagichni bosish, 101 ga qo‘ng‘iroq qilish, rahbarga xabar berish"]
+  B --> C{"O‘chirish<br/>xavfsizmi?"}
+  C -- "Ha" --> D["Jihozlarni tokdan uzish,<br/>o‘t o‘chirgichdan foydalanish"]
+  D --> E{"O‘chirildimi?"}
+  E -- "Ha" --> F["Rahbarga xabar berish,<br/>xonani shamollatish"]
+  E -- "Yo‘q" --> G
+  C -- "Yo‘q" --> G["Evakuatsiya: eng yaqin xavfsiz chiqish orqali,<br/>liftdan foydalanmasdan"]
+  G --> H["Eshiklarni yopib chiqish, tutunda engashib,<br/>burun va og‘izni ho‘l mato bilan to‘sib harakatlanish"]
+  H --> I["Yig‘ilish joyida ro‘yxat bo‘yicha sanash"]
+  I --> J(["O‘t o‘chiruvchilarga ma’lumot berish, binoga qaytmaslik"])

@@ -1,0 +1,6 @@
+[submodule "NationalChat"]
+	path = NationalChat
+	url = https://github.com/SardorSohinazarov/NationalChat.git
+[submodule "NationalChatClient"]
+	path = NationalChatClient
+	url = https://github.com/SardorSohinazarov/NationalChatClient.git

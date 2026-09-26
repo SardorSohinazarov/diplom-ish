@@ -1,0 +1,21 @@
+sequenceDiagram
+  autonumber
+  participant E as Guruh egasi (brauzer)
+  participant API as GroupController
+  participant S as GroupService
+  participant DB as PostgreSQL
+  participant N as Real vaqt xabarnomasi
+  participant M as A’zolar (brauzer)
+  E->>API: POST /api/groups (nom, tavsif, a’zolar)
+  API->>S: CreateAsync
+  S->>DB: Foydalanuvchilarni tekshirish
+  S->>DB: chats + groups + chat_members + xizmat xabari (bitta tranzaksiya)
+  S->>N: MessageReceived (“guruhni yaratdi”)
+  N-->>M: Yangi guruh chatlar ro‘yxatida paydo bo‘ladi
+  API-->>E: GroupDto (a’zolar, rollar)
+  E->>API: POST /api/groups/{chatId}/members
+  API->>S: AddMembersAsync
+  S->>S: Rolni tekshirish (admin yoki ega)
+  S->>DB: chat_members + xizmat xabari
+  S->>N: MessageReceived, GroupUpdated
+  N-->>M: “… guruhga qo‘shdi”, a’zolar soni yangilanadi

@@ -1,0 +1,69 @@
+erDiagram
+  USERS {
+    int Id PK
+  }
+  CHATS {
+    int Id PK
+  }
+  MESSAGES {
+    int Id PK
+    int ChatId FK
+    int SenderId FK
+    text TextContent
+    int ReplyToMessageId FK
+    int ServiceAction "xizmat xabari turi"
+    timestamptz SentAt
+    timestamptz EditedAt
+    timestamptz DeletedAt
+  }
+  MESSAGE_VIEWS {
+    int Id PK
+    int MessageId FK
+    int UserId FK
+    timestamptz ViewedAt
+  }
+  ATTACHMENTS {
+    int Id PK
+    int MessageId FK
+    int FileId FK
+    int Type "1-rasm, 2-video, 3-fayl"
+  }
+  FILES {
+    int Id PK
+    string Name
+    string MimeType
+    int SizeBytes
+    string StoragePath
+  }
+  PHOTOS {
+    int Id PK
+    int FileId FK
+    int Width
+    int Height
+  }
+  STORIES {
+    int Id PK
+    int UserId FK
+    int FileId FK
+    string Caption
+    int Type
+    timestamptz ExpiresAt "CreatedAt + 24 soat"
+  }
+  STORY_VIEWS {
+    int Id PK
+    int StoryId FK
+    int UserId FK
+    timestamptz ViewedAt
+  }
+  CHATS ||--o{ MESSAGES : "xabarlari"
+  USERS ||--o{ MESSAGES : "yuborgan"
+  MESSAGES |o--o{ MESSAGES : "javob"
+  MESSAGES ||--o{ MESSAGE_VIEWS : "ko'rishlar"
+  USERS ||--o{ MESSAGE_VIEWS : "ko'rgan"
+  MESSAGES ||--o{ ATTACHMENTS : "biriktirmalar"
+  FILES ||--o{ ATTACHMENTS : "fayl"
+  FILES ||--o| PHOTOS : "o'lchamlar"
+  USERS ||--o{ STORIES : "hikoyalari"
+  FILES ||--o{ STORIES : "media"
+  STORIES ||--o{ STORY_VIEWS : "ko'rishlar"
+  USERS ||--o{ STORY_VIEWS : "ko'rgan"

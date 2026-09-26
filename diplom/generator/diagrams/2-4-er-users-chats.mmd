@@ -1,0 +1,72 @@
+erDiagram
+  USERS {
+    int Id PK
+    string Email "unique"
+    string Username "unique"
+    string FirstName
+    string LastName
+    string Bio
+    int ProfilePhotoId FK
+    bool IsProfileCompleted
+    timestamptz CreatedAt
+  }
+  SESSIONS {
+    int Id PK
+    int UserId FK
+    string DeviceName
+    string IpAddress
+    string RefreshTokenHash "HMAC-SHA256"
+    timestamptz LastActiveAt
+    timestamptz ExpiresAt
+    timestamptz RevokedAt
+  }
+  EMAIL_VERIFICATION_CODES {
+    int Id PK
+    string Email
+    string CodeHash "PBKDF2"
+    int AttemptCount
+    timestamptz ExpiresAt
+    timestamptz ConsumedAt
+  }
+  CONTACTS {
+    int Id PK
+    int UserId FK
+    int ContactUserId FK
+    string CustomFirstName
+    string CustomLastName
+  }
+  CHATS {
+    int Id PK
+    int Type "1-shaxsiy, 2-guruh"
+    timestamptz CreatedAt
+    timestamptz DeletedAt
+  }
+  CHAT_MEMBERS {
+    int Id PK
+    int ChatId FK
+    int UserId FK
+    int Role "1-a'zo, 2-admin, 3-ega"
+    timestamptz JoinedAt
+  }
+  GROUPS {
+    int Id PK
+    int ChatId FK "unique"
+    string Title
+    string Description
+    int CreatorId FK
+    int PhotoId FK
+  }
+  PHOTOS {
+    int Id PK
+    int FileId FK
+    int Width
+    int Height
+  }
+  USERS ||--o{ SESSIONS : "sessiyalari"
+  USERS ||--o{ CONTACTS : "kontaktlari"
+  USERS ||--o{ CHAT_MEMBERS : "a'zoligi"
+  CHATS ||--|{ CHAT_MEMBERS : "a'zolari"
+  CHATS ||--o| GROUPS : "guruh ma'lumoti"
+  USERS ||--o{ GROUPS : "yaratgan"
+  PHOTOS |o--o{ USERS : "profil rasmi"
+  PHOTOS |o--o{ GROUPS : "guruh rasmi"

@@ -1,0 +1,16 @@
+flowchart TB
+  X["X25519(o'z yopiq kaliti, suhbatdosh ochiq kaliti)<br/>32 baytli umumiy sir"] --> H["HKDF-SHA-256<br/>salt = SHA-256(‘NationalChat secret chat v1’)<br/>info = nc-secret-v1 | chatId | ikkala ochiq kalit"]
+  H --> CI["Zanjir kaliti CK₀<br/>(tashabbuskor → qabul qiluvchi)"]
+  H --> CP["Zanjir kaliti CK₀<br/>(qabul qiluvchi → tashabbuskor)"]
+  CI --> M1["MK₁ = HMAC(CK₀, 0x01)"]
+  CI --> N1["CK₁ = HMAC(CK₀, 0x02)"]
+  N1 --> M2["MK₂ = HMAC(CK₁, 0x01)"]
+  N1 --> N2["CK₂ = HMAC(CK₁, 0x02)"]
+  N2 --> D["…"]
+  M1 --> E1["AES-256-GCM(MK₁, iv, matn)<br/>AAD = chatId | yo‘nalish | seq=1"]
+  M2 --> E2["AES-256-GCM(MK₂, iv, matn)<br/>AAD = chatId | yo‘nalish | seq=2"]
+  E1 --> B1["Blob: [versiya][12 bayt IV][shifrmatn + teg]"]
+  E2 --> B2["Blob: [versiya][12 bayt IV][shifrmatn + teg]"]
+  CP --> R["Xuddi shunday zanjir<br/>teskari yo‘nalish uchun"]
+  classDef forget fill:#f2f2f2,stroke:#777,stroke-dasharray:4 3
+  class CI,N1 forget
