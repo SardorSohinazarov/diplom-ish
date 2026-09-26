@@ -1,0 +1,51 @@
+Test run for C:\Users\sohinazarov_s\Desktop\diplom ish\NationalChat\tests\NationalChat.Tests\bin\Debug\net8.0\NationalChat.Tests.dll (.NETCoreApp,Version=v8.0)
+A total of 1 test files matched the specified pattern.
+[xUnit.net 00:00:00.00] xUnit.net VSTest Adapter v2.5.3.1+6b60a9e56a (64-bit .NET 8.0.31)
+[xUnit.net 00:00:00.06]   Discovering: NationalChat.Tests
+[xUnit.net 00:00:00.10]   Discovered:  NationalChat.Tests
+[xUnit.net 00:00:00.10]   Starting:    NationalChat.Tests
+  Passed NationalChat.Tests.Security.Pbkdf2OneTimeCodeHasherTests.Verify_MalformedHash_ReturnsFalse [3 ms]
+  Passed NationalChat.Tests.Security.HmacRefreshTokenHasherTests.Hash_IsDeterministicForSameKey [2 ms]
+  Passed NationalChat.Tests.Security.HmacRefreshTokenHasherTests.Constructor_ShortKey_Throws [< 1 ms]
+  Passed NationalChat.Tests.Security.HmacRefreshTokenHasherTests.Hash_DependsOnKey [1 ms]
+  Passed NationalChat.Tests.Validation.ValidatorTests.UpdateRole_OnlyMemberOrAdmin(role: Admin, expected: True) [15 ms]
+  Passed NationalChat.Tests.Validation.ValidatorTests.UpdateRole_OnlyMemberOrAdmin(role: Member, expected: True) [< 1 ms]
+  Passed NationalChat.Tests.Validation.ValidatorTests.UpdateRole_OnlyMemberOrAdmin(role: Creator, expected: False) [8 ms]
+  Passed NationalChat.Tests.Validation.ValidatorTests.AddMembers_NonPositiveId_IsInvalid [26 ms]
+  Passed NationalChat.Tests.Validation.ValidatorTests.CursorPagination_LimitMustBeBetween1And100(limit: 1, expected: True) [10 ms]
+  Passed NationalChat.Tests.Validation.ValidatorTests.CursorPagination_LimitMustBeBetween1And100(limit: 101, expected: False) [1 ms]
+  Passed NationalChat.Tests.Validation.ValidatorTests.CursorPagination_LimitMustBeBetween1And100(limit: 0, expected: False) [< 1 ms]
+  Passed NationalChat.Tests.Validation.ValidatorTests.CursorPagination_LimitMustBeBetween1And100(limit: 100, expected: True) [< 1 ms]
+  Passed NationalChat.Tests.Validation.ValidatorTests.CreateGroup_TitleLongerThanLimit_IsInvalid [1 ms]
+  Passed NationalChat.Tests.Validation.ValidatorTests.CreateGroup_WithoutMembers_IsInvalid [< 1 ms]
+  Passed NationalChat.Tests.Chats.ChatPermissionTests.Delete_ByCreatorOrPrivateParticipant_IsAllowed(type: Private, role: Member) [71 ms]
+  Passed NationalChat.Tests.Chats.ChatPermissionTests.Delete_ByCreatorOrPrivateParticipant_IsAllowed(type: Group, role: Creator) [< 1 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.Get_NonMember_ReturnsNull [76 ms]
+  Passed NationalChat.Tests.Chats.ChatPermissionTests.DeleteGroup_ByNonCreator_IsDenied [2 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.UpdateRole_OnlyCreatorCanPromote [5 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.Create_EmptyTitle_FailsValidation [2 ms]
+  Passed NationalChat.Tests.Chats.ChatPermissionTests.ClearGroupHistory_ByRegularMember_IsDenied [7 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.AddMembers_ByAdmin_AddsMemberAndWritesServiceMessage [9 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.RemoveMember_ByCreator_RemovesAndNotifiesRemovedUser [4 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.AddMembers_OverMemberLimit_IsRejected [1 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.Leave_Creator_TransfersOwnershipToOldestAdmin [2 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.Create_ValidRequest_CreatesGroupWithCreatorRoleAndServiceMessage [4 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.Update_TitleChange_WritesTitleChangedServiceMessage [1 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.Leave_LastMember_DeletesChat [< 1 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.UpdateRole_CreatorRoleCannotBeGranted [< 1 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.Create_UnknownMember_IsRejected [< 1 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.AddMembers_AlreadyInGroup_IsRejected [< 1 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.AddMembers_ByRegularMember_IsForbidden [< 1 ms]
+  Passed NationalChat.Tests.Groups.GroupServiceTests.RemoveMember_AdminCannotRemoveCreator [< 1 ms]
+  Passed NationalChat.Tests.Security.Pbkdf2OneTimeCodeHasherTests.Verify_WrongCode_ReturnsFalse [233 ms]
+[xUnit.net 00:00:00.84]   Finished:    NationalChat.Tests
+  Passed NationalChat.Tests.Pagination.CursorPaginationTests.LastPage_HasNoCursor [384 ms]
+  Passed NationalChat.Tests.Pagination.CursorPaginationTests.FirstPage_ReturnsNewestItemsAndCursor [28 ms]
+  Passed NationalChat.Tests.Pagination.CursorPaginationTests.BeforeId_ReturnsOlderItemsOnly [12 ms]
+  Passed NationalChat.Tests.Security.Pbkdf2OneTimeCodeHasherTests.Verify_CorrectCode_ReturnsTrue [228 ms]
+  Passed NationalChat.Tests.Security.Pbkdf2OneTimeCodeHasherTests.Hash_SameCodeTwice_UsesDifferentSaltAndIterationPrefix [230 ms]
+
+Test Run Successful.
+Total tests: 39
+     Passed: 39
+ Total time: 1.2569 Seconds
