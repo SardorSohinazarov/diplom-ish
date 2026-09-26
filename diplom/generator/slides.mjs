@@ -9,7 +9,7 @@ import { renderIcons } from './tools/icons.mjs';
 
 const OUT = path.join(ROOT, '..', 'Taqdimot_Sohinazarov_Sardor.pptx');
 const TOPIC = '“Milliy chat” dasturini ishlab chiqish';
-const TOTAL = 20;
+const TOTAL = 24;
 
 // Palette taken from the application itself (indigo accent of the chat UI).
 const C = {
@@ -33,7 +33,7 @@ const CW = W - 2 * M; // content width
 // ───────────────────────────────────────── helpers
 
 const ICONS = [
-  ...['landmark', 'database', 'globe', 'target', 'shield-check', 'mail', 'key-round', 'lock-keyhole', 'monitor-smartphone', 'server', 'monitor', 'container', 'users', 'crown', 'shield', 'user', 'search', 'circle-play', 'user-pen', 'phone', 'lock', 'bot', 'bell', 'smartphone', 'trending-up', 'armchair', 'lightbulb', 'wind', 'door-open', 'zap', 'check']
+  ...['landmark', 'database', 'globe', 'target', 'shield-check', 'mail', 'key-round', 'lock-keyhole', 'monitor-smartphone', 'server', 'monitor', 'container', 'users', 'crown', 'shield', 'user', 'search', 'circle-play', 'user-pen', 'phone', 'lock', 'bot', 'bell', 'smartphone', 'trending-up', 'armchair', 'lightbulb', 'wind', 'door-open', 'zap', 'check', 'languages', 'building-2', 'badge-check', 'link', 'fingerprint', 'timer', 'file-lock', 'mail-check']
     .map((n) => [n, C.white]),
   ['check', C.ok],
   ['arrow-right', C.pri],
@@ -137,6 +137,14 @@ function iconRow(s, name, head, desc, x, y, w, { d = 0.6, headSize = 17, descSiz
   if (desc) text(s, desc, { x: x + d + 0.25, y: y + 0.36, w: w - d - 0.25, h: 0.62, fontSize: descSize, color: C.muted, valign: 'top' });
 }
 
+/** Dark console card with monospace lines; each line is [text, colour]. */
+function terminal(s, lines, x, y, w, h, fontSize = 12) {
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w, h, rectRadius: 0.1, fill: { color: '1E1E1E' }, line: { type: 'none' } });
+  text(s, lines.map(([t, color], i) => ({ text: t, options: { color, breakLine: i < lines.length - 1 } })), {
+    x: x + 0.25, y: y + 0.15, w: w - 0.5, h: h - 0.3, fontFace: 'Consolas', fontSize, valign: 'top', lineSpacingMultiple: 1.15,
+  });
+}
+
 const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, color: C.text, valign: 'middle', margin: [0.04, 0.08, 0.04, 0.08], ...o } });
 
 // ───────────────────────────────────────── 1. Titul
@@ -205,8 +213,8 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     'Mavjud messenjerlar va real vaqt texnologiyalarini tahlil qilish',
     'Tizimga funksional va nofunksional talablarni aniqlash',
     'Arxitektura, ma’lumotlar bazasi va UML modellarini loyihalash',
-    'Xavfsiz autentifikatsiya va sessiyalar tizimini yaratish',
-    'Server (.NET 8) va klient (Angular) qismlarini ishlab chiqish',
+    'Xavfsiz autentifikatsiya va E2E shifrlangan maxfiy chatlar',
+    'Server, klient, lotin↔kirill va tashkilot rejimini ishlab chiqish',
     'Bulutga joylashtirish, sinash va HFX talablarini ishlab chiqish',
   ];
   const cw = (CW - 2 * 0.3) / 3;
@@ -229,10 +237,11 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   const body = [
     ['Egasi (davlat)', 'BAA', 'Meta (AQSh)', 'AQSh', 'Tencent (Xitoy)', 'Mahalliy'],
     ['Ro‘yxatdan o‘tish', 'Telefon raqami', 'Telefon raqami', 'Telefon raqami', 'Telefon raqami', 'E-pochta kodi, Google'],
-    ['E2E shifrlash', 'Faqat maxfiy chatlarda', 'Sukut bo‘yicha', 'Sukut bo‘yicha', 'Yo‘q', 'Rejalashtirilgan (TLS bor)'],
+    ['E2E shifrlash', 'Faqat maxfiy chatlarda', 'Sukut bo‘yicha', 'Sukut bo‘yicha', 'Yo‘q', 'Maxfiy chatlarda'],
     ['Yozishmalar', 'Bulutda', 'Qurilmada', 'Qurilmada', 'Serverda', 'O‘z serverida'],
-    ['Server kodi', 'Yopiq', 'Yopiq', 'Ochiq', 'Yopiq', 'Mahalliy nazoratda'],
     ['Ma’lumotlar joyi', 'Xorijda', 'Xorijda', 'Xorijda', 'Xitoyda', 'O‘zbekistonda ham mumkin'],
+    ['Lotin ↔ kirill', 'Yo‘q', 'Yo‘q', 'Yo‘q', 'Yo‘q', 'Bor (qidiruv ham)'],
+    ['Tashkilot tasdig‘i', 'Yo‘q', 'Yo‘q', 'Yo‘q', 'Yo‘q', 'E-pochta domeni'],
   ];
   const last = head.length - 1;
   const rows = [
@@ -249,7 +258,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     ),
   ];
   s.addTable(rows, {
-    x: M, y: 1.5, w: CW, colW: [2.2, 1.9, 1.9, 1.9, 1.9, 2.33], rowH: 0.56,
+    x: M, y: 1.45, w: CW, colW: [2.2, 1.9, 1.9, 1.9, 1.9, 2.33], rowH: 0.5,
     border: { type: 'solid', color: C.line, pt: 0.75 },
   });
   card(s, M, 5.7, CW, 0.95, C.tint);
@@ -320,7 +329,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
       x, y: 2.6, w, h: 4.0, fontSize: 14, color: C.text, paraSpaceAfter: 7, valign: 'top',
     });
   };
-  col(M, 4.3, '12', 'funksional talab', [
+  col(M, 4.3, '15', 'funksional talab', [
     'Kirish: e-pochta kodi yoki Google',
     'Profil va faol sessiyalar',
     'Shaxsiy va guruh chatlari',
@@ -329,6 +338,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     '“Yozmoqda”, o‘qildi, onlayn holat',
     '24 soatlik hikoyalar',
     'Yorug‘ / qorong‘i mavzu, mobil ko‘rinish',
+    'Lotin↔kirill, tashkilot, maxfiy chat',
   ]);
   col(5.2, 4.1, '7', 'nofunksional talab', [
     'Unumdorlik: xabar < 1 soniyada',
@@ -363,7 +373,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   const s = contentSlide(7, 'Texnologiyalar steki');
   const cols = [
     ['server', 'Server qismi', ['.NET 8, ASP.NET Core', 'SignalR — real vaqt', 'Entity Framework Core 8', 'PostgreSQL 16', 'FluentValidation, JWT', 'Redis — onlayn holat']],
-    ['monitor', 'Klient qismi', ['Angular 22 (standalone, signals)', 'TypeScript, RxJS', '@microsoft/signalr', 'Google Identity Services', 'O‘z dizayn tizimi (SCSS)', 'Server tomonida render (SSR)']],
+    ['monitor', 'Klient qismi', ['Angular 22 (standalone, signals)', 'TypeScript, RxJS', '@microsoft/signalr', 'Google Identity Services', 'O‘z dizayn tizimi (SCSS)', 'Web Crypto API — E2E']],
     ['container', 'Infratuzilma', ['Docker (multi-stage)', 'Render bulut platformasi', 'SMTP — kodlar yuborish', 'ClamAV — antivirus', 'ImageSharp, FFmpeg — media', 'Git va GitHub']],
   ];
   const cw = (CW - 2 * 0.35) / 3;
@@ -424,8 +434,8 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   framed(s, '2-4-er-users-chats.png', M, 1.5, 8.5, 5.1, { valign: 'top', align: 'left' });
   const sx = 9.5, sw = W - M - sx;
   const stats = [
-    ['9', 'sxema', 'identity, messaging, groups, stories …'],
-    ['32', 'jadval', 'kelajakdagi kanallar va botlar uchun ham'],
+    ['10', 'sxema', 'identity, messaging, organizations …'],
+    ['36', 'jadval', 'kelajakdagi kanallar va botlar uchun ham'],
     ['Keyset', 'kursorli sahifalash', 'beforeId + limit (1–100), totalCount siz'],
   ];
   stats.forEach(([big, label, desc], i) => {
@@ -436,7 +446,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     text(s, desc, { x: sx + 0.25, y: y + 1.08, w: sw - 0.5, h: 0.35, fontSize: 11, color: C.muted });
   });
   s.addNotes(
-    'Ma’lumotlar bazasi PostgreSQL’da 9 ta sxemaga guruhlangan 32 ta jadvaldan iborat. Ekranda foydalanuvchilar, sessiyalar, chatlar va guruhlar qismining ER-diagrammasi ko‘rsatilgan. Barcha vaqt qiymatlari UTC’da saqlanadi. Xabarlar va chatlar ro‘yxati uchun sahifa raqamli emas, kursorli sahifalash qo‘llanilgan: klient oxirgi ko‘rgan xabar identifikatorini yuboradi va server undan oldingi xabarlarni indeks bo‘yicha tez qaytaradi. Bu usul chatga yangi xabarlar qo‘shilayotganda ham xabarlar takrorlanmasligini yoki tushib qolmasligini ta’minlaydi.',
+    'Ma’lumotlar bazasi PostgreSQL’da 10 ta sxemaga guruhlangan 36 ta jadvaldan iborat. Ekranda foydalanuvchilar, sessiyalar, chatlar va guruhlar qismining ER-diagrammasi ko‘rsatilgan. Barcha vaqt qiymatlari UTC’da saqlanadi. Xabarlar va chatlar ro‘yxati uchun sahifa raqamli emas, kursorli sahifalash qo‘llanilgan: klient oxirgi ko‘rgan xabar identifikatorini yuboradi va server undan oldingi xabarlarni indeks bo‘yicha tez qaytaradi. Bu usul chatga yangi xabarlar qo‘shilayotganda ham xabarlar takrorlanmasligini yoki tushib qolmasligini ta’minlaydi.',
   );
 }
 
@@ -486,9 +496,108 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   );
 }
 
-// ───────────────────────────────────────── 12. Interfeys: kirish
+// ───────────────────────────────────────── 12. O'ziga xos imkoniyatlar
 {
-  const s = contentSlide(12, 'Dastur interfeysi: tizimga kirish');
+  const s = contentSlide(12, '“Milliy chat”ning o‘ziga xos imkoniyatlari');
+  const cards = [
+    ['languages', 'Lotin ↔ Kirill', ['Har kim xabarni o‘zi tanlagan yozuvda ko‘radi', 'Xabar bazada asl holida qoladi', 'Qidiruv yozuvga bog‘liq emas']],
+    ['building-2', 'Tashkilot rejimi', ['Tashkilot = e-pochta domeni', '“tuit.uz ✓” belgisi, yopiq domen guruhi', 'Gmail va boshqalar faqat taklif havolasi orqali']],
+    ['lock-keyhole', 'Maxfiy chat (E2E)', ['Server xabar mazmunini ko‘rmaydi', 'X25519 + AES-256-GCM, oldinga maxfiylik', 'Kalit izi, taymer, shifrlangan fayllar']],
+  ];
+  const cw = (CW - 2 * 0.35) / 3;
+  cards.forEach(([ic, head, items], i) => {
+    const x = M + i * (cw + 0.35);
+    card(s, x, 1.5, cw, 4.2, i === 2 ? C.ink : C.tint);
+    badge(s, ic, x + 0.35, 1.8, 0.75, C.pri);
+    text(s, head, { x: x + 0.35, y: 2.75, w: cw - 0.7, h: 0.5, fontSize: 21, bold: true, color: i === 2 ? C.white : C.ink });
+    text(s, items.map((t, j) => ({ text: t, options: { bullet: true, breakLine: j < items.length - 1 } })), {
+      x: x + 0.35, y: 3.4, w: cw - 0.7, h: 2.2, fontSize: 15, color: i === 2 ? C.tint2 : C.text, paraSpaceAfter: 8, valign: 'top',
+    });
+  });
+  card(s, M, 5.95, CW, 0.75, C.tint2);
+  s.addImage({ path: icon('check', C.ok), x: M + 0.3, y: 6.15, w: 0.36, h: 0.36 });
+  text(s, 'Birinchi ikki imkoniyat ko‘rib chiqilgan xorijiy messenjerlarning birortasida yo‘q — ular aynan o‘zbek foydalanuvchisi uchun.', {
+    x: M + 0.85, y: 5.95, w: CW - 1.1, h: 0.75, fontSize: 15, color: C.ink, valign: 'middle',
+  });
+  s.addNotes(
+    'Endi “Milliy chat”ni oddiy messenjerdan ajratib turadigan uchta imkoniyat haqida. Birinchisi — lotin va kirill yozuvlari o‘rtasida avtomatik o‘girish: har bir foydalanuvchi xabarlarni o‘zi tanlagan yozuvda ko‘radi. Ikkinchisi — tashkilot rejimi: e-pochta domeni tashkilot sifatida qabul qilinadi va uning xodimlari yopiq guruhga avtomatik qo‘shiladi. Uchinchisi — uchdan-uchgacha shifrlangan maxfiy chatlar, ularning mazmunini serverning o‘zi ham o‘qiy olmaydi. Birinchi ikkisi tahlil qilingan xorijiy messenjerlarning birortasida yo‘q.',
+  );
+}
+
+// ───────────────────────────────────────── 13. Lotin ↔ Kirill
+{
+  const s = contentSlide(13, 'Lotin ↔ Kirill: har kim o‘z yozuvida o‘qiydi');
+  // Only the conversation area: the chat list on the left is the same in both screens.
+  const crop = [0.225, 0, 0.775, 0.6];
+  const w = (CW - 0.35) / 2;
+  const a = framed(s, '3-20-script-original.jpg', M, 1.45, w, 2.9, { crop, align: 'left' });
+  const b = framed(s, '3-20-script-latin.jpg', M + w + 0.35, 1.45, w, 2.9, { crop, align: 'right' });
+  pill(s, 'Asl holida', a, 1.5);
+  pill(s, '“Lotin” sozlamasi', b, 2.2);
+  text(s, [
+    { text: 'Xabar bazada asl holida saqlanadi, o‘girish faqat ko‘rsatishda', options: { bullet: true, breakLine: true } },
+    { text: 'Kontekst qoidalari: е → ye/e, ц → ts/s, ў → o‘, tutuq belgisi', options: { bullet: true, breakLine: true } },
+    { text: 'URL, @username va kod o‘girilmaydi', options: { bullet: true, breakLine: true } },
+    { text: 'Server (C#) va klient (TS) — bitta 80 juftlikli test to‘plami', options: { bullet: true } },
+  ], { x: M, y: a.y + a.h + 0.3, w: 6.0, h: 2.2, fontSize: 14, color: C.text, paraSpaceAfter: 6, valign: 'top' });
+  const db = framed(s, '3-29-db-search-text.png', M + 6.3, a.y + a.h + 0.35, CW - 6.3, 1.7, { align: 'right' });
+  text(s, 'SearchText — yozuvdan qat’i nazar qidiruv kaliti', { x: db.x, y: db.y + db.h + 0.05, w: db.w, h: 0.3, fontSize: 11, italic: true, color: C.muted, align: 'center' });
+  s.addNotes(
+    'Chapda suhbat asl holida: Aziz kirillda, Sardor lotinda yozgan. O‘ngda xuddi shu suhbat “Lotin” sozlamasida — hamma xabar lotinda ko‘rinadi. Xabar bazada asl holida saqlanadi, o‘girish faqat ko‘rsatish paytida bajariladi, shuning uchun har bir foydalanuvchi o‘z yozuvini tanlaydi. Algoritm 1995-yilgi imlo qoidalariga asoslangan va kontekstni hisobga oladi: masalan, so‘z boshidagi “е” harfi “ye” bo‘ladi. Qidiruv uchun esa har bir xabarning lotin, kichik harfli nusxasi saqlanadi — pastdagi rasmda ko‘rinib turibdi. Shuning uchun “rahmat” deb qidirilsa, kirillda yozilgan “Раҳмат” ham topiladi.',
+  );
+}
+
+// ───────────────────────────────────────── 14. Tashkilot rejimi
+{
+  const s = contentSlide(14, 'Tashkilot rejimi: e-pochta domeni orqali tasdiq');
+  const steps = [
+    ['mail-check', 'Tasdiqlangan pochta bilan kirish', 'ali@tuit.uz → tashkilot “tuit.uz”'],
+    ['badge-check', 'Birinchi foydalanuvchi — admin', 'Domenning yopiq guruhi avtomatik yaratiladi'],
+    ['users', 'Keyingilar avtomatik a’zo', 'Ism yonida “tuit.uz ✓”, guruhga qo‘shiladi'],
+    ['link', 'Boshqalar — faqat taklif bilan', 'gmail.com va h.k.: admin yoki 128 bitli havola'],
+  ];
+  steps.forEach(([ic, h, d], i) => iconRow(s, ic, h, d, M, 1.55 + i * 1.22, 4.6, { d: 0.6, headSize: 16, descSize: 13 }));
+  const shot = framed(s, '3-22-organization-group.jpg', M + 4.9, 1.5, CW - 4.9, 5.1, { align: 'right' });
+  pill(s, 'Domen guruhi va taklif havolasi', shot, 3.1);
+  s.addNotes(
+    'Tashkilot rejimi alohida ro‘yxat yoki sozlamani talab qilmaydi: tashkilot — bu e-pochta domenining o‘zi. Kimdir tuit.uz pochtasi bilan birinchi bo‘lib kirsa, u tashkilot admini bo‘ladi va tuit.uz nomli yopiq guruh avtomatik yaratiladi. Keyin kirgan har bir xodim ism yonida “tuit.uz” belgisini oladi va guruhga o‘zi qo‘shiladi. Gmail, mail.ru kabi umumiy pochta foydalanuvchilari esa bu guruhga faqat admin qo‘shganda yoki taklif havolasi orqali kira oladi. Domenlar faqat to‘liq tengligi bo‘yicha solishtiriladi, shuning uchun o‘xshash soxta domen bilan kirib bo‘lmaydi.',
+  );
+}
+
+// ───────────────────────────────────────── 15. Maxfiy chat
+{
+  const s = contentSlide(15, 'Maxfiy chat: uchdan-uchgacha shifrlash');
+  const shot = framed(s, '3-26-secret-chat.jpg', M, 1.5, 6.6, 5.1, { align: 'left', crop: [0.225, 0, 0.775, 0.93] });
+  const rx = shot.x + shot.w + 0.4, rw = W - M - rx;
+  text(s, 'Protokol (Web Crypto API)', { x: rx, y: 1.5, w: rw, h: 0.4, fontSize: 16, bold: true, color: C.ink });
+  const chain = [
+    ['X25519', 'kalit kelishuvi — serverga faqat ochiq kalit'],
+    ['HKDF-SHA-256', 'ikki yo‘nalish uchun zanjir kalitlari'],
+    ['HMAC ratchet', 'har xabarga yangi kalit, eskisi unutiladi'],
+    ['AES-256-GCM', 'shifrlash; AAD = chat | yo‘nalish | seq'],
+  ];
+  chain.forEach(([h, d], i) => {
+    const y = 2.0 + i * 0.78;
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: rx, y, w: rw, h: 0.62, rectRadius: 0.1, fill: { color: i % 2 ? C.tint : C.tint2 }, line: { type: 'none' } });
+    text(s, [
+      { text: h + '  ', options: { bold: true, color: C.pri } },
+      { text: d, options: { color: C.text } },
+    ], { x: rx + 0.2, y, w: rw - 0.3, h: 0.62, fontSize: 12, valign: 'middle' });
+  });
+  const dbY = 2.0 + chain.length * 0.78 + 0.15;
+  text(s, 'Serverdagi yagona iz (secret_messages):', { x: rx, y: dbY, w: rw, h: 0.35, fontSize: 12, bold: true, color: C.ink });
+  terminal(s, [
+    ['Id | Seq | bytes | Ciphertext', 'D4D4D4'],
+    [' 6 |   5 |   183 | AdBp3POJtrxqSydreRLgRu…', '4ADE80'],
+  ], rx, dbY + 0.4, rw, 0.85, 12);
+  s.addNotes(
+    'Maxfiy chat ikki qurilma o‘rtasida ochiladi. Har bir qurilma X25519 kalit juftini yaratadi va serverga faqat ochiq kalitni yuboradi. Ikkala tomon bir xil umumiy sirni hisoblaydi, undan har bir yo‘nalish uchun kalitlar zanjiri olinadi. Har bir xabar yangi kalit bilan AES-256-GCM orqali shifrlanadi, eski kalit esa unutiladi — bu oldinga maxfiylikni beradi. Server xabarni faqat yetkazib beradi va qabul qilingach o‘chiradi: pastda ma’lumotlar bazasida qolgan yagona yozuv — 183 baytli ma’nosiz blob. O‘rtada begona odam yo‘qligini tekshirish uchun foydalanuvchilar kalit izini — emoji va raqamlarni solishtiradi. Chatda o‘z-o‘zini o‘chirish taymeri va shifrlangan fayllar ham bor.',
+  );
+}
+
+// ───────────────────────────────────────── 16. Interfeys: kirish
+{
+  const s = contentSlide(16, 'Dastur interfeysi: tizimga kirish');
   const shots = [
     ['3-01-login.jpg', 'Kirish', 'E-pochta manzilini kiritish yoki Google orqali kirish'],
     ['3-02-otp.jpg', 'Tasdiqlash kodi', '6 xonali bir martalik kod pochtaga yuboriladi'],
@@ -516,7 +625,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 
 // ───────────────────────────────────────── 13. Interfeys: shaxsiy chat
 {
-  const s = contentSlide(13, 'Dastur interfeysi: shaxsiy chat');
+  const s = contentSlide(17, 'Dastur interfeysi: shaxsiy chat');
   const big = framed(s, '3-05-private-chat.jpg', M, 1.5, 7.8, 4.9, { align: 'left' });
   pill(s, 'Suhbat: “yozmoqda…”, o‘qildi ✓✓, onlayn holat', big, 4.6);
   const rx = big.x + big.w + 0.35, rw = W - M - rx;
@@ -531,7 +640,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 
 // ───────────────────────────────────────── 14. Interfeys: guruh chatlari
 {
-  const s = contentSlide(14, 'Dastur interfeysi: guruh chatlari');
+  const s = contentSlide(18, 'Dastur interfeysi: guruh chatlari');
   const lw = 4.3;
   const roles = [
     ['crown', 'Egasi', 'Adminlarni tayinlaydi, guruhni o‘chiradi'],
@@ -550,7 +659,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 
 // ───────────────────────────────────────── 15. Qidiruv, hikoyalar, profil
 {
-  const s = contentSlide(15, 'Qidiruv, hikoyalar va profil');
+  const s = contentSlide(19, 'Qidiruv, hikoyalar va profil');
   // Same height for all three; the story and profile screens are cropped to their content (the rest is backdrop).
   const ih = 3.9, gap = 0.4;
   const items = [
@@ -574,7 +683,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 
 // ───────────────────────────────────────── 16. Moslashuvchan dizayn
 {
-  const s = contentSlide(16, 'Qorong‘i mavzu va mobil ko‘rinish');
+  const s = contentSlide(20, 'Qorong‘i mavzu va mobil ko‘rinish');
   const dark = framed(s, '3-16-dark-theme.jpg', M, 1.5, 7.3, 4.6, { align: 'left' });
   pill(s, 'Qorong‘i mavzu', dark, 1.9);
   const pw = (W - M - (dark.x + dark.w + 0.4) - 0.3) / 2;
@@ -593,10 +702,10 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 
 // ───────────────────────────────────────── 17. Joylashtirish va testlash
 {
-  const s = contentSlide(17, 'Joylashtirish va testlash');
+  const s = contentSlide(21, 'Joylashtirish va testlash');
   const stats = [
-    ['56', 'REST API endpointi'],
-    ['39', 'unit test — barchasi o‘tdi'],
+    ['73', 'REST API endpointi'],
+    ['536', 'unit test: 307 server + 229 klient'],
     ['43', 'API integratsion tekshiruvi'],
     ['Docker', 'Render bulutida ishlaydi'],
   ];
@@ -607,22 +716,31 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     text(s, big, { x: x + 0.3, y: 1.62, w: cw - 0.6, h: 0.75, fontSize: big.length > 3 ? 30 : 40, bold: true, color: i === 1 ? C.white : C.pri, valign: 'middle' });
     text(s, label, { x: x + 0.3, y: 2.38, w: cw - 0.6, h: 0.4, fontSize: 14, color: i === 1 ? C.tint2 : C.ink });
   });
-  const box = framed(s, '3-19-unit-tests.png', M + CW - 4.2, 3.25, 4.2, 3.45, { align: 'right' });
+  const box = { x: M + CW - 4.6, y: 3.25, w: 4.6, h: 2.7 };
+  terminal(s, [
+    ['PS> dotnet test', '9CDCFE'],
+    ['Passed!  Failed: 0', '4ADE80'],
+    ['Passed: 307, Total: 307', '4ADE80'],
+    ['', 'D4D4D4'],
+    ['PS> ng test --watch=false', '9CDCFE'],
+    ['Test Files  12 passed', '4ADE80'],
+    ['Tests      229 passed', '4ADE80'],
+  ], box.x, box.y, box.w, box.h, 15);
   text(s, [
     { text: 'Ko‘p bosqichli Docker obrazi: SDK’da yig‘ish, yengil ASP.NET runtime’da ishga tushirish', options: { bullet: true, breakLine: true } },
     { text: 'GitHub’ga push qilinganda Render obrazni avtomatik qayta yig‘adi', options: { bullet: true, breakLine: true } },
     { text: 'Maxfiy kalitlar kodda emas, muhit o‘zgaruvchilarida', options: { bullet: true, breakLine: true } },
-    { text: 'xUnit + NSubstitute: guruhlar, sahifalash, xavfsizlik va validatsiya testlari', options: { bullet: true, breakLine: true } },
+    { text: 'xUnit va Vitest: transliteratsiya, tashkilotlar, maxfiy chat protokoli, guruhlar, xavfsizlik', options: { bullet: true, breakLine: true } },
     { text: 'Swagger UI orqali API hujjatlari va qo‘lda sinov', options: { bullet: true } },
   ], { x: M, y: 3.3, w: box.x - M - 0.4, h: 3.4, fontSize: 15, color: C.text, paraSpaceAfter: 9, valign: 'top' });
   s.addNotes(
-    'Server 56 ta REST endpoint va SignalR habidan iborat. U ko‘p bosqichli Docker obraziga yig‘iladi va Render bulut platformasida ishlaydi. GitHub’ga yangi kod yuborilganda obraz avtomatik qayta yig‘iladi, maxfiy kalitlar esa muhit o‘zgaruvchilarida saqlanadi. Dasturning to‘g‘riligi 39 ta unit test bilan tekshirildi va ularning barchasi muvaffaqiyatli o‘tdi. Bundan tashqari, API darajasida 43 ta integratsion tekshiruv va qo‘lda sinov ssenariylari o‘tkazildi.',
+    'Server 73 ta REST endpoint va SignalR habidan iborat. U ko‘p bosqichli Docker obraziga yig‘iladi va Render bulut platformasida ishlaydi. GitHub’ga yangi kod yuborilganda obraz avtomatik qayta yig‘iladi, maxfiy kalitlar esa muhit o‘zgaruvchilarida saqlanadi. Dasturning to‘g‘riligi 536 ta unit test bilan tekshirildi: serverda 307 ta, klientda 229 ta, ularning barchasi muvaffaqiyatli o‘tdi. Eng ko‘p test transliteratsiya va maxfiy chat protokoliga to‘g‘ri keladi. Bundan tashqari, API darajasida 43 ta integratsion tekshiruv va qo‘lda sinov ssenariylari o‘tkazildi.',
   );
 }
 
 // ───────────────────────────────────────── 18. HFX
 {
-  const s = contentSlide(18, 'Hayot faoliyati xavfsizligi');
+  const s = contentSlide(22, 'Hayot faoliyati xavfsizligi');
   // Both drawings are dense, so they get captions underneath instead of pills over them.
   const a = framed(s, '4-1-workstation.png', M, 1.45, 5.4, 3.25, { align: 'left' });
   const b = framed(s, '4-3-evacuation-plan.png', a.x + a.w + 0.4, 1.45, W - M - (a.x + a.w + 0.4), 3.25, { align: 'right' });
@@ -650,14 +768,14 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 
 // ───────────────────────────────────────── 19. Xulosa
 {
-  const s = contentSlide(19, 'Xulosa va istiqbollar');
+  const s = contentSlide(23, 'Xulosa va istiqbollar');
   const results = [
     'Messenjerlar va real vaqt texnologiyalari tahlil qilindi, SignalR tanlandi',
-    'Clean Architecture asosidagi server, 32 jadvalli PostgreSQL bazasi',
-    'Parolsiz autentifikatsiya: e-pochta kodi, Google, JWT, sessiyalar',
-    'Shaxsiy va guruh chatlari, media fayllar, hikoyalar — real vaqtda',
-    'Angular 22 da moslashuvchan, ikki mavzuli o‘zbekcha interfeys',
-    'Docker orqali bulutga joylashtirildi, testlar bilan tasdiqlandi',
+    'Clean Architecture, 36 jadval, 73 endpoint, 536 ta test',
+    'Chatlar, guruhlar, media, hikoyalar — real vaqtda',
+    'Lotin↔kirill ko‘rinish va yozuvdan qat’i nazar qidiruv',
+    'Tashkilot rejimi: domen orqali tasdiq, yopiq guruhlar',
+    'Maxfiy chatlar: E2E, oldinga maxfiylik, kalit izi',
   ];
   text(s, 'Erishilgan natijalar', { x: M, y: 1.45, w: 6.5, h: 0.45, fontSize: 19, bold: true, color: C.ink });
   results.forEach((t, i) => {
@@ -671,7 +789,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   text(s, 'Istiqbollar', { x: px + 0.35, y: 1.65, w: pw - 0.7, h: 0.45, fontSize: 19, bold: true, color: C.white });
   const future = [
     ['phone', 'WebRTC ovozli va video qo‘ng‘iroqlar'],
-    ['lock', 'Uchdan-uchgacha shifrlash (E2E)'],
+    ['badge-check', 'OneID orqali shaxsni tasdiqlash'],
     ['bot', 'Kanallar va botlar platformasi'],
     ['bell', 'Push-bildirishnomalar'],
     ['smartphone', 'Android va iOS ilovalari'],
@@ -683,7 +801,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     text(s, t, { x: px + 1.0, y, w: pw - 1.2, h: 0.48, fontSize: 15, color: C.tint2, valign: 'middle' });
   });
   s.addNotes(
-    'Xulosa qilib aytganda, ishda qo‘yilgan barcha vazifalar bajarildi. Mavjud yechimlar tahlil qilindi, tizim loyihalandi, parolsiz autentifikatsiyaga ega, real vaqtda ishlaydigan messenjer yaratildi va bulutga joylashtirildi. “Milliy chat”ni tashkilotlar, ta’lim muassasalari va davlat idoralari o‘z serverlarida ichki aloqa vositasi sifatida qo‘llashi mumkin. Kelajakda ovozli va video qo‘ng‘iroqlar, uchdan-uchgacha shifrlash, kanallar va botlar hamda mobil ilovalarni qo‘shish rejalashtirilgan. Ma’lumotlar bazasi sxemasida bu imkoniyatlar uchun joy oldindan ajratilgan.',
+    'Xulosa qilib aytganda, ishda qo‘yilgan barcha vazifalar bajarildi. Mavjud yechimlar tahlil qilindi, tizim loyihalandi, parolsiz autentifikatsiyaga ega, real vaqtda ishlaydigan messenjer yaratildi va bulutga joylashtirildi. “Milliy chat”ni tashkilotlar, ta’lim muassasalari va davlat idoralari o‘z serverlarida ichki aloqa vositasi sifatida qo‘llashi mumkin. Messenjerning o‘ziga xos uchta imkoniyati — lotin va kirill yozuvlari o‘rtasida o‘girish, tashkilot rejimi va maxfiy chatlar — uni xorijiy analoglardan ajratib turadi. Kelajakda OneID orqali shaxsni davlat darajasida tasdiqlash, ovozli va video qo‘ng‘iroqlar, kanallar va botlar hamda mobil ilovalarni qo‘shish rejalashtirilgan. Ma’lumotlar bazasi sxemasida bu imkoniyatlar uchun joy oldindan ajratilgan.',
   );
 }
 
