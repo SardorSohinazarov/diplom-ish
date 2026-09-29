@@ -8,7 +8,7 @@ import { ROOT } from './lib.mjs';
 import { renderIcons } from './tools/icons.mjs';
 
 const OUT = path.join(ROOT, '..', 'Taqdimot_Sohinazarov_Sardor.pptx');
-const TOPIC = '“Milliy chat” dasturini ishlab chiqish';
+const TOPIC = 'Real vaqtda xabar almashish imkonini beruvchi “Milliy chat” dasturini ishlab chiqish';
 const TOTAL = 24;
 
 // Palette taken from the application itself (indigo accent of the chat UI).
@@ -65,7 +65,7 @@ function fit(name, w, h, crop = [0, 0, 1, 1]) {
 
 const pres = new pptxgen();
 pres.layout = 'LAYOUT_WIDE';
-pres.author = 'Sohinazarov Sardor';
+pres.author = 'Sohinazarov Sardorbek';
 pres.title = TOPIC;
 pres.theme = { headFontFace: F, bodyFontFace: F };
 
@@ -154,18 +154,18 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   text(s, [
     { text: 'O‘ZBEKISTON RESPUBLIKASI RAQAMLI TEXNOLOGIYALAR VAZIRLIGI', options: { breakLine: true } },
     { text: 'MUHAMMAD AL-XORAZMIY NOMIDAGI TOSHKENT AXBOROT TEXNOLOGIYALARI UNIVERSITETI', options: { breakLine: true } },
-    { text: '“Tizimli va amaliy dasturlash” kafedrasi' },
+    { text: '“Axborot texnologiyalarining dasturiy ta’minoti” kafedrasi' },
   ], { x: M, y: 0.35, w: CW, h: 0.95, fontSize: 13, color: C.tint3, align: 'center', lineSpacingMultiple: 1.15 });
 
   text(s, 'BITIRUV MALAKAVIY ISHI', { x: M, y: 1.95, w: 6.6, h: 0.4, fontSize: 16, bold: true, color: C.tint4, charSpacing: 3 });
-  text(s, TOPIC, { x: M, y: 2.4, w: 6.6, h: 1.7, fontSize: 40, bold: true, color: C.white, valign: 'top' });
+  text(s, TOPIC, { x: M, y: 2.4, w: 6.6, h: 1.7, fontSize: 26, bold: true, color: C.white, valign: 'top' });
   text(s, 'Telegramga o‘xshash milliy veb-messenjer', { x: M, y: 4.15, w: 6.6, h: 0.45, fontSize: 20, color: C.tint3 });
 
   text(s, [
     { text: 'Bajardi:  ', options: { color: C.tint4 } },
     { text: 'S.O. Sohinazarov', options: { bold: true, breakLine: true } },
     { text: 'Ilmiy rahbar:  ', options: { color: C.tint4 } },
-    { text: '________________', options: { bold: true } },
+    { text: 'dots. Y.Sh. Yuldoshev', options: { bold: true } },
   ], { x: M, y: 5.05, w: 6.6, h: 0.9, fontSize: 16, color: C.white, lineSpacingMultiple: 1.4 });
 
   const shot = fit('3-05-private-chat.jpg', 5.3, 3.4);
@@ -174,7 +174,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 
   text(s, 'Toshkent – 2026', { x: M, y: 6.75, w: CW, h: 0.4, fontSize: 14, bold: true, color: C.tint3, align: 'center' });
   s.addNotes(
-    'Assalomu alaykum, hurmatli komissiya a’zolari! Mening ismim Sohinazarov Sardor. Bitiruv malakaviy ishimning mavzusi — “Milliy chat” dasturini ishlab chiqish. Ish doirasida Telegramga o‘xshash, foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan veb-messenjer loyihalandi va to‘liq ishlaydigan holatga keltirildi. Ekranning o‘ng tomonida dasturning haqiqiy interfeysi ko‘rsatilgan.',
+    'Assalomu alaykum, hurmatli komissiya a’zolari! Mening ismim Sohinazarov Sardorbek. Bitiruv malakaviy ishimning mavzusi — real vaqtda xabar almashish imkonini beruvchi “Milliy chat” dasturini ishlab chiqish. Ish doirasida Telegramga o‘xshash, foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan veb-messenjer loyihalandi va to‘liq ishlaydigan holatga keltirildi. Ekranning o‘ng tomonida dasturning haqiqiy interfeysi ko‘rsatilgan.',
   );
 }
 
