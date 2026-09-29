@@ -44,6 +44,6 @@ export const introduction = () => [
   ),
   h3('Bitiruv malakaviy ishining tuzilishi.'),
   p(
-    'Ish kirish, to‘rt bob, xulosa, foydalanilgan adabiyotlar ro‘yxati va ilovalardan iborat. Birinchi bobda mavjud messenjerlar va real vaqtda aloqa texnologiyalari tahlil qilinib, masala qo‘yilgan. Ikkinchi bobda tizim arxitekturasi, ma’lumotlar bazasi, UML modellari, xavfsizlik va maxfiy chat protokoli loyihalangan. Uchinchi bobda dasturni ishlab chiqish, joylashtirish, sinash va foydalanish yo‘riqnomasi keltirilgan. To‘rtinchi bob hayot faoliyati xavfsizligiga bag‘ishlangan. Ish 46 ta rasm, 19 ta jadval, 10 ta kod listingi va 7 ta ilovani o‘z ichiga oladi.',
+    'Ish kirish, to‘rt bob, xulosa, foydalanilgan adabiyotlar ro‘yxati va ilovalardan iborat. Birinchi bobda mavjud messenjerlar va real vaqtda aloqa texnologiyalari tahlil qilinib, masala qo‘yilgan. Ikkinchi bobda tizim arxitekturasi, ma’lumotlar bazasi, UML modellari, xavfsizlik va maxfiy chat protokoli loyihalangan. Uchinchi bobda dasturni ishlab chiqish, joylashtirish, sinash va foydalanish yo‘riqnomasi keltirilgan. To‘rtinchi bob hayot faoliyati xavfsizligiga bag‘ishlangan. Ish 29 ta rasm, 17 ta jadval, 5 ta kod listingi va 4 ta ilovani o‘z ichiga oladi.',
   ),
 ];
