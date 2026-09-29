@@ -184,7 +184,7 @@ private async Task EnsureChatMembershipAsync(int chatId)
   // ───────────────────────────────── 3.4
   h2('3.4. Guruh chatlari va hikoyalar'),
   ...ps(
-    'Guruh chatlari GroupService servisida amalga oshirilgan. Servis har bir amaldan oldin foydalanuvchining guruhdagi rolini aniqlaydi va 2.4-jadvaldagi ruxsatlarni qo‘llaydi. O‘zgarishlar esa xizmat xabarlari va real vaqt hodisalari bilan birga saqlanadi. Eng murakkab holatlardan biri — guruh egasining guruhdan chiqishi (3.4-listing). Bu holatda guruh egasiz qolmasligi uchun egalik eng oldin tayinlangan administratorga, administratorlar bo‘lmasa esa guruhga eng oldin qo‘shilgan a’zoga o‘tadi. Guruhda hech kim qolmasa, u yumshoq o‘chiriladi.',
+    'Guruh chatlari GroupService servisida amalga oshirilgan. Servis har bir amaldan oldin foydalanuvchining guruhdagi rolini aniqlaydi va 2.3-jadvaldagi ruxsatlarni qo‘llaydi. O‘zgarishlar esa xizmat xabarlari va real vaqt hodisalari bilan birga saqlanadi. Eng murakkab holatlardan biri — guruh egasining guruhdan chiqishi (3.4-listing). Bu holatda guruh egasiz qolmasligi uchun egalik eng oldin tayinlangan administratorga, administratorlar bo‘lmasa esa guruhga eng oldin qo‘shilgan a’zoga o‘tadi. Guruhda hech kim qolmasa, u yumshoq o‘chiriladi.',
   ),
   ...code(
     `var now = timeProvider.GetUtcNow().UtcDateTime;
