@@ -3,19 +3,19 @@ import { bullets, h1, p, ps } from '../lib.mjs';
 export const conclusion = () => [
   h1('Xulosa'),
   p(
-    'Bitiruv malakaviy ishida foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan, real vaqtda xabar almashish imkonini beruvchi “Milliy chat” dasturi loyihalandi va ishlab chiqildi. Kirishda qo‘yilgan vazifalar quyidagicha hal etildi:',
+    'Ishning natijasi — foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan va real vaqtda xabar almashish imkonini beruvchi, bulutda ishlab turgan “Milliy chat” dasturi. Kirishda qo‘yilgan har bir vazifa bo‘yicha quyidagi natijalar olindi:',
   ),
   ...bullets([
-    'mavjud messenjerlar taqqoslanib, ularning barchasi ma’lumotlarni xorijda saqlashi va bu lokalizatsiya talablari nuqtai nazaridan milliy yechim zarurligini asoslashi ko‘rsatildi; real vaqt aloqasi uchun SignalR tanlandi;',
-    'server qismi Clean Architecture asosida to‘rt qatlamga ajratildi, PostgreSQL bazasi 10 ta sxemadagi 36 ta jadvaldan iborat qilib loyihalandi, tizim UML diagrammalari bilan modellashtirildi;',
-    'bir martalik kod, Google hisobi, qisqa muddatli JWT va rotatsiya qilinadigan refresh token asosidagi parolsiz autentifikatsiya hamda qurilmalar bo‘yicha sessiyalarni boshqarish ishlab chiqildi;',
-    '.NET 8 va SignalR asosida 73 ta endpointli REST API va real vaqt habi amalga oshirildi: shaxsiy va guruh chatlari, media fayllar, “yozmoqda” va o‘qilganlik belgilari, onlayn holat va hikoyalar; Angular 22 da moslashuvchan, qorong‘i mavzuli interfeys yaratildi;',
-    'lotin–kirill transliteratsiyasi va yozuvdan qat’i nazar qidiruv, e-pochta domeni orqali tashkilot rejimi hamda Web Crypto API asosidagi oldinga maxfiylikka ega E2E shifrlangan maxfiy chatlar ishlab chiqildi;',
-    'tizim Docker konteynerida bulutga joylashtirildi va 307 ta server, 229 ta klient testi, 43 ta integratsion tekshiruv hamda qo‘lda o‘tkazilgan sinovlar bilan tasdiqlandi;',
-    'hayot faoliyati xavfsizligi bo‘limida dasturchi ish joyining ergonomik talablari tizimlashtirildi, yoritish va shamollatish hisoblandi, IT-ofis uchun evakuatsiya reja-sxemasi va hisobiy evakuatsiya vaqti aniqlandi.',
+    'Telegram, WhatsApp, Signal va WeChat solishtirilganda ularning birortasi ham ma’lumotlarni O‘zbekistonda saqlamasligi va o‘zbek tilining ikki yozuvini hisobga olmasligi aniqlandi. Serverdan brauzerga ma’lumot yetkazish usullari orasidan WebSocket tezligini beradigan va u ishlamasa boshqa usulga o‘zi o‘tadigan SignalR tanlandi.',
+    'Server to‘rt qatlamga ajratildi, shu tufayli biznes-qoidalar ma’lumotlar bazasi va freymvorkdan mustaqil qoldi. Ma’lumotlar bazasi 36 ta jadvaldan iborat bo‘lib, ularning bir qismi kanallar va qo‘ng‘iroqlar kabi kelajakdagi imkoniyatlar uchun oldindan tayyorlangan.',
+    'Kirish tizimi parolsiz qurildi: kod bazada ochiq holda emas, faqat xesh ko‘rinishida saqlanadi, access token 15 daqiqa yashaydi, refresh token esa har foydalanishda almashadi. Foydalanuvchi o‘z qurilmalarini ko‘ra oladi va begona qurilmani chiqarib yubora oladi.',
+    '73 ta API endpoint va SignalR habi orqali shaxsiy va guruh chatlari, fayllar, hikoyalar, “yozmoqda” va o‘qilganlik belgilari hamda onlayn holat ishlaydi. Interfeys telefonda ham, kompyuterda ham qulay, yorug‘ va qorong‘i mavzuga ega.',
+    'Uchta o‘ziga xos imkoniyat amalga oshirildi. Kirillda yozilgan xabarni lotinda o‘qish mumkin va aksincha, qidiruv esa ikkala yozuvda ham topadi. Tashkilot pochtasi bilan kirgan foydalanuvchi o‘z tashkilotining yopiq guruhiga avtomatik qo‘shiladi. Maxfiy chatda xabar faqat ikki qurilmada ochiladi, serverda esa ma’nosiz shifrlangan baytlar turadi.',
+    'Dastur Docker konteynerida bulutga joylashtirildi. Uning to‘g‘ri ishlashi 307 ta server va 229 ta klient testi, 43 ta integratsion tekshiruv va qo‘lda o‘tkazilgan sinovlar bilan tasdiqlandi.',
+    'Hayot faoliyati xavfsizligi bo‘limida 6 × 6 m xona uchun ish joylari, yoritish va shamollatish hisoblandi, 45 kishilik qavat taxminan 0,83 daqiqada evakuatsiya qilinishi ko‘rsatildi.',
   ]),
   ...ps(
-    '“Milliy chat”ni ta’lim muassasalari, tashkilotlar va davlat idoralari respublika hududidagi serverlarda ichki muloqot vositasi sifatida qo‘llashi mumkin, bunda ma’lumotlar ustidan nazorat mamlakat ichida qoladi. Tashkilot rejimi xodimlarni korporativ pochta orqali avtomatik birlashtiradi, transliteratsiya turli yozuvda yozadigan foydalanuvchilarning bir-birini tushunishini osonlashtiradi, maxfiy chatlar esa nozik yozishmalarni serverdan ham himoya qiladi.',
-    'Kelajakda kanallar va botlar, WebRTC asosidagi qo‘ng‘iroqlar, OneID orqali shaxsni tasdiqlash, maxfiy chatlarni ko‘p qurilmali modelga o‘tkazish, push-bildirishnomalar va mobil ilovalarni qo‘shish rejalashtirilgan.',
+    'Dasturning asosiy afzalligi shundaki, uni istalgan tashkilot o‘z serverida ishga tushirib, yozishmalar ustidan to‘liq nazoratni o‘zida saqlab qolishi mumkin. Ish davomida real vaqt tizimini loyihalash, xavfsiz autentifikatsiya va uchdan-uchgacha shifrlashni amalda qo‘llash tajribasi orttirildi.',
+    'Dasturni rivojlantirishning keyingi qadamlari — kanallar va botlar, ovozli va video qo‘ng‘iroqlar, OneID orqali shaxsni tasdiqlash, maxfiy chatlarni bir necha qurilmada ishlatish, push-bildirishnomalar va mobil ilovalar.',
   ),
 ];
