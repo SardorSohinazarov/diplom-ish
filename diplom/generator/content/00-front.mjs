@@ -11,7 +11,7 @@ import {
 } from 'docx';
 import { FONT, TEXT_WIDTH, blank, center, line, pageBreak, runs } from '../lib.mjs';
 
-export const TOPIC = '“Milliy chat” dasturini ishlab chiqish';
+export const TOPIC = 'Real vaqtda xabar almashish imkonini beruvchi “Milliy chat” dasturini ishlab chiqish';
 const BLANK = '__________________';
 
 const none = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
@@ -89,21 +89,19 @@ export const titlePage = () => [
   ...header(),
   ...blank(2),
   line('Himoyaga ruxsat', { align: AlignmentType.RIGHT, bold: true }),
-  line('“Tizimli va amaliy dasturlash”', { align: AlignmentType.RIGHT }),
-  line('kafedrasi mudiri', { align: AlignmentType.RIGHT }),
-  line('___________ K.F. Kerimov', { align: AlignmentType.RIGHT }),
+  line('“ATDT” kafedra mudiri', { align: AlignmentType.RIGHT }),
+  line('___________ Raximov N.O.', { align: AlignmentType.RIGHT }),
   line('«____» ______________ 2026-yil', { align: AlignmentType.RIGHT }),
   ...blank(3),
   center('BITIRUV MALAKAVIY ISHI', { bold: true, size: 36 }),
   ...blank(1),
   center(`Mavzu: ${TOPIC}`, { bold: true, size: 32 }),
-  center('(Telegramga o‘xshash milliy messenjer)', { size: 28 }),
   ...blank(4),
   layoutTable(
     [
-      ['Bitiruvchi', `${BLANK}\n(imzo)`, 'S.O. Sohinazarov'],
+      ['Bitiruvchi (315-21 DIo‘ guruh)', `${BLANK}\n(imzo)`, 'S.O. Sohinazarov'],
       ['', '', ''],
-      ['Ilmiy rahbar', `${BLANK}\n(imzo)`, BLANK],
+      ['Ilmiy rahbar', `${BLANK}\n(imzo)`, 'Y.Sh. Yuldoshev'],
       ['', '', ''],
       ['Taqrizchi', `${BLANK}\n(imzo)`, BLANK],
       ['', '', ''],
@@ -111,7 +109,7 @@ export const titlePage = () => [
     ],
     [4, 4, 3],
   ),
-  ...blank(5),
+  ...blank(3),
   center('Toshkent – 2026', { bold: true }),
 ];
 
@@ -120,15 +118,15 @@ export const assignmentPages = () => [
   ...header(),
   ...blank(1),
   line('Fakultet: Dasturiy injiniring'),
-  line('Kafedra: Tizimli va amaliy dasturlash'),
+  line('Kafedra: Axborot texnologiyalarining dasturiy ta’minoti'),
   line('Ta’lim yo‘nalishi: 60610600 – Dasturiy injiniring'),
   ...blank(1),
   line('TASDIQLAYMAN', { align: AlignmentType.RIGHT, bold: true }),
-  line('“TAD” kafedrasi mudiri', { align: AlignmentType.RIGHT }),
-  line('___________ K.F. Kerimov', { align: AlignmentType.RIGHT }),
+  line('“ATDT” kafedra mudiri', { align: AlignmentType.RIGHT }),
+  line('___________ Raximov N.O.', { align: AlignmentType.RIGHT }),
   line('«____» ______________ 2026-yil', { align: AlignmentType.RIGHT }),
   ...blank(1),
-  center('Sohinazarov Sardor O‘rinboy o‘g‘lining', { bold: true }),
+  center('315-21 DIo‘ guruh talabasi Sohinazarov Sardorbek O‘rinboy o‘g‘lining', { bold: true }),
   center('bitiruv malakaviy ishiga', {}),
   center('T O P S H I R I Q', { bold: true, size: 32, before: 120, after: 120 }),
   line(`1. BMI mavzusi: ${TOPIC}.`, { line: 320 }),
@@ -149,17 +147,16 @@ export const assignmentPages = () => [
   line('7. Topshiriq berilgan sana: __________________.', { line: 320, after: 200 }),
   layoutTable(
     [
-      ['Rahbar:', `${BLANK}\n(imzo)`, ''],
-      ['Topshiriqni oldim:', `${BLANK}\n(imzo)`, ''],
+      ['Rahbar:', `${BLANK}\n(imzo)`, 'Y.Sh. Yuldoshev'],
+      ['Topshiriqni oldim:', `${BLANK}\n(imzo)`, 'S.O. Sohinazarov'],
     ],
     [4, 4, 3],
   ),
-  pageBreak(),
-  line('8. BMIning alohida bo‘limlari bo‘yicha maslahatchilar:', { line: 360, after: 120 }),
+  line('8. BMIning alohida bo‘limlari bo‘yicha maslahatchilar:', { line: 360, after: 120, pageBreakBefore: true }),
   gridTable(
     ['№', 'Bo‘lim nomi', 'Maslahatchi', 'Topshiriq berdi', 'Topshiriq oldi'],
     [
-      ['1', 'Asosiy qism', BLANK, '', ''],
+      ['1', 'Asosiy qism', 'Y.Sh. Yuldoshev', '', ''],
       ['2', 'Hayot faoliyati xavfsizligi', 'S. Abdullayeva', '', ''],
     ],
     [1, 5, 4, 3, 3],
@@ -183,8 +180,8 @@ export const assignmentPages = () => [
   ...blank(2),
   layoutTable(
     [
-      ['Bitiruv malakaviy ish rahbari:', `${BLANK}\n(imzo)`, ''],
-      ['Bitiruvchi:', `${BLANK}\n(imzo)`, ''],
+      ['Bitiruv malakaviy ish rahbari:', `${BLANK}\n(imzo)`, 'Y.Sh. Yuldoshev'],
+      ['Bitiruvchi:', `${BLANK}\n(imzo)`, 'S.O. Sohinazarov'],
     ],
     [4, 4, 3],
   ),

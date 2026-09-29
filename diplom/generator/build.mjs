@@ -56,8 +56,8 @@ const page = {
 };
 
 const doc = new Document({
-  creator: 'Sohinazarov Sardor',
-  title: '"Milliy chat" dasturini ishlab chiqish',
+  creator: 'Sohinazarov Sardorbek',
+  title: 'Real vaqtda xabar almashish imkonini beruvchi “Milliy chat” dasturini ishlab chiqish',
   description: 'Bitiruv malakaviy ishi',
   features: { updateFields: true },
   styles: {

@@ -1,5 +1,5 @@
-# Opens the diploma in Word, updates the table of contents, prints page/word counts
-# and exports a PDF (late binding, because the Word interop type library is not registered).
+# Opens the diploma in Word, updates the table of contents and saves it back to the .docx,
+# prints page/word counts and exports a PDF (late binding, because the Word interop type library is not registered).
 # Usage: powershell -File tools/export-pdf.ps1 <docx> <pdf>
 param([string]$Docx, [string]$Pdf)
 $Docx = [System.IO.Path]::GetFullPath($Docx)
@@ -14,12 +14,14 @@ try {
   [void](Call $word "Visible" $SET @($false))
   [void](Call $word "DisplayAlerts" $SET @(0))
   $docs = Call $word "Documents" $GET $null
-  $doc = Call $docs "Open" $CALL @($Docx, $false, $true)
+  $doc = Call $docs "Open" $CALL @($Docx, $false, $false)
   $tocs = Call $doc "TablesOfContents" $GET $null
   if ((Call $tocs "Count" $GET $null) -gt 0) {
     $toc = Call $tocs "Item" $CALL @(1)
     [void](Call $toc "Update" $CALL $null)
   }
+  # Save the filled-in table of contents into the .docx too, not only into the PDF.
+  [void](Call $doc "Save" $CALL $null)
   $pages = Call $doc "ComputeStatistics" $CALL @(2)
   $words = Call $doc "ComputeStatistics" $CALL @(0)
   [void](Call $doc "ExportAsFixedFormat" $CALL @($Pdf, 17))

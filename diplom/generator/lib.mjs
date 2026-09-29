@@ -314,6 +314,7 @@ export const code = (source, titleText) => {
 export const center = (text, opts = {}) =>
   new Paragraph({
     alignment: AlignmentType.CENTER,
+    pageBreakBefore: opts.pageBreakBefore,
     spacing: { line: opts.line ?? 276, before: opts.before ?? 0, after: opts.after ?? 0 },
     children: runs(text, { bold: opts.bold, size: opts.size, allCaps: opts.caps }),
   });
@@ -323,6 +324,7 @@ export const line = (text, opts = {}) =>
   new Paragraph({
     alignment: opts.align ?? AlignmentType.LEFT,
     indent: opts.indentLeft ? { left: opts.indentLeft } : undefined,
+    pageBreakBefore: opts.pageBreakBefore,
     spacing: { line: opts.line ?? 276, before: opts.before ?? 0, after: opts.after ?? 0 },
     children: runs(text, { bold: opts.bold, size: opts.size }),
   });
