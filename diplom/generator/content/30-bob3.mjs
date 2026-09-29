@@ -9,7 +9,7 @@ export const chapter3 = () => [
   // ───────────────────────────────── 3.1
   h2('3.1. Server qismini ishlab chiqish'),
   ...ps(
-    'Server yechimi to‘rtta loyihadan (Domain, Application, Infrastructure, API) va unit testlar loyihasidan iborat. Kirish nuqtasi — Program.cs fayli faqat so‘rovlarni qayta ishlash konveyerini sozlaydi: eng birinchi xatolarni ushlovchi middleware, so‘ng xavfsizlik sarlavhalari, autentifikatsiya, avtorizatsiya, controllerlar va SignalR habi. Servislarni ro‘yxatdan o‘tkazish esa mavzuli kengaytma metodlariga ajratilgan.',
+    'Server yechimi to‘rtta loyihadan (Domain, Application, Infrastructure, API) va unit testlar loyihasidan iborat. Kirish nuqtasi — Program.cs fayli faqat so‘rovlarni qayta ishlash konveyerini sozlaydi [42]: eng birinchi xatolarni ushlovchi middleware, so‘ng xavfsizlik sarlavhalari, autentifikatsiya, avtorizatsiya, controllerlar va SignalR habi. Servislarni ro‘yxatdan o‘tkazish esa mavzuli kengaytma metodlariga ajratilgan.',
     'Server 11 ta controller orqali 73 ta HTTP endpointni taqdim etadi (3.1-jadval). Endpointlar RESTful tamoyil asosida nomlangan: resurslar ko‘plik shaklida, amal esa HTTP metodi orqali ifodalanadi, masalan “POST /api/chats/{chatId}/messages”.',
   ),
   ...table(
@@ -32,11 +32,11 @@ export const chapter3 = () => [
     [3.6, 3.8, 1.2, 6.5],
   ),
   ...ps(
-    'API OpenAPI (Swagger) orqali avtomatik hujjatlashtiriladi: barcha endpointlarni JWT token bilan to‘g‘ridan-to‘g‘ri sinab ko‘rish mumkin (3.1-rasm). Barcha javoblar yagona formatda (succeeded, message, data) qaytadi, xato xabarlari o‘zbek tilida yozilgan. Kiruvchi DTO’lar FluentValidation validatorlari bilan tekshiriladi, kutilmagan istisnolar esa logga TraceId bilan yoziladi va mijozga ichki tafsilotlarsiz qaytariladi.',
+    'API OpenAPI (Swagger) orqali avtomatik hujjatlashtiriladi: barcha endpointlarni JWT token bilan to‘g‘ridan-to‘g‘ri sinab ko‘rish mumkin (3.1-rasm). Barcha javoblar yagona formatda (succeeded, message, data) qaytadi, xato xabarlari o‘zbek tilida yozilgan. Kiruvchi DTO’lar FluentValidation validatorlari bilan tekshiriladi [48], kutilmagan istisnolar esa logga TraceId bilan yoziladi va mijozga ichki tafsilotlarsiz qaytariladi.',
   ),
   ...figure('3-04-swagger.jpg', '3.1', 'Swagger UI: server API hujjatlari', 13),
   p(
-    'Kursorli sahifalash barcha repozitoriylar uchun umumiy IQueryable kengaytma metodi sifatida yozilgan (3.1-listing). Metod “Id < beforeId” shartini ifodalar daraxti orqali dinamik quradi va limitdan bittaga ko‘p yozuv o‘qiydi: qo‘shimcha yozuv borligi hasMore qiymatini beradi, alohida COUNT so‘roviga hojat qolmaydi. Natija to‘g‘ridan-to‘g‘ri DTO’ga proyeksiya qilinadi, shuning uchun bazadan faqat kerakli ustunlar o‘qiladi.',
+    'Kursorli sahifalash barcha repozitoriylar uchun umumiy IQueryable kengaytma metodi sifatida yozilgan (3.1-listing). Metod “Id < beforeId” shartini ifodalar daraxti orqali dinamik quradi va limitdan bittaga ko‘p yozuv o‘qiydi: qo‘shimcha yozuv borligi hasMore qiymatini beradi, alohida COUNT so‘roviga hojat qolmaydi. Natija to‘g‘ridan-to‘g‘ri DTO’ga proyeksiya qilinadi, shuning uchun bazadan faqat kerakli ustunlar o‘qiladi [16, 41].',
   ),
   ...code(
     `public static async Task<CursorPagedResponse<TResult>> ToCursorPagedResponseAsync<TEntity, TResult>(
@@ -68,7 +68,7 @@ export const chapter3 = () => [
   // ───────────────────────────────── 3.2
   h2('3.2. Real vaqtda xabar almashishni amalga oshirish'),
   p(
-    'Real vaqt aloqasi ChatHub SignalR habi orqali quriladi. Hab mijoz chaqira oladigan to‘rtta metodni taqdim etadi, server esa mijozlarga o‘n to‘rt turdagi hodisa yuboradi (3.2-jadval). Har bir ulanish ikki guruhga qo‘shiladi: foydalanuvchining barcha qurilmalari uchun “user:{id}” va aynan shu qurilma uchun “session:{sid}”; ikkinchisi maxfiy chat hodisalarini faqat bog‘langan qurilmaga yetkazadi.',
+    'Real vaqt aloqasi ChatHub SignalR habi orqali quriladi [40]. Hab mijoz chaqira oladigan to‘rtta metodni taqdim etadi, server esa mijozlarga o‘n to‘rt turdagi hodisa yuboradi (3.2-jadval). Har bir ulanish ikki guruhga qo‘shiladi: foydalanuvchining barcha qurilmalari uchun “user:{id}” va aynan shu qurilma uchun “session:{sid}”; ikkinchisi maxfiy chat hodisalarini faqat bog‘langan qurilmaga yetkazadi.',
   ),
   ...table(
     '3.2',
@@ -137,7 +137,7 @@ private async Task EnsureChatMembershipAsync(int chatId)
   h2('3.4. Lotin–kirill transliteratsiyasi va yozuvdan qat’i nazar qidiruv'),
   ...ps(
     'Xabar bazada doimo **asl holida** saqlanadi, o‘girish esa faqat ko‘rsatish paytida klientda bajariladi. Shu sababli bitta xabarni bir foydalanuvchi lotinda, boshqasi kirillda ko‘radi. Foydalanuvchi sozlamasi (ScriptPreference) serverda saqlanadi va barcha qurilmalarida amal qiladi, yozuv almashtirilganda esa xabarlar sahifani yangilamasdan qayta chiziladi.',
-    'Algoritm o‘zbek lotin alifbosi va imlo qoidalariga asoslanadi va Domain qatlamidagi UzbekTransliterator sinfida amalga oshirilgan; klientda uning TypeScript’dagi aynan nusxasi ishlaydi. Ikkalasi bitta umumiy test to‘plami (80 ta kirill–lotin juftligi) bo‘yicha tekshiriladi. Kirilldan lotinga o‘girish deyarli bir ma’noli, teskari yo‘nalishda esa kontekstga bog‘liq qoidalar talab etiladi (3.3-jadval).',
+    'Algoritm o‘zbek lotin alifbosi va imlo qoidalariga asoslanadi [8, 9] va Domain qatlamidagi UzbekTransliterator sinfida amalga oshirilgan; klientda uning TypeScript’dagi aynan nusxasi ishlaydi. Ikkalasi bitta umumiy test to‘plami (80 ta kirill–lotin juftligi) bo‘yicha tekshiriladi. Kirilldan lotinga o‘girish deyarli bir ma’noli, teskari yo‘nalishda esa kontekstga bog‘liq qoidalar talab etiladi (3.3-jadval).',
   ),
   ...table(
     '3.3',
@@ -202,7 +202,7 @@ private async Task EnsureChatMembershipAsync(int chatId)
     'Bitta suhbatning turli yozuv sozlamalarida ko‘rinishi',
   ),
   ...ps(
-    'Qidiruv ham yozuvga bog‘liq emas: “rahmat” so‘rovi “Раҳмат”ni ham topadi. Buning uchun xabar yaratilganda va tahrirlanganda uning **qidiruv kaliti** — lotinga o‘girilgan, kichik harfli, tutuq belgilari birxillashtirilgan nusxasi SearchText ustuniga yoziladi. Qidiruv so‘rovi ham xuddi shu funksiyadan o‘tkazilib, ILIKE bilan qidiriladi. Ustun qo‘shilishidan oldingi xabarlar uchun kalitlar SearchTextBackfill fon ishi tomonidan 500 tadan to‘ldiriladi. Bazadagi natija 3.7-rasmda ko‘rsatilgan.',
+    'Qidiruv ham yozuvga bog‘liq emas: “rahmat” so‘rovi “Раҳмат”ni ham topadi. Buning uchun xabar yaratilganda va tahrirlanganda uning **qidiruv kaliti** — lotinga o‘girilgan, kichik harfli, tutuq belgilari birxillashtirilgan nusxasi SearchText ustuniga yoziladi. Qidiruv so‘rovi ham xuddi shu funksiyadan o‘tkazilib, ILIKE bilan qidiriladi [44]. Ustun qo‘shilishidan oldingi xabarlar uchun kalitlar SearchTextBackfill fon ishi tomonidan 500 tadan to‘ldiriladi. Bazadagi natija 3.7-rasmda ko‘rsatilgan.',
   ),
   ...figure('3-29-db-search-text.png', '3.7', 'messages jadvali: asl matn (TextContent) va qidiruv kaliti (SearchText)', 16),
 
@@ -289,7 +289,7 @@ await realtimeNotifier.MessageReceivedAsync(SecretChatMapper.ToDto(message), rec
     '3.5-listing. SecretChatService.SendAsync: shifrlangan xabarni qabul qilish (qisqartirilgan)',
   ),
   ...ps(
-    'Klientdagi kriptografik kod secret-crypto.ts modulida joylashgan va Angular’ga bog‘liq emas; uning asosiy qismi ilovalarda keltirilgan. Yangi zanjir holati xabar yuborilishidan oldin IndexedDB’ga xabar bilan bitta tranzaksiyada yoziladi, shuning uchun sahifa to‘satdan yopilsa ham bitta xabar kaliti ikki marta ishlatilmaydi. Xabarlar qurilmadagi navbat (outbox) orqali qat’iy tartibda yuboriladi. Maxfiy chat oynasida qulf belgisi, taymer va kalit izini tekshirish tugmalari bor (3.9-rasm).',
+    'Klientdagi kriptografik kod secret-crypto.ts modulida joylashgan va Angular’ga bog‘liq emas [50]; uning asosiy qismi ilovalarda keltirilgan. Yangi zanjir holati xabar yuborilishidan oldin IndexedDB’ga xabar bilan bitta tranzaksiyada yoziladi, shuning uchun sahifa to‘satdan yopilsa ham bitta xabar kaliti ikki marta ishlatilmaydi. Xabarlar qurilmadagi navbat (outbox) orqali qat’iy tartibda yuboriladi. Maxfiy chat oynasida qulf belgisi, taymer va kalit izini tekshirish tugmalari bor (3.9-rasm).',
     'Server xabar mazmunini bilmasligi amalda ham tekshirildi: suhbatdosh oflayn bo‘lgan paytda yuborilgan xabar bazada faqat 183 baytli ma’nosiz blob ko‘rinishida turadi, yetkazilgan xabarlar esa serverdan butunlay o‘chirilgan (3.10-rasm).',
   ),
   ...figurePair(
@@ -305,7 +305,7 @@ await realtimeNotifier.MessageReceivedAsync(SecretChatMapper.ToDto(message), rec
   // ───────────────────────────────── 3.7
   h2('3.7. Klient qismini ishlab chiqish'),
   ...ps(
-    'Klient ilovasi Angular 22 ning mustaqil (standalone) komponentlaridan tashkil topgan va uchta marshrutga ega: /auth, /chat va /join/:token. /chat sahifasi authGuard, /auth esa guestGuard bilan himoyalangan, barcha sahifalar kerak bo‘lganda yuklanadi (lazy loading). Ilova holati Angular signals orqali boshqariladi: chatlar ro‘yxati, xabarlar va “yozmoqda” holati ChatApiService’da signal ko‘rinishida saqlanadi, komponentlar esa computed() yordamida “6 a’zo, 2 onlayn” kabi hosila qiymatlar oladi. REST javoblari ham, SignalR hodisalari ham holatga bir xil yo‘l bilan qo‘llanadi.',
+    'Klient ilovasi Angular 22 ning mustaqil (standalone) komponentlaridan tashkil topgan [43] va uchta marshrutga ega: /auth, /chat va /join/:token. /chat sahifasi authGuard, /auth esa guestGuard bilan himoyalangan, barcha sahifalar kerak bo‘lganda yuklanadi (lazy loading). Ilova holati Angular signals orqali boshqariladi: chatlar ro‘yxati, xabarlar va “yozmoqda” holati ChatApiService’da signal ko‘rinishida saqlanadi, komponentlar esa computed() yordamida “6 a’zo, 2 onlayn” kabi hosila qiymatlar oladi. REST javoblari ham, SignalR hodisalari ham holatga bir xil yo‘l bilan qo‘llanadi.',
     'authInterceptor har bir so‘rovga access tokenni qo‘shadi, 401 javobida esa tokenni yangilab so‘rovni takrorlaydi; bir vaqtda bir nechta so‘rov muvaffaqiyatsiz bo‘lsa ham bitta refresh so‘rovi ishlatiladi. Interfeys loyihaning dizayn tizimiga asoslangan: ranglar CSS o‘zgaruvchilari orqali berilgani uchun qorong‘i mavzu ularning muqobil qiymatlari bilan amalga oshiriladi. Interfeys moslashuvchan: katta ekranda uch ustunli joylashuv, telefonda esa bir vaqtda bitta ekran ko‘rsatiladi (3.11-rasm).',
   ),
   ...figurePair(
@@ -320,8 +320,8 @@ await realtimeNotifier.MessageReceivedAsync(SecretChatMapper.ToDto(message), rec
   // ───────────────────────────────── 3.8
   h2('3.8. Joylashtirish va testlash'),
   ...ps(
-    'Server ilovasi ko‘p bosqichli Dockerfile yordamida yig‘iladi: birinchi bosqichda .NET SDK obrazida loyiha nashr qilinadi, ikkinchisida faqat natija yengil ASP.NET runtime obraziga ko‘chiriladi, shuning uchun yakuniy obrazda kompilyator va manba kodi bo‘lmaydi. Konteyner Render platformasida ishga tushiriladi va GitHub’dagi o‘zgarishlardan so‘ng avtomatik qayta yig‘iladi. Maxfiy sozlamalar (bazaga ulanish, JWT va HMAC kalitlari, SMTP) kodda emas, muhit o‘zgaruvchilarida saqlanadi.',
-    'Biznes-mantiq xUnit freymvorkida NationalChat.Tests loyihasi bilan tekshirildi. Tashqi bog‘liqliklar NSubstitute yordamida soxtalashtirildi, vaqtga bog‘liq mantiq esa qat’iy TimeProvider bilan sinaldi. Serverda 307 ta, klientda Vitest freymvorkida 229 ta test yozildi; klient testlari transliteratsiyaning server bilan bir xil ishlashini, shifrlash, kalit zanjiri va soxta xabarlarni rad etishni tekshiradi. Natija 3.12-rasmda, server testlari tarkibi 3.4-jadvalda keltirilgan.',
+    'Server ilovasi ko‘p bosqichli Dockerfile yordamida yig‘iladi [45]: birinchi bosqichda .NET SDK obrazida loyiha nashr qilinadi, ikkinchisida faqat natija yengil ASP.NET runtime obraziga ko‘chiriladi, shuning uchun yakuniy obrazda kompilyator va manba kodi bo‘lmaydi. Konteyner Render platformasida ishga tushiriladi va GitHub’dagi o‘zgarishlardan so‘ng avtomatik qayta yig‘iladi. Maxfiy sozlamalar (bazaga ulanish, JWT va HMAC kalitlari, SMTP) kodda emas, muhit o‘zgaruvchilarida saqlanadi.',
+    'Biznes-mantiq xUnit freymvorkida NationalChat.Tests loyihasi bilan tekshirildi [49]. Tashqi bog‘liqliklar NSubstitute yordamida soxtalashtirildi, vaqtga bog‘liq mantiq esa qat’iy TimeProvider bilan sinaldi. Serverda 307 ta, klientda Vitest freymvorkida 229 ta test yozildi [51]; klient testlari transliteratsiyaning server bilan bir xil ishlashini, shifrlash, kalit zanjiri va soxta xabarlarni rad etishni tekshiradi. Natija 3.12-rasmda, server testlari tarkibi 3.4-jadvalda keltirilgan.',
   ),
   ...figure('3-19-unit-tests.png', '3.12', 'Server (dotnet test) va klient (ng test) testlarini bajarish natijasi', 15),
   ...table(

@@ -7,7 +7,7 @@ export const chapter1 = () => [
   h2('1.1. Messenjerlarning rivojlanishi va hozirgi holati'),
   ...ps(
     'Messenjer (ingl. instant messenger) — foydalanuvchilar o‘rtasida matnli, ovozli, video va boshqa xabarlarni Internet orqali deyarli bir zumda yetkazadigan dasturiy ta’minot. Elektron pochtadan farqli ravishda messenjerda muloqot dialog ko‘rinishida kechadi: xabar darhol yetkaziladi, jo‘natuvchi esa suhbatdosh onlayn ekanini, xabarni o‘qiganini yoki javob yozayotganini ko‘radi.',
-    'Birinchi ommaviy chat tizimi 1988-yilda yaratilgan IRC protokoli edi. 1996-yilda chiqqan ICQ kontaktlar ro‘yxati va onlayn holat tushunchalarini ommalashtirdi, 1999-yilda boshlangan Jabber loyihasi esa IETF standarti XMPP’ga asos bo‘ldi. Smartfonlar paydo bo‘lgach, 2009-yilda WhatsApp foydalanuvchini telefon raqami orqali identifikatsiya qilishni joriy etdi va messenjerni SMS’ning bepul muqobiliga aylantirdi. 2013-yilda ishga tushirilgan Telegram yozishmalarni serverda saqlaydigan “bulutli” yondashuvni, 2014-yilda chiqqan Signal esa keyinchalik WhatsApp’da ham qo‘llangan uchdan-uchgacha shifrlash protokolini taklif etdi.',
+    'Birinchi ommaviy chat tizimi 1988-yilda yaratilgan IRC protokoli edi. 1996-yilda chiqqan ICQ kontaktlar ro‘yxati va onlayn holat tushunchalarini ommalashtirdi, 1999-yilda boshlangan Jabber loyihasi esa IETF standarti XMPP’ga asos bo‘ldi. Smartfonlar paydo bo‘lgach, 2009-yilda WhatsApp foydalanuvchini telefon raqami orqali identifikatsiya qilishni joriy etdi va messenjerni SMS’ning bepul muqobiliga aylantirdi. 2013-yilda ishga tushirilgan Telegram yozishmalarni serverda saqlaydigan “bulutli” yondashuvni, 2014-yilda chiqqan Signal esa keyinchalik WhatsApp’da ham qo‘llangan uchdan-uchgacha shifrlash protokolini taklif etdi [47].',
     'Hozirgi messenjerlar quyidagi yo‘nalishlarda rivojlanmoqda:',
   ),
   ...bullets([
@@ -27,11 +27,11 @@ export const chapter1 = () => [
   ),
   h3('Telegram.'),
   p(
-    'Telegram o‘zining MTProto 2.0 protokolidan foydalanadi. Oddiy chatlarda xabarlar mijoz va server o‘rtasida shifrlanib, serverda saqlanadi, shu tufayli yozishmalar har qanday qurilmadan ochiladi. Uchdan-uchgacha shifrlash faqat alohida “maxfiy chat”larda qo‘llanadi. 200 000 a’zoli guruhlar, kanallar, botlar va 2 GB gacha fayllar qo‘llab-quvvatlanadi. Kuchli tomonlari — tezlik, bulutli sinxronizatsiya va boy funksionallik; kamchiliklari — server kodining yopiqligi va serverlarning xorijda joylashgani.',
+    'Telegram o‘zining MTProto 2.0 protokolidan foydalanadi [46]. Oddiy chatlarda xabarlar mijoz va server o‘rtasida shifrlanib, serverda saqlanadi, shu tufayli yozishmalar har qanday qurilmadan ochiladi. Uchdan-uchgacha shifrlash faqat alohida “maxfiy chat”larda qo‘llanadi. 200 000 a’zoli guruhlar, kanallar, botlar va 2 GB gacha fayllar qo‘llab-quvvatlanadi. Kuchli tomonlari — tezlik, bulutli sinxronizatsiya va boy funksionallik; kamchiliklari — server kodining yopiqligi va serverlarning xorijda joylashgani.',
   ),
   h3('WhatsApp.'),
   p(
-    'WhatsApp Meta kompaniyasiga tegishli. 2016-yildan barcha yozishmalar Signal Protocol asosida uchdan-uchgacha shifrlanadi va serverda faqat yetkazilgunga qadar turadi. Guruhlar 1024 a’zogacha bo‘ladi. Kamchiliklari — kodi yopiq, metama’lumotlar (kim, kim bilan, qachon yozishgani) esa kompaniya ixtiyorida qoladi.',
+    'WhatsApp Meta kompaniyasiga tegishli. 2016-yildan barcha yozishmalar Signal Protocol asosida uchdan-uchgacha shifrlanadi va serverda faqat yetkazilgunga qadar turadi [47]. Guruhlar 1024 a’zogacha bo‘ladi. Kamchiliklari — kodi yopiq, metama’lumotlar (kim, kim bilan, qachon yozishgani) esa kompaniya ixtiyorida qoladi.',
   ),
   h3('Signal va WeChat.'),
   p(
@@ -72,8 +72,8 @@ export const chapter1 = () => [
     '**nazorat qilib bo‘lmaslik** — yopiq server kodi ma’lumotlar qanday qayta ishlanishini tekshirishga imkon bermaydi.',
   ]),
   ...ps(
-    '“Shaxsga doir ma’lumotlar to‘g‘risida”gi O‘RQ-547-son Qonun (2019) shaxsga doir ma’lumotlarni yig‘ish, saqlash va himoya qilish tartibini belgilaydi. 2021-yilgi qo‘shimchalarga ko‘ra fuqarolarning shaxsga doir ma’lumotlarini Internet orqali qayta ishlovchi operatorlar ularni respublika hududidagi ma’lumotlar bazalarida saqlashi shart. Milliy messenjer bu talabga tabiiy ravishda javob beradi: uning serverlari mamlakat ichidagi data-markazda joylashadi, kodi mahalliy mutaxassislar nazoratida bo‘ladi.',
-    'Milliy messenjer mahalliy ehtiyojlarni ham hisobga oladi. O‘zbekistonda lotin yozuvi rasmiy bo‘lsa-da, kirill yozuvi hanuz keng qo‘llanadi: katta avlod kirillda, yoshlar lotinda yozadi. Xorijiy messenjerlarda bu yozuvlar o‘rtasida bog‘lanish yo‘q — lotincha qidiruv kirillcha xabarni topmaydi. Shuningdek, ta’lim muassasalari va tashkilotlar uchun a’zoning haqiqatan shu tashkilotga tegishli ekanini tasdiqlash muhim. Telefon raqamiga asoslangan messenjerlar buni ta’minlay olmaydi, tashkilotning e-pochta domeni esa bunday tasdiq uchun tabiiy vositadir.',
+    '“Shaxsga doir ma’lumotlar to‘g‘risida”gi O‘RQ-547-son Qonun (2019) shaxsga doir ma’lumotlarni yig‘ish, saqlash va himoya qilish tartibini belgilaydi. 2021-yilgi qo‘shimchalarga ko‘ra fuqarolarning shaxsga doir ma’lumotlarini Internet orqali qayta ishlovchi operatorlar ularni respublika hududidagi ma’lumotlar bazalarida saqlashi shart [1, 2]. Milliy messenjer bu talabga tabiiy ravishda javob beradi: uning serverlari mamlakat ichidagi data-markazda joylashadi, kodi mahalliy mutaxassislar nazoratida bo‘ladi.',
+    'Milliy messenjer mahalliy ehtiyojlarni ham hisobga oladi. O‘zbekistonda lotin yozuvi rasmiy bo‘lsa-da [8], kirill yozuvi hanuz keng qo‘llanadi: katta avlod kirillda, yoshlar lotinda yozadi. Xorijiy messenjerlarda bu yozuvlar o‘rtasida bog‘lanish yo‘q — lotincha qidiruv kirillcha xabarni topmaydi. Shuningdek, ta’lim muassasalari va tashkilotlar uchun a’zoning haqiqatan shu tashkilotga tegishli ekanini tasdiqlash muhim. Telefon raqamiga asoslangan messenjerlar buni ta’minlay olmaydi, tashkilotning e-pochta domeni esa bunday tasdiq uchun tabiiy vositadir.',
   ),
 
   // ───────────────────────────────── 1.4
@@ -81,8 +81,8 @@ export const chapter1 = () => [
   ...ps(
     'Messenjerning asosiy texnik vazifasi — yangi xabarni qabul qiluvchiga imkon qadar tez yetkazish. HTTP protokoli “so‘rov–javob” modeliga asoslangan va server o‘z tashabbusi bilan mijozga ma’lumot yubora olmaydi. Shu sababli serverdan mijozga ma’lumot “itarish” (push) uchun bir necha usul ishlab chiqilgan.',
     '**Short polling** usulida mijoz har bir necha soniyada “yangi xabar bormi?” deb so‘raydi: so‘rovlarning aksariyati bo‘sh qaytadi, xabar esa interval qadar kechikadi. **Long polling**’da server yangi ma’lumot paydo bo‘lguncha javobni ushlab turadi; kechikish kamayadi, lekin har bir xabar uchun yangi HTTP so‘rovi kerak. **Server-Sent Events** (SSE) bitta HTTP ulanish orqali hodisalarni uzluksiz yuboradi, ammo faqat serverdan mijozga yo‘nalishda ishlaydi.',
-    '**WebSocket** (RFC 6455) ulanishi oddiy HTTP so‘rovi bilan boshlanib, “101 Switching Protocols” javobidan so‘ng ikki tomonlama (full-duplex) kanalga aylanadi. Shundan keyin mijoz ham, server ham istalgan vaqtda kichik freymlar yuboradi. Minimal kechikish va qo‘shimcha trafik tufayli WebSocket zamonaviy veb-messenjerlarning asosiy transporti hisoblanadi.',
-    '**ASP.NET Core SignalR** — Microsoft kutubxonasi bo‘lib, transport darajasini abstraksiya qiladi: avval WebSocket orqali ulanadi, u ishlamasa avtomatik ravishda SSE yoki long polling’ga o‘tadi. Dasturchi “hab” (Hub) abstraksiyasi bilan ishlaydi: mijoz server metodlarini, server esa mijoz funksiyalarini masofadan chaqiradi. Ulanishlarni guruhlash, ma’lum foydalanuvchiga xabar yuborish, JWT autentifikatsiyasi va qayta ulanish tayyor holda beriladi. Texnologiyalar 1.2-jadvalda taqqoslangan.',
+    '**WebSocket** (RFC 6455) ulanishi oddiy HTTP so‘rovi bilan boshlanib, “101 Switching Protocols” javobidan so‘ng ikki tomonlama (full-duplex) kanalga aylanadi [22]. Shundan keyin mijoz ham, server ham istalgan vaqtda kichik freymlar yuboradi. Minimal kechikish va qo‘shimcha trafik tufayli WebSocket zamonaviy veb-messenjerlarning asosiy transporti hisoblanadi.',
+    '**ASP.NET Core SignalR** — Microsoft kutubxonasi bo‘lib, transport darajasini abstraksiya qiladi: avval WebSocket orqali ulanadi, u ishlamasa avtomatik ravishda SSE yoki long polling’ga o‘tadi. Dasturchi “hab” (Hub) abstraksiyasi bilan ishlaydi: mijoz server metodlarini, server esa mijoz funksiyalarini masofadan chaqiradi. Ulanishlarni guruhlash, ma’lum foydalanuvchiga xabar yuborish, JWT autentifikatsiyasi va qayta ulanish tayyor holda beriladi [40]. Texnologiyalar 1.2-jadvalda taqqoslangan.',
   ),
   ...table(
     '1.2',
@@ -130,7 +130,7 @@ export const chapter1 = () => [
     '**xavfsizlik** — HTTPS, qisqa muddatli access token, xavfsiz cookie’dagi refresh token, kod va tokenlarni xesh ko‘rinishida saqlash, fayllarni antivirus orqali tekshirish;',
     '**ishonchlilik** — xatolarni markazlashgan qayta ishlash, ulanish uzilganda avtomatik qayta ulanish;',
     '**kengaytiriluvchanlik** — holatsiz API, yangi funksiyani boshqa qismlarga ta’sir qilmasdan qo‘shish;',
-    '**qo‘llab-quvvatlanuvchanlik** — Clean Architecture qatlamlari, yagona kod uslubi, versiyalar nazorati;',
+    '**qo‘llab-quvvatlanuvchanlik** — Clean Architecture qatlamlari, yagona kod uslubi, versiyalar nazorati [10, 11];',
     '**ko‘chiriluvchanlik** — Docker konteynerida istalgan serverga joylashtirish;',
     '**qulaylik** — o‘zbek tilidagi, Telegram foydalanuvchilariga tanish interfeys.',
   ]),

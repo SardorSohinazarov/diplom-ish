@@ -7,8 +7,8 @@ export const chapter2 = () => [
   h2('2.1. Texnologiyalarni tanlash va asoslash'),
   ...ps(
     'Texnologiyalarni tanlashda quyidagi mezonlar qo‘yildi: real vaqtda ikki tomonlama aloqa, yuqori unumdorlik, tayyor va ishonchli xavfsizlik vositalari, ekotizimning yetukligi, ochiq kodli litsenziya va konteynerlarda joylashtirish qulayligi.',
-    'Server qismi uchun **.NET 8** (LTS) platformasi va **ASP.NET Core** freymvorki tanlandi. Ular kross-platformali, Linux konteynerlarida ishlaydi va mustaqil sinovlarda eng tezkor veb-freymvorklar qatorida turadi. Muqobil sifatida Node.js va Spring Boot ko‘rib chiqildi, ammo hal qiluvchi omil **SignalR** kutubxonasining platforma tarkibiga kirishi bo‘ldi: WebSocket va zaxira transportlar, hablar, guruhlar va JWT autentifikatsiyasi qo‘shimcha kutubxonalarsiz ishlaydi. Ma’lumotlar bazasi sifatida ACID tranzaksiyalar, sxemalar va murakkab indekslarni qo‘llab-quvvatlaydigan **PostgreSQL** tanlandi, u bilan **Entity Framework Core 8** ORM orqali ishlanadi.',
-    'Klient qismi **Angular 22** freymvorkida yozildi: u marshrutlash, formalar, HTTP klient va DI’ni bitta ekotizimda beradi, TypeScript’ning qat’iy tiplanishi esa server qismidagi C# bilan uslubiy uyg‘unlikni ta’minlaydi. Server ilovasi **Docker** konteyneriga yig‘ilib, **Render** bulutli platformasida ishga tushirilgan. Tanlangan texnologiyalar 2.1-jadvalda keltirilgan.',
+    'Server qismi uchun **.NET 8** (LTS) platformasi va **ASP.NET Core** freymvorki tanlandi [15, 17]. Ular kross-platformali, Linux konteynerlarida ishlaydi va mustaqil sinovlarda eng tezkor veb-freymvorklar qatorida turadi. Muqobil sifatida Node.js va Spring Boot ko‘rib chiqildi, ammo hal qiluvchi omil **SignalR** kutubxonasining platforma tarkibiga kirishi bo‘ldi: WebSocket va zaxira transportlar, hablar, guruhlar va JWT autentifikatsiyasi qo‘shimcha kutubxonalarsiz ishlaydi. Ma’lumotlar bazasi sifatida ACID tranzaksiyalar, sxemalar va murakkab indekslarni qo‘llab-quvvatlaydigan **PostgreSQL** tanlandi, u bilan **Entity Framework Core 8** ORM orqali ishlanadi [16, 18].',
+    'Klient qismi **Angular 22** freymvorkida yozildi [43]: u marshrutlash, formalar, HTTP klient va DI’ni bitta ekotizimda beradi, TypeScript’ning qat’iy tiplanishi esa server qismidagi C# bilan uslubiy uyg‘unlikni ta’minlaydi. Server ilovasi **Docker** konteyneriga yig‘ilib, **Render** bulutli platformasida ishga tushirilgan. Tanlangan texnologiyalar 2.1-jadvalda keltirilgan.',
   ),
   ...table(
     '2.1',
@@ -36,17 +36,17 @@ export const chapter2 = () => [
   h2('2.2. Tizim arxitekturasi'),
   ...ps(
     '“Milliy chat” klient-server arxitekturasi asosida qurilgan (2.1-rasm). Brauzerdagi Angular ilovasi server bilan ikki kanal orqali aloqa qiladi: holatni o‘zgartiruvchi barcha amallar (xabar yuborish, profilni tahrirlash, guruh yaratish) uchun HTTPS ustidagi **REST API**, serverdan mijozga hodisalarni (yangi xabar, o‘qilganlik, “yozmoqda”, onlayn holat) tezkor yetkazish uchun esa WebSocket ustidagi **SignalR** ulanishi. Tashqi xizmatlardan SMTP server bir martalik kodlarni yetkazadi, Google Identity kirish uchun ID token beradi, ClamAV esa yuklanayotgan fayllarni tekshiradi.',
-    'Server holatsiz (stateless) loyihalangan: sessiyalar ma’lumotlar bazasida, autentifikatsiya har bir so‘rovdagi JWT tokenda saqlanadi. Shu sababli bir necha server nusxasini ishga tushirish mumkin, bunda faqat onlayn holat va SignalR ulanishlarini Redis’da umumlashtirish talab etiladi.',
+    'Server holatsiz (stateless) loyihalangan: sessiyalar ma’lumotlar bazasida, autentifikatsiya har bir so‘rovdagi JWT tokenda saqlanadi. Shu sababli bir necha server nusxasini ishga tushirish mumkin, bunda faqat onlayn holat va SignalR ulanishlarini Redis’da umumlashtirish talab etiladi [12].',
   ),
   ...figure('2-2-deployment.png', '2.1', 'Tizimning umumiy arxitekturasi va joylashtirish sxemasi', 16.5),
   ...ps(
-    'Server kodi Robert Martin taklif etgan **Clean Architecture** tamoyillari asosida to‘rtta loyihaga ajratilgan (2.2-rasm). Asosiy qoida — bog‘liqliklar faqat tashqi qatlamlardan ichki qatlamlarga yo‘naladi, shuning uchun biznes-qoidalar ma’lumotlar bazasi yoki freymvork almashtirilganda o‘zgarmaydi va alohida sinalishi mumkin.',
+    'Server kodi Robert Martin taklif etgan **Clean Architecture** tamoyillari asosida to‘rtta loyihaga ajratilgan (2.2-rasm). Asosiy qoida — bog‘liqliklar faqat tashqi qatlamlardan ichki qatlamlarga yo‘naladi, shuning uchun biznes-qoidalar ma’lumotlar bazasi yoki freymvork almashtirilganda o‘zgarmaydi va alohida sinalishi mumkin [10].',
   ),
   ...figure('2-1-clean-architecture.png', '2.2', 'Server qismining Clean Architecture qatlamlari', 15.5),
   ...bullets([
-    '**Domain** — biznes obyektlari (User, Chat, ChatMember, Message, Story, Organization, SecretChat va boshqalar), sanab o‘tiladigan turlar va o‘zbek yozuvlari transliteratori. Hech bir loyihaga bog‘liq emas;',
+    '**Domain** — biznes obyektlari (User, Chat, ChatMember, Message, Story, Organization, SecretChat va boshqalar), sanab o‘tiladigan turlar va o‘zbek yozuvlari transliteratori. Hech bir loyihaga bog‘liq emas [14];',
     '**Application** — foydalanish holatlarini amalga oshiruvchi servislar, DTO’lar, validatorlar hamda tashqi dunyo bilan aloqa uchun interfeyslar (IMessageRepository, IChatRealtimeNotifier, IEmailSender, IFileStorage). Kod funksiyalar (Chats, Groups, Messages, Organizations, SecretChats…) bo‘yicha guruhlangan;',
-    '**Infrastructure** — interfeyslarning texnik amalga oshirilishi: EF Core konteksti va repozitoriylar, JWT, PBKDF2 va HMAC xeshlovchilari, SMTP, ClamAV, ImageSharp va FFmpeg ishlov beruvchilari, fon ishlari;',
+    '**Infrastructure** — interfeyslarning texnik amalga oshirilishi: EF Core konteksti va repozitoriylar [13], JWT, PBKDF2 va HMAC xeshlovchilari, SMTP, ClamAV, ImageSharp va FFmpeg ishlov beruvchilari, fon ishlari;',
     '**API** — REST controllerlar, SignalR habi (ChatHub), middleware’lar va bog‘liqliklarni ro‘yxatga olish.',
   ]),
   ...ps(
@@ -57,7 +57,7 @@ export const chapter2 = () => [
   // ───────────────────────────────── 2.3
   h2('2.3. Ma’lumotlar bazasini loyihalash'),
   p(
-    'Ma’lumotlar bazasi “kod birinchi” (code-first) yondashuvida loyihalandi: jadvallar Domain’dagi entity sinflari va EF Core konfiguratsiyalari asosida yaratiladi, sxemaning har bir o‘zgarishi migratsiya sifatida saqlanadi. 36 ta jadval vazifasiga ko‘ra PostgreSQL’ning o‘nta sxemasiga ajratilgan (2.2-jadval). Ularning bir qismi (kanallar, qo‘ng‘iroqlar, stikerlar, botlar, so‘rovnomalar) kelajakdagi funksiyalar uchun oldindan tayyorlangan.',
+    'Ma’lumotlar bazasi “kod birinchi” (code-first) yondashuvida loyihalandi: jadvallar Domain’dagi entity sinflari va EF Core konfiguratsiyalari asosida yaratiladi, sxemaning har bir o‘zgarishi migratsiya sifatida saqlanadi [41]. 36 ta jadval vazifasiga ko‘ra PostgreSQL’ning o‘nta sxemasiga ajratilgan [44] (2.2-jadval). Ularning bir qismi (kanallar, qo‘ng‘iroqlar, stikerlar, botlar, so‘rovnomalar) kelajakdagi funksiyalar uchun oldindan tayyorlangan.',
   ),
   ...table(
     '2.2',
@@ -89,7 +89,7 @@ export const chapter2 = () => [
     '**Indekslar** — users(Email, Username), sessions(RefreshTokenHash), organizations(Domain) kabi unique va tez-tez bajariladigan so‘rovlar uchun tarkibiy indekslar.',
   ]),
   p(
-    'Chatlar ro‘yxati va xabarlar tarixi uchun **kursorli (keyset) sahifalash** tanlandi. OFFSET/LIMIT usulida yangi xabar qo‘shilganda sahifalar siljiydi va katta OFFSET’da so‘rov sekinlashadi. Kursorli usulda mijoz “beforeId” va “limit” yuboradi, server esa birlamchi kalit indeksi bo‘yicha limit+1 ta yozuvni o‘qib, items, nextCursor va hasMore maydonlarini qaytaradi. So‘rov tezligi tarix hajmiga bog‘liq emas.',
+    'Chatlar ro‘yxati va xabarlar tarixi uchun **kursorli (keyset) sahifalash** tanlandi. OFFSET/LIMIT usulida yangi xabar qo‘shilganda sahifalar siljiydi va katta OFFSET’da so‘rov sekinlashadi. Kursorli usulda mijoz “beforeId” va “limit” yuboradi, server esa birlamchi kalit indeksi bo‘yicha limit+1 ta yozuvni o‘qib, items, nextCursor va hasMore maydonlarini qaytaradi. So‘rov tezligi tarix hajmiga bog‘liq emas [12].',
   ),
 
   landscapeFigure('2-4-er-users-chats.png', '2.3', 'ER-diagramma: foydalanuvchilar, sessiyalar, chatlar va guruhlar'),
@@ -100,7 +100,7 @@ export const chapter2 = () => [
   // ───────────────────────────────── 2.4
   h2('2.4. Tizimning UML modellari'),
   p(
-    'Tizimda uchta aktor mavjud. **Mehmon** faqat ro‘yxatdan o‘tishi yoki kirishi mumkin. **Foydalanuvchi** profilini boshqaradi, yozishadi, fayl va hikoyalar almashadi, guruh va maxfiy chat ochadi, xabarlarni o‘zi tanlagan yozuvda ko‘radi. **Guruh administratori yoki egasi** qo‘shimcha ravishda guruh a’zolari, sozlamalari va taklif havolasini boshqaradi (2.5-rasm). Guruhdagi ruxsatlar 2.3-jadvalda keltirilgan; ular server servislarida tekshiriladi, interfeys esa ruxsat berilmagan tugmalarni ko‘rsatmaydi.',
+    'Tizimning funksional imkoniyatlari va jarayonlari UML tilida modellashtirildi [20]. Tizimda uchta aktor mavjud. **Mehmon** faqat ro‘yxatdan o‘tishi yoki kirishi mumkin. **Foydalanuvchi** profilini boshqaradi, yozishadi, fayl va hikoyalar almashadi, guruh va maxfiy chat ochadi, xabarlarni o‘zi tanlagan yozuvda ko‘radi. **Guruh administratori yoki egasi** qo‘shimcha ravishda guruh a’zolari, sozlamalari va taklif havolasini boshqaradi (2.5-rasm). Guruhdagi ruxsatlar 2.3-jadvalda keltirilgan; ular server servislarida tekshiriladi, interfeys esa ruxsat berilmagan tugmalarni ko‘rsatmaydi.',
   ),
   ...figure('2-6-use-case.png', '2.5', 'Foydalanish holatlari (use-case) diagrammasi', 12, 22),
   ...table(
@@ -139,10 +139,10 @@ export const chapter2 = () => [
   // ───────────────────────────────── 2.5
   h2('2.5. Xavfsizlikni loyihalash'),
   ...ps(
-    'Tizim parollardan foydalanmaydi, shuning uchun parollar bazasining sizib chiqishi yoki zaif parollar muammosi yo‘q. Bir martalik kodlar PBKDF2 (HMAC-SHA256, 210 000 iteratsiya, tasodifiy tuz) bilan xeshlanadi va vaqtga bog‘liq bo‘lmagan usulda solishtiriladi. Google orqali kirishda ID tokenning imzosi, muddati va auditoriyasi tekshiriladi.',
-    'Kirishdan so‘ng ikki token beriladi. **Access token** — 15 daqiqa amal qiladigan, foydalanuvchi va sessiya identifikatorini saqlovchi JWT (HS256); u API so‘rovlarida va SignalR ulanishida yuboriladi. **Refresh token** — 30 kunlik tasodifiy qator bo‘lib, JavaScript o‘qiy olmaydigan HttpOnly, SameSite=Strict cookie’da saqlanadi, bazaga esa faqat HMAC xeshi yoziladi. Access token muddati tugaganda klient interceptori uni avtomatik yangilaydi, refresh token esa har safar almashtiriladi (rotatsiya), shuning uchun o‘g‘irlangan eski token ishlamaydi.',
+    'Tizim parollardan foydalanmaydi, shuning uchun parollar bazasining sizib chiqishi yoki zaif parollar muammosi yo‘q. Bir martalik kodlar PBKDF2 (HMAC-SHA256, 210 000 iteratsiya, tasodifiy tuz) bilan xeshlanadi [24, 25] va vaqtga bog‘liq bo‘lmagan usulda solishtiriladi. Google orqali kirishda ID tokenning imzosi, muddati va auditoriyasi tekshiriladi.',
+    'Kirishdan so‘ng ikki token beriladi. **Access token** — 15 daqiqa amal qiladigan, foydalanuvchi va sessiya identifikatorini saqlovchi JWT (HS256) [23]; u API so‘rovlarida va SignalR ulanishida yuboriladi. **Refresh token** — 30 kunlik tasodifiy qator bo‘lib, JavaScript o‘qiy olmaydigan HttpOnly, SameSite=Strict cookie’da saqlanadi, bazaga esa faqat HMAC xeshi yoziladi. Access token muddati tugaganda klient interceptori uni avtomatik yangilaydi, refresh token esa har safar almashtiriladi (rotatsiya), shuning uchun o‘g‘irlangan eski token ishlamaydi.',
     'Har bir kirish alohida sessiya yaratadi: foydalanuvchi barcha faol qurilmalarini ko‘radi va begona qurilmani chiqarib yuborishi mumkin. Avtorizatsiyada tokenning o‘zi yetarli emas — har bir chat bilan bog‘liq REST va hab chaqiruvida server foydalanuvchining shu chat a’zosi ekanini bazadan tekshiradi. Kiruvchi ma’lumotlar FluentValidation bilan tekshiriladi, kutilmagan xatolar esa mijozga ichki tafsilotlarsiz qaytariladi.',
-    'Yuklanadigan rasm kengaytmasi bo‘yicha emas, tarkibi bo‘yicha tekshiriladi va qayta kodlanadi, ya’ni yashirin metama’lumot va zararli qo‘shimchalar olib tashlanadi. Fayllar tasodifiy nom bilan saqlanadi, faqat chat a’zolariga beriladi va ClamAV bilan tekshiriladi. Klient ilovasi qat’iy **Content Security Policy** bilan himoyalangan: skriptlar faqat ilovaning o‘z manzilidan yuklanadi. Bu XSS’ga qarshi, ayniqsa maxfiy chat kalitlarini himoya qilish uchun muhim. Asosiy tahdidlar va himoya choralari 2.4-jadvalda umumlashtirilgan.',
+    'Yuklanadigan rasm kengaytmasi bo‘yicha emas, tarkibi bo‘yicha tekshiriladi va qayta kodlanadi, ya’ni yashirin metama’lumot va zararli qo‘shimchalar olib tashlanadi. Fayllar tasodifiy nom bilan saqlanadi, faqat chat a’zolariga beriladi va ClamAV bilan tekshiriladi. Klient ilovasi qat’iy **Content Security Policy** bilan himoyalangan [31]: skriptlar faqat ilovaning o‘z manzilidan yuklanadi. Bu XSS’ga qarshi, ayniqsa maxfiy chat kalitlarini himoya qilish uchun muhim. Asosiy tahdidlar va himoya choralari 2.4-jadvalda umumlashtirilgan [33].',
   ),
   ...table(
     '2.4',
@@ -167,8 +167,8 @@ export const chapter2 = () => [
   // ───────────────────────────────── 2.6
   h2('2.6. Maxfiy chatlar kriptografik protokolini loyihalash'),
   ...ps(
-    'Oddiy chatlarda xabarlar serverga TLS orqali yetib keladi, lekin serverda ochiq saqlanadi — bu barcha qurilmalarda sinxronizatsiya, qidiruv va transliteratsiyani ta’minlaydi. Ammo ayrim yozishmalar server buzilganda yoki baza sizib chiqqanda ham o‘qilmasligi kerak. Buning uchun uchdan-uchgacha (E2E) shifrlangan **maxfiy chatlar** loyihalandi. Protokolda server “halol, lekin qiziquvchan” deb qaraladi: u xabarlarni yetkazadi, lekin faqat kim kimga, qachon va qancha hajmda yozganini biladi.',
-    'Signal va WhatsApp’dagi ko‘p qurilmali model har bir qurilma kalitlarini boshqarishni talab qiladi, shuning uchun Telegram’dagi kabi **qurilmaga bog‘langan model** tanlandi: maxfiy chat ikki aniq qurilma o‘rtasida ochiladi. Kriptografiyani noldan yozish xavfli bo‘lgani uchun protokol faqat brauzerning standart **Web Crypto API** primitivlaridan quriladi (2.5-jadval), barcha yopiq kalitlar esa “extractable: false” rejimida yaratiladi — skript ular bilan shifrlay oladi, lekin kalit baytlarini o‘qiy olmaydi.',
+    'Oddiy chatlarda xabarlar serverga TLS orqali yetib keladi, lekin serverda ochiq saqlanadi — bu barcha qurilmalarda sinxronizatsiya, qidiruv va transliteratsiyani ta’minlaydi. Ammo ayrim yozishmalar server buzilganda yoki baza sizib chiqqanda ham o‘qilmasligi kerak. Buning uchun uchdan-uchgacha (E2E) shifrlangan **maxfiy chatlar** loyihalandi. Protokolda server “halol, lekin qiziquvchan” deb qaraladi [19]: u xabarlarni yetkazadi, lekin faqat kim kimga, qachon va qancha hajmda yozganini biladi.',
+    'Signal va WhatsApp’dagi ko‘p qurilmali model har bir qurilma kalitlarini boshqarishni talab qiladi, shuning uchun Telegram’dagi kabi **qurilmaga bog‘langan model** tanlandi: maxfiy chat ikki aniq qurilma o‘rtasida ochiladi. Kriptografiyani noldan yozish xavfli bo‘lgani uchun protokol faqat brauzerning standart **Web Crypto API** primitivlaridan quriladi [30] (2.5-jadval), barcha yopiq kalitlar esa “extractable: false” rejimida yaratiladi — skript ular bilan shifrlay oladi, lekin kalit baytlarini o‘qiy olmaydi.',
   ),
   ...table(
     '2.5',
@@ -184,17 +184,17 @@ export const chapter2 = () => [
     [2.6, 2.6, 8],
   ),
   ...ps(
-    '**Kalit almashish.** Tashabbuskorning brauzeri X25519 kalit juftini yaratib, serverga faqat ochiq kalitni yuboradi (2.9-rasm). Suhbatdosh taklifni qaysi qurilmada qabul qilsa, chat o‘sha qurilmaga bog‘lanadi va u ham o‘z ochiq kalitini qaytaradi. Shundan so‘ng ikkala tomon mustaqil ravishda bir xil umumiy sirni hisoblaydi. Serverdagi ikki ochiq kalitdan bu sirni topish diskret logarifm masalasini yechishni talab qiladi.',
+    '**Kalit almashish.** Tashabbuskorning brauzeri X25519 [26] kalit juftini yaratib, serverga faqat ochiq kalitni yuboradi (2.9-rasm). Suhbatdosh taklifni qaysi qurilmada qabul qilsa, chat o‘sha qurilmaga bog‘lanadi va u ham o‘z ochiq kalitini qaytaradi. Shundan so‘ng ikkala tomon mustaqil ravishda bir xil umumiy sirni hisoblaydi. Serverdagi ikki ochiq kalitdan bu sirni topish diskret logarifm masalasini yechishni talab qiladi.',
   ),
   ...figure('2-12-secret-handshake.png', '2.9', 'Maxfiy chatni ochish va shifrlangan xabar yetkazish ketma-ketlik diagrammasi', 13, 22),
   ...ps(
-    '**Xabar kalitlari zanjiri.** Umumiy sir HKDF yordamida har bir yo‘nalish uchun alohida zanjir kalitiga kengaytiriladi (2.10-rasm). Har bir xabarda zanjir bir qadam suriladi: MK = HMAC(CK, 0x01), CK′ = HMAC(CK, 0x02), eski kalit esa darhol unutiladi. Bu **oldinga maxfiylikni** ta’minlaydi: joriy kalit o‘g‘irlansa ham, avvalgi xabarlarni ochib bo‘lmaydi. Xabar AES-256-GCM bilan shifrlanadi, AAD sifatida esa “chatId | yo‘nalish | tartib raqami” ishlatiladi, shuning uchun xabarni boshqa chatga ko‘chirish yoki o‘rnini almashtirish teg tekshiruvida aniqlanadi.',
+    '**Xabar kalitlari zanjiri.** Umumiy sir HKDF [27] yordamida har bir yo‘nalish uchun alohida zanjir kalitiga kengaytiriladi (2.10-rasm). Har bir xabarda zanjir bir qadam suriladi: MK = HMAC(CK, 0x01), CK′ = HMAC(CK, 0x02) [25], eski kalit esa darhol unutiladi. Bu **oldinga maxfiylikni** ta’minlaydi: joriy kalit o‘g‘irlansa ham, avvalgi xabarlarni ochib bo‘lmaydi. Xabar AES-256-GCM bilan shifrlanadi [28], AAD sifatida esa “chatId | yo‘nalish | tartib raqami” ishlatiladi, shuning uchun xabarni boshqa chatga ko‘chirish yoki o‘rnini almashtirish teg tekshiruvida aniqlanadi.',
   ),
   ...figure('2-13-ratchet.png', '2.10', 'Maxfiy chatda kalitlarni chiqarish va xabar kalitlari zanjiri', 13, 20),
   ...ps(
     '**Yetkazish.** Server faqat saqlab-uzatish vazifasini bajaradi: shifrlangan blob qabul qiluvchi qurilmaga yuboriladi, u tasdiq (ack) qaytargach server blobni o‘chiradi, yetkazilmaganlari 7 kundan keyin tozalanadi. Har bir xabarning o‘suvchi tartib raqami takroriy yuborish (replay) hujumidan himoyalaydi, tartibsiz kelgan xabarlar uchun esa 200 tagacha o‘tkazib yuborilgan kalit vaqtincha saqlanadi. O‘z-o‘zini o‘chirish taymeri va tarixni tozalash buyrug‘i ham shifrlangan xabar sifatida yuboriladi.',
-    '**Fayllar va kalit izi.** Fayl brauzerda alohida tasodifiy AES kalit bilan shifrlanib yuklanadi, kalit va fayl nomi esa E2E xabar ichida yuboriladi. Kalit izi ikkala ochiq kalitning SHA-256 xeshidan 8 ta emoji va raqamlar ko‘rinishida hisoblanadi: server o‘rtada turib kalitlarni almashtirsa (MITM), ikki tomondagi belgilar farq qiladi.',
-    '**Cheklovlar.** Protokol Signal’dagi to‘liq Double Ratchet emas: suhbat davomida yangi Diffi-Xellman almashinuvi bajarilmagani uchun buzilgandan keyin tiklanish xususiyati yo‘q. Metama’lumotlar serverga ko‘rinadi, maxfiy chat esa faqat bitta qurilmada ishlaydi. Veb-ilovada shifrlash kodini ham server yuborgani sababli bu xavf qat’iy CSP bilan kamaytirilgan, to‘liq bartaraf etish esa alohida mobil ilova talab qiladi.',
+    '**Fayllar va kalit izi.** Fayl brauzerda alohida tasodifiy AES kalit bilan shifrlanib yuklanadi, kalit va fayl nomi esa E2E xabar ichida yuboriladi. Kalit izi ikkala ochiq kalitning SHA-256 [29] xeshidan 8 ta emoji va raqamlar ko‘rinishida hisoblanadi: server o‘rtada turib kalitlarni almashtirsa (MITM), ikki tomondagi belgilar farq qiladi.',
+    '**Cheklovlar.** Protokol Signal’dagi to‘liq Double Ratchet emas [32]: suhbat davomida yangi Diffi-Xellman almashinuvi bajarilmagani uchun buzilgandan keyin tiklanish xususiyati yo‘q. Metama’lumotlar serverga ko‘rinadi, maxfiy chat esa faqat bitta qurilmada ishlaydi. Veb-ilovada shifrlash kodini ham server yuborgani sababli bu xavf qat’iy CSP bilan kamaytirilgan, to‘liq bartaraf etish esa alohida mobil ilova talab qiladi.',
   ),
 
   h2('2-bob bo‘yicha xulosa'),

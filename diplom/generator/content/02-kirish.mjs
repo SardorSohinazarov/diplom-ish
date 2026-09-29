@@ -7,7 +7,7 @@ export const introduction = () => [
   ),
   h3('Mavzuning dolzarbligi.'),
   ...ps(
-    '“Raqamli O‘zbekiston – 2030” strategiyasi (PF-6079-son Farmon, 2020-yil 5-oktabr) mahalliy dasturiy mahsulotlarni rivojlantirish va axborot xavfsizligini ta’minlashni ustuvor vazifa sifatida belgilaydi. “Shaxsga doir ma’lumotlar to‘g‘risida”gi Qonunga 2021-yilda kiritilgan o‘zgartishlarga ko‘ra fuqarolarning shaxsga doir ma’lumotlari respublika hududidagi texnik vositalarda saqlanishi lozim. Bu talablar ma’lumotlarni o‘z serverida saqlaydigan milliy messenjer yaratishni dolzarb qiladi.',
+    '“Raqamli O‘zbekiston – 2030” strategiyasi (PF-6079-son Farmon, 2020-yil 5-oktabr) mahalliy dasturiy mahsulotlarni rivojlantirish va axborot xavfsizligini ta’minlashni ustuvor vazifa sifatida belgilaydi [7]. “Shaxsga doir ma’lumotlar to‘g‘risida”gi Qonunga 2021-yilda kiritilgan o‘zgartishlarga ko‘ra fuqarolarning shaxsga doir ma’lumotlari respublika hududidagi texnik vositalarda saqlanishi lozim [1]. Bu talablar ma’lumotlarni o‘z serverida saqlaydigan milliy messenjer yaratishni dolzarb qiladi.',
     'Texnik jihatdan ham masala murakkab: xabar, “yozmoqda” belgisi va onlayn holat real vaqtda, sahifani yangilamasdan yetkazilishi, katta yozishmalar tarixi tez yuklanishi, autentifikatsiya esa ishonchli bo‘lishi kerak. Bularni hal etish qatlamli arxitektura, real vaqt protokollari va ma’lumotlar bazasini optimallashtirishni amalda qo‘llashni talab qiladi.',
   ),
   h3('Bitiruv malakaviy ishining maqsadi'),

@@ -7,7 +7,7 @@ import { bullets, figure, formula, h1, h2, h3, numbered, p, ps, table } from '..
 export const chapter4 = () => [
   h1('IV-bob. Hayot faoliyati xavfsizligi'),
   p(
-    'Hayot faoliyati xavfsizligi inson faoliyatidagi xavfli va zararli omillarni aniqlash, ularning ta’sirini kamaytirish hamda favqulodda vaziyatlarda odamlar hayoti va sog‘lig‘ini saqlashga qaratilgan chora-tadbirlar tizimidir. “Milliy chat” kabi dasturiy mahsulotni ishlab chiqish jamoasi ish vaqtining asosiy qismini kompyuter qarshisida o‘tkazgani uchun bobda ikki masala ko‘rib chiqiladi: dasturchining ergonomik ish joyini tashkil etish hamda IT-ofisda evakuatsiyani rejalashtirish va avariya yoki yong‘inda xodimlarning harakatlari.',
+    'Hayot faoliyati xavfsizligi inson faoliyatidagi xavfli va zararli omillarni aniqlash, ularning ta’sirini kamaytirish hamda favqulodda vaziyatlarda odamlar hayoti va sog‘lig‘ini saqlashga qaratilgan chora-tadbirlar tizimidir [21]. “Milliy chat” kabi dasturiy mahsulotni ishlab chiqish jamoasi ish vaqtining asosiy qismini kompyuter qarshisida o‘tkazgani uchun bobda ikki masala ko‘rib chiqiladi: dasturchining ergonomik ish joyini tashkil etish hamda IT-ofisda evakuatsiyani rejalashtirish va avariya yoki yong‘inda xodimlarning harakatlari.',
   ),
 
   // ───────────────────────────────── 4.1
@@ -25,7 +25,7 @@ export const chapter4 = () => [
     '**psixoemotsional zo‘riqish** — muddatlar bosimi, tungi navbatchiliklar va tizim avariyalarini bartaraf etish.',
   ]),
   p(
-    'Ish joyiga qo‘yiladigan talablar Mehnat kodeksi, “Mehnatni muhofaza qilish to‘g‘risida”gi Qonun, sanitariya qoidalari hamda ISO 9241-5, GOST 12.2.032-78, GOST 12.1.005-88 va KMK 2.01.05-98 standartlari bilan belgilanadi.',
+    'Ish joyiga qo‘yiladigan talablar Mehnat kodeksi, “Mehnatni muhofaza qilish to‘g‘risida”gi Qonun, sanitariya qoidalari hamda ISO 9241-5, GOST 12.2.032-78, GOST 12.1.005-88 va KMK 2.01.05-98 standartlari bilan belgilanadi [3, 4, 34, 36, 37, 39].',
   ),
 
   h3('Ish xonasiga qo‘yiladigan talablar.'),
@@ -63,7 +63,7 @@ export const chapter4 = () => [
 
   h3('Mikroiqlim, yoritish va shovqin.'),
   p(
-    'Dasturchi mehnati energiya sarfi bo‘yicha Ia toifadagi yengil ishlarga kiradi (energiya sarfi 139 W gacha). Bunday ishlar uchun ish zonasi mikroiqlimining maqbul ko‘rsatkichlari, yoritilganlik va shovqin me’yorlari 4.2-jadvalda keltirilgan.',
+    'Dasturchi mehnati energiya sarfi bo‘yicha Ia toifadagi yengil ishlarga kiradi [37] (energiya sarfi 139 W gacha). Bunday ishlar uchun ish zonasi mikroiqlimining maqbul ko‘rsatkichlari, yoritilganlik va shovqin me’yorlari 4.2-jadvalda keltirilgan.',
   ),
   ...table(
     '4.2',
@@ -90,7 +90,7 @@ export const chapter4 = () => [
   ),
   formula('~n~_{max} = min(~S~ / 6; ~V~ / 20) = min(36 / 6; 108 / 20) = min(6; 5,4) = 5', '4.1'),
   p(
-    'Demak, xonada 5 ta ish joyi tashkil etiladi. Umumiy sun’iy yoritish yorug‘lik oqimidan foydalanish koeffitsiyenti usuli bilan hisoblanadi. Avval xona indeksi aniqlanadi:',
+    'Demak, xonada 5 ta ish joyi tashkil etiladi. Umumiy sun’iy yoritish yorug‘lik oqimidan foydalanish koeffitsiyenti usuli bilan hisoblanadi [39]. Avval xona indeksi aniqlanadi:',
   ),
   formula('~i~ = ~A~·~B~ / (~h~·(~A~ + ~B~)),', '4.2'),
   p(
@@ -129,7 +129,7 @@ export const chapter4 = () => [
   h2('4.2. Evakuatsiya tadbirlarini rejalashtirish hamda avariya va yong‘inlar sodir bo‘lganda xodimlarning harakatlari'),
   ...ps(
     'Favqulodda vaziyat — avariya, halokat, tabiiy ofat yoki boshqa hodisa natijasida odamlar hayoti, sog‘lig‘i va atrof-muhitga zarar yetishi mumkin bo‘lgan holat. IT-ofis uchun eng ehtimoliy vaziyatlar yong‘in, zilzila (Toshkent yuqori seysmik faollik zonasida joylashgan), elektr ta’minotidagi avariya, quvurlarning yorilishi va gaz sizishidir. Bunday vaziyatlarda xodimlar hayotini saqlashning asosiy usuli o‘z vaqtida va tartibli evakuatsiyadir.',
-    'Asosiy talablar “Favqulodda vaziyatlarda aholini va hududlarni muhofaza qilish to‘g‘risida”gi, “Yong‘in xavfsizligi to‘g‘risida”gi qonunlar va GOST 12.1.004-91 standarti bilan belgilanadi.',
+    'Asosiy talablar “Favqulodda vaziyatlarda aholini va hududlarni muhofaza qilish to‘g‘risida”gi, “Yong‘in xavfsizligi to‘g‘risida”gi qonunlar va GOST 12.1.004-91 standarti bilan belgilanadi [5, 6, 38].',
   ),
 
   h3('IT-ofisda yong‘in chiqish sabablari va o‘t o‘chirish vositalari.'),
@@ -161,7 +161,7 @@ export const chapter4 = () => [
   ...bullets([
     'har bir qavatda kamida ikkita, bir-biridan uzoqda joylashgan evakuatsiya chiqishi;',
     'yo‘laklar kengligi kamida 1–1,2 m, eshiklar kamida 0,8 m; eshiklar chiqish tomonga va ichkaridan kalitsiz ochiladi; yo‘l va zinalarni to‘sib qo‘yish taqiqlanadi;',
-    'avariya yoritishi, ISO 7010 bo‘yicha yashil “Favqulodda chiqish” belgilari, yong‘in signalizatsiyasi va ovozli xabardor qilish tizimi;',
+    'avariya yoritishi, ISO 7010 bo‘yicha yashil “Favqulodda chiqish” belgilari [35], yong‘in signalizatsiyasi va ovozli xabardor qilish tizimi;',
     'har bir qavatda fotolyuminessent materialdan tayyorlangan evakuatsiya reja-sxemalari.',
   ]),
   p(
@@ -178,7 +178,7 @@ export const chapter4 = () => [
 
   h3('Evakuatsiya vaqtini hisoblash.'),
   ...ps(
-    'Evakuatsiya yo‘llarining yetarliligini baholash uchun hisobiy evakuatsiya vaqti aniqlanadi. Hisoblash GOST 12.1.004-91 standartida keltirilgan odamlar oqimining harakat parametrlari asosida soddalashtirilgan usulda bajariladi. Evakuatsiya yo‘li o‘lchamlari va odamlar soni bir xil bo‘lgan uchastkalarga ajratiladi. Har bir uchastkadagi odamlar oqimining zichligi quyidagicha aniqlanadi:',
+    'Evakuatsiya yo‘llarining yetarliligini baholash uchun hisobiy evakuatsiya vaqti aniqlanadi. Hisoblash GOST 12.1.004-91 standartida keltirilgan odamlar oqimining harakat parametrlari asosida soddalashtirilgan usulda bajariladi [38]. Evakuatsiya yo‘li o‘lchamlari va odamlar soni bir xil bo‘lgan uchastkalarga ajratiladi. Har bir uchastkadagi odamlar oqimining zichligi quyidagicha aniqlanadi:',
   ),
   formula('~D~_{i} = ~N~_{i}·~f~ / (~l~_{i}·δ_{i}),', '4.7'),
   p(
