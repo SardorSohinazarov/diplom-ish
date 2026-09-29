@@ -226,6 +226,57 @@ export const landscapeFigure = (file, number, title, widthCm = 24) => ({
   children: figure(file, number, title, widthCm, 14.5),
 });
 
+const noBorder = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
+
+/**
+ * Two images side by side with "a) …" / "b) …" sub-captions and one shared caption below:
+ *   figurePair([['3-01-login.jpg', 'kirish sahifasi'], ['3-02-otp.jpg', 'kodni kiritish']], '3.10', 'Tizimga kirish')
+ */
+export function figurePair(items, number, title) {
+  const half = Math.floor(TEXT_WIDTH / 2);
+  const pxPerCm = 37.8;
+  const widthCm = 8;
+  const cells = items.map(([file, label], i) => {
+    const data = fs.readFileSync(path.join(ROOT, 'rasmlar', file));
+    const { w, h } = imageSize(data);
+    const width = widthCm * pxPerCm;
+    return new TableCell({
+      width: { size: half, type: WidthType.DXA },
+      borders: { top: noBorder, bottom: noBorder, left: noBorder, right: noBorder },
+      margins: { left: 40, right: 40 },
+      children: [
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          keepNext: true,
+          spacing: { before: 120, after: 0, line: 240 },
+          children: [
+            new ImageRun({
+              type: file.endsWith('.png') ? 'png' : 'jpg',
+              data,
+              transformation: { width: Math.round(width), height: Math.round((width * h) / w) },
+            }),
+          ],
+        }),
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          keepNext: true,
+          spacing: { before: 40, after: 0, line: 240 },
+          children: runs(`${'ab'[i]}) ${label}`, { size: 24 }),
+        }),
+      ],
+    });
+  });
+  return [
+    new Table({
+      width: { size: TEXT_WIDTH, type: WidthType.DXA },
+      columnWidths: [half, TEXT_WIDTH - half],
+      borders: { top: noBorder, bottom: noBorder, left: noBorder, right: noBorder, insideHorizontal: noBorder, insideVertical: noBorder },
+      rows: [new TableRow({ cantSplit: true, children: cells })],
+    }),
+    caption(`${number}-rasm. ${title}`),
+  ];
+}
+
 /** Visible placeholder box for content that still has to be supplied. */
 export const placeholder = (titleText, note) => [
   new Paragraph({
