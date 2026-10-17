@@ -1,16 +1,14 @@
-import { code, figure, figurePair, h1, h2, h3, p, ps, table } from '../lib.mjs';
+import { bullets, figure, figurePair, formula, h1, h2, h3, numbered, p, ps, table } from '../lib.mjs';
 
 export const chapter3 = () => [
-  h1('III-bob. “Milliy chat” dasturini ishlab chiqish'),
-  p(
-    'Ushbu bobda loyihalangan tizimning dasturiy amalga oshirilishi yoritiladi. Server qismi 236 ta C# faylidan (migratsiyalarsiz 9 mingga yaqin qator), klient qismi esa 30 ta Angular komponenti va 13 mingdan ortiq qatordan iborat. Keltirilgan kod parchalari loyihaning haqiqiy manba kodidan olingan, qisqartirilgan joylar “…” bilan belgilangan.',
-  ),
+  h1('III-bob. “Milliy” xabarchini ishlab chiqish'),
 
   // ───────────────────────────────── 3.1
   h2('3.1. Server qismini ishlab chiqish'),
+  h3('Server tuzilmasi va REST API.'),
   ...ps(
-    'Server yechimi to‘rtta loyihadan (Domain, Application, Infrastructure, API) va unit testlar loyihasidan iborat. Kirish nuqtasi — Program.cs fayli faqat so‘rovlarni qayta ishlash konveyerini sozlaydi [42]: eng birinchi xatolarni ushlovchi middleware, so‘ng xavfsizlik sarlavhalari, autentifikatsiya, avtorizatsiya, controllerlar va SignalR habi. Servislarni ro‘yxatdan o‘tkazish esa mavzuli kengaytma metodlariga ajratilgan.',
-    'Server 11 ta controller orqali 73 ta HTTP endpointni taqdim etadi (3.1-jadval). Endpointlar RESTful tamoyil asosida nomlangan: resurslar ko‘plik shaklida, amal esa HTTP metodi orqali ifodalanadi, masalan “POST /api/chats/{chatId}/messages”.',
+    'Server yechimi to‘rtta loyihadan (Domain, Application, Infrastructure, API) va unit testlar loyihasidan iborat. Kirish nuqtasi — Program.cs fayli faqat so‘rovlarni qayta ishlash konveyerini sozlaydi [42]: eng birinchi xatolarni ushlovchi middleware, so‘ng xavfsizlik sarlavhalari, autentifikatsiya, avtorizatsiya, controllerlar va ikkita SignalR habi. Servislarni ro‘yxatdan o‘tkazish mavzuli kengaytma metodlariga ajratilgan, shuning uchun yangi funksiya qo‘shilganda Program.cs o‘zgarmaydi: forum, reaksiyalar va bloklash ham shu tartibda, mavjud kodga tegmasdan qo‘shildi.',
+    'Server 17 ta controller orqali 104 ta HTTP endpointni taqdim etadi (3.1-jadval). Endpointlar RESTful tamoyil asosida nomlangan: resurslar ko‘plik shaklida, amal esa HTTP metodi orqali ifodalanadi. Masalan, xabarga reaksiya qo‘yish “PUT /api/chats/{chatId}/messages/{messageId}/reaction”, uni olib tashlash esa xuddi shu manzilga “DELETE” so‘rovi bilan bajariladi. PUT ishlatilgani tasodif emas: bitta foydalanuvchi bitta xabarga faqat bitta reaksiya qo‘ya oladi, shuning uchun so‘rov yangi yozuv qo‘shmaydi, balki holatni o‘rnatadi va takror yuborilsa ham natija o‘zgarmaydi.',
   ),
   ...table(
     '3.1',
@@ -18,129 +16,141 @@ export const chapter3 = () => [
     ['Controller', 'Asosiy yo‘l', 'Soni', 'Vazifasi'],
     [
       ['AuthController', '/api/auth', '11', 'Kod so‘rash va tasdiqlash, Google, ro‘yxatdan o‘tish, tokenni yangilash, sessiyalar'],
-      ['ProfileController', '/api/users/me', '6', 'Profilni olish va tahrirlash, profil rasmi, yozuv sozlamasi'],
-      ['UserController, ContactController', '/api/users, /api/contacts', '4', 'Foydalanuvchilarni qidirish, kontaktlar'],
+      ['ProfileController, UserController', '/api/users', '7', 'Profil, profil rasmi, yozuv sozlamasi, foydalanuvchilarni qidirish'],
+      ['ContactController, BlockController', '/api/contacts, /api/blocks', '6', 'Kontaktlar; bloklash, blokdan chiqarish va bloklanganlar ro‘yxati'],
       ['ChatController', '/api/chats', '3', 'Chatlar ro‘yxati, shaxsiy chat, chatni o‘chirish'],
       ['GroupController', '/api/groups', '12', 'Guruh yaratish, tahrirlash, a’zolar va rollar, taklif havolalari'],
-      ['MessageController', '/api/chats/{id}/messages', '7', 'Xabarlar tarixi, yuborish, tahrirlash, o‘chirish, qidiruv'],
+      ['MessageController, MessageReactionController', '/api/chats/{id}/messages', '9', 'Xabarlar tarixi, yuborish, tahrirlash, o‘chirish, qidiruv, reaksiyalar'],
       ['MessageAttachmentController', '/api/chats/…, /api/media/…', '10', 'Rasm, video, fayl yuklash va berish, ulashilgan media'],
-      ['StoryController', '/api/stories', '8', 'Hikoyalar lentasi, yaratish, ko‘rishlar'],
+      ['StoryController', '/api/stories', '8', 'Lavhalar lentasi, yaratish, ko‘rishlar'],
+      ['PostController, ForumMediaController', '/api/forum', '17', 'Lentalar, post va javoblar, layk, repost, shikoyat, post mediasi'],
+      ['FollowController, NotificationController', '/api/forum', '9', 'Obunalar, tavsiyalar, forum profili, forum bildirishnomalari'],
       ['OrganizationController', '/api/organizations', '1', 'Foydalanuvchining tashkiloti va roli'],
       ['SecretChatController', '/api/secret-chats', '11', 'Maxfiy chat so‘rovi, qabul qilish, shifrlangan xabar va fayllar, ack'],
-      ['Jami', '', '73', ''],
+      ['Jami', '', '104', ''],
     ],
-    [3.6, 3.8, 1.2, 6.5],
+    [4.2, 3.6, 1.1, 6.2],
   ),
   ...ps(
     'API OpenAPI (Swagger) orqali avtomatik hujjatlashtiriladi: barcha endpointlarni JWT token bilan to‘g‘ridan-to‘g‘ri sinab ko‘rish mumkin (3.1-rasm). Barcha javoblar yagona formatda (succeeded, message, data) qaytadi, xato xabarlari o‘zbek tilida yozilgan. Kiruvchi DTO’lar FluentValidation validatorlari bilan tekshiriladi [48], kutilmagan istisnolar esa logga TraceId bilan yoziladi va mijozga ichki tafsilotlarsiz qaytariladi.',
+    'Ro‘yxat qaytaruvchi barcha endpointlarda kursorli sahifalash ishlatiladi. U barcha repozitoriylar uchun umumiy IQueryable kengaytma metodi sifatida yozilgan: metod “Id < beforeId” shartini ifodalar daraxti orqali dinamik quradi va limitdan bittaga ko‘p yozuv o‘qiydi. Qo‘shimcha yozuv borligi hasMore qiymatini beradi, shuning uchun alohida COUNT so‘roviga hojat qolmaydi. Natija to‘g‘ridan-to‘g‘ri DTO’ga proyeksiya qilinadi va bazadan faqat kerakli ustunlar o‘qiladi [16, 41]. Forumning top lentasida tartib Id bo‘yicha emas, reyting bo‘yicha bo‘lgani uchun kursor ikki qiymatdan — oxirgi ko‘rilgan postning reytingi va identifikatoridan iborat.',
   ),
-  ...figure('3-04-swagger.jpg', '3.1', 'Swagger UI: server API hujjatlari', 13),
+  ...figure('3-04-swagger.jpg', '3.1', 'Swagger UI: server API hujjatlari', 14),
+
+  h3('Real vaqtda xabar almashish.'),
   p(
-    'Kursorli sahifalash barcha repozitoriylar uchun umumiy IQueryable kengaytma metodi sifatida yozilgan (3.1-listing). Metod “Id < beforeId” shartini ifodalar daraxti orqali dinamik quradi va limitdan bittaga ko‘p yozuv o‘qiydi: qo‘shimcha yozuv borligi hasMore qiymatini beradi, alohida COUNT so‘roviga hojat qolmaydi. Natija to‘g‘ridan-to‘g‘ri DTO’ga proyeksiya qilinadi, shuning uchun bazadan faqat kerakli ustunlar o‘qiladi [16, 41].',
-  ),
-  ...code(
-    `public static async Task<CursorPagedResponse<TResult>> ToCursorPagedResponseAsync<TEntity, TResult>(
-    this IQueryable<TEntity> query, CursorPaginationRequest pagination,
-    Expression<Func<TEntity, int>> idSelector, Expression<Func<TEntity, TResult>> resultSelector,
-    Func<TResult, int> cursorSelector, CancellationToken cancellationToken = default)
-{
-    if (pagination.BeforeId is not null)
-    {
-        var beforeId = Expression.Lambda<Func<TEntity, bool>>(
-            Expression.LessThan(idSelector.Body, Expression.Constant(pagination.BeforeId.Value)),
-            idSelector.Parameters);
-        query = query.Where(beforeId);
-    }
-
-    var results = await query.OrderByDescending(idSelector)
-        .Take(pagination.Limit + 1)
-        .Select(resultSelector)
-        .ToListAsync(cancellationToken);
-
-    var hasMore = results.Count > pagination.Limit;
-    IReadOnlyList<TResult> items = hasMore ? results.Take(pagination.Limit).ToArray() : results;
-    int? nextCursor = hasMore ? cursorSelector(items[^1]) : null;
-    return new(items, nextCursor, hasMore);
-}`,
-    '3.1-listing. Kursorli sahifalash (QueryableExtensions)',
-  ),
-
-  // ───────────────────────────────── 3.2
-  h2('3.2. Real vaqtda xabar almashishni amalga oshirish'),
-  p(
-    'Real vaqt aloqasi ChatHub SignalR habi orqali quriladi [40]. Hab mijoz chaqira oladigan to‘rtta metodni taqdim etadi, server esa mijozlarga o‘n to‘rt turdagi hodisa yuboradi (3.2-jadval). Har bir ulanish ikki guruhga qo‘shiladi: foydalanuvchining barcha qurilmalari uchun “user:{id}” va aynan shu qurilma uchun “session:{sid}”; ikkinchisi maxfiy chat hodisalarini faqat bog‘langan qurilmaga yetkazadi.',
+    'Real vaqt aloqasi ikkita SignalR habi orqali quriladi [40]. **ChatHub** chatlar uchun to‘rtta metodni taqdim etadi va mijozlarga o‘n beshta turdagi hodisa yuboradi, **ForumHub** esa forumdagi yangiliklarni yetkazadi (3.2-jadval). Habni ikkiga ajratish forum sahifasi ochilmagan foydalanuvchiga ortiqcha trafik yubormaslik imkonini beradi. ChatHub’ga ulangan har bir ulanish ikki guruhga qo‘shiladi: foydalanuvchining barcha qurilmalari uchun “user:{id}” va aynan shu qurilma uchun “session:{sid}”. Ikkinchisi maxfiy chat hodisalarini faqat chat bog‘langan qurilmaga yetkazadi.',
   ),
   ...table(
     '3.2',
-    'SignalR habi metodlari va hodisalari',
+    'SignalR hablarining metodlari va hodisalari',
     ['Nomi', 'Yo‘nalish', 'Vazifasi'],
     [
-      ['JoinChat / LeaveChat', 'Mijoz → server', 'Ochilgan chatning “chat:{id}” guruhiga qo‘shilish yoki chiqish'],
-      ['SetTyping(chatId, isTyping)', 'Mijoz → server', '“Yozmoqda” holatini chatdagi boshqalarga uzatish'],
-      ['MarkMessagesRead(chatId, ids)', 'Mijoz → server', 'Xabarlarni o‘qilgan deb belgilash (100 tagacha)'],
-      ['MessageReceived / Updated / Deleted', 'Server → mijoz', 'Yangi, tahrirlangan yoki o‘chirilgan xabar'],
-      ['MessagesRead, TypingChanged', 'Server → mijoz', 'O‘qilganlik (✓✓) va “yozmoqda” holati'],
-      ['ChatCleared / ChatDeleted, GroupUpdated', 'Server → mijoz', 'Chat tarixi tozalandi, chat o‘chirildi, guruh o‘zgardi'],
-      ['UserPresenceChanged, ProfilePhotoUpdated', 'Server → mijoz', 'Onlayn holat va profil rasmi o‘zgardi'],
-      ['SecretChatRequested / Accepted / Closed', 'Server → mijoz', 'Maxfiy chat taklifi, qabul qilinishi yoki yopilishi'],
-      ['SecretMessageReceived', 'Server → mijoz', 'Shifrlangan xabar (faqat bog‘langan qurilmaga)'],
+      ['JoinChat / LeaveChat', 'Mijoz → ChatHub', 'Ochilgan chatning “chat:{id}” guruhiga qo‘shilish yoki chiqish'],
+      ['SetTyping(chatId, isTyping)', 'Mijoz → ChatHub', '“Yozmoqda” holatini chatdagi boshqalarga uzatish'],
+      ['MarkMessagesRead(chatId, ids)', 'Mijoz → ChatHub', 'Xabarlarni o‘qilgan deb belgilash (100 tagacha)'],
+      ['MessageReceived / Updated / Deleted', 'ChatHub → mijoz', 'Yangi, tahrirlangan yoki o‘chirilgan xabar'],
+      ['MessageReactionChanged', 'ChatHub → mijoz', 'Xabardagi reaksiyalar va ularning soni o‘zgardi'],
+      ['MessagesRead, TypingChanged', 'ChatHub → mijoz', 'O‘qilganlik (✓✓) va “yozmoqda” holati'],
+      ['ChatCleared / ChatDeleted, GroupUpdated', 'ChatHub → mijoz', 'Chat tarixi tozalandi, chat o‘chirildi, guruh o‘zgardi'],
+      ['UserPresenceChanged, ProfilePhotoUpdated', 'ChatHub → mijoz', 'Onlayn holat va profil rasmi o‘zgardi'],
+      ['SecretChatRequested / Accepted / Closed, SecretMessageReceived', 'ChatHub → mijoz', 'Maxfiy chat taklifi, qabul qilinishi, yopilishi va shifrlangan xabar'],
+      ['JoinPost / LeavePost', 'Mijoz → ForumHub', 'Ochilgan post muhokamasini kuzatishni boshlash yoki to‘xtatish'],
+      ['ForumReplyAdded, ForumPostCountsChanged, ForumPostDeleted', 'ForumHub → mijoz', 'Ochiq postga javob qo‘shildi, hisoblagichlar o‘zgardi, post o‘chirildi'],
+      ['ForumPostPublished, ForumNotification', 'ForumHub → mijoz', 'Obuna bo‘lingan muallif post joyladi; shaxsiy forum bildirishnomasi'],
     ],
-    [4.4, 2.8, 6.3],
+    [5, 2.8, 6.5],
   ),
+  ...ps(
+    'Hab metodlari ham REST kabi himoyalangan: har bir chaqiruvda foydalanuvchining chat a’zosi ekani bazadan tekshiriladi. Aks holda chat identifikatorini taxmin qilib, begona chatdagi hodisalarni tinglash mumkin bo‘lardi. ForumHub’da JoinPost metodi ham avval postning shu foydalanuvchiga ko‘rinishini tekshiradi: masalan, bloklangan muallifning postini kuzatib bo‘lmaydi.',
+    'Real vaqt xabarnomalari Application qatlamidagi IChatRealtimeNotifier va IForumRealtimeNotifier interfeyslari orqali yuboriladi, ularning SignalR’dagi amalga oshirilishi esa API qatlamida joylashgan. Xabarnoma tranzaksiya muvaffaqiyatli yakunlangandan keyingina yuboriladi va yuborishdagi xato asosiy amalni bekor qilmaydi: xabar bazaga yozilgan bo‘lsa, mijoz uni keyingi so‘rovda baribir oladi.',
+    'Onlayn holat IPresenceTracker interfeysi orqali kuzatiladi: bitta serverda faol ulanishlar xotirada, bir necha serverda esa Redis’da saqlanadi. Oxirgi ulanish uzilganda server 8 soniya kutadi, shuning uchun sahifani yangilash yoki qisqa uzilishda suhbatdoshlarda “oflayn” holati ko‘rinmaydi. Klientdagi ChatRealtimeService ulanishni avtomatik qayta ulanish siyosati (0, 2, 5, 10 soniya) bilan yaratadi va qayta ulangach ochiq chatga yana qo‘shiladi. 3.2-rasmda sarlavhada “yozmoqda…” holati, xabarlar yonida o‘qilganlik belgilari, ro‘yxatda esa tashkilot a’zolari yonidagi “tuit.uz ✓” belgisi ko‘rinib turibdi.',
+  ),
+  ...figure('3-05-private-chat.jpg', '3.2', 'Shaxsiy chat: real vaqtda “yozmoqda” holati va o‘qilganlik belgilari', 13.5),
+
+  h3('Media fayllar, guruhlar va lavhalar.'),
+  ...ps(
+    'Rasm, video va fayllar bitta konveyerdan o‘tadi: hajm tekshiriladi (rasm 10 MB, fayl 50 MB, video 200 MB gacha), fayl ClamAV bilan skanerlanadi, rasm formati tarkibi bo‘yicha aniqlanib qayta kodlanadi va 256 pikselli kichik nusxasi yaratiladi, video uchun esa ffmpeg yordamida muqova olinadi. Fayl diskka GUID nom bilan yoziladi, bazaga metama’lumotlar va xabar qo‘shiladi, a’zolarga esa MessageReceived hodisasi yuboriladi. Videolar HTTP Range so‘rovlari orqali oqim ko‘rinishida beriladi, shuning uchun foydalanuvchi videoni to‘liq yuklanishini kutmasdan ko‘ra boshlaydi. Chatdagi barcha media ma’lumot panelida turlari bo‘yicha guruhlanadi (3.3-rasm).',
+  ),
+  ...figure('3-08-shared-media.jpg', '3.3', 'Chatdagi ulashilgan media paneli', 12.5),
   p(
-    'Hab metodlari ham REST kabi himoyalangan: har bir chaqiruvda foydalanuvchining chat a’zosi ekani tekshiriladi (3.2-listing). Aks holda chat identifikatorini taxmin qilib, begona chatdagi hodisalarni tinglash mumkin bo‘lardi.',
+    'Guruh chatlari GroupService servisida amalga oshirilgan: har bir amaldan oldin foydalanuvchi roli aniqlanadi va 2.3-jadvaldagi ruxsatlar qo‘llanadi, o‘zgarishlar esa xizmat xabarlari bilan birga saqlanadi. Guruh egasi chiqib ketsa, egalik eng oldin tayinlangan administratorga, u bo‘lmasa eng oldin qo‘shilgan a’zoga o‘tadi; guruhda hech kim qolmasa, u yumshoq o‘chiriladi. Guruhga qo‘shilayotganlar orasida qo‘shayotgan foydalanuvchi bilan bloklash o‘rnatilgan odam bo‘lsa, so‘rov rad etiladi. Taklif havolasi uchun 16 baytli kriptografik tasodifiy token yaratiladi, havola yangilanganda eski token darhol ishlamay qoladi. Guruh chati va ma’lumot paneli 3.4-rasmda ko‘rsatilgan.',
   ),
-  ...code(
-    `public async Task MarkMessagesRead(int chatId, IReadOnlyCollection<int> messageIds)
-{
-    await EnsureChatMembershipAsync(chatId);
-    var ids = messageIds.Where(id => id > 0).Distinct().Take(100).ToArray();
-    if (ids.Length == 0) return;
-
-    var readerUserId = GetCurrentUserId();
-    await messageRepository.MarkAsReadAsync(chatId, readerUserId, ids,
-        timeProvider.GetUtcNow().UtcDateTime, Context.ConnectionAborted);
-    await realtimeNotifier.MessagesReadAsync(chatId, readerUserId, ids,
-        await messageRepository.GetMemberUserIdsAsync(chatId, Context.ConnectionAborted),
-        Context.ConnectionAborted);
-}
-
-private async Task EnsureChatMembershipAsync(int chatId)
-{
-    if (!await messageRepository.IsChatMemberAsync(chatId, GetCurrentUserId(), Context.ConnectionAborted))
-        throw new HubException("Bu chatga kirish huquqi yo'q.");
-}`,
-    '3.2-listing. ChatHub: o‘qilganlik belgisini qayd etish va a’zolikni tekshirish',
-  ),
+  ...figure('3-13-group-chat.jpg', '3.4', 'Guruh chati va guruh haqidagi ma’lumot paneli', 12.5),
   ...ps(
-    'Onlayn holat IPresenceTracker interfeysi orqali kuzatiladi: bitta serverda faol ulanishlar xotirada, bir necha serverda esa Redis’da saqlanadi. Oxirgi ulanish uzilganda server 8 soniya kutadi, shuning uchun sahifani yangilash yoki qisqa uzilishda suhbatdoshlarda “oflayn” holati ko‘rinmaydi.',
-    'Klientdagi ChatRealtimeService ulanishni avtomatik qayta ulanish siyosati (0, 2, 5, 10 soniya) bilan yaratadi va qayta ulangach ochiq chatga yana qo‘shiladi. Kiruvchi hodisalar RxJS orqali ChatApiService’ga uzatiladi va u ilova holatini yangilaydi. 3.2-rasmda sarlavhada “yozmoqda…” holati, xabarlar yonida o‘qilganlik belgilari, ro‘yxatda esa tashkilot a’zolari yonidagi “tuit.uz ✓” belgisi ko‘rinib turibdi.',
+    'Lavhalar (stories) StoryService servisida amalga oshirilgan: rasm yoki video (50 MB gacha) va izohdan iborat lavha 24 soat ko‘rinadi, so‘ng lentadan avtomatik chiqadi. Dastlab lentada foydalanuvchi bilan chati bor barcha odamlarning lavhalari chiqardi. Forum qo‘shilgach, lenta forumdagi obunalarga bog‘landi: endi unda faqat foydalanuvchining o‘zi va u obuna bo‘lgan odamlarning lavhalari chiqadi. Shunday qilib, kimning lavhalarini ko‘rishni foydalanuvchining o‘zi tanlaydi. Obuna bekor qilinsa yoki tomonlardan biri ikkinchisini bloklasa, lavhalar lentadan darhol yo‘qoladi.',
+    'Ko‘rilmagan lavhalar rangli halqa bilan ajratiladi, muallif esa kim ko‘rganini biladi (3.5-rasm). Lavha media fayli ham HTTP Range orqali beriladi; video teglari Authorization sarlavhasini yubora olmagani uchun bu so‘rovda access token so‘rov parametrida qabul qilinadi.',
   ),
-  ...figure('3-05-private-chat.jpg', '3.2', 'Shaxsiy chat: real vaqtda “yozmoqda” holati va o‘qilganlik belgilari', 14),
+  ...figure('3-11-story-viewer.jpg', '3.5', 'Lavhani ko‘rish oynasi', 13.5),
 
-  // ───────────────────────────────── 3.3
-  h2('3.3. Media fayllar, guruhlar va hikoyalar'),
+  h3('Xabarlarga reaksiya va foydalanuvchini bloklash.'),
   ...ps(
-    'Rasm, video va fayllar bitta konveyerdan o‘tadi: hajm tekshiriladi (rasm 10 MB, fayl 50 MB, video 200 MB gacha), fayl ClamAV bilan skanerlanadi, rasm formati tarkibi bo‘yicha aniqlanib qayta kodlanadi va 256 pikselli kichik nusxasi yaratiladi, video uchun esa ffmpeg yordamida muqova olinadi. Fayl diskka GUID nom bilan yoziladi, bazaga metama’lumotlar va xabar qo‘shiladi, a’zolarga esa MessageReceived hodisasi yuboriladi. Videolar HTTP Range so‘rovlari orqali oqim ko‘rinishida beriladi. Chatdagi barcha media ma’lumot panelida turlari bo‘yicha guruhlanadi (3.3-rasm).',
+    'Reaksiya — xabarga alohida javob yozmasdan munosabat bildirish usuli. MessageReactionService quyidagi qoidalarni bajaradi: reaksiya faqat chat a’zosi tomonidan va faqat oddiy xabarga qo‘yiladi (xizmat xabariga emas); ruxsat etilgan oltita emoji (👍, ❤️, 😂, 😮, 😢, 🙏) dan boshqasi rad etiladi; boshqa emoji tanlansa, eskisi almashtiriladi, xuddi shu emoji qayta yuborilsa esa hech narsa o‘zgarmaydi. O‘zgarishdan keyin server xabardagi reaksiyalarning yangi xulosasini (har bir emoji va uning soni) hisoblab, MessageReactionChanged hodisasi bilan chat a’zolariga yuboradi.',
+    'Xabar ro‘yxatini yuklashda har bir xabar uchun reaksiyalar alohida so‘ralmaydi: repozitoriy sahifadagi barcha xabarlar uchun ikkita umumiy so‘rov bajaradi — biri har bir emoji soni bo‘yicha xulosani, ikkinchisi foydalanuvchining o‘z reaksiyalarini o‘qiydi. Klientda reaksiyalar xabar ostida “emoji + son” ko‘rinishidagi tugmalar sifatida chiqadi, foydalanuvchining o‘z reaksiyasi esa ramka bilan ajratiladi (3.6-rasm). O‘z reaksiyasi bosilsa, u olib tashlanadi.',
   ),
-  ...figure('3-08-shared-media.jpg', '3.3', 'Chatdagi ulashilgan media paneli', 13),
-  ...ps(
-    'Guruh chatlari GroupService servisida amalga oshirilgan: har bir amaldan oldin foydalanuvchi roli aniqlanadi va 2.3-jadvaldagi ruxsatlar qo‘llanadi, o‘zgarishlar esa xizmat xabarlari bilan birga saqlanadi. Guruh egasi chiqib ketsa, egalik eng oldin tayinlangan administratorga, u bo‘lmasa eng oldin qo‘shilgan a’zoga o‘tadi; guruhda hech kim qolmasa, u yumshoq o‘chiriladi. Taklif havolasi uchun 16 baytli kriptografik tasodifiy token yaratiladi, havola yangilanganda eski token darhol ishlamay qoladi. Guruh chati va ma’lumot paneli 3.4-rasmda ko‘rsatilgan.',
-  ),
-  ...figure('3-13-group-chat.jpg', '3.4', 'Guruh chati va guruh haqidagi ma’lumot paneli', 14),
+  ...figure('3-30-reactions.jpg', '3.6', 'Xabarga reaksiya bildirish: emoji paneli va xabar ostidagi reaksiyalar', 13.5),
   p(
-    'Hikoyalar StoryService servisida amalga oshirilgan: rasm yoki video (50 MB gacha) va izohdan iborat hikoya 24 soat ko‘rinadi. Lentada foydalanuvchi va u bilan chati bor foydalanuvchilarning hikoyalari chiqadi, ko‘rilmaganlari rangli halqa bilan ajratiladi, muallif esa kim ko‘rganini biladi (3.5-rasm).',
-  ),
-  ...figure('3-11-story-viewer.jpg', '3.5', 'Hikoyani ko‘rish oynasi', 12),
-
-  // ───────────────────────────────── 3.4
-  h2('3.4. Lotin–kirill transliteratsiyasi va yozuvdan qat’i nazar qidiruv'),
-  ...ps(
-    'Xabar bazada doimo **asl holida** saqlanadi, o‘girish esa faqat ko‘rsatish paytida klientda bajariladi. Shu sababli bitta xabarni bir foydalanuvchi lotinda, boshqasi kirillda ko‘radi. Foydalanuvchi sozlamasi (ScriptPreference) serverda saqlanadi va barcha qurilmalarida amal qiladi, yozuv almashtirilganda esa xabarlar sahifani yangilamasdan qayta chiziladi.',
-    'Algoritm o‘zbek lotin alifbosi va imlo qoidalariga asoslanadi [8, 9] va Domain qatlamidagi UzbekTransliterator sinfida amalga oshirilgan; klientda uning TypeScript’dagi aynan nusxasi ishlaydi. Ikkalasi bitta umumiy test to‘plami (80 ta kirill–lotin juftligi) bo‘yicha tekshiriladi. Kirilldan lotinga o‘girish deyarli bir ma’noli, teskari yo‘nalishda esa kontekstga bog‘liq qoidalar talab etiladi (3.3-jadval).',
+    'Bloklash keraksiz yoki bezovta qiluvchi foydalanuvchidan himoyalanish uchun mo‘ljallangan. Bloklash yozuvi bir tomonlama saqlanadi (kim kimni bloklagan), lekin ta’siri ikki tomonlama: bloklangan foydalanuvchi ham, bloklagan foydalanuvchi ham bir-biriga yoza olmaydi. Bu tekshiruv bitta joyda emas, balki tegishli barcha servislarda bajariladi (3.3-jadval).',
   ),
   ...table(
     '3.3',
+    'Bloklashning tizim qismlariga ta’siri',
+    ['Tizim qismi', 'Bloklashdan keyingi xatti-harakat'],
+    [
+      ['Shaxsiy chat', 'Matnli xabar ham, fayl ham yuborilmaydi; fayl diskka yozilishidan oldin rad etiladi'],
+      ['Onlayn holat', 'Chatlar ro‘yxatida bir-birining onlayn holati va oxirgi faolligi ko‘rinmaydi'],
+      ['Guruhlar', 'Bloklangan foydalanuvchini guruhga qo‘shib bo‘lmaydi'],
+      ['Maxfiy chat', 'Yangi maxfiy chat taklifi yuborilmaydi'],
+      ['Forum', 'Postlar lentada ko‘rinmaydi, obuna bo‘lib bo‘lmaydi, profil yopiq'],
+      ['Lavhalar', 'Obuna bo‘lingan bo‘lsa ham lavhalar lentada chiqmaydi'],
+    ],
+    [3.5, 10],
+  ),
+  p(
+    'Chat menyusida “Bloklash” bandi tanlangach, xabar yozish maydoni o‘rnida “Siz bu foydalanuvchini blokladingiz” yozuvi va “Blokdan chiqarish” tugmasi chiqadi (3.7-rasm). Bloklanganlar ro‘yxati profil oynasida ham ko‘rsatiladi va u yerdan blokdan chiqarish mumkin. Ikkinchi tomon xabar yuborishga uringanda “bu foydalanuvchi bilan yozishib bo‘lmaydi: bloklash o‘rnatilgan” xatosini oladi; xatoda kim kimni bloklagani aytilmaydi.',
+  ),
+  ...figure('3-31-blocked-user.jpg', '3.7', 'Bloklangan foydalanuvchi bilan chat', 13.5),
+
+  h3('Forumni amalga oshirish.'),
+  ...ps(
+    'Forum — foydalanuvchilar ochiq fikr almashadigan qism: chatdan farqli ravishda post ma’lum bir suhbatdoshga emas, muallifga obuna bo‘lgan barcha odamlarga ko‘rinadi. Post 280 belgigacha matn va 4 tagacha rasm yoki bitta videodan (50 MB gacha) iborat bo‘ladi. Postga javob yozish, uni repost qilish, o‘z izohi bilan iqtibos keltirish, layk bosish va shikoyat qilish mumkin. Barcha bu amallar PostService, FollowService va NotificationService servislarida, forum mediasini qayta ishlash esa alohida PostMediaService’da amalga oshirilgan.',
+    'Javoblar daraxt ko‘rinishida saqlanadi: har bir javob ParentPostId orqali o‘zi javob bergan postga, RootPostId orqali esa muhokamaning birinchi postiga bog‘lanadi. Muhokama ochilganda server tanlangan post, uning 30 tagacha ajdodi va javoblarini qaytaradi. Post o‘chirilganda u bazadan o‘chmaydi, balki “Bu post o‘chirilgan” deb ko‘rsatiladi, shunda unga yozilgan javoblar ma’nosini yo‘qotmaydi.',
+    'Lenta uch xil: **Obunalar** — obuna bo‘lingan mualliflarning yangi postlari, **Yangi** — barcha postlar vaqt bo‘yicha va **Top** — eng ko‘p muhokama qilinayotgan postlar. Top lenta uchun har bir postning “issiqlik” reytingi quyidagi formula bilan hisoblanadi:',
+  ),
+  formula('S = (L + 2R + 3P + 0,01V) / (t + 2)^{1,5}', '3.1'),
+  ...ps(
+    'bu yerda L — layklar, R — javoblar, P — repostlar, V — ko‘rishlar soni, t — postning soatlardagi yoshi. Javob va repost laykdan ko‘ra ko‘proq kuch talab qilgani uchun ular katta vazn oladi. Maxrajdagi daraja vaqt o‘tishi bilan reytingni pasaytiradi, shuning uchun kechagi mashhur post bugungisiga joy bo‘shatadi. Qo‘shiluvchi 2 esa endigina joylangan postning birinchi laykdanoq hammadan yuqoriga chiqib ketishiga yo‘l qo‘ymaydi. Reytingni har bir so‘rovda hisoblash qimmat bo‘lgani uchun uni HotScoreRefresh fon ishi har 5 daqiqada oxirgi 72 soat ichidagi postlar uchun yangilaydi. Lentaning bitta sahifasida bitta muallifning 2 tadan ortiq posti chiqmaydi, aks holda faol muallif butun lentani egallab olardi.',
+    'Ko‘rishlar soni har bir foydalanuvchi uchun bir marta hisoblanadi: post_views jadvalida (PostId, UserId) juftligi unique. Hisoblagichlar postning o‘zida saqlanadi va atomar UPDATE so‘rovi bilan oshiriladi, shuning uchun bir vaqtda kelgan ko‘plab layklar bir-birining natijasini o‘chirib yubormaydi.',
+    'Spam va suiiste’moldan himoyalanish uchun forumda bir nechta cheklov qo‘yilgan (3.4-jadval). Cheklov so‘nggi vaqt oralig‘idagi postlar sonini bazadan sanash orqali tekshiriladi. Muallif o‘z postiga shikoyat qila olmaydi, bitta foydalanuvchining bitta postga shikoyati esa (PostId, ReporterId) unique indeksi tufayli faqat bir marta saqlanadi.',
+  ),
+  ...table(
+    '3.4',
+    'Forumdagi cheklovlar',
+    ['Cheklov', 'Qiymat'],
+    [
+      ['Post matni', '280 belgigacha'],
+      ['Post mediasi', '4 tagacha rasm yoki 1 ta video (50 MB gacha)'],
+      ['Yangi muhokama boshlash', 'Soatiga 10 tagacha'],
+      ['Javob yozish', 'Daqiqasiga 5 tagacha'],
+      ['Shikoyat sababi', '200 belgigacha'],
+      ['Muhokamada ko‘rsatiladigan ajdodlar', '30 tagacha'],
+      ['Top lentada bitta muallif', 'Sahifada 2 tagacha post'],
+      ['Obuna tavsiyalari', 'Oxirgi 7 kunda eng ko‘p post yozgan 10 tagacha foydalanuvchi'],
+    ],
+    [5, 9],
+  ),
+  ...ps(
+    'Forum bildirishnomalari besh xil hodisa uchun yaratiladi: postga javob, layk, repost, iqtibos va yangi obunachi. Foydalanuvchining o‘z amali haqida bildirishnoma yaratilmaydi. Layk, repost va obuna bekor qilinib, qayta bajarilganda bildirishnoma takrorlanmaydi — aks holda bir foydalanuvchi laykni bosib-qaytarib, muallifni bildirishnomalar bilan ko‘mib tashlashi mumkin edi. Bildirishnoma bazaga yozilgach, ForumHub orqali real vaqtda yuboriladi va interfeysdagi hisoblagich darhol yangilanadi.',
+    'Obuna bo‘lingan muallif yangi post joylaganda server ForumPostPublished hodisasini obunachilarga yuboradi. Klient yangi postni lentaga darhol qo‘shmaydi, balki lenta tepasida “N ta yangi post — ko‘rsatish” tugmasini chiqaradi: shunda foydalanuvchi o‘qiyotgan post ko‘zi oldidan siljib ketmaydi.',
+  ),
+
+  h3('Lotin–kirill transliteratsiyasi va qidiruv.'),
+  ...ps(
+    'Xabar bazada doimo **asl holida** saqlanadi, o‘girish esa faqat ko‘rsatish paytida klientda bajariladi. Shu sababli bitta xabarni bir foydalanuvchi lotinda, boshqasi kirillda ko‘radi. Foydalanuvchi sozlamasi (ScriptPreference) serverda saqlanadi va barcha qurilmalarida amal qiladi, yozuv almashtirilganda esa xabarlar sahifani yangilamasdan qayta chiziladi. Xuddi shu sozlama forum postlariga ham qo‘llanadi.',
+    'Algoritm o‘zbek lotin alifbosi va imlo qoidalariga asoslanadi [8, 9] va Domain qatlamidagi UzbekTransliterator sinfida amalga oshirilgan; klientda uning TypeScript’dagi aynan nusxasi ishlaydi. Ikkalasi bitta umumiy test to‘plami (80 ta kirill–lotin juftligi) bo‘yicha tekshiriladi. Kirilldan lotinga o‘girish deyarli bir ma’noli, teskari yo‘nalishda esa kontekstga bog‘liq qoidalar talab etiladi (3.5-jadval). O‘girishda matn har bir harf bo‘yicha bir marta o‘qiladi: harf uchun avval kontekstga bog‘liq qoidalar (oldingi harf unli yoki so‘z boshi ekani), keyin oddiy moslik lug‘ati tekshiriladi, shuning uchun algoritmning murakkabligi matn uzunligiga chiziqli bog‘liq.',
+  ),
+  ...table(
+    '3.5',
     'Kontekstga bog‘liq transliteratsiya qoidalari',
     ['Holat', 'Qoida', 'Misol'],
     [
@@ -156,256 +166,226 @@ private async Task EnsureChatMembershipAsync(int chatId)
     [3, 6.5, 5],
   ),
   p(
-    'Kirilldan lotinga o‘girishning asosiy qismi 3.3-listingda keltirilgan: har bir harf uchun avval kontekstga bog‘liq qoidalar, keyin oddiy moslik lug‘ati tekshiriladi.',
-  ),
-  ...code(
-    `private static string ToLatinSegment(string text)
-{
-    var builder = new StringBuilder(text.Length + 8);
-    for (var i = 0; i < text.Length; i++)
-    {
-        var ch = text[i];
-        var lower = char.ToLowerInvariant(ch);
-        var previous = i > 0 ? char.ToLowerInvariant(text[i - 1]) : '\\0';
-
-        string latin;
-        if (lower == 'е')
-        {
-            var soundsYe = !IsWordChar(text, i - 1) || CyrillicVowels.Contains(previous) || previous is 'ъ' or 'ь';
-            latin = soundsYe ? "ye" : "e";
-        }
-        else if (lower == 'ц')
-            latin = CyrillicVowels.Contains(previous) ? "ts" : "s";
-        else if (lower == 'ҳ' && previous == 'с')
-            latin = TutuqMark + "h";   // "сҳ" is written with a tutuq so that it is not read as "ш"
-        else if (!CyrillicToLatinMap.TryGetValue(lower, out latin!))
-        {
-            builder.Append(ch);
-            continue;
-        }
-
-        builder.Append(ch == lower ? latin : ApplyUpperCase(latin, IsUpperCaseWord(text, i)));
-    }
-    return builder.ToString();
-}`,
-    '3.3-listing. UzbekTransliterator: kirill matnini lotinga o‘girish (C#)',
-  ),
-  p(
-    'Natija 3.6-rasmda ko‘rsatilgan: “Asl holida” sozlamasida suhbatdosh kirillda, foydalanuvchi lotinda yozgan xabarlar aralash chiqadi, “Lotin” sozlamasida esa butun suhbat lotin yozuvida ko‘rinadi.',
+    'Natija 3.8-rasmda ko‘rsatilgan: “Asl holida” sozlamasida suhbatdosh kirillda, foydalanuvchi lotinda yozgan xabarlar aralash chiqadi, “Lotin” sozlamasida esa butun suhbat lotin yozuvida ko‘rinadi.',
   ),
   ...figurePair(
     [
       ['3-20-script-original.jpg', '“Asl holida”'],
       ['3-20-script-latin.jpg', '“Lotin” sozlamasi'],
     ],
-    '3.6',
+    '3.8',
     'Bitta suhbatning turli yozuv sozlamalarida ko‘rinishi',
   ),
   ...ps(
-    'Qidiruv ham yozuvga bog‘liq emas: “rahmat” so‘rovi “Раҳмат”ni ham topadi. Buning uchun xabar yaratilganda va tahrirlanganda uning **qidiruv kaliti** — lotinga o‘girilgan, kichik harfli, tutuq belgilari birxillashtirilgan nusxasi SearchText ustuniga yoziladi. Qidiruv so‘rovi ham xuddi shu funksiyadan o‘tkazilib, ILIKE bilan qidiriladi [44]. Ustun qo‘shilishidan oldingi xabarlar uchun kalitlar SearchTextBackfill fon ishi tomonidan 500 tadan to‘ldiriladi. Bazadagi natija 3.7-rasmda ko‘rsatilgan.',
+    'Qidiruv ham yozuvga bog‘liq emas: “rahmat” so‘rovi “Раҳмат”ni ham topadi. Buning uchun xabar yaratilganda va tahrirlanganda uning **qidiruv kaliti** — lotinga o‘girilgan, kichik harfli, tutuq belgilari birxillashtirilgan nusxasi SearchText ustuniga yoziladi. Qidiruv so‘rovi ham xuddi shu funksiyadan o‘tkazilib, ILIKE bilan qidiriladi [44]. Ustun qo‘shilishidan oldingi xabarlar uchun kalitlar SearchTextBackfill fon ishi tomonidan 500 tadan to‘ldiriladi. Bazadagi natija 3.9-rasmda ko‘rsatilgan.',
   ),
-  ...figure('3-29-db-search-text.png', '3.7', 'messages jadvali: asl matn (TextContent) va qidiruv kaliti (SearchText)', 16),
+  ...figure('3-29-db-search-text.png', '3.9', 'messages jadvali: asl matn (TextContent) va qidiruv kaliti (SearchText)', 16),
 
-  // ───────────────────────────────── 3.5
-  h2('3.5. Tashkilot rejimini amalga oshirish'),
+  h3('Tashkilot rejimi.'),
   ...ps(
-    'OrganizationEmailMatcher sinfi e-pochtadan domenni ajratadi, normallashtiradi va umumiy pochta xizmatlari ro‘yxati bilan solishtiradi; u tashqi bog‘liqliksiz va 22 ta unit test bilan tekshirilgan. OrganizationMembershipService.EnsureMembershipAsync metodi foydalanuvchi tasdiqlangan pochta bilan kirgan har safar chaqiriladi (3.4-listing). Bir vaqtda ikki foydalanuvchi yangi domen bilan kirsa, unique indeks tufayli faqat bittasi tashkilotni yaratib admin bo‘ladi, ikkinchisi a’zo sifatida qo‘shiladi.',
+    'OrganizationEmailMatcher sinfi e-pochtadan domenni ajratadi, normallashtiradi va umumiy pochta xizmatlari ro‘yxati bilan solishtiradi; u tashqi bog‘liqliksiz va 22 ta unit test bilan tekshirilgan. OrganizationMembershipService.EnsureMembershipAsync metodi foydalanuvchi tasdiqlangan pochta bilan kirgan har safar chaqiriladi va quyidagi qadamlarni bajaradi:',
   ),
-  ...code(
-    `public async Task EnsureMembershipAsync(User user, CancellationToken cancellationToken = default)
-{
-    // An e-mail never changes, so an existing membership is final.
-    if (await repository.GetMembershipAsync(user.Id, cancellationToken) is not null) return;
-
-    var domain = OrganizationEmailMatcher.OrganizationDomainOf(user.Email);
-    if (domain is null) return;
-
-    var now = timeProvider.GetUtcNow().UtcDateTime;
-    var organization = await repository.FindByDomainAsync(domain, cancellationToken);
-    var isFounder = false;
-    if (organization is null)
-    {
-        var created = OrganizationFactory.Create(domain, now);
-        isFounder = await repository.TryAddOrganizationAsync(created, cancellationToken);
-        organization = isFounder ? created : await repository.FindByDomainAsync(domain, cancellationToken);
-        if (organization is null) return;
-    }
-
-    // The first person from a domain becomes its admin.
-    var role = isFounder ? OrganizationRole.Admin : OrganizationRole.Member;
-    var member = OrganizationFactory.CreateMember(organization.Id, user.Id, role, now);
-    if (!await repository.TryAddMemberAsync(member, cancellationToken)) return;
-
-    var groupChatIds = await repository.GetOrganizationGroupChatIdsAsync(organization.Id, cancellationToken);
-    if (groupChatIds.Count == 0)
-    {
-        await groupService.CreateOrganizationGroupAsync(user.Id, cancellationToken);
-        return;
-    }
-
-    foreach (var chatId in groupChatIds)
-        await groupService.JoinViaOrganizationAsync(chatId, user.Id, cancellationToken);
-}`,
-    '3.4-listing. OrganizationMembershipService: foydalanuvchini tashkilotga va domen guruhiga qo‘shish',
-  ),
+  ...numbered([
+    'foydalanuvchi allaqachon biror tashkilot a’zosi bo‘lsa, hech narsa qilinmaydi: e-pochta o‘zgarmagani uchun a’zolik ham o‘zgarmaydi;',
+    'e-pochtadan tashkilot domeni ajratiladi; umumiy pochta xizmati bo‘lsa, jarayon to‘xtaydi;',
+    'domen bo‘yicha tashkilot qidiriladi, topilmasa yaratiladi va uni yaratgan foydalanuvchi tashkilot admini bo‘ladi;',
+    'foydalanuvchi tashkilot a’zolari jadvaliga qo‘shiladi;',
+    'tashkilotning domen guruhi hali bo‘lmasa, u yaratiladi; bo‘lsa, foydalanuvchi unga qo‘shiladi va guruhda xizmat xabari chiqadi.',
+  ]),
   p(
-    'Tashkilot a’zoligi foydalanuvchi haqidagi barcha DTO’larga qo‘shilgan va klientda ismlar yonida “tuit.uz ✓” ko‘rinishida chiqadi. Domen guruhida har bir qo‘shilish xizmat xabari bilan qayd etiladi, tashqaridagi foydalanuvchi esa guruhga taklif havolasi orqali kiradi (3.8-rasm).',
+    'Bir vaqtda ikki foydalanuvchi yangi domen bilan kirsa, organizations(Domain) ustunidagi unique indeks tufayli faqat bittasi tashkilotni yaratib admin bo‘ladi, ikkinchisining yozish urinishi rad etiladi va u mavjud tashkilotga a’zo sifatida qo‘shiladi. Tashkilot a’zoligi foydalanuvchi haqidagi barcha DTO’larga qo‘shilgan va klientda ismlar yonida “tuit.uz ✓” ko‘rinishida chiqadi. Tashqaridagi foydalanuvchi esa domen guruhiga taklif havolasi orqali kiradi (3.10-rasm).',
   ),
   ...figurePair(
     [
       ['3-22-organization-group.jpg', 'yopiq domen guruhi'],
       ['3-23-join-invite.jpg', 'taklif havolasi sahifasi'],
     ],
-    '3.8',
+    '3.10',
     'Tashkilot rejimi',
   ),
 
-  // ───────────────────────────────── 3.6
-  h2('3.6. Maxfiy chatlarni amalga oshirish'),
+  h3('Maxfiy chatlar.'),
   ...ps(
     'Server tomonida maxfiy chatlar SecretChatService va SecretChatController orqali amalga oshirilgan. Barcha endpointlar joriy qurilma nomidan ishlaydi: qurilma access tokendagi sessiya identifikatori bo‘yicha aniqlanadi va har bir so‘rovda sessiyaning faolligi bazadan qayta tekshiriladi. Chat bog‘lanmagan qurilmadan kelgan so‘rov “topilmadi” javobini oladi.',
-    'Shifrlangan xabarni qabul qilish 3.5-listingda ko‘rsatilgan. Server blobni ochmaydi, faqat formati va hajmini (32 KB gacha) tekshiradi. Tartib raqami oxirgisidan katta bo‘lishi shart, bir vaqtda kelgan takroriy so‘rovlar uchun esa unique indeks ikkinchi himoya chizig‘ini beradi. Qabul qiluvchi xabarni olgach, ack so‘rovi yuboradi va server uni o‘chiradi; SecretChatCleanup fon ishi esa har soatda eskirgan so‘rov, xabar va fayllarni tozalaydi.',
-  ),
-  ...code(
-    `var chat = await repository.GetAsync(secretChatId, cancellationToken);
-var side = chat is null ? SecretChatAccess.Side.None : SecretChatAccess.SideOf(chat, userId, sessionId);
-if (chat is null || side == SecretChatAccess.Side.None) return new(null, NotFoundError);
-if (chat.Status != SecretChatStatus.Active) return new(null, "Maxfiy chat faol emas.");
-
-var lastSeq = side == SecretChatAccess.Side.Initiator ? chat.InitiatorLastSeq : chat.ParticipantLastSeq;
-if (request.Seq <= lastSeq) return new(null, DuplicateSeqError, Duplicate: true);
-
-if (side == SecretChatAccess.Side.Initiator) chat.InitiatorLastSeq = request.Seq;
-else chat.ParticipantLastSeq = request.Seq;
-
-var ciphertext = SecretChatBase64.TryDecode(request.Ciphertext)!;
-var message = SecretChatFactory.CreateMessage(chat.Id, sessionId, request.Seq, ciphertext, Now());
-if (!await repository.TryAddMessageAsync(message, cancellationToken))
-    return new(null, DuplicateSeqError, Duplicate: true);
-
-var recipientSessionId = side == SecretChatAccess.Side.Initiator
-    ? chat.ParticipantSessionId!.Value : chat.InitiatorSessionId;
-await realtimeNotifier.MessageReceivedAsync(SecretChatMapper.ToDto(message), recipientSessionId, cancellationToken);`,
-    '3.5-listing. SecretChatService.SendAsync: shifrlangan xabarni qabul qilish (qisqartirilgan)',
-  ),
-  ...ps(
-    'Klientdagi kriptografik kod secret-crypto.ts modulida joylashgan va Angular’ga bog‘liq emas [50]; uning asosiy qismi ilovalarda keltirilgan. Yangi zanjir holati xabar yuborilishidan oldin IndexedDB’ga xabar bilan bitta tranzaksiyada yoziladi, shuning uchun sahifa to‘satdan yopilsa ham bitta xabar kaliti ikki marta ishlatilmaydi. Xabarlar qurilmadagi navbat (outbox) orqali qat’iy tartibda yuboriladi. Maxfiy chat oynasida qulf belgisi, taymer va kalit izini tekshirish tugmalari bor (3.9-rasm).',
-    'Server xabar mazmunini bilmasligi amalda ham tekshirildi: suhbatdosh oflayn bo‘lgan paytda yuborilgan xabar bazada faqat 183 baytli ma’nosiz blob ko‘rinishida turadi, yetkazilgan xabarlar esa serverdan butunlay o‘chirilgan (3.10-rasm).',
+    'Shifrlangan xabar kelganda server blobni ochmaydi, faqat uning formati va hajmini (32 KB gacha) tekshiradi. So‘ng xabarning tartib raqami shu tomonning oxirgi raqamidan katta ekani tekshiriladi: kichik yoki teng raqamli xabar takror deb rad etiladi. Bir vaqtda kelgan ikki bir xil so‘rov uchun (SecretChatId, SenderSessionId, Seq) ustunlaridagi unique indeks ikkinchi himoya chizig‘ini beradi. Shundan keyingina blob saqlanadi va faqat qabul qiluvchi qurilmaning “session:{sid}” guruhiga yuboriladi. Qabul qiluvchi xabarni olgach, ack so‘rovi yuboradi va server uni o‘chiradi; SecretChatCleanup fon ishi esa har soatda eskirgan so‘rov, xabar va fayllarni tozalaydi.',
+    'Klientdagi kriptografik kod secret-crypto.ts modulida joylashgan va Angular’ga bog‘liq emas [50]; uning asosiy qismi ilovalarda keltirilgan. Yangi zanjir holati xabar yuborilishidan oldin IndexedDB’ga xabar bilan bitta tranzaksiyada yoziladi, shuning uchun sahifa to‘satdan yopilsa ham bitta xabar kaliti ikki marta ishlatilmaydi. Xabarlar qurilmadagi navbat (outbox) orqali qat’iy tartibda yuboriladi.',
+    'Keyinchalik maxfiy chatlarga **o‘qilganlik belgisi** (✓✓) qo‘shildi. Oddiy chatdagi mexanizm bu yerda ishlamaydi, chunki server xabarlarni ko‘rmaydi. Shuning uchun “o‘qildi” xabari ham oddiy xabar kabi shifrlanadi va ichida “shu raqamgacha o‘qildi” qiymatini olib boradi. Uni faqat chat ekranda ochiq turganda klient yuboradi. Server bu xabarni boshqalaridan ajrata olmaydi va kim nimani qachon o‘qiganini bilmaydi, shuning uchun bu imkoniyat uchun serverda hech narsa o‘zgartirilmadi. Maxfiy chat oynasida qulf belgisi, taymer va kalit izini tekshirish tugmalari bor (3.11-rasm).',
+    'Server xabar mazmunini bilmasligi amalda ham tekshirildi: suhbatdosh oflayn bo‘lgan paytda yuborilgan xabar bazada faqat ma’nosiz blob ko‘rinishida turadi, yetkazilgan xabarlar esa serverdan butunlay o‘chirilgan (3.12-rasm).',
   ),
   ...figurePair(
     [
-      ['3-26-secret-chat.jpg', 'shifrlangan rasm va taymer'],
+      ['3-26-secret-chat.jpg', 'shifrlangan rasm, taymer va ✓✓'],
       ['3-27-secret-fingerprint.jpg', 'kalit izini tekshirish'],
     ],
-    '3.9',
+    '3.11',
     'Maxfiy chat',
   ),
-  ...figure('3-28-db-secret-messages.png', '3.10', 'secret_messages jadvali: serverda faqat yetkazilmagan shifrlangan blob saqlanadi', 16),
+  ...figure('3-28-db-secret-messages.png', '3.12', 'secret_messages jadvali: serverda faqat yetkazilmagan shifrlangan blob saqlanadi', 16),
 
-  // ───────────────────────────────── 3.7
-  h2('3.7. Klient qismini ishlab chiqish'),
+  // ───────────────────────────────── 3.2
+  h2('3.2. Klient qismi va foydalanuvchi imkoniyatlari'),
+  h3('Klient ilovasining tuzilishi.'),
   ...ps(
-    'Klient ilovasi Angular 22 ning mustaqil (standalone) komponentlaridan tashkil topgan [43] va uchta marshrutga ega: /auth, /chat va /join/:token. /chat sahifasi authGuard, /auth esa guestGuard bilan himoyalangan, barcha sahifalar kerak bo‘lganda yuklanadi (lazy loading). Ilova holati Angular signals orqali boshqariladi: chatlar ro‘yxati, xabarlar va “yozmoqda” holati ChatApiService’da signal ko‘rinishida saqlanadi, komponentlar esa computed() yordamida “6 a’zo, 2 onlayn” kabi hosila qiymatlar oladi. REST javoblari ham, SignalR hodisalari ham holatga bir xil yo‘l bilan qo‘llanadi.',
-    'authInterceptor har bir so‘rovga access tokenni qo‘shadi, 401 javobida esa tokenni yangilab so‘rovni takrorlaydi; bir vaqtda bir nechta so‘rov muvaffaqiyatsiz bo‘lsa ham bitta refresh so‘rovi ishlatiladi. Interfeys loyihaning dizayn tizimiga asoslangan: ranglar CSS o‘zgaruvchilari orqali berilgani uchun qorong‘i mavzu ularning muqobil qiymatlari bilan amalga oshiriladi. Interfeys moslashuvchan: katta ekranda uch ustunli joylashuv, telefonda esa bir vaqtda bitta ekran ko‘rsatiladi (3.11-rasm).',
+    'Klient ilovasi Angular 22 ning mustaqil (standalone) komponentlaridan tashkil topgan [43]. Ilova 41 ta komponent va 92 ta TypeScript faylidan iborat va to‘rtta asosiy marshrutga ega: /auth, /chat, /forum va /join/:token. /forum marshruti ichida lenta, post muhokamasi (/forum/post/:id), forum profili (/forum/user/:id) va bildirishnomalar (/forum/notifications) sahifalari bor. /chat va /forum sahifalari authGuard, /auth esa guestGuard bilan himoyalangan, barcha sahifalar kerak bo‘lganda yuklanadi (lazy loading), shuning uchun forum kodi chatdan foydalanayotgan foydalanuvchining brauzeriga umuman yuklanmaydi.',
+    'Ilova holati Angular signals orqali boshqariladi: chatlar ro‘yxati, xabarlar, reaksiyalar va “yozmoqda” holati ChatApiService’da signal ko‘rinishida saqlanadi, komponentlar esa computed() yordamida “6 a’zo, 2 onlayn” kabi hosila qiymatlar oladi. REST javoblari ham, SignalR hodisalari ham holatga bir xil yo‘l bilan qo‘llanadi. Masalan, reaksiya hodisasi kelganda applyReactionEvent funksiyasi xabarni topib, uning reaksiyalar ro‘yxatini serverdan kelgan xulosa bilan almashtiradi; bu funksiya sof (pure) bo‘lgani uchun alohida unit testlar bilan tekshirilgan.',
   ),
   ...figurePair(
     [
       ['3-16-dark-theme.jpg', 'qorong‘i mavzu'],
       ['3-17-mobile.jpg', 'mobil qurilmada'],
     ],
-    '3.11',
+    '3.13',
     'Qorong‘i mavzu va mobil ko‘rinish',
   ),
-
-  // ───────────────────────────────── 3.8
-  h2('3.8. Joylashtirish va testlash'),
-  ...ps(
-    'Server ilovasi ko‘p bosqichli Dockerfile yordamida yig‘iladi [45]: birinchi bosqichda .NET SDK obrazida loyiha nashr qilinadi, ikkinchisida faqat natija yengil ASP.NET runtime obraziga ko‘chiriladi, shuning uchun yakuniy obrazda kompilyator va manba kodi bo‘lmaydi. Konteyner Render platformasida ishga tushiriladi va GitHub’dagi o‘zgarishlardan so‘ng avtomatik qayta yig‘iladi. Maxfiy sozlamalar (bazaga ulanish, JWT va HMAC kalitlari, SMTP) kodda emas, muhit o‘zgaruvchilarida saqlanadi.',
-    'Biznes-mantiq xUnit freymvorkida NationalChat.Tests loyihasi bilan tekshirildi [49]. Tashqi bog‘liqliklar NSubstitute yordamida soxtalashtirildi, vaqtga bog‘liq mantiq esa qat’iy TimeProvider bilan sinaldi. Serverda 307 ta, klientda Vitest freymvorkida 229 ta test yozildi [51]; klient testlari transliteratsiyaning server bilan bir xil ishlashini, shifrlash, kalit zanjiri va soxta xabarlarni rad etishni tekshiradi. Natija 3.12-rasmda, server testlari tarkibi 3.4-jadvalda keltirilgan.',
+  p(
+    'authInterceptor har bir so‘rovga access tokenni qo‘shadi, 401 javobida esa tokenni yangilab so‘rovni takrorlaydi; bir vaqtda bir nechta so‘rov muvaffaqiyatsiz bo‘lsa ham bitta refresh so‘rovi ishlatiladi. Interfeys loyihaning dizayn tizimiga asoslangan: ranglar CSS o‘zgaruvchilari orqali berilgani uchun qorong‘i mavzu ularning muqobil qiymatlari bilan amalga oshiriladi. Interfeys moslashuvchan: katta ekranda uch ustunli joylashuv, telefonda esa bir vaqtda bitta ekran ko‘rsatiladi (3.13-rasm).',
   ),
-  ...figure('3-19-unit-tests.png', '3.12', 'Server (dotnet test) va klient (ng test) testlarini bajarish natijasi', 15),
+
+  h3('Forum interfeysi.'),
+  ...ps(
+    'Forumga chatlar ro‘yxati tepasidagi “Forum” tugmasi orqali o‘tiladi; tugmadagi raqam o‘qilmagan forum bildirishnomalari sonini ko‘rsatadi. Forum sahifasi uch ustunli: chapda navigatsiya (Lenta, Bildirishnomalar, Profilim) va chatlarga qaytish havolasi, o‘rtada lenta, o‘ngda esa “Kimni kuzatish kerak” tavsiyalari joylashgan. Tor ekranda o‘ng ustun yashiriladi va navigatsiya faqat belgilardan iborat ixcham panelga, telefonda esa ekranning pastki qismidagi panelga aylanadi.',
+    'Lenta tepasida uchta yorliq — “Obunalar”, “Top” va “Yangi” — hamda post yozish maydoni turadi (3.14-rasm). Har bir yorliq uchun alohida yuklovchi yaratiladi, shuning uchun yorliq almashtirilganda ro‘yxat boshidan yuklanadi. Postlar ro‘yxati kursorli sahifalar bilan ishlaydi: foydalanuvchi pastga aylantirganda keyingi sahifa avtomatik so‘raladi, butun lentani birdaniga yuklash talab etilmaydi.',
+    'Har bir post kartasida muallifning avatari, ismi, username, post joylanganidan beri o‘tgan vaqt (“3 daq”, “2 soat”), matn, media va to‘rtta amal tugmasi bor: javob, repost, layk va ko‘rishlar soni. Matn foydalanuvchi tanlagan yozuvda ko‘rsatiladi, ya’ni kirillda yozilgan postni lotinda o‘qish mumkin. Postdagi rasm va videolar avtorizatsiya sarlavhasi talab qilingani uchun oddiy havola sifatida emas, blob ko‘rinishida yuklanadi va bir marta yuklangani keshda saqlanadi.',
+  ),
+  ...figure('3-33-forum-feed.jpg', '3.14', 'Forum: “Obunalar” lentasi va obuna tavsiyalari', 12.5),
+  ...ps(
+    '“Top” lentasida postlar (3.1) formula bo‘yicha hisoblangan reyting tartibida chiqadi (3.15-rasm). Rasmda Aziz Nazarovning iqtibos keltirilgan posti ko‘rinib turibdi: iqtibos qilingan post muallifning o‘z matni ostida alohida ramkada ko‘rsatiladi va uni bosib asl muhokamaga o‘tish mumkin. Iqtibos “Repost” tugmasi menyusidagi “Iqtibos keltirish” bandi orqali yoziladi: u alohida dialog oynasida ochiladi va unda iqtibos qilinayotgan post oldindan ko‘rsatiladi.',
+    'Repost qilingan post kartaning tepasida “… repost qildi” yozuvi bilan chiqadi. Bunday kartadagi barcha amallar — layk, javob, yana repost — asl postga qo‘llanadi, shuning uchun bitta post bir necha marta repost qilinsa ham hisoblagichlar bitta joyda yig‘iladi. Layk yoki repost bosilganda server asl postning yangi hisoblagichlari bilan to‘liq nusxasini qaytaradi va karta shu nusxa bilan qayta chiziladi.',
+  ),
+  ...figure('3-34-forum-top.jpg', '3.15', 'Forum: “Top” lentasi va iqtibos keltirilgan post', 12.5),
+  ...ps(
+    'Post bosilganda uning muhokama sahifasi ochiladi (3.16-rasm). Agar ochilgan post javob bo‘lsa, uning tepasida muhokamaning boshlang‘ich postigacha bo‘lgan barcha ajdodlari vertikal chiziq bilan bog‘langan holda ko‘rsatiladi, ochilgan postning o‘zi esa kattaroq shriftda chiqadi. Uning ostida javob yozish maydoni va javoblar ro‘yxati joylashgan.',
+    'Sahifa ochilishi bilan klient ForumHub’ning JoinPost metodini chaqiradi va shu post muhokamasini kuzatishni boshlaydi. Boshqa foydalanuvchi layk bossa yoki repost qilsa, hisoblagichlar sahifani yangilamasdan o‘zgaradi. Yangi javoblar esa ro‘yxatga darhol qo‘shilmaydi: o‘qilayotgan matn siljib ketmasligi uchun ro‘yxat tepasida “N ta yangi javob — ko‘rsatish” tugmasi chiqadi. Sahifadan chiqilganda LeavePost chaqiriladi. Real vaqt yangilanishlari qo‘shimcha imkoniyat sifatida qaralgan: hab ulanmagan bo‘lsa ham sahifa REST so‘rovlari orqali to‘liq ishlaydi.',
+  ),
+  ...figure('3-35-forum-thread.jpg', '3.16', 'Forum: post muhokamasi va javoblar', 12.5),
+  ...ps(
+    'Post yozish maydonida qolgan belgilar soni ko‘rsatiladi: 20 tadan kam qolganda raqam rang bilan ajratiladi, chegara oshganda esa “Joylash” tugmasi o‘chadi. Rasm yoki video tanlanganda klient avval uning turini va hajmini tekshiradi, so‘ng faylni darhol serverga yuklaydi va post yozish maydonida ko‘rsatadi (3.17-rasm). Yuklangan fayl ko‘rsatish uchun serverdan qayta yuklab olinmaydi, balki brauzerdagi mahalliy nusxadan chiqariladi.',
+    'Post joylanganda serverga matn bilan birga faqat yuklangan media identifikatorlari yuboriladi. Bu yondashuv katta videoni yuklash va postni joylashni ajratadi: foydalanuvchi video yuklanayotganda matnni yozishda davom etadi. Postga biriktirilmay qolgan media keyinchalik PostMediaCleanup fon ishi tomonidan tozalanadi, shuning uchun tashlab ketilgan yuklashlar diskni egallab qolmaydi. Foydalanuvchining o‘zi yozgan post lenta tepasiga darhol qo‘shiladi.',
+  ),
+  ...figure('3-36-forum-composer.jpg', '3.17', 'Forum: rasm biriktirilgan yangi post yozish', 12.5),
+  ...ps(
+    '“Bildirishnomalar” sahifasida kim qaysi postga javob yozgani, layk bosgani, repost qilgani, iqtibos keltirgani yoki obuna bo‘lgani ko‘rsatiladi (3.18-rasm). Har bir qatorda hodisa turi belgisi, foydalanuvchi avatari va ismi, hodisa bo‘lgan postning qisqa matni chiqadi; qator bosilganda tegishli post yoki foydalanuvchi profili ochiladi. Ro‘yxat ham kursorli sahifalar bilan yuklanadi.',
+    'Sahifa ochilganda barcha bildirishnomalar o‘qilgan deb belgilanadi va navigatsiyadagi hisoblagich nolga tushadi. Forum sahifasi yopiq bo‘lsa ham ForumHub ulanishi saqlanib turadi, shuning uchun yangi bildirishnoma kelganda chatlar ro‘yxatidagi “Forum” tugmasidagi raqam darhol oshadi.',
+  ),
+  ...figure('3-37-forum-notifications.jpg', '3.18', 'Forum bildirishnomalari', 12.5),
+  ...ps(
+    'Forum profilida foydalanuvchining ismi, username, bio, obunachilar va obunalar soni hamda uchta yorliq — “Postlar”, “Obunachilar” va “Obunalar” ko‘rsatiladi (3.19-rasm). Boshqa foydalanuvchining profilida “Obuna bo‘lish” yoki “Obunani bekor qilish” tugmasi chiqadi. Obunachilar va obunalar ro‘yxati ham kursorli sahifalanadi, kursor sifatida esa obuna yozuvining identifikatori ishlatiladi.',
+    'Obuna faqat forum lentasiga emas, lavhalarga ham ta’sir qiladi: foydalanuvchi kimga obuna bo‘lsa, chatlar ro‘yxati tepasidagi lavhalar qatorida o‘sha odamning lavhalari chiqadi. Bloklash o‘rnatilgan foydalanuvchining profili ochilmaydi.',
+  ),
+  ...figure('3-38-forum-profile.jpg', '3.19', 'Forum profili', 12.5),
+
+  h3('Desktop bildirishnomalar.'),
+  ...ps(
+    'Messenjer odatda boshqa oynalar bilan bir vaqtda ochiq turadi, shuning uchun foydalanuvchi yangi xabarni o‘tkazib yubormasligi kerak. Buning uchun brauzerning Notification API’si asosida desktop bildirishnomalar qo‘shildi. NotificationService servisi yangi xabar kelganda quyidagi shartlar bajarilsa, operatsion tizim bildirishnomasini ko‘rsatadi: xabarni foydalanuvchining o‘zi yubormagan, foydalanuvchi bildirishnomalarni yoqqan va brauzer ruxsat bergan, shuningdek ilova boshqa oynada turibdi yoki xabar kelgan chat ochiq emas. Bildirishnomada jo‘natuvchi ismi va xabar matni foydalanuvchi tanlagan yozuvda (lotin yoki kirill) chiqadi, u bosilganda ilova oynasi faollashib, kerakli chat ochiladi. Bundan tashqari, brauzer yorlig‘ining sarlavhasida o‘qilmagan xabarlar soni ko‘rsatiladi.',
+    'Bitta chatdan kelgan bildirishnomalar bir xil teg bilan yaratiladi, shuning uchun ketma-ket kelgan o‘nta xabar ekranda o‘nta oyna emas, bitta yangilanib turuvchi bildirishnoma bo‘lib chiqadi. Bildirishnomalar profil oynasidagi alohida kalit bilan yoqiladi (3.20-rasm): birinchi yoqilganda brauzer foydalanuvchidan ruxsat so‘raydi. Service worker ishlatilmagani sababli bildirishnoma faqat ilova brauzerda ochiq turganda keladi; bu cheklov interfeysda ham yozib qo‘yilgan.',
+  ),
+  ...figure('3-32-notification-setting.jpg', '3.20', 'Profil oynasi: bildirishnomalar va bloklanganlar ro‘yxati', 13.5),
+
+  // ───────────────────────────────── 3.3
+  h2('3.3. Joylashtirish, testlash va foydalanish yo‘riqnomasi'),
+  h3('Joylashtirish.'),
+  p(
+    'Server ilovasi ko‘p bosqichli Dockerfile yordamida yig‘iladi [45]: birinchi bosqichda .NET SDK obrazida loyiha nashr qilinadi, ikkinchisida faqat natija yengil ASP.NET runtime obraziga ko‘chiriladi, shuning uchun yakuniy obrazda kompilyator va manba kodi bo‘lmaydi. Konteyner Render platformasida ishga tushiriladi va GitHub’dagi o‘zgarishlardan so‘ng avtomatik qayta yig‘iladi. Maxfiy sozlamalar (bazaga ulanish, JWT va HMAC kalitlari, SMTP) kodda emas, muhit o‘zgaruvchilarida saqlanadi. Lokal ishlab chiqish uchun repozitoriyda appsettings.example.json namunasi bor: yangi kompyuterda uni nusxalab, ma’lumotlar bazasi migratsiyalarini qo‘llash kifoya.',
+  ),
+  h3('Testlash.'),
+  ...ps(
+    'Biznes-mantiq xUnit freymvorkida NationalChat.Tests loyihasi bilan tekshirildi [49]. Tashqi bog‘liqliklar NSubstitute yordamida soxtalashtirildi, vaqtga bog‘liq mantiq (lavhalarning 24 soati, top lenta reytingi, forum cheklovlari) esa qat’iy TimeProvider bilan sinaldi. Serverda 425 ta, klientda Vitest freymvorkida 20 ta faylda 295 ta test yozildi [51]. Klient testlari transliteratsiyaning server bilan bir xil ishlashini, shifrlash va kalit zanjirini, soxta xabarlarni rad etishni, reaksiya hodisalarini qo‘llashni va bildirishnoma ko‘rsatish shartlarini tekshiradi. Barcha testlar muvaffaqiyatli o‘tdi (3.21-rasm), server testlari tarkibi 3.6-jadvalda keltirilgan.',
+  ),
+  ...figure('3-19-unit-tests.png', '3.21', 'Server (dotnet test) va klient (ng test) testlarini bajarish natijasi', 15.5),
   ...table(
-    '3.4',
+    '3.6',
     'Server unit testlari tarkibi va natijalari',
-    ['Test sinfi', 'Soni', 'Tekshiriladigan holatlar', 'Natija'],
+    ['Test sinflari', 'Soni', 'Tekshiriladigan holatlar', 'Natija'],
     [
       ['UzbekTransliteratorTests, MessageSearchTextTests', '167', 'Umumiy to‘plamdagi 80 ta juftlik ikkala yo‘nalishda, kontekst qoidalari, registr, himoyalangan qismlar, qidiruv kaliti', 'O‘tdi'],
+      ['Forum (6 ta sinf)', '79', 'Post, javob va iqtibos, media, cheklovlar, shikoyat, top lenta reytingi va sahifalash, obunalar, bildirishnomalarni takrorlamaslik', 'O‘tdi'],
       ['Organization… (3 ta sinf)', '44', 'Domenni ajratish, o‘xshash va umumiy domenlar, birinchi foydalanuvchi — admin, taklif havolalari', 'O‘tdi'],
       ['SecretChatServiceTests, AuthServiceSecretChatTests', '39', 'Qurilmaga bog‘lash, takroriy seq’ni rad etish, boshqa qurilmadan yuborish, ack, logout’da yopilish', 'O‘tdi'],
-      ['GroupServiceTests, ChatPermissionTests', '19', 'Rollar va ruxsatlar, egalikni o‘tkazish, a’zolar limiti', 'O‘tdi'],
-      ['Xeshlash, ClientOrigin, sahifalash, validatorlar', '38', 'PBKDF2 va HMAC, ruxsat etilgan manzillar, kursorli sahifalash, validatsiya chegaralari', 'O‘tdi'],
-      ['Jami', '307', '', '307 / 307'],
+      ['Reaksiya, bloklash, lavhalar lentasi (4 ta sinf)', '30', 'Ruxsat etilgan emoji, reaksiyani almashtirish, bloklangan chatga yozish, lentada faqat obunalar', 'O‘tdi'],
+      ['GroupServiceTests, ChatPermissionTests', '22', 'Rollar va ruxsatlar, egalikni o‘tkazish, a’zolar limiti', 'O‘tdi'],
+      ['Xeshlash, sessiyalar, sahifalash, validatorlar va boshqalar', '44', 'PBKDF2 va HMAC, ruxsat etilgan manzillar, kursorli sahifalash, validatsiya chegaralari', 'O‘tdi'],
+      ['Jami', '425', '', '425 / 425'],
     ],
     [4.2, 1.1, 7.4, 1.6],
   ),
   p(
-    'Bundan tashqari, guruh chatlari uchun API darajasida 43 ta tekshiruvdan iborat avtomatik ssenariy yozildi va barchasi muvaffaqiyatli o‘tdi. Maxfiy chatlar ikki alohida brauzerda haqiqiy server bilan sinaldi, diplomdagi barcha skrinshotlar ham haqiqiy tizimdan avtomatik olindi. Qo‘lda o‘tkazilgan asosiy sinovlar 3.5-jadvalda keltirilgan.',
+    'Bundan tashqari, guruh chatlari uchun API darajasida 43 ta tekshiruvdan iborat avtomatik ssenariy yozildi va barchasi muvaffaqiyatli o‘tdi. Maxfiy chatlar ikki alohida brauzerda haqiqiy server bilan sinaldi. Diplom loyihasidagi barcha skrinshotlar ham haqiqiy tizimdan avtomatik olindi: alohida skript sinov bazasini REST API orqali namunaviy ma’lumotlar bilan to‘ldiradi, ikkinchi skript esa brauzerni boshqarib, kerakli ekranlarni suratga oladi. Qo‘lda o‘tkazilgan asosiy sinovlar 3.7-jadvalda keltirilgan.',
   ),
   ...table(
-    '3.5',
+    '3.7',
     'Qo‘lda o‘tkazilgan asosiy sinov ssenariylari',
     ['№', 'Ssenariy', 'Kutilgan natija', 'Natija'],
     [
       ['1', 'Yangi e-pochta bilan kirish va ro‘yxatdan o‘tish', 'Kod keladi, profil yaratiladi, chat sahifasi ochiladi', 'Mos'],
       ['2', 'Noto‘g‘ri kodni 5 marta kiritish', 'Kod bekor qilinadi, keyin to‘g‘ri kod ham qabul qilinmaydi', 'Mos'],
       ['3', 'Ikki brauzerda xabar almashish', 'Xabar sahifani yangilamasdan keladi, ✓✓ belgisi paydo bo‘ladi', 'Mos'],
-      ['4', 'Guruh yaratish va a’zo qo‘shish', 'Guruh barcha a’zolarda darhol paydo bo‘ladi, xizmat xabari chiqadi', 'Mos'],
-      ['5', 'Oddiy a’zo guruhni boshqarishga urinadi', 'Boshqaruv tugmalari ko‘rinmaydi, API rad etadi', 'Mos'],
-      ['6', 'Boshqa qurilma sessiyasini yakunlash', 'Qurilma chiqadi, tokeni yangilanmaydi, undagi maxfiy chatlar yopiladi', 'Mos'],
-      ['7', 'Telefon o‘lchamida (375 px) foydalanish', 'Gorizontal aylantirish yo‘q, barcha amallar mavjud', 'Mos'],
-      ['8', 'Kirillcha xabarni “Lotin” sozlamasida ko‘rish va qidirish', 'Xabar lotinda ko‘rinadi, lotincha so‘rov uni topadi', 'Mos'],
-      ['9', '@tuit.uz va @gmail.com bilan ro‘yxatdan o‘tish', 'Birinchisi belgi oladi va domen guruhiga qo‘shiladi, ikkinchisi yo‘q', 'Mos'],
-      ['10', 'Ikki brauzerda maxfiy chat, rasm va taymer', 'Kalit izlari bir xil, xabar ochiladi, muddati o‘tgani ikkala tomonda o‘chadi', 'Mos'],
+      ['4', 'Guruhda xabarga reaksiya qo‘yish', 'Reaksiya barcha a’zolarda darhol ko‘rinadi, boshqa emoji tanlansa almashadi', 'Mos'],
+      ['5', 'Foydalanuvchini bloklash', 'Ikkala tomon ham yoza olmaydi, onlayn holat yashiriladi', 'Mos'],
+      ['6', 'Oddiy a’zo guruhni boshqarishga urinadi', 'Boshqaruv tugmalari ko‘rinmaydi, API rad etadi', 'Mos'],
+      ['7', 'Forumda post yozish va unga boshqa brauzerdan javob berish', 'Javob va hisoblagich sahifani yangilamasdan chiqadi, muallif bildirishnoma oladi', 'Mos'],
+      ['8', 'Bir daqiqada 6 ta javob yozish', 'Oltinchi javob rad etiladi, yangi muhokama boshlash mumkin', 'Mos'],
+      ['9', 'Boshqa oynada turganda yangi xabar kelishi', 'Desktop bildirishnoma chiqadi, bosilganda chat ochiladi', 'Mos'],
+      ['10', 'Kirillcha xabarni “Lotin” sozlamasida ko‘rish va qidirish', 'Xabar lotinda ko‘rinadi, lotincha so‘rov uni topadi', 'Mos'],
+      ['11', '@tuit.uz va @gmail.com bilan ro‘yxatdan o‘tish', 'Birinchisi belgi oladi va domen guruhiga qo‘shiladi, ikkinchisi yo‘q', 'Mos'],
+      ['12', 'Ikki brauzerda maxfiy chat, rasm va taymer', 'Kalit izlari bir xil, ✓✓ chiqadi, muddati o‘tgan xabar ikkala tomonda o‘chadi', 'Mos'],
+      ['13', 'Telefon o‘lchamida (375 px) foydalanish', 'Gorizontal aylantirish yo‘q, barcha amallar mavjud', 'Mos'],
     ],
     [0.8, 5, 6.5, 1.4],
   ),
 
-  // ───────────────────────────────── 3.9
-  h2('3.9. Foydalanish yo‘riqnomasi'),
-  h3('Tizimga kirish.'),
+  h3('Foydalanish yo‘riqnomasi.'),
   p(
-    'Kirish sahifasida e-pochta manzili kiritiladi yoki Google hisobi tanlanadi, so‘ng pochtaga kelgan 6 xonali kod kiritiladi (3.13-rasm). Manzil birinchi marta ishlatilayotgan bo‘lsa, ism, familiya va username kiritilib profil yaratiladi. Tashkilot pochtasi bilan kirilganda foydalanuvchi tashkilotning domen guruhiga avtomatik qo‘shiladi.',
+    '**Tizimga kirish.** Kirish sahifasida e-pochta manzili kiritiladi yoki Google hisobi tanlanadi, so‘ng pochtaga kelgan 6 xonali kod kiritiladi (3.22-rasm). Manzil birinchi marta ishlatilayotgan bo‘lsa, ism, familiya va username kiritilib profil yaratiladi. Tashkilot pochtasi bilan kirilganda foydalanuvchi tashkilotning domen guruhiga avtomatik qo‘shiladi.',
   ),
   ...figurePair(
     [
       ['3-01-login.jpg', 'kirish sahifasi'],
       ['3-02-otp.jpg', 'tasdiqlash kodi'],
     ],
-    '3.13',
+    '3.22',
     'Tizimga kirish',
   ),
-  h3('Xabar almashish.'),
   p(
-    'Chap paneldagi qidiruv maydoniga ism yoki username yozilib, suhbatdosh tanlanadi. Xabar pastdagi maydonga yoziladi va Enter bilan yuboriladi, qisqich tugmasi orqali fayl biriktiriladi. Xabar ustiga olib borilganda javob berish, tahrirlash va o‘chirish amallari chiqadi. Sarlavhadagi qidiruv tugmasi chat ichida qidiradi, topilgan xabar bosilganda chat o‘sha joyga aylantiriladi (3.14-rasm).',
+    '**Xabar almashish.** Chap paneldagi qidiruv maydoniga ism yoki username yozilib, suhbatdosh tanlanadi. Xabar pastdagi maydonga yoziladi va Enter bilan yuboriladi, qisqich tugmasi orqali fayl biriktiriladi. Xabar ustiga olib borilganda reaksiya, javob berish, tahrirlash va o‘chirish amallari chiqadi. Sarlavhadagi qidiruv tugmasi chat ichida qidiradi, topilgan xabar bosilganda chat o‘sha joyga aylantiriladi (3.23-rasm). Keraksiz suhbatdosh chat menyusidagi “Bloklash” bandi orqali bloklanadi.',
   ),
   ...figurePair(
     [
       ['3-06-reply.jpg', 'xabarga javob yozish'],
       ['3-09-message-search.jpg', 'chat ichida qidirish'],
     ],
-    '3.14',
+    '3.23',
     'Xabar almashish',
   ),
-  h3('Profil va yozuv sozlamasi.'),
   p(
-    'Profil oynasida ism, username va profil rasmi tahrirlanadi, mavzu almashtiriladi, “Qurilmalar” bo‘limida esa begona qurilmani hisobdan chiqarish mumkin. “Yozuv” bo‘limida xabarlar qaysi yozuvda ko‘rsatilishi tanlanadi: “Asl holida”, “Lotin” yoki “Кирилл” (3.15-rasm).',
+    '**Profil va sozlamalar.** Profil oynasida ism, username va profil rasmi tahrirlanadi, mavzu almashtiriladi. “Yozuv” bo‘limida xabarlar qaysi yozuvda ko‘rsatilishi tanlanadi: “Asl holida”, “Lotin” yoki “Кирилл” (3.24-rasm). Shu oynada desktop bildirishnomalar yoqiladi, bloklangan foydalanuvchilar ro‘yxati ko‘riladi va “Qurilmalar” bo‘limida begona qurilma hisobdan chiqariladi.',
   ),
   ...figurePair(
     [
       ['3-12-profile-editor.jpg', 'profilni tahrirlash'],
       ['3-21-script-setting.jpg', '“Yozuv” sozlamasi'],
     ],
-    '3.15',
+    '3.24',
     'Profil oynasi',
   ),
-  h3('Guruh va maxfiy chat.'),
-  ...ps(
-    'Guruh yaratish uchun “Yangi guruh” tugmasi bosiladi, a’zolar tanlanadi, so‘ng nom, tavsif va rasm kiritiladi. Guruh sarlavhasi bosilganda ma’lumot paneli ochiladi (3.4-rasm): ega va administratorlar bu yerda a’zolarni boshqaradi va taklif havolasini yaratadi.',
-    'Maxfiy chat shaxsiy chat menyusidagi “Maxfiy chat boshlash” bandi orqali ochiladi. Suhbatdosh taklifni qabul qilgach, kalit izini yuzma-yuz solishtirish, taymer o‘rnatish va shifrlangan fayl yuborish mumkin. Maxfiy chat faqat u ochilgan qurilmada ishlaydi.',
-  ),
-
-  h2('3-bob bo‘yicha xulosa'),
   p(
-    'Uchinchi bobda “Milliy chat” tizimining dasturiy amalga oshirilishi ko‘rib chiqildi. Server qismida 73 ta endpointli REST API, kursorli sahifalash, to‘rt metodli va o‘n to‘rt hodisali SignalR habi, onlayn holatni kuzatish, media fayllarni xavfsiz qayta ishlash, guruhlar va hikoyalar, klient qismida esa signals asosidagi holat boshqaruvi, tokenni avtomatik yangilash, qorong‘i mavzu va moslashuvchan interfeys yaratildi. Tizimning o‘ziga xos uchta imkoniyati — lotin–kirill transliteratsiyasi va yozuvdan qat’i nazar qidiruv, e-pochta domeni orqali tashkilot rejimi hamda E2E shifrlangan maxfiy chatlar amalga oshirildi. Tizim Docker konteynerida bulutga joylashtirildi va 307 ta server, 229 ta klient testi, 43 ta integratsion tekshiruv hamda qo‘lda o‘tkazilgan sinovlar bilan tasdiqlandi.',
+    '**Guruh yaratish.** Chatlar ro‘yxati tepasidagi “Yangi guruh” tugmasi bosiladi va qidiruv orqali a’zolar tanlanadi, so‘ng “Keyingi” tugmasi bosilib, guruh nomi, tavsifi va rasmi kiritiladi (3.25-rasm). Guruh sarlavhasi bosilganda ma’lumot paneli ochiladi (3.4-rasm): ega va administratorlar bu yerda a’zolarni boshqaradi va taklif havolasini yaratadi.',
+  ),
+  ...figurePair(
+    [
+      ['3-14-group-create-members.jpg', 'a’zolarni tanlash'],
+      ['3-15-group-create-details.jpg', 'guruh ma’lumotlari'],
+    ],
+    '3.25',
+    'Yangi guruh yaratish',
+  ),
+  ...bullets([
+    '**Forum.** “Forum” tugmasi orqali forumga o‘tiladi. Post yozish uchun lenta tepasidagi maydonga matn kiritiladi, rasm tugmasi orqali media qo‘shiladi va “Joylash” bosiladi. Muallifning ismi bosilganda uning profili ochiladi, u yerda “Obuna bo‘lish” tugmasi bor. Repost tugmasi bosilganda “Repost qilish” yoki “Iqtibos keltirish” tanlanadi.',
+    '**Lavhalar.** Chatlar ro‘yxati tepasidagi o‘z avatari bosilib, rasm yoki video tanlanadi. Obuna bo‘lingan odamlarning lavhalari shu qatorda chiqadi, ko‘rilmaganlari rangli halqa bilan belgilanadi.',
+    '**Maxfiy chat.** Shaxsiy chat menyusidagi “Maxfiy chat boshlash” bandi tanlanadi. Suhbatdosh taklifni qabul qilgach, kalit izini yuzma-yuz solishtirish, taymer o‘rnatish va shifrlangan fayl yuborish mumkin. Maxfiy chat faqat u ochilgan qurilmada ishlaydi.',
+  ]),
+
+  h2('3-bob bo‘yicha xulosa', { toc: false }),
+  p(
+    'Uchinchi bobda “Milliy” xabarchining dasturiy amalga oshirilishi ko‘rib chiqildi. Server qismida 17 ta controller va 104 ta endpointdan iborat REST API, kursorli sahifalash, ChatHub va ForumHub SignalR hablari, onlayn holatni kuzatish, media fayllarni xavfsiz qayta ishlash, guruhlar va lavhalar yaratildi. Keyingi bosqichda xabarlarga reaksiya, foydalanuvchini bloklash, reytingli top lentaga ega forum va desktop bildirishnomalar qo‘shildi; ular mavjud arxitekturaga uning qatlamlarini o‘zgartirmasdan joylashdi. Tizimning o‘ziga xos uchta imkoniyati — lotin–kirill transliteratsiyasi va yozuvdan qat’i nazar qidiruv, e-pochta domeni orqali tashkilot rejimi hamda o‘qilganlik belgisiga ega E2E shifrlangan maxfiy chatlar amalga oshirildi. Tizim Docker konteynerida bulutga joylashtirildi va 425 ta server, 295 ta klient testi, 43 ta integratsion tekshiruv hamda qo‘lda o‘tkazilgan sinovlar bilan tasdiqlandi.',
   ),
 ];

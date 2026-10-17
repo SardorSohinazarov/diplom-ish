@@ -16,7 +16,8 @@ function slice(source, from, before) {
   return lines.slice(start, end).join('\n');
 }
 
-const listing = (title, file, source) => [h2(title), p(`Fayl: ${file}`, { noIndent: true }), ...code(source.trimEnd())];
+// Appendix titles stay out of the table of contents (only "Ilovalar" itself is listed there).
+const listing = (title, file, source) => [h2(title, { toc: false }), p(`Fayl: ${file}`, { noIndent: true }), ...code(source.trimEnd())];
 
 export const appendix = () => [
   h1('Ilovalar'),
@@ -32,6 +33,11 @@ export const appendix = () => [
     slice(read('NationalChatClient', 'src', 'app', 'features', 'chat', 'secret', 'secret-crypto.ts'), 'export async function deriveChains(', 'export interface SecretFingerprint'),
   ),
   ...testsAppendix(),
+  ...listing(
+    '5-ilova. Forum top lentasi uchun post reytingi (HotScore)',
+    'NationalChat/src/Application/Features/Forum/HotScore.cs',
+    read('NationalChat', 'src', 'Application', 'Features', 'Forum', 'HotScore.cs'),
+  ),
 ];
 
 /** The tests live on the feature/unit-tests branch; skip the appendix if that branch is not checked out. */

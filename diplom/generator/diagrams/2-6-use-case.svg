@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1030" viewBox="0 0 1000 1030" font-family="Times New Roman, serif" fill="#111">
+  <defs><marker id="g" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="14" markerHeight="14" orient="auto"><path d="M1,1 L11,6 L1,11 z" fill="#fff" stroke="#111" stroke-width="1.5"/></marker></defs>
+  <rect width="1000" height="1030" fill="#fff"/>
+  <rect x="12" y="12" width="976" height="1006" fill="#fafafa" stroke="#777" stroke-width="2"/>
+  <text x="500" y="46" text-anchor="middle" font-size="24" font-weight="bold">“Milliy chat” tizimi</text>
+  <line x1="476" y1="106" x2="365" y2="120" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="200" cy="120" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="200" y="115.6" text-anchor="middle" font-size="22">E-pochta kodi yoki</text><text x="200" y="139.8" text-anchor="middle" font-size="22">Google orqali kirish</text>
+  <line x1="524" y1="106" x2="635" y2="120" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="800" cy="120" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="800" y="127.7" text-anchor="middle" font-size="22">Ro‘yxatdan o‘tish</text>
+  <g stroke="#111" stroke-width="2.5" fill="none"><circle cx="500" cy="82" r="12" fill="#fff"/><line x1="500" y1="94" x2="500" y2="126"/><line x1="480" y1="106" x2="520" y2="106"/><line x1="500" y1="126" x2="484" y2="150"/><line x1="500" y1="126" x2="516" y2="150"/></g><rect x="466.4" y="156" width="67.19999999999999" height="30" fill="#fafafa"/><text x="500" y="177.7" text-anchor="middle" font-size="22" font-weight="bold">Mehmon</text>
+  <line x1="476" y1="472" x2="365" y2="264" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="200" cy="264" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="200" y="259.6" text-anchor="middle" font-size="22">Profil va sessiyalarni</text><text x="200" y="283.8" text-anchor="middle" font-size="22">boshqarish</text>
+  <line x1="476" y1="472" x2="365" y2="338" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="200" cy="338" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="200" y="333.6" text-anchor="middle" font-size="22">Foydalanuvchi qidirish,</text><text x="200" y="357.8" text-anchor="middle" font-size="22">kontaktlar</text>
+  <line x1="476" y1="472" x2="365" y2="412" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="200" cy="412" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="200" y="407.6" text-anchor="middle" font-size="22">Shaxsiy chat: yuborish,</text><text x="200" y="431.8" text-anchor="middle" font-size="22">tahrirlash, o‘chirish</text>
+  <line x1="476" y1="472" x2="365" y2="486" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="200" cy="486" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="200" y="481.6" text-anchor="middle" font-size="22">Rasm, video, fayl</text><text x="200" y="505.8" text-anchor="middle" font-size="22">yuborish</text>
+  <line x1="476" y1="472" x2="365" y2="560" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="200" cy="560" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="200" y="555.6" text-anchor="middle" font-size="22">Xabarga reaksiya</text><text x="200" y="579.8" text-anchor="middle" font-size="22">bildirish</text>
+  <line x1="476" y1="472" x2="365" y2="634" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="200" cy="634" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="200" y="641.7" text-anchor="middle" font-size="22">Xabarlarni qidirish</text>
+  <line x1="476" y1="472" x2="365" y2="708" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="200" cy="708" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="200" y="703.6" text-anchor="middle" font-size="22">Lotin yoki kirillda</text><text x="200" y="727.8" text-anchor="middle" font-size="22">ko‘rish</text>
+  <line x1="524" y1="472" x2="635" y2="264" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="800" cy="264" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="800" y="259.6" text-anchor="middle" font-size="22">Foydalanuvchini</text><text x="800" y="283.8" text-anchor="middle" font-size="22">bloklash</text>
+  <line x1="524" y1="472" x2="635" y2="338" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="800" cy="338" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="800" y="333.6" text-anchor="middle" font-size="22">Lavha joylash</text><text x="800" y="357.8" text-anchor="middle" font-size="22">va ko‘rish</text>
+  <line x1="524" y1="472" x2="635" y2="412" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="800" cy="412" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="800" y="407.6" text-anchor="middle" font-size="22">Forumda post, javob,</text><text x="800" y="431.8" text-anchor="middle" font-size="22">repost, layk</text>
+  <line x1="524" y1="472" x2="635" y2="486" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="800" cy="486" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="800" y="481.6" text-anchor="middle" font-size="22">Obuna bo‘lish,</text><text x="800" y="505.8" text-anchor="middle" font-size="22">top lenta</text>
+  <line x1="524" y1="472" x2="635" y2="560" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="800" cy="560" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="800" y="555.6" text-anchor="middle" font-size="22">Maxfiy (E2E) chat,</text><text x="800" y="579.8" text-anchor="middle" font-size="22">kalitni tekshirish</text>
+  <line x1="524" y1="472" x2="635" y2="634" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="800" cy="634" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="800" y="629.6" text-anchor="middle" font-size="22">Guruh yaratish,</text><text x="800" y="653.8" text-anchor="middle" font-size="22">guruhdan chiqish</text>
+  <line x1="524" y1="472" x2="635" y2="708" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="800" cy="708" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="800" y="703.6" text-anchor="middle" font-size="22">Taklif havolasi orqali</text><text x="800" y="727.8" text-anchor="middle" font-size="22">yopiq guruhga qo‘shilish</text>
+  <g stroke="#111" stroke-width="2.5" fill="none"><circle cx="500" cy="448" r="12" fill="#fff"/><line x1="500" y1="460" x2="500" y2="492"/><line x1="480" y1="472" x2="520" y2="472"/><line x1="500" y1="492" x2="484" y2="516"/><line x1="500" y1="492" x2="516" y2="516"/></g><rect x="427.2" y="522" width="145.6" height="30" fill="#fafafa"/><text x="500" y="543.7" text-anchor="middle" font-size="22" font-weight="bold">Foydalanuvchi</text>
+  <line x1="476" y1="875" x2="365" y2="852" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="200" cy="852" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="200" y="847.6" text-anchor="middle" font-size="22">A’zo qo‘shish / chiqarish,</text><text x="200" y="871.8" text-anchor="middle" font-size="22">guruhni tahrirlash</text>
+  <line x1="476" y1="875" x2="365" y2="926" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="200" cy="926" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="200" y="921.6" text-anchor="middle" font-size="22">Admin tayinlash, guruhni</text><text x="200" y="945.8" text-anchor="middle" font-size="22">o‘chirish (faqat ega)</text>
+  <line x1="524" y1="875" x2="635" y2="889" stroke="#555" stroke-width="1.6"/>
+  <ellipse cx="800" cy="889" rx="165" ry="31" fill="#fff" stroke="#222" stroke-width="2"/>
+  <text x="800" y="884.6" text-anchor="middle" font-size="22">Taklif havolasini</text><text x="800" y="908.8" text-anchor="middle" font-size="22">yaratish / bekor qilish</text>
+  <g stroke="#111" stroke-width="2.5" fill="none"><circle cx="500" cy="851" r="12" fill="#fff"/><line x1="500" y1="863" x2="500" y2="895"/><line x1="480" y1="875" x2="520" y2="875"/><line x1="500" y1="895" x2="484" y2="919"/><line x1="500" y1="895" x2="516" y2="919"/></g><rect x="432.8" y="925" width="134.39999999999998" height="30" fill="#fafafa"/><text x="500" y="946.7" text-anchor="middle" font-size="22" font-weight="bold">Guruh admini</text>
+  <line x1="500" y1="835" x2="500" y2="562" stroke="#111" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#g)"/>
+</svg>
