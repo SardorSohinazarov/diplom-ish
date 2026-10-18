@@ -33,7 +33,7 @@ const CW = W - 2 * M; // content width
 // ───────────────────────────────────────── helpers
 
 const ICONS = [
-  ...['landmark', 'database', 'globe', 'target', 'shield-check', 'mail', 'key-round', 'lock-keyhole', 'monitor-smartphone', 'server', 'monitor', 'container', 'users', 'crown', 'shield', 'user', 'search', 'circle-play', 'user-pen', 'phone', 'lock', 'bot', 'bell', 'smartphone', 'trending-up', 'armchair', 'lightbulb', 'wind', 'door-open', 'zap', 'check', 'languages', 'building-2', 'badge-check', 'link', 'fingerprint', 'timer', 'file-lock', 'mail-check', 'smile-plus', 'ban']
+  ...['landmark', 'database', 'globe', 'target', 'shield-check', 'mail', 'key-round', 'lock-keyhole', 'monitor-smartphone', 'server', 'monitor', 'container', 'users', 'crown', 'shield', 'user', 'search', 'circle-play', 'user-pen', 'phone', 'lock', 'bot', 'bell', 'smartphone', 'trending-up', 'armchair', 'lightbulb', 'wind', 'door-open', 'flame', 'zap', 'check', 'languages', 'building-2', 'badge-check', 'link', 'fingerprint', 'timer', 'file-lock', 'mail-check', 'smile-plus', 'ban']
     .map((n) => [n, C.white]),
   ['check', C.ok],
   ['arrow-right', C.pri],
@@ -771,10 +771,10 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     text(s, label, { x: box.x, y: box.y + box.h + 0.08, w: box.w, h: 0.3, fontSize: 12, italic: true, color: C.muted, align: 'center' });
   }
   const stats = [
-    ['armchair', '5 ish joyi', 'xona 6 × 6 × 3 m'],
-    ['lightbulb', '421 lk', '12 ta LED panel (me’yor 400 lk)'],
-    ['wind', '150 m³/soat', 'toza havo, 5 xodim uchun'],
-    ['door-open', '≈ 50 soniya', 'hisobiy evakuatsiya vaqti'],
+    ['armchair', '6 m² / 20 m³', 'bitta ish joyiga eng kam maydon va hajm'],
+    ['lightbulb', '300–500 lk', 'stol yuzasining yoritilganligi'],
+    ['door-open', '≥ 2 chiqish', 'har bir qavatda evakuatsiya uchun'],
+    ['flame', 'OU-3 / OU-5', 'kompyuter xonalari uchun o‘t o‘chirgich'],
   ];
   const cw = (CW - 3 * 0.3) / 4;
   stats.forEach(([ic, big, label], i) => {
@@ -785,7 +785,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     text(s, label, { x: x + 0.85, y: 5.92, w: cw - 0.95, h: 0.6, fontSize: 12, color: C.muted, valign: 'top' });
   });
   s.addNotes(
-    'Hayot faoliyati xavfsizligi bo‘limida ikki masala ko‘rib chiqildi. Birinchisi — dasturchining ergonomik ish joyi. Stol, stul va monitorning to‘g‘ri o‘lchamlari keltirildi va 6 ga 6 metrli xona uchun hisob-kitob qilindi: xonaga 5 ta ish joyi joylashadi, 12 ta LED panel 421 lyuks yoritilganlik beradi, bu me’yordagi 400 lyuksdan yuqori. Havo almashinuvi soatiga 150 kub metr. Ikkinchi masala — evakuatsiya. IT-ofis qavati uchun evakuatsiya reja-sxemasi ishlab chiqildi, hisobiy evakuatsiya vaqti taxminan 50 soniya chiqdi. Yong‘in sodir bo‘lganda xodimlarning harakatlar tartibi ham belgilandi.',
+    'Hayot faoliyati xavfsizligi bo‘limida ikki masala ko‘rib chiqildi. Birinchisi — dasturchining ergonomik ish joyi. Stol, stul va monitorning to‘g‘ri o‘lchamlari, mikroiqlim, yoritilganlik va shovqin me’yorlari keltirildi: bitta ish joyiga kamida 6 kvadrat metr maydon va 20 kub metr hajm, stol yuzasida 300–500 lyuks yoritilganlik kerak. Ikkinchi masala — evakuatsiya. IT-ofis qavati uchun evakuatsiya reja-sxemasi ishlab chiqildi, yong‘in sinflari va o‘t o‘chirish vositalari tanlandi. Yong‘in sodir bo‘lganda xodimlarning harakatlar tartibi ham belgilandi.',
   );
 }
 

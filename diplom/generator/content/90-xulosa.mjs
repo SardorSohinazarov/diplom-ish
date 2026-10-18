@@ -13,7 +13,7 @@ export const conclusion = () => [
     'Ochiq fikr almashish uchun forum yaratildi: 280 belgigacha post, javoblar daraxti, repost, iqtibos, layk, obunalar va real vaqtda keladigan bildirishnomalar. Top lentada postlar layk, javob, repost va ko‘rishlar soni hamda postning yoshidan hisoblanadigan reyting bo‘yicha tartiblanadi, spamga qarshi esa chastota cheklovlari va shikoyatlar qo‘llanadi.',
     'Uchta o‘ziga xos imkoniyat amalga oshirildi. Kirillda yozilgan xabarni lotinda o‘qish mumkin va aksincha, qidiruv esa ikkala yozuvda ham topadi. Tashkilot pochtasi bilan kirgan foydalanuvchi o‘z tashkilotining yopiq guruhiga avtomatik qo‘shiladi. Maxfiy chatda xabar faqat ikki qurilmada ochiladi, serverda esa ma’nosiz shifrlangan baytlar turadi; o‘qilganlik belgisi ham shifrlangan holda yuboriladi.',
     'Dastur Docker konteynerida bulutga joylashtirildi. Uning to‘g‘ri ishlashi 425 ta server va 295 ta klient testi, 43 ta integratsion tekshiruv va qo‘lda o‘tkazilgan sinovlar bilan tasdiqlandi.',
-    'Hayot faoliyati xavfsizligi bo‘limida 6 × 6 m xona uchun ish joylari, yoritish va shamollatish hisoblandi, 45 kishilik qavat taxminan 0,83 daqiqada evakuatsiya qilinishi ko‘rsatildi.',
+    'Hayot faoliyati xavfsizligi bo‘limida dasturchining ergonomik ish joyiga qo‘yiladigan talablar keltirildi, IT-ofis qavati uchun evakuatsiya reja-sxemasi tuzildi va avariyalarda xodimlarning harakatlar tartibi belgilandi.',
   ]),
   ...ps(
     'Dasturning asosiy afzalligi shundaki, uni istalgan tashkilot o‘z serverida ishga tushirib, yozishmalar ustidan to‘liq nazoratni o‘zida saqlab qolishi mumkin. Diplom loyihasi davomida real vaqt tizimini loyihalash, xavfsiz autentifikatsiya va uchdan-uchgacha shifrlashni amalda qo‘llash tajribasi orttirildi.',
