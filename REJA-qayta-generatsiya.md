@@ -1,7 +1,7 @@
 # Diplom loyihasini qayta generatsiya qilish — reja (2026-10-17)
 
 > Manba: [REJA-rahbar-izohlari.md](REJA-rahbar-izohlari.md) dagi 14 ta izoh va `NationalChat` / `NationalChatClient` dagi yangi commitlar.
-> **Holati:** reja tasdiqlanishini kutmoqda. "boshla" deyilmaguncha `diplom/` ga tegilmaydi.
+> **Holati:** bajarildi (`2eb7206`). Hozirgi holat va qolgan ishlar: [DAVOM-ETTIRISH.md](DAVOM-ETTIRISH.md).
 
 ## 0. Hozirgi holat
 
