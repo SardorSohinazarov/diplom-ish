@@ -60,7 +60,7 @@ const review = () => [
     'Bugungi kunda muloqotning katta qismi messenjerlarga ko‘chgan. Biroq respublikada eng ko‘p foydalaniladigan Telegram va WhatsApp xorijiy kompaniyalarga tegishli bo‘lib, fuqarolarning yozishmalari va shaxsga doir ma’lumotlari mamlakatdan tashqaridagi serverlarda saqlanadi. “Shaxsga doir ma’lumotlar to‘g‘risida”gi Qonun talablari nuqtai nazaridan ma’lumotlarni respublika hududida saqlaydigan milliy messenjer yaratish dolzarb masaladir. Shu jihatdan Sohinazarov Sardorbek tomonidan bajarilgan diplom loyihasi dolzarbligi, texnik yechimlari va amaliy ahamiyati bilan ajralib turadi.',
   ),
   p(
-    'Diplom loyihasi 89 betdan iborat bo‘lib, **kirish**, to‘rtta **asosiy bob**, **xulosa**, 51 nomdan iborat **foydalanilgan adabiyotlar ro‘yxati** va **ilovalardan** tashkil topgan. Loyihada 42 ta rasm, 19 ta jadval, 10 ta formula va 5 ta ilova keltirilgan.',
+    'Diplom loyihasi 84 betdan iborat bo‘lib, **kirish**, to‘rtta **asosiy bob**, **xulosa**, 51 nomdan iborat **foydalanilgan adabiyotlar ro‘yxati** va **ilovalardan** tashkil topgan. Loyihada 41 ta rasm, 17 ta jadval, 1 ta formula va 5 ta ilova keltirilgan.',
   ),
   p(
     '**I-bobda** – Telegram, WhatsApp, Signal va WeChat funksionallik, xavfsizlik hamda ma’lumotlarni saqlash joyi bo‘yicha taqqoslangan. Real vaqtda aloqa texnologiyalari (WebSocket, SSE, long polling) tahlil qilinib, **SignalR** kutubxonasi tanlangani asoslangan, tizimga talablar aniqlangan.',
