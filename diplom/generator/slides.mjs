@@ -9,7 +9,7 @@ import { renderIcons } from './tools/icons.mjs';
 
 const OUT = path.join(ROOT, '..', 'Taqdimot_Sohinazarov_Sardor.pptx');
 const TOPIC = 'Real vaqtda xabar almashish imkonini beruvchi “Milliy” xabarchi ishlab chiqish';
-const TOTAL = 25;
+const TOTAL = 26;
 
 // Palette taken from the application itself (indigo accent of the chat UI).
 const C = {
@@ -33,7 +33,7 @@ const CW = W - 2 * M; // content width
 // ───────────────────────────────────────── helpers
 
 const ICONS = [
-  ...['landmark', 'database', 'globe', 'target', 'shield-check', 'mail', 'key-round', 'lock-keyhole', 'monitor-smartphone', 'server', 'monitor', 'container', 'users', 'crown', 'shield', 'user', 'search', 'circle-play', 'user-pen', 'phone', 'lock', 'bot', 'bell', 'smartphone', 'trending-up', 'armchair', 'lightbulb', 'wind', 'door-open', 'flame', 'zap', 'check', 'languages', 'building-2', 'badge-check', 'link', 'fingerprint', 'timer', 'file-lock', 'mail-check', 'smile-plus', 'ban']
+  ...['landmark', 'database', 'globe', 'target', 'shield-check', 'mail', 'key-round', 'lock-keyhole', 'monitor-smartphone', 'server', 'monitor', 'container', 'users', 'crown', 'shield', 'user', 'search', 'circle-play', 'user-pen', 'phone', 'lock', 'bot', 'bell', 'smartphone', 'trending-up', 'sparkles', 'store', 'gavel', 'blocks', 'armchair', 'lightbulb', 'wind', 'door-open', 'flame', 'zap', 'check', 'languages', 'building-2', 'badge-check', 'link', 'fingerprint', 'timer', 'file-lock', 'mail-check', 'smile-plus', 'ban']
     .map((n) => [n, C.white]),
   ['check', C.ok],
   ['arrow-right', C.pri],
@@ -71,9 +71,10 @@ pres.theme = { headFontFace: F, bodyFontFace: F };
 
 const text = (slide, value, opts) => slide.addText(value, { fontFace: F, color: C.text, margin: 0, isTextBox: true, ...opts });
 
-/** Content slide: white background, title, footer with topic and slide number. */
-function contentSlide(n, title) {
+/** Content slide: white background, title, footer with topic and slide number (counted automatically). */
+function contentSlide(_, title) {
   const s = pres.addSlide();
+  const n = pres.slides.length;
   s.background = { color: C.white };
   text(s, title, { x: M, y: 0.4, w: CW, h: 0.8, fontSize: 30, bold: true, color: C.ink, valign: 'middle' });
   text(s, TOPIC, { x: M, y: 6.98, w: 8, h: 0.3, fontSize: 10, color: C.muted });
@@ -184,19 +185,19 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   const rows = [
     ['landmark', '“Raqamli O‘zbekiston – 2030” strategiyasi', 'PF-6079-son Farmon: mahalliy dasturiy mahsulotlar va axborot xavfsizligi ustuvor vazifa'],
     ['database', 'Ma’lumotlarni lokalizatsiya qilish talabi', '“Shaxsga doir ma’lumotlar to‘g‘risida”gi Qonun: fuqarolar ma’lumotlari respublika hududida saqlanishi kerak'],
-    ['globe', 'Xorijiy messenjerlarga bog‘liqlik', 'Telegram, WhatsApp, Signal, WeChat — barchasi xorijiy yurisdiksiyada, ma’lumotlar mamlakatdan tashqarida'],
+    ['globe', 'Xorijiy messenjerlarga bog‘liqlik', 'Telegram, WhatsApp, Signal, WeChat ma’lumotlarni chet elda saqlaydi; mahalliy Humo esa pullik va faqat davlat xodimlari uchun'],
   ];
   rows.forEach(([ic, h, d], i) => iconRow(s, ic, h, d, M, 1.65 + i * 1.6, 7.0, { d: 0.7 }));
 
   card(s, 8.2, 1.55, W - M - 8.2, 4.95, C.tint);
   text(s, 'Yechim — “Milliy” xabarchi', { x: 8.55, y: 1.85, w: 4.0, h: 0.45, fontSize: 20, bold: true, color: C.ink });
-  const pros = ['Ma’lumotlar O‘zbekistondagi serverda saqlanadi', 'O‘zbek tilidagi tanish interfeys', 'Kod va arxitektura mahalliy nazoratda', 'Tashkilotlar uchun ichki aloqa vositasi'];
+  const pros = ['Ma’lumotlar O‘zbekistondagi serverda saqlanadi', 'Hamma uchun ochiq va bepul', 'O‘z kodi, mahalliy nazoratda', 'Tashkilotlar uchun ichki aloqa vositasi'];
   pros.forEach((t, i) => {
     s.addImage({ path: icon('check', C.ok), x: 8.55, y: 2.72 + i * 0.9, w: 0.34, h: 0.34 });
     text(s, t, { x: 9.05, y: 2.65 + i * 0.9, w: 3.5, h: 0.7, fontSize: 15, color: C.text, valign: 'top' });
   });
   s.addNotes(
-    'Mavzuning dolzarbligi uchta omilga asoslanadi. Birinchidan, “Raqamli O‘zbekiston – 2030” strategiyasi mahalliy dasturiy mahsulotlarni rivojlantirishni ustuvor vazifa qilib belgilagan. Ikkinchidan, “Shaxsga doir ma’lumotlar to‘g‘risida”gi Qonunga ko‘ra fuqarolarimizning ma’lumotlari respublika hududida saqlanishi kerak. Uchinchidan, bugun keng qo‘llanayotgan messenjerlarning barchasi xorijiy kompaniyalarga tegishli va ma’lumotlarni chet elda saqlaydi. “Milliy” xabarchi aynan shu muammoga yechim: ma’lumotlar o‘z serverida, interfeys o‘zbek tilida, kod esa mahalliy nazoratda.',
+    'Mavzuning dolzarbligi uchta omilga asoslanadi. Birinchidan, “Raqamli O‘zbekiston – 2030” strategiyasi mahalliy dasturiy mahsulotlarni rivojlantirishni ustuvor vazifa qilib belgilagan. Ikkinchidan, qonunga ko‘ra fuqarolarimizning ma’lumotlari respublika hududida saqlanishi kerak. Uchinchidan, ko‘p ishlatiladigan messenjerlar xorijiy kompaniyalarniki va ma’lumotlarni chet elda saqlaydi. Mahalliy Humo messenjeri bor, lekin u pullik va faqat davlat xodimlari uchun. “Milliy” xabarchi esa hamma uchun ochiq: ma’lumotlar o‘z serverida, kod mahalliy nazoratda.',
   );
 }
 
@@ -233,15 +234,15 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 // ───────────────────────────────────────── 4. Messenjerlar tahlili
 {
   const s = contentSlide(4, 'Mavjud messenjerlar tahlili');
-  const head = ['Mezon', 'Telegram', 'WhatsApp', 'Signal', 'WeChat', '“Milliy” xabarchi'];
+  const head = ['Mezon', 'Telegram', 'WhatsApp', 'Signal', 'WeChat', 'Humo', '“Milliy” xabarchi'];
   const body = [
-    ['Egasi (davlat)', 'BAA', 'Meta (AQSh)', 'AQSh', 'Tencent (Xitoy)', 'Mahalliy'],
-    ['Ro‘yxatdan o‘tish', 'Telefon raqami', 'Telefon raqami', 'Telefon raqami', 'Telefon raqami', 'E-pochta kodi, Google'],
-    ['E2E shifrlash', 'Faqat maxfiy chatlarda', 'Sukut bo‘yicha', 'Sukut bo‘yicha', 'Yo‘q', 'Maxfiy chatlarda'],
-    ['Yozishmalar', 'Bulutda', 'Qurilmada', 'Qurilmada', 'Serverda', 'O‘z serverida'],
-    ['Ma’lumotlar joyi', 'Xorijda', 'Xorijda', 'Xorijda', 'Xitoyda', 'O‘zbekistonda ham mumkin'],
-    ['Lotin ↔ kirill', 'Yo‘q', 'Yo‘q', 'Yo‘q', 'Yo‘q', 'Bor (qidiruv ham)'],
-    ['Tashkilot tasdig‘i', 'Yo‘q', 'Yo‘q', 'Yo‘q', 'Yo‘q', 'E-pochta domeni'],
+    ['Egasi (davlat)', 'BAA', 'Meta (AQSh)', 'AQSh', 'Tencent (Xitoy)', 'UNICON-SOFT (O‘zb.)', 'Mahalliy'],
+    ['Kimlar uchun, narxi', 'Hamma, bepul', 'Hamma, bepul', 'Hamma, bepul', 'Hamma, bepul', 'Davlat xodimlari, pullik', 'Hamma, bepul'],
+    ['Ro‘yxatdan o‘tish', 'Telefon raqami', 'Telefon raqami', 'Telefon raqami', 'Telefon raqami', '—', 'E-pochta kodi, Google'],
+    ['To‘liq shifrlash', 'Faqat maxfiy chatlarda', 'Hamma chatlarda', 'Hamma chatlarda', 'Yo‘q', 'E’lon qilingan', 'Maxfiy chatlarda'],
+    ['Ma’lumotlar joyi', 'Chet elda', 'Chet elda', 'Chet elda', 'Xitoyda', 'O‘zbekistonda', 'O‘zbekistonda ham mumkin'],
+    ['Lotin ↔ kirill', 'Yo‘q', 'Yo‘q', 'Yo‘q', 'Yo‘q', '—', 'Bor (qidiruv ham)'],
+    ['Tashkilot tasdig‘i', 'Yo‘q', 'Yo‘q', 'Yo‘q', 'Yo‘q', '—', 'Ish e-pochtasi'],
   ];
   const last = head.length - 1;
   const rows = [
@@ -258,16 +259,59 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     ),
   ];
   s.addTable(rows, {
-    x: M, y: 1.45, w: CW, colW: [2.2, 1.9, 1.9, 1.9, 1.9, 2.33], rowH: 0.5,
+    x: M, y: 1.45, w: CW, colW: [2.0, 1.6, 1.6, 1.6, 1.6, 1.75, 1.98], rowH: 0.5,
     border: { type: 'solid', color: C.line, pt: 0.75 },
   });
   card(s, M, 5.7, CW, 0.95, C.tint);
   badge(s, 'globe', M + 0.25, 5.87, 0.6);
-  text(s, 'Barcha mashhur messenjerlar ma’lumotlarni xorijda saqlaydi. Foydalanish qulayligi bo‘yicha namuna sifatida Telegram tanlandi.', {
+  text(s, 'Xorijiy messenjerlar ma’lumotlarni chet elda saqlaydi, Humo esa pullik va faqat davlat xodimlari uchun. Qulaylik bo‘yicha namuna sifatida Telegram tanlandi.', {
     x: M + 1.1, y: 5.72, w: CW - 1.35, h: 0.9, fontSize: 15, color: C.ink, valign: 'middle',
   });
   s.addNotes(
-    'Diplom loyihasining birinchi bobida mashhur messenjerlar besh mezon bo‘yicha taqqoslandi. Jadvaldan ko‘rinib turibdiki, ularning barchasi xorijiy kompaniyalarga tegishli va ma’lumotlarni mamlakatdan tashqarida saqlaydi. “Milliy” xabarchi esa istalgan serverga, jumladan O‘zbekistondagi data-markazga joylashtirilishi mumkin. Ro‘yxatdan o‘tish SMS o‘rniga elektron pochta va Google orqali amalga oshiriladi. Foydalanish qulayligi va funksionallik bo‘yicha eng yaxshi muvozanatga ega bo‘lgani uchun interfeys namunasi sifatida Telegram tanlandi.',
+    'Birinchi bobda beshta messenjer solishtirildi: Telegram, WhatsApp, Signal, WeChat va mahalliy Humo. Xorijiy messenjerlar ma’lumotlarni chet elda saqlaydi. Humo ma’lumotlarni O‘zbekistonda saqlaydi, lekin u Telegram kodi asosida qilingan, pullik va faqat davlat xodimlari uchun. “Milliy” xabarchini esa istalgan tashkilot o‘z serveriga o‘rnatishi mumkin, undan hamma bepul foydalanadi. Ro‘yxatdan o‘tish SMS o‘rniga elektron pochta yoki Google orqali bo‘ladi. Interfeys namunasi sifatida eng qulay messenjer — Telegram tanlandi.',
+  );
+}
+
+// ───────────────────────────────────────── 4b. Ustunliklar
+{
+  const s = contentSlide(0, 'Nega yana bitta messenjer kerak?');
+  card(s, M, 1.4, CW, 1.0, C.ink);
+  badge(s, 'sparkles', M + 0.3, 1.6, 0.6, C.pri);
+  text(s, [
+    { text: 'Sun’iy intellekt yordamchisi — ishlab chiqilmoqda. ', options: { bold: true, color: C.white } },
+    { text: 'Yozishmaning qisqacha mazmuni, javob takliflari, ovozli xabarni matnga aylantirish, o‘zbek–rus–ingliz tarjima, imloni tuzatish, spam va haqoratni aniqlash.', options: { color: C.tint2 } },
+  ], { x: M + 1.15, y: 1.45, w: CW - 1.4, h: 0.9, fontSize: 15, valign: 'middle' });
+  const cols = [
+    ['Funksional ustunliklar', [
+      'Lotin va kirill: har kim o‘z yozuvida o‘qiydi, qidiruv ikkalasida',
+      'Tashkilot rejimi: ish e-pochtasi orqali yopiq guruhga',
+      'Maxfiy chatlar: server ham o‘qiy olmaydi',
+      'Forum: ochiq muhokama, obunalar, top lenta',
+      'Parolsiz kirish: SMS va telefon raqami shart emas',
+      'Boshqa tizimlarga qo‘shiladi: Elektron kooperatsiya portali',
+    ]],
+    ['Nofunksional ustunliklar', [
+      'O‘z kodi: Telegram nusxasi emas, noldan yozilgan',
+      'Hamma uchun ochiq va bepul',
+      'Ma’lumotlar tashkilotning o‘z serverida',
+      'O‘rnatish shart emas: brauzerda, telefonda ham',
+      'Sekin internetda ham ishlaydi',
+      'Xavfsiz: sessiyalar nazorati, antivirus, xeshlar',
+      'Kengaytirish oson: bir nechta server, Docker',
+      '700 dan ortiq avtomatik test',
+    ]],
+  ];
+  const cw = (CW - 0.35) / 2;
+  cols.forEach(([head, items], i) => {
+    const x = M + i * (cw + 0.35);
+    card(s, x, 2.6, cw, 4.2, C.tint);
+    text(s, head, { x: x + 0.3, y: 2.75, w: cw - 0.6, h: 0.45, fontSize: 18, bold: true, color: C.ink });
+    text(s, items.map((t, j) => ({ text: t, options: { bullet: true, breakLine: j < items.length - 1 } })), {
+      x: x + 0.3, y: 3.3, w: cw - 0.6, h: 3.35, fontSize: 14, color: C.text, paraSpaceAfter: 5, valign: 'top',
+    });
+  });
+  s.addNotes(
+    'Komissiya “Humo bor ekan, yana bitta messenjer nega kerak?” deb so‘rashi mumkin. Javob shundaki, “Milliy” xabarchi boshqa maqsad va boshqa foydalanuvchilar uchun. Humo Telegram kodi asosida qilingan, pullik va faqat davlat xodimlari uchun. “Milliy” esa noldan yozilgan, hamma uchun ochiq va bepul, uni har qanday tashkilot o‘z serveriga o‘rnata oladi. Uning funksional ustunliklari — lotin va kirill yozuvlari, tashkilot rejimi, maxfiy chatlar, forum va boshqa tizimlarga qo‘shilishi. Buning isboti — Elektron kooperatsiya portalidagi chat moduli. Keyingi bosqichda sun’iy intellekt yordamchisi qo‘shiladi: u yozishmaning qisqacha mazmunini chiqaradi, javob taklif qiladi, ovozni matnga aylantiradi, tarjima qiladi va spamni aniqlaydi.',
   );
 }
 
@@ -371,9 +415,9 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 {
   const s = contentSlide(7, 'Texnologiyalar steki');
   const cols = [
-    ['server', 'Server qismi', ['.NET 8, ASP.NET Core', 'SignalR — real vaqt', 'Entity Framework Core 8', 'PostgreSQL 16', 'FluentValidation, JWT', 'Redis — onlayn holat']],
-    ['monitor', 'Klient qismi', ['Angular 22 (standalone, signals)', 'TypeScript, RxJS', '@microsoft/signalr', 'Google Identity Services', 'O‘z dizayn tizimi (SCSS)', 'Web Crypto API — E2E']],
-    ['container', 'Infratuzilma', ['Docker (multi-stage)', 'Render bulut platformasi', 'SMTP — kodlar yuborish', 'ClamAV — antivirus', 'ImageSharp, FFmpeg — media', 'Git va GitHub']],
+    ['server', 'Server qismi', ['.NET muhiti', 'SignalR — real vaqt', 'Entity Framework — baza bilan ishlash', 'PostgreSQL — ma’lumotlar bazasi', 'Redis — onlayn holat']],
+    ['monitor', 'Klient qismi', ['Angular', 'TypeScript', 'SignalR klienti', 'Google orqali kirish', 'O‘z dizayn tizimi', 'Web Crypto API — maxfiy chatlar']],
+    ['container', 'Infratuzilma', ['Docker — konteynerlash', 'Render bulut xizmati', 'Pochta — kirish kodlari', 'ClamAV — antivirus', 'Rasm va video ishlovi', 'Git va GitHub']],
   ];
   const cw = (CW - 2 * 0.35) / 3;
   cols.forEach(([ic, head, items], i) => {
@@ -388,7 +432,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   s.addImage({ path: icon('check', C.ok), x: M, y: 6.23, w: 0.34, h: 0.34 });
   text(s, 'Barcha texnologiyalar ochiq kodli va bepul — litsenziya xarajati yo‘q.', { x: M + 0.5, y: 6.15, w: CW - 0.5, h: 0.5, fontSize: 15, color: C.ink, valign: 'middle' });
   s.addNotes(
-    'Server qismi .NET 8 platformasida, ASP.NET Core freymvorkida yozilgan. Real vaqt aloqasi SignalR orqali, ma’lumotlar bazasi bilan ishlash Entity Framework Core orqali amalga oshiriladi. Ma’lumotlar bazasi — PostgreSQL. Klient qismi Angular 22 freymvorkida, holatni boshqarish uchun signals mexanizmidan foydalanilgan. Infratuzilmada Docker, Render bulut platformasi, kodlarni yuborish uchun SMTP, yuklanayotgan fayllarni tekshirish uchun ClamAV antivirusi ishlatilgan. Barcha texnologiyalar ochiq kodli va bepul.',
+    'Server qismi .NET muhitida yozilgan, ma’lumotlar bazasi bilan Entity Framework orqali ishlanadi, baza sifatida PostgreSQL tanlangan. Xabarlar SignalR orqali real vaqtda yetkaziladi. Brauzer qismi Angular’da yozilgan. Dasturni joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi, dastur Render bulut xizmatida ishlaydi. Pochta kirish kodlarini yuboradi, ClamAV antivirusi esa yuklangan fayllarni tekshiradi. Barcha texnologiyalar ochiq kodli va bepul.',
   );
 }
 
@@ -750,14 +794,14 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     ['Tests      295 passed', '4ADE80'],
   ], box.x, box.y, box.w, box.h, 15);
   text(s, [
-    { text: 'Ko‘p bosqichli Docker obrazi: SDK’da yig‘ish, yengil ASP.NET runtime’da ishga tushirish', options: { bullet: true, breakLine: true } },
+    { text: 'Konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi', options: { bullet: true, breakLine: true } },
     { text: 'GitHub’ga push qilinganda Render obrazni avtomatik qayta yig‘adi', options: { bullet: true, breakLine: true } },
     { text: 'Maxfiy kalitlar kodda emas, muhit o‘zgaruvchilarida', options: { bullet: true, breakLine: true } },
     { text: 'xUnit va Vitest: transliteratsiya, forum, maxfiy chat protokoli, tashkilotlar, reaksiya va bloklash', options: { bullet: true, breakLine: true } },
     { text: 'Swagger UI orqali API hujjatlari va qo‘lda sinov', options: { bullet: true } },
   ], { x: M, y: 3.3, w: box.x - M - 0.4, h: 3.4, fontSize: 15, color: C.text, paraSpaceAfter: 9, valign: 'top' });
   s.addNotes(
-    'Server 104 ta REST endpoint va ikkita SignalR habidan iborat. U ko‘p bosqichli Docker obraziga yig‘iladi va Render bulut platformasida ishlaydi. GitHub’ga yangi kod yuborilganda obraz avtomatik qayta yig‘iladi, maxfiy kalitlar esa muhit o‘zgaruvchilarida saqlanadi. Dasturning to‘g‘riligi 720 ta unit test bilan tekshirildi: serverda 425 ta, klientda 295 ta, ularning barchasi muvaffaqiyatli o‘tdi. Eng ko‘p test transliteratsiya, forum va maxfiy chat protokoliga to‘g‘ri keladi. Bundan tashqari, API darajasida 43 ta integratsion tekshiruv va qo‘lda sinov ssenariylari o‘tkazildi.',
+    'Server 104 ta API manzil va ikkita jonli aloqa markazidan iborat. Dasturni joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi, dastur Render bulut xizmatida ishlaydi. GitHub’ga yangi kod yuklanganda dastur avtomatik yangilanadi, maxfiy kalitlar esa kodda emas, server sozlamalarida saqlanadi. Dastur 720 ta avtomatik test bilan tekshirildi: serverda 425 ta, brauzer qismida 295 ta, hammasi muvaffaqiyatli o‘tdi. Bundan tashqari, 43 ta qo‘shimcha tekshiruv va qo‘lda sinovlar o‘tkazildi.',
   );
 }
 
@@ -793,12 +837,12 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 {
   const s = contentSlide(24, 'Xulosa va istiqbollar');
   const results = [
-    'Messenjerlar va real vaqt texnologiyalari tahlil qilindi, SignalR tanlandi',
-    'Clean Architecture, 43 jadval, 104 endpoint, 720 ta test',
+    'Beshta messenjer, jumladan Humo tahlil qilindi, SignalR tanlandi',
+    '43 jadval, 104 API manzil, 720 ta test',
     'Chatlar, guruhlar, reaksiyalar, lavhalar, forum — real vaqtda',
-    'Lotin↔kirill ko‘rinish va yozuvdan qat’i nazar qidiruv',
-    'Tashkilot rejimi: domen orqali tasdiq, yopiq guruhlar',
-    'Maxfiy chatlar: E2E, oldinga maxfiylik, kalit izi',
+    'Lotin↔kirill ko‘rinish va ikkala yozuvda qidiruv',
+    'Tashkilot rejimi va maxfiy chatlar',
+    'Elektron kooperatsiya portalining chat modulida qo‘llanildi',
   ];
   text(s, 'Erishilgan natijalar', { x: M, y: 1.45, w: 6.5, h: 0.45, fontSize: 19, bold: true, color: C.ink });
   results.forEach((t, i) => {
@@ -811,12 +855,12 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   card(s, px, 1.45, pw, 5.2, C.ink);
   text(s, 'Istiqbollar', { x: px + 0.35, y: 1.65, w: pw - 0.7, h: 0.45, fontSize: 19, bold: true, color: C.white });
   const future = [
-    ['phone', 'WebRTC ovozli va video qo‘ng‘iroqlar'],
-    ['badge-check', 'OneID orqali shaxsni tasdiqlash'],
-    ['bot', 'Kanallar va botlar platformasi'],
-    ['bell', 'Ilova yopiq bo‘lganda ham push-bildirishnomalar'],
-    ['smartphone', 'Android va iOS ilovalari'],
-    ['trending-up', 'Redis bilan gorizontal kengaytirish'],
+    ['sparkles', 'Sun’iy intellekt yordamchisi'],
+    ['store', 'Bozor: do‘konlar va savdo'],
+    ['gavel', 'Kompaniyalar uchun auksion va tenderlar'],
+    ['blocks', 'Blokcheyn: shaffof tender, aqlli shartnoma'],
+    ['phone', 'Qo‘ng‘iroqlar, kanallar va botlar'],
+    ['smartphone', 'OneID va mobil ilovalar'],
   ];
   future.forEach(([ic, t], i) => {
     const y = 2.3 + i * 0.7;
@@ -824,7 +868,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     text(s, t, { x: px + 1.0, y, w: pw - 1.2, h: 0.48, fontSize: 15, color: C.tint2, valign: 'middle' });
   });
   s.addNotes(
-    'Xulosa qilib aytganda, diplom loyihasida qo‘yilgan barcha vazifalar bajarildi. Mavjud yechimlar tahlil qilindi, tizim loyihalandi, parolsiz autentifikatsiyaga ega, real vaqtda ishlaydigan messenjer yaratildi va bulutga joylashtirildi. “Milliy” xabarchini tashkilotlar, ta’lim muassasalari va davlat idoralari o‘z serverlarida ichki aloqa vositasi sifatida qo‘llashi mumkin. Messenjerning o‘ziga xos uchta imkoniyati — lotin va kirill yozuvlari o‘rtasida o‘girish, tashkilot rejimi va maxfiy chatlar — uni xorijiy analoglardan ajratib turadi. Kelajakda OneID orqali shaxsni davlat darajasida tasdiqlash, ovozli va video qo‘ng‘iroqlar, kanallar va botlar hamda mobil ilovalarni qo‘shish rejalashtirilgan. Ma’lumotlar bazasi sxemasida bu imkoniyatlar uchun joy oldindan ajratilgan.',
+    'Xulosa qilib aytganda, diplom loyihasida qo‘yilgan barcha vazifalar bajarildi. Mavjud messenjerlar, jumladan Humo tahlil qilindi, tizim loyihalandi, parolsiz kirishga ega, real vaqtda ishlaydigan messenjer yaratildi va bulutga joylashtirildi. Chat texnologiyasi Elektron kooperatsiya portalida kompaniyalar o‘rtasidagi chat modulini yaratishda qo‘llanildi. “Milliy” xabarchini tashkilotlar, universitetlar va davlat idoralari o‘z serverlarida ichki aloqa vositasi sifatida ishlatishi mumkin. Keyingi bosqichda sun’iy intellekt yordamchisi qo‘shiladi: u yozishmaning qisqacha mazmunini chiqaradi, tarjima qiladi va spamni aniqlaydi. Xabarchi ichida bozor yaratiladi, kompaniyalar o‘rtasida auksion va tenderlar o‘tkaziladi, ularning shaffofligini esa blokcheyn ta’minlaydi. Shuningdek, qo‘ng‘iroqlar, kanallar va botlar, OneID va mobil ilovalar rejalashtirilgan.',
   );
 }
 

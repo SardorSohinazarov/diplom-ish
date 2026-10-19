@@ -1,5 +1,6 @@
-// Builds the reviewer's report (taqriz) and the supervisor's conclusion (rahbar xulosasi)
-// in the same style as the diploma, following the samples in ../../examples.
+// Builds the supervisor's conclusion (rahbar xulosasi) in the same style as the diploma.
+// The reviewer's report (taqriz) is written by the reviewer and kept as is in
+// ../Taqriz_Sohinazarov_Sardor.docx, so it is not generated here.
 // Usage: node hujjatlar.mjs
 import fs from 'node:fs';
 import path from 'node:path';
@@ -52,44 +53,6 @@ const university = [
   center('TEXNOLOGIYALARI UNIVERSITETI', { bold: true }),
 ];
 
-const review = () => [
-  ...university,
-  centerRich(`Talaba ${STUDENT_GEN} **“${TOPIC}”** mavzusidagi diplom loyihasiga`),
-  center('T A Q R I Z', { bold: true, line: LINE, after: 120 }),
-  p(
-    'Bugungi kunda muloqotning katta qismi messenjerlarga ko‘chgan. Biroq respublikada eng ko‘p foydalaniladigan Telegram va WhatsApp xorijiy kompaniyalarga tegishli bo‘lib, fuqarolarning yozishmalari va shaxsga doir ma’lumotlari mamlakatdan tashqaridagi serverlarda saqlanadi. “Shaxsga doir ma’lumotlar to‘g‘risida”gi Qonun talablari nuqtai nazaridan ma’lumotlarni respublika hududida saqlaydigan milliy messenjer yaratish dolzarb masaladir. Shu jihatdan Sohinazarov Sardorbek tomonidan bajarilgan diplom loyihasi dolzarbligi, texnik yechimlari va amaliy ahamiyati bilan ajralib turadi.',
-  ),
-  p(
-    'Diplom loyihasi 84 betdan iborat bo‘lib, **kirish**, to‘rtta **asosiy bob**, **xulosa**, 51 nomdan iborat **foydalanilgan adabiyotlar ro‘yxati** va **ilovalardan** tashkil topgan. Loyihada 41 ta rasm, 17 ta jadval, 1 ta formula va 5 ta ilova keltirilgan.',
-  ),
-  p(
-    '**I-bobda** – Telegram, WhatsApp, Signal va WeChat funksionallik, xavfsizlik hamda ma’lumotlarni saqlash joyi bo‘yicha taqqoslangan. Real vaqtda aloqa texnologiyalari (WebSocket, SSE, long polling) tahlil qilinib, **SignalR** kutubxonasi tanlangani asoslangan, tizimga talablar aniqlangan.',
-  ),
-  p(
-    '**II-bobda** – tizim **.NET 8**, **ASP.NET Core**, **Entity Framework Core** va **PostgreSQL** texnologiyalari asosida Clean Architecture tamoyillari bo‘yicha loyihalangan. Ma’lumotlar bazasi, UML modellari, autentifikatsiya hamda maxfiy chatlarning kriptografik protokoli bayon etilgan.',
-  ),
-  p(
-    '**III-bobda** – real vaqtda xabar almashish, guruh chatlari, media fayllar, xabarlarga reaksiyalar, foydalanuvchini bloklash, lavhalar va desktop bildirishnomalar amalga oshirilgan, klient qismi **Angular**da yaratilgan. Ochiq fikr almashish uchun postlar, javoblar, obunalar va reytingli top lentaga ega **forum** yaratilgan. O‘ziga xos imkoniyatlar alohida e’tiborga loyiq: xabarlarni **lotin yoki kirill** yozuvida ko‘rsatish va yozuvdan qat’i nazar qidiruv, e-pochta domeni orqali tasdiqlanadigan **tashkilot rejimi** hamda **Web Crypto API** asosida uchdan-uchgacha shifrlangan **maxfiy chatlar**. Dastur **Docker**da joylashtirilgan va testlar bilan sinalgan.',
-  ),
-  p(
-    '**IV-bobda** – hayot faoliyati xavfsizligi: dasturchi ish joyining ergonomikasi va evakuatsiya tadbirlari ko‘rib chiqilgan.',
-  ),
-  p(
-    'Talaba mustaqil fikrlash va zamonaviy texnologiyalardan foydalanish qobiliyatini namoyon qilgan. Tizimni tashkilotlar va davlat idoralari o‘z serverlarida ichki muloqot vositasi sifatida qo‘llashi mumkin.',
-  ),
-  p('Ishda ayrim kamchiliklar ham mavjud:', { keepNext: true }),
-  p('– mobil ilovalar hamda ilova yopiq bo‘lganda ham keladigan push-bildirishnomalar mavjud emas;'),
-  p('– maxfiy chatlar faqat bitta qurilmada ishlaydi;'),
-  p('– tizimning yuqori yuklama ostidagi ishlashi sinovlar bilan yetarlicha asoslanmagan.'),
-  p('Bu kamchiliklar ishning umumiy ijobiy bahosiga ta’sir qilmaydi.'),
-  p(
-    '**Xulosa qilib aytganda**, Sohinazarov Sardorbekning diplom loyihasi mavzusi dolzarb, mazmuni boy, texnik yechimlari esa amaliyotga yo‘naltirilgan, qo‘yilgan talablarga javob beradi va himoyaga **tavsiya etiladi**. Loyiha “a’lo” bahoga loyiq.',
-  ),
-  ...blank(1),
-  signature(`Taqrizchi:\n${BLANK}\n${BLANK}\n${BLANK}`, '________________'),
-  line('M.O.', { bold: true, indentLeft: 4300, before: 120 }),
-];
-
 const supervisor = () => [
   center('O‘ZBEKISTON RESPUBLIKASI', { bold: true }),
   center('RAQAMLI TEXNOLOGIYALAR VAZIRLIGI', { bold: true }),
@@ -99,10 +62,10 @@ const supervisor = () => [
   ),
   center('Ilmiy rahbar xulosasi', { bold: true, line: LINE, after: 120 }),
   p(
-    'Ushbu diplom loyihasi foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan, shaxsiy va guruh yozishmalarida real vaqtda xabar almashish imkonini beruvchi “Milliy” xabarchini ishlab chiqishga bag‘ishlangan. Muallif to‘liq ishlaydigan veb-ilova yaratgan, u tashkilotlarda ichki muloqot vositasi sifatida amaliy ahamiyatga ega.',
+    'Ushbu diplom loyihasi foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan, shaxsiy va guruh yozishmalarida xabarlarni real vaqtda yetkazadigan “Milliy” xabarchini ishlab chiqishga bag‘ishlangan. Muallif to‘liq ishlaydigan veb-ilova yaratgan. Uning chat texnologiyasi Elektron kooperatsiya portalida kompaniyalar o‘rtasidagi chat modulini yaratishda qo‘llanilgan.',
   ),
   p(
-    'Tizim arxitekturasi, ma’lumotlar bazasi modeli va foydalanuvchi rollari UML diagrammalar orqali ifodalangan. Dasturiy yechim .NET 8, ASP.NET Core, SignalR, PostgreSQL va Angular texnologiyalari asosida Clean Architecture tamoyillari bo‘yicha ishlab chiqilgan. Lotin–kirill transliteratsiyasi, tashkilot rejimi, uchdan-uchgacha shifrlangan maxfiy chatlar, xabarlarga reaksiyalar, bloklash va forum amalga oshirilgan, dastur Docker’da joylashtirilib, testlar bilan sinalgan.',
+    'Tizim tuzilishi, ma’lumotlar bazasi va foydalanuvchi rollari UML diagrammalar bilan ifodalangan. Server .NET muhitida, Entity Framework asosida, brauzer qismi esa Angular’da yozilgan, xabarlar SignalR orqali yetkaziladi. Lotin–kirill o‘girish, tashkilot rejimi, maxfiy chatlar, xabarlarga reaksiyalar, bloklash va forum amalga oshirilgan. Dasturni joylashtirish uchun Docker’dan foydalanilgan, dastur testlar bilan sinalgan.',
   ),
   p(
     'Diplom loyihasi to‘rtta bobdan iborat bo‘lib, loyihaning nazariy, texnik va amaliy jihatlari bosqichma-bosqich yoritilgan. Talaba mustaqillik va tashabbuskorlik namoyon etgan, kalendar grafikka rioya qilgan.',
@@ -131,5 +94,4 @@ async function write(file, title, children) {
   console.log(out);
 }
 
-await write('Taqriz_Sohinazarov_Sardor.docx', 'Taqriz', review());
 await write('Rahbar_xulosasi_Sohinazarov_Sardor.docx', 'Ilmiy rahbar xulosasi', supervisor());

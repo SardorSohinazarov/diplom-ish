@@ -64,5 +64,6 @@ export const references = () => [
     'xUnit.net documentation. — https://xunit.net',
     'MDN Web Docs. SubtleCrypto (Web Crypto API). — https://developer.mozilla.org/docs/Web/API/SubtleCrypto',
     'Vitest documentation. — https://vitest.dev',
+    'Telegram’dan ko‘chirilgan “milliy messenjer”: uning obunasi o‘n minglab davlat xizmatchilariga sotiladi // Kun.uz. — 2023-yil 1-fevral. — https://kun.uz/news/2023/02/01/telegramdan-kochirilgan-milliy-messenjer-uning-obunasi-on-minglab-davlat-xizmatchilariga-sotiladi',
   ], 'refs'),
 ];

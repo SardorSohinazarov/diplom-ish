@@ -132,7 +132,7 @@ export const assignmentPages = () => [
   line('2. Mavzuni tasdiqlagan buyruq: «____» __________ 2026-yil № __________.', { line: 300 }),
   line('3. Diplom loyihasini himoyaga topshirish muddati: __________________.', { line: 300 }),
   line(
-    '4. Diplom loyihasining boshlang‘ich ma’lumotlari: mavjud messenjerlar (Telegram, WhatsApp, Signal) tahlili, real vaqtda xabar almashish texnologiyalari, .NET 8, ASP.NET Core, PostgreSQL, SignalR va Angular texnologiyalariga oid adabiyotlar hamda amaliyot materiallari.',
+    '4. Diplom loyihasining boshlang‘ich ma’lumotlari: mavjud messenjerlar (Telegram, WhatsApp, Signal, WeChat, Humo) tahlili, real vaqtda xabar almashish texnologiyalari, .NET muhiti, Entity Framework, SignalR va Angular texnologiyalariga oid adabiyotlar hamda amaliyot materiallari.',
     { line: 300, align: AlignmentType.JUSTIFIED },
   ),
   line(

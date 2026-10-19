@@ -7,7 +7,7 @@ import { bullets, figure, h1, h2, h3, numbered, p, ps, table } from '../lib.mjs'
 export const chapter4 = () => [
   h1('IV-bob. Hayot faoliyati xavfsizligi'),
   p(
-    'Ushbu bobda “Milliy” xabarchini yaratgan dasturchilar jamoasining mehnat sharoitlari hayot faoliyati xavfsizligi [21] nuqtai nazaridan tahlil qilinadi. Loyihadagi ishning deyarli barchasi — server va klient kodini yozish, testlarni ishga tushirish, xabar almashishni bir nechta brauzerda sinash — kompyuter oldida bajariladi, shu bois birinchi navbatda ish joyining ergonomikasi ko‘rib chiqiladi. Ikkinchi masala — jamoa joylashgan ofisda yong‘in yoki boshqa avariya yuz berganda odamlarni xavfsiz chiqarib yuborish rejasini tuzish.',
+    'Ushbu bobda “Milliy” xabarchini yaratgan dasturchilarning mehnat sharoitlari hayot faoliyati xavfsizligi nuqtai nazaridan ko‘rib chiqiladi [21]. Loyihadagi deyarli butun ish kompyuter oldida bajariladi: kod yozish, testlarni ishga tushirish, xabar almashishni bir nechta brauzerda sinash. Shuning uchun avval ish joyining qulayligi va sog‘liqqa zarar yetkazmasligi, ya’ni ergonomikasi ko‘rib chiqiladi. Ikkinchi masala — ofisda yong‘in yoki boshqa avariya yuz berganda odamlarni xavfsiz olib chiqish rejasini tuzish.',
   ),
 
   // ───────────────────────────────── 4.1
@@ -17,12 +17,12 @@ export const chapter4 = () => [
     'Messenjer ishlab chiqish jarayonining xususiyatlaridan kelib chiqib, quyidagi xavfli va zararli omillarni ajratish mumkin:',
   ),
   ...bullets([
-    '**ko‘z charchashi** — nigoh kod, log va chat oynalari o‘rtasida doimo ko‘chib turadi, ekranga tikilganda esa ko‘z kamroq qirpiladi; natijada ko‘z quriydi va ko‘rish o‘tkirligi vaqtincha pasayadi;',
-    '**bir xil holatda uzoq o‘tirish** — xatoni qidirish yoki kod yozishda xodim soatlab o‘rnidan turmaydi, bu bo‘yin, yelka va belda og‘riq keltirib chiqaradi;',
-    '**qo‘l va bilakning takroriy harakatlari** — kun davomida minglab tugma bosish va sichqoncha harakati bilak nervining siqilishiga (tunnel sindromi) olib kelishi mumkin;',
-    '**ish muhiti omillari** — kompyuterlardan chiqadigan issiqlik, konditsioner quritgan havo, ekrandagi aks va ochiq ofisdagi suhbatlar;',
-    '**elektr xavfi** — bir stolga ko‘plab qurilma (noutbuk, monitorlar, zaryadlovchilar) ulanganda rozetka va uzaytirgichlar ortiqcha yuklanadi;',
-    '**asabiy zo‘riqish** — reliz muddatlari, server ishdan chiqqanda uni tezda tiklash zarurati va tungi navbatchiliklar.',
+    'ko‘z charchashi. Nigoh kod, jurnal va chat oynalari o‘rtasida doim ko‘chib turadi, ekranga tikilganda esa odam ko‘zini kamroq qirpiydi. Natijada ko‘z quriydi va vaqtincha yomonroq ko‘ra boshlaydi;',
+    'bir holatda uzoq o‘tirish. Xato qidirganda yoki kod yozganda dasturchi soatlab o‘rnidan turmaydi. Bu bo‘yin, yelka va belda og‘riqqa olib keladi;',
+    'qo‘l va bilakning bir xil harakatlari. Kun davomida minglab tugma bosish va sichqonchani surish bilak nervining siqilishiga (tunnel sindromi) sabab bo‘lishi mumkin;',
+    'ish muhiti. Kompyuterlardan chiqadigan issiqlik, konditsioner quritgan havo, ekrandagi yaltirash va ochiq ofisdagi suhbatlar ham charchatadi;',
+    'elektr xavfi. Bitta stolga ko‘p qurilma — noutbuk, monitorlar, zaryadlovchilar ulanganda rozetka va uzaytirgichlar ortiqcha yuklanadi;',
+    'asabiy zo‘riqish. Ishni muddatida topshirish, server ishdan chiqqanda uni tezda tiklash va tungi navbatchiliklar ruhiy toliqtiradi.',
   ]),
   p(
     'Ish joyiga qo‘yiladigan talablar Mehnat kodeksi, “Mehnatni muhofaza qilish to‘g‘risida”gi Qonun, sanitariya qoidalari hamda ISO 9241-5, GOST 12.2.032-78, GOST 12.1.005-88 va KMK 2.01.05-98 standartlari bilan belgilanadi [3, 4].',
@@ -154,18 +154,18 @@ export const chapter4 = () => [
   ...figure('4-4-fire-actions.png', '4.3', 'Yong‘in sodir bo‘lganda xodimlarning harakatlar algoritmi', 11, 14),
 
   h3('Boshqa avariyalarda xodimlarning harakatlari.'),
-  ...bullets([
-    '**Zilzila** — silkinish davomida zinaga yoki liftga yugurish xavfli; mustahkam stol ostiga kirib yoki kapital devor burchagida turib, oynali derazalar va baland shkaflardan uzoqlashiladi. Silkinish to‘xtagach, bino evakuatsiya yo‘llari bo‘yicha tark etiladi.',
-    '**Server xonasida gazli o‘t o‘chirish tizimi ishga tushsa** — ovozli va yorug‘lik signali berilishi bilan xona tark etiladi, chunki o‘chiruvchi gaz havodagi kislorodni kamaytiradi; xona shamollatilmaguncha ichkariga kirilmaydi.',
-    '**Kimnidir tok ursa** — unga yalang qo‘l bilan tegilmaydi; avval avtomat o‘chiriladi yoki jabrlanuvchi quruq yog‘och bilan simdan ajratiladi, keyin 103 chaqiriladi, nafas olmayotgan bo‘lsa reanimatsiya boshlanadi.',
-    '**Gaz hidi sezilsa** — chiroq va boshqa elektr kalitlari yoqilmaydi ham, o‘chirilmaydi ham (uchqun portlashga sabab bo‘lishi mumkin), olov yoqilmaydi; derazalar ochiladi, odamlar chiqariladi va 104 ga xabar beriladi.',
-  ]),
+  ...ps(
+    '**Zilzila.** Silkinish paytida zinaga yoki liftga yugurish xavfli. Mustahkam stol ostiga kirish yoki kapital devor burchagida turish, oynali derazalar va baland shkaflardan uzoqlashish kerak. Silkinish to‘xtagach, binodan evakuatsiya yo‘llari orqali chiqiladi.',
+    '**Server xonasida o‘t o‘chirish tizimi ishga tushsa.** Ovozli va yorug‘lik signali berilishi bilan xonadan chiqish kerak, chunki o‘chiruvchi gaz havodagi kislorodni kamaytiradi. Xona shamollatilmaguncha ichkariga kirilmaydi.',
+    '**Kimnidir tok ursa.** Unga yalang qo‘l bilan tegilmaydi. Avval tok o‘chiriladi yoki jabrlanuvchi quruq yog‘och bilan simdan ajratiladi, keyin 103 ga qo‘ng‘iroq qilinadi. U nafas olmayotgan bo‘lsa, sun’iy nafas berish boshlanadi.',
+    '**Gaz hidi sezilsa.** Chiroq va boshqa elektr kalitlari yoqilmaydi ham, o‘chirilmaydi ham, chunki uchqun portlashga sabab bo‘lishi mumkin. Olov yoqilmaydi, derazalar ochiladi, odamlar chiqariladi va 104 ga xabar beriladi.',
+  ),
   p(
     'Xodimlarni tezkor xabardor qilish uchun korporativ aloqa vositalaridan ham foydalanish mumkin. Masalan, “Milliy” xabarchidagi tashkilotning domen guruhi orqali evakuatsiya haqidagi xabar va yig‘ilish joyi bir necha soniyada barcha xodimlarning telefon va kompyuterlariga yetkaziladi, xodimlar esa xavfsiz joyga yetib kelganini javob bilan tasdiqlaydi. Bu vosita signalizatsiya va ovozli xabardor qilish tizimini to‘ldiradi va ayniqsa masofadan ishlayotgan xodimlar uchun foydali.',
   ),
 
   h2('4-bob bo‘yicha xulosa', { toc: false }),
   p(
-    'Bobda “Milliy” xabarchi jamoasi misolida dasturchi mehnatining asosiy xavfli omillari — ko‘z charchashi, uzoq o‘tirish, takroriy harakatlar va asabiy zo‘riqish aniqlandi va ularni kamaytiradigan ergonomik talablar keltirildi. Ish xonasiga, mikroiqlim, yoritilganlik va shovqinga qo‘yiladigan me’yorlar jamlandi. Ikkinchi bo‘limda ofisda yong‘in chiqish sabablari va o‘chirish vositalari tahlil qilinib, namunaviy qavat uchun evakuatsiya reja-sxemasi tuzildi. Yong‘in, zilzila va boshqa avariyalarda xodimlarning harakatlari aniq tartib sifatida berildi.',
+    'Bobda dasturchi mehnatidagi asosiy xavflar aniqlandi: ko‘z charchashi, uzoq o‘tirish, qo‘lning bir xil harakatlari va asabiy zo‘riqish. Ularni kamaytirish uchun ish joyiga qo‘yiladigan talablar keltirildi, xona harorati, yoritilishi va shovqini uchun me’yorlar jamlandi. Ikkinchi bo‘limda ofisda yong‘in chiqish sabablari va o‘chirish vositalari ko‘rib chiqildi, namunaviy qavat uchun evakuatsiya reja-sxemasi tuzildi. Yong‘in, zilzila va boshqa avariyalarda xodimlar nima qilishi kerakligi aniq tartib sifatida berildi.',
   ),
 ];

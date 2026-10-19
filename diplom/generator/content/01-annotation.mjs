@@ -13,14 +13,14 @@ const title = (text, newPage) =>
 export const annotation = () => [
   title('ANNOTATSIYA', true),
   p(
-    'Diplom loyihasi foydalanuvchi ma’lumotlarini O‘zbekiston hududidagi serverda saqlaydigan “Milliy” xabarchini ishlab chiqishga bag‘ishlangan. Server qismi ASP.NET Core 8, PostgreSQL va SignalR, klient qismi Angular asosida yaratildi. Dasturda shaxsiy va guruh chatlari, fayl almashish, reaksiyalar, lavhalar va forum, lotin–kirill transliteratsiyasi, e-pochta domeni bo‘yicha tashkilot guruhlari hamda uchdan-uchgacha shifrlangan maxfiy chatlar amalga oshirildi. Dastur avtomatik testlar bilan tekshirildi.',
+    'Diplom loyihasi foydalanuvchi ma’lumotlarini O‘zbekistondagi serverda saqlaydigan “Milliy” xabarchini ishlab chiqishga bag‘ishlangan. Server .NET muhitida, Entity Framework asosida, brauzer qismi Angular’da yozildi, xabarlar SignalR orqali real vaqtda yetkaziladi. Dasturda shaxsiy va guruh chatlari, fayl almashish, reaksiyalar, lavhalar va forum, lotin–kirill o‘girish, ish e-pochtasi orqali tashkilot guruhlari hamda maxfiy chatlar bor. Chat texnologiyasi Elektron kooperatsiya portalida qo‘llanildi.',
   ),
   title('АННОТАЦИЯ', false),
   p(
-    'Дипломный проект посвящён разработке мессенджера «Milliy», хранящего данные пользователей на серверах в Узбекистане. Серверная часть создана на ASP.NET Core 8, PostgreSQL и SignalR, клиентская — на Angular. Реализованы личные и групповые чаты, обмен файлами, реакции, истории и форум, транслитерация между латиницей и кириллицей, группы организаций по домену электронной почты и сквозное шифрование секретных чатов. Программа проверена автоматическими тестами.',
+    'Дипломный проект посвящён разработке мессенджера «Milliy», хранящего данные пользователей на серверах в Узбекистане. Сервер написан на платформе .NET с использованием Entity Framework, клиент — на Angular, сообщения доставляются в реальном времени через SignalR. Реализованы личные и групповые чаты, обмен файлами, реакции, истории и форум, перевод между латиницей и кириллицей, группы организаций по рабочей почте и секретные чаты. Технология чата применена на портале «Электронная кооперация».',
   ),
   title('ANNOTATION', false),
   p(
-    'The diploma project develops “Milliy”, a messenger that keeps user data on servers inside Uzbekistan. The server is built with ASP.NET Core 8, PostgreSQL and SignalR, the client with Angular. The application provides private and group chats, file sharing, reactions, stories and a forum, Latin–Cyrillic transliteration, organization groups based on the e-mail domain and end-to-end encrypted secret chats. The application is verified with automated tests.',
+    'The diploma project develops “Milliy”, a messenger that keeps user data on servers inside Uzbekistan. The server is written on the .NET platform with Entity Framework, the client in Angular, and messages are delivered in real time via SignalR. The application provides private and group chats, file sharing, reactions, stories and a forum, Latin–Cyrillic conversion, organization groups based on work e-mail and secret chats. The chat technology is used in the “Electronic Cooperation” portal.',
   ),
 ];
