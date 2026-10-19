@@ -9,7 +9,7 @@ const lines = fs.readFileSync(file, 'utf8').replace(/\r/g, '').split('\n')
   .map((l) => {
     const e = esc(l);
     if (/^\s*Passed /.test(l)) return e.replace('Passed', '<span style="color:#4ade80">Passed</span>');
-    if (/Passed: \d+/.test(l)) return `<span style="color:#4ade80">${e}</span>`;
+    if (/Passed:\s+\d+|\d+ passed/.test(l)) return `<span style="color:#4ade80">${e}</span>`;
     return e;
   });
 const html = `<html><body style="margin:0;background:#1e1e1e"><pre style="display:inline-block;margin:0;padding:18px 22px;font:15px/1.45 Consolas,monospace;color:#d4d4d4;white-space:pre">` +

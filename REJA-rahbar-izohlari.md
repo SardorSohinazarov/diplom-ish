@@ -1,7 +1,7 @@
 # Diplom — ilmiy rahbar izohlari (2026-10-17)
 
 > Bu fayl boshqa kompyuterda / yangi suhbatda davom etish uchun yozilgan.
-> **Holati:** izohlar yig'ildi, `diplom/` ga hali hech qanday o'zgartirish kiritilmagan.
+> **Holati:** bajarildi (`2eb7206`). Hozirgi holat va qolgan ishlar: [DAVOM-ETTIRISH.md](DAVOM-ETTIRISH.md).
 > Foydalanuvchi "boshla" demaguncha `diplom/` ga tegilmaydi. Boshlashdan oldin batafsil reja ko'rsatilib, tasdiq olinadi.
 > Hammasi bir martada qo'llanadi: izohlar + kodning yangi imkoniyatlari + yangi sonlar.
 

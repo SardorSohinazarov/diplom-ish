@@ -1,14 +1,25 @@
 // Renders every diagrams/*.mmd (Mermaid) file to rasmlar/<name>.png using the installed Chrome.
-// Usage: node tools/render-diagrams.mjs [name-filter]
+// Only diagrams whose .mmd is newer than the .png are redrawn; --force redraws all of them.
+// Usage: node tools/render-diagrams.mjs [name-filter] [--force]
 import fs from 'node:fs';
 import path from 'node:path';
 import puppeteer from 'puppeteer-core';
 import { ROOT } from '../lib.mjs';
 
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
-const filter = process.argv[2] ?? '';
+const args = process.argv.slice(2);
+const force = args.includes('--force');
+const filter = args.find((a) => !a.startsWith('--')) ?? '';
 const dir = path.join(ROOT, 'diagrams');
-const files = fs.readdirSync(dir).filter((f) => f.endsWith('.mmd') && f.includes(filter));
+const isStale = (file) => {
+  const png = path.join(ROOT, 'rasmlar', `${path.basename(file, '.mmd')}.png`);
+  return force || !fs.existsSync(png) || fs.statSync(png).mtimeMs < fs.statSync(path.join(dir, file)).mtimeMs;
+};
+const files = fs.readdirSync(dir).filter((f) => f.endsWith('.mmd') && f.includes(filter) && isStale(f));
+if (!files.length) {
+  console.log('Hamma diagrammalar yangi.');
+  process.exit(0);
+}
 
 // Print-friendly monochrome theme with a single accent colour.
 const config = {

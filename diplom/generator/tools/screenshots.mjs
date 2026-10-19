@@ -8,24 +8,27 @@ import { ROOT } from '../lib.mjs';
 
 const CHROME = 'C:/Program Files/Google/Chrome/Application/chrome.exe';
 const APP = process.env.APP_URL ?? 'http://localhost:4200';
-const API = process.env.API_URL ?? 'http://localhost:5043';
+// HTTPS directly: the http port redirects, and a redirect to another port drops the Authorization header.
+const API = process.env.API_URL ?? 'https://localhost:7122';
 const OUT = path.join(ROOT, 'rasmlar');
 const filter = process.argv[2] ?? '';
 const seed = JSON.parse(fs.readFileSync(path.join(ROOT, 'data', 'seed.json'), 'utf8'));
 const signalR = createRequire(path.join(ROOT, '..', '..', 'NationalChatClient', 'package.json'))('@microsoft/signalr');
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
-const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, args: ['--lang=uz-UZ'] });
+const browser = await puppeteer.launch({ executablePath: CHROME, headless: true, acceptInsecureCerts: true, args: ['--lang=uz-UZ', '--ignore-certificate-errors'] });
 
-async function newPage({ token, theme = 'light', mobile = false } = {}) {
+async function newPage({ token, theme = 'light', mobile = false, notifications = false } = {}) {
   const context = await browser.createBrowserContext();
+  if (notifications) await context.overridePermissions(APP, ['notifications']);
   const page = await context.newPage();
   await page.setViewport(mobile ? { width: 390, height: 844, deviceScaleFactor: 2, isMobile: true, hasTouch: true } : { width: 1440, height: 900, deviceScaleFactor: 2 });
   await page.goto(`${APP}/auth`, { waitUntil: 'networkidle2' });
-  await page.evaluate((t, th) => {
+  await page.evaluate((t, th, n) => {
     localStorage.setItem('milliy-chat-theme', th);
+    if (n) localStorage.setItem('milliy-chat-notifications', 'on');
     if (t) localStorage.setItem('milliy-chat-access-token', t);
-  }, token, theme);
+  }, token, theme, notifications);
   if (token) await page.goto(`${APP}/chat`, { waitUntil: 'networkidle2' });
   else await page.reload({ waitUntil: 'networkidle2' });
   await sleep(800);
@@ -305,6 +308,75 @@ if ('3-20-script'.includes(filter) || filter.startsWith('3-20')) {
   await sleep(1200);
   await shot(guest, '3-23-join-invite');
   await guest.browserContext().close();
+}
+
+// ── Reactions, blocking, desktop-notification setting ──────────────────────────────────
+{
+  const page = await newPage({ token: sardor, notifications: true });
+  await openChat(page, '315-21 guruh');
+  const bubble = await page.evaluateHandle(() =>
+    [...document.querySelectorAll('article.message')].find((a) => a.textContent.includes('keyingi haftaning')),
+  );
+  await bubble.hover();
+  await sleep(300);
+  await page.evaluate((el) => el.querySelector('[aria-label="Reaksiya qo‘yish"] button, button[aria-label="Reaksiya qo‘yish"]')?.click(), bubble);
+  await sleep(500);
+  await shot(page, '3-30-reactions');
+  await page.reload({ waitUntil: 'networkidle2' });
+  await sleep(1000);
+
+  await openChat(page, 'Chegirma Market');
+  await sleep(500);
+  await shot(page, '3-31-blocked-user');
+  await page.reload({ waitUntil: 'networkidle2' });
+  await sleep(1000);
+
+  await click(page, 'button[aria-label="Profil"]');
+  await sleep(1000);
+  await click(page, 'button[aria-label="Profilni tahrirlash"]');
+  await page.waitForNetworkIdle({ idleTime: 500 });
+  await page.evaluate(() => document.querySelector('.notifications-section')?.scrollIntoView({ block: 'center' }));
+  await sleep(600);
+  await shot(page, '3-32-notification-setting');
+  await page.browserContext().close();
+}
+
+// ── Forum ────────────────────────────────────────────────────────────────────────────────
+{
+  const page = await newPage({ token: sardor });
+  await page.goto(`${APP}/forum`, { waitUntil: 'networkidle2' });
+  await page.waitForNetworkIdle({ idleTime: 800 });
+  await sleep(2500);
+  await shot(page, '3-33-forum-feed');
+
+  await click(page, '.feed-tabs button', 'Top');
+  await page.waitForNetworkIdle({ idleTime: 500 });
+  await sleep(1000);
+  await shot(page, '3-34-forum-top');
+
+  await page.goto(`${APP}/forum/post/${seed.posts.main}`, { waitUntil: 'networkidle2' });
+  await page.waitForNetworkIdle({ idleTime: 800 });
+  await sleep(2500);
+  await shot(page, '3-35-forum-thread');
+
+  await page.goto(`${APP}/forum`, { waitUntil: 'networkidle2' });
+  await sleep(1000);
+  await typeInto(page, 'app-post-composer textarea', 'Himoyaga bir hafta qoldi. Taqdimot slaydlari tayyor, endi nutqni mashq qilyapman 🎓');
+  const file = await page.$('app-post-composer input[type="file"]');
+  await file.uploadFile(path.join(ROOT, 'data', 'story-1.jpg'));
+  await sleep(2500);
+  await shot(page, '3-36-forum-composer');
+
+  await page.goto(`${APP}/forum/notifications`, { waitUntil: 'networkidle2' });
+  await page.waitForNetworkIdle({ idleTime: 800 });
+  await sleep(2500);
+  await shot(page, '3-37-forum-notifications');
+
+  await page.goto(`${APP}/forum/user/${seed.ids.sardor}`, { waitUntil: 'networkidle2' });
+  await page.waitForNetworkIdle({ idleTime: 800 });
+  await sleep(2500);
+  await shot(page, '3-38-forum-profile');
+  await page.browserContext().close();
 }
 
 // ── Secret chat between Sardor and Jasur (two browsers, real E2E) ────────────────────────

@@ -21,3 +21,6 @@ Thumbs.db
 desktop.ini
 .vscode/
 .idea/
+
+# build.mjs --only bilan yaratiladigan bitta bobli ko'rinishlar
+diplom/generator/preview/

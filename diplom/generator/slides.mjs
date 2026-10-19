@@ -8,8 +8,8 @@ import { ROOT } from './lib.mjs';
 import { renderIcons } from './tools/icons.mjs';
 
 const OUT = path.join(ROOT, '..', 'Taqdimot_Sohinazarov_Sardor.pptx');
-const TOPIC = 'Real vaqtda xabar almashish imkonini beruvchi “Milliy chat” dasturini ishlab chiqish';
-const TOTAL = 24;
+const TOPIC = 'Real vaqtda xabar almashish imkonini beruvchi “Milliy” xabarchi ishlab chiqish';
+const TOTAL = 25;
 
 // Palette taken from the application itself (indigo accent of the chat UI).
 const C = {
@@ -33,7 +33,7 @@ const CW = W - 2 * M; // content width
 // ───────────────────────────────────────── helpers
 
 const ICONS = [
-  ...['landmark', 'database', 'globe', 'target', 'shield-check', 'mail', 'key-round', 'lock-keyhole', 'monitor-smartphone', 'server', 'monitor', 'container', 'users', 'crown', 'shield', 'user', 'search', 'circle-play', 'user-pen', 'phone', 'lock', 'bot', 'bell', 'smartphone', 'trending-up', 'armchair', 'lightbulb', 'wind', 'door-open', 'zap', 'check', 'languages', 'building-2', 'badge-check', 'link', 'fingerprint', 'timer', 'file-lock', 'mail-check']
+  ...['landmark', 'database', 'globe', 'target', 'shield-check', 'mail', 'key-round', 'lock-keyhole', 'monitor-smartphone', 'server', 'monitor', 'container', 'users', 'crown', 'shield', 'user', 'search', 'circle-play', 'user-pen', 'phone', 'lock', 'bot', 'bell', 'smartphone', 'trending-up', 'armchair', 'lightbulb', 'wind', 'door-open', 'flame', 'zap', 'check', 'languages', 'building-2', 'badge-check', 'link', 'fingerprint', 'timer', 'file-lock', 'mail-check', 'smile-plus', 'ban']
     .map((n) => [n, C.white]),
   ['check', C.ok],
   ['arrow-right', C.pri],
@@ -174,7 +174,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 
   text(s, 'Toshkent – 2026', { x: M, y: 6.75, w: CW, h: 0.4, fontSize: 14, bold: true, color: C.tint3, align: 'center' });
   s.addNotes(
-    'Assalomu alaykum, hurmatli komissiya a’zolari! Mening ismim Sohinazarov Sardorbek. Bitiruv malakaviy ishimning mavzusi — real vaqtda xabar almashish imkonini beruvchi “Milliy chat” dasturini ishlab chiqish. Ish doirasida Telegramga o‘xshash, foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan veb-messenjer loyihalandi va to‘liq ishlaydigan holatga keltirildi. Ekranning o‘ng tomonida dasturning haqiqiy interfeysi ko‘rsatilgan.',
+    'Assalomu alaykum, hurmatli komissiya a’zolari! Mening ismim Sohinazarov Sardorbek. Diplom loyihamning mavzusi — real vaqtda xabar almashish imkonini beruvchi “Milliy” xabarchini ishlab chiqish. Ish doirasida Telegramga o‘xshash, foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan veb-messenjer loyihalandi va to‘liq ishlaydigan holatga keltirildi. Ekranning o‘ng tomonida dasturning haqiqiy interfeysi ko‘rsatilgan.',
   );
 }
 
@@ -189,23 +189,23 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   rows.forEach(([ic, h, d], i) => iconRow(s, ic, h, d, M, 1.65 + i * 1.6, 7.0, { d: 0.7 }));
 
   card(s, 8.2, 1.55, W - M - 8.2, 4.95, C.tint);
-  text(s, 'Yechim — “Milliy chat”', { x: 8.55, y: 1.85, w: 4.0, h: 0.45, fontSize: 20, bold: true, color: C.ink });
+  text(s, 'Yechim — “Milliy” xabarchi', { x: 8.55, y: 1.85, w: 4.0, h: 0.45, fontSize: 20, bold: true, color: C.ink });
   const pros = ['Ma’lumotlar O‘zbekistondagi serverda saqlanadi', 'O‘zbek tilidagi tanish interfeys', 'Kod va arxitektura mahalliy nazoratda', 'Tashkilotlar uchun ichki aloqa vositasi'];
   pros.forEach((t, i) => {
     s.addImage({ path: icon('check', C.ok), x: 8.55, y: 2.72 + i * 0.9, w: 0.34, h: 0.34 });
     text(s, t, { x: 9.05, y: 2.65 + i * 0.9, w: 3.5, h: 0.7, fontSize: 15, color: C.text, valign: 'top' });
   });
   s.addNotes(
-    'Mavzuning dolzarbligi uchta omilga asoslanadi. Birinchidan, “Raqamli O‘zbekiston – 2030” strategiyasi mahalliy dasturiy mahsulotlarni rivojlantirishni ustuvor vazifa qilib belgilagan. Ikkinchidan, “Shaxsga doir ma’lumotlar to‘g‘risida”gi Qonunga ko‘ra fuqarolarimizning ma’lumotlari respublika hududida saqlanishi kerak. Uchinchidan, bugun keng qo‘llanayotgan messenjerlarning barchasi xorijiy kompaniyalarga tegishli va ma’lumotlarni chet elda saqlaydi. “Milliy chat” aynan shu muammoga yechim: ma’lumotlar o‘z serverida, interfeys o‘zbek tilida, kod esa mahalliy nazoratda.',
+    'Mavzuning dolzarbligi uchta omilga asoslanadi. Birinchidan, “Raqamli O‘zbekiston – 2030” strategiyasi mahalliy dasturiy mahsulotlarni rivojlantirishni ustuvor vazifa qilib belgilagan. Ikkinchidan, “Shaxsga doir ma’lumotlar to‘g‘risida”gi Qonunga ko‘ra fuqarolarimizning ma’lumotlari respublika hududida saqlanishi kerak. Uchinchidan, bugun keng qo‘llanayotgan messenjerlarning barchasi xorijiy kompaniyalarga tegishli va ma’lumotlarni chet elda saqlaydi. “Milliy” xabarchi aynan shu muammoga yechim: ma’lumotlar o‘z serverida, interfeys o‘zbek tilida, kod esa mahalliy nazoratda.',
   );
 }
 
 // ───────────────────────────────────────── 3. Maqsad va vazifalar
 {
-  const s = contentSlide(3, 'Ishning maqsadi va vazifalari');
+  const s = contentSlide(3, 'Loyihaning maqsadi va vazifalari');
   card(s, M, 1.45, CW, 1.1, C.ink);
   badge(s, 'target', M + 0.3, 1.7, 0.6, C.pri);
-  text(s, 'Maqsad: foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan, shaxsiy va guruh yozishmalarini real vaqtda ta’minlaydigan “Milliy chat” veb-messenjerini loyihalash va ishlab chiqish.', {
+  text(s, 'Maqsad: foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan, shaxsiy va guruh yozishmalarini real vaqtda ta’minlaydigan “Milliy” xabarchi veb-messenjerini loyihalash va ishlab chiqish.', {
     x: M + 1.15, y: 1.5, w: CW - 1.4, h: 1.0, fontSize: 16, color: C.white, valign: 'middle',
   });
 
@@ -226,14 +226,14 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     text(s, t, { x: x + 0.3, y: y + 0.75, w: cw - 0.6, h: 0.8, fontSize: 15, color: C.text, valign: 'top' });
   });
   s.addNotes(
-    'Ishning maqsadi — ma’lumotlarni o‘z serverida saqlaydigan va real vaqtda ishlaydigan veb-messenjer yaratish. Bunga erishish uchun oltita vazifa qo‘yildi: mavjud yechimlar va texnologiyalarni tahlil qilish, talablarni aniqlash, tizimni loyihalash, xavfsiz autentifikatsiyani yaratish, server va klient qismlarini ishlab chiqish va nihoyat, dasturni bulutga joylashtirib sinash hamda hayot faoliyati xavfsizligi talablarini ishlab chiqish.',
+    'Loyihaning maqsadi — ma’lumotlarni o‘z serverida saqlaydigan va real vaqtda ishlaydigan veb-messenjer yaratish. Bunga erishish uchun oltita vazifa qo‘yildi: mavjud yechimlar va texnologiyalarni tahlil qilish, talablarni aniqlash, tizimni loyihalash, xavfsiz autentifikatsiyani yaratish, server va klient qismlarini ishlab chiqish va nihoyat, dasturni bulutga joylashtirib sinash hamda hayot faoliyati xavfsizligi talablarini ishlab chiqish.',
   );
 }
 
 // ───────────────────────────────────────── 4. Messenjerlar tahlili
 {
   const s = contentSlide(4, 'Mavjud messenjerlar tahlili');
-  const head = ['Mezon', 'Telegram', 'WhatsApp', 'Signal', 'WeChat', 'Milliy chat'];
+  const head = ['Mezon', 'Telegram', 'WhatsApp', 'Signal', 'WeChat', '“Milliy” xabarchi'];
   const body = [
     ['Egasi (davlat)', 'BAA', 'Meta (AQSh)', 'AQSh', 'Tencent (Xitoy)', 'Mahalliy'],
     ['Ro‘yxatdan o‘tish', 'Telefon raqami', 'Telefon raqami', 'Telefon raqami', 'Telefon raqami', 'E-pochta kodi, Google'],
@@ -267,7 +267,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     x: M + 1.1, y: 5.72, w: CW - 1.35, h: 0.9, fontSize: 15, color: C.ink, valign: 'middle',
   });
   s.addNotes(
-    'Ishning birinchi bobida mashhur messenjerlar besh mezon bo‘yicha taqqoslandi. Jadvaldan ko‘rinib turibdiki, ularning barchasi xorijiy kompaniyalarga tegishli va ma’lumotlarni mamlakatdan tashqarida saqlaydi. “Milliy chat” esa istalgan serverga, jumladan O‘zbekistondagi data-markazga joylashtirilishi mumkin. Ro‘yxatdan o‘tish SMS o‘rniga elektron pochta va Google orqali amalga oshiriladi. Foydalanish qulayligi va funksionallik bo‘yicha eng yaxshi muvozanatga ega bo‘lgani uchun interfeys namunasi sifatida Telegram tanlandi.',
+    'Diplom loyihasining birinchi bobida mashhur messenjerlar besh mezon bo‘yicha taqqoslandi. Jadvaldan ko‘rinib turibdiki, ularning barchasi xorijiy kompaniyalarga tegishli va ma’lumotlarni mamlakatdan tashqarida saqlaydi. “Milliy” xabarchi esa istalgan serverga, jumladan O‘zbekistondagi data-markazga joylashtirilishi mumkin. Ro‘yxatdan o‘tish SMS o‘rniga elektron pochta va Google orqali amalga oshiriladi. Foydalanish qulayligi va funksionallik bo‘yicha eng yaxshi muvozanatga ega bo‘lgani uchun interfeys namunasi sifatida Telegram tanlandi.',
   );
 }
 
@@ -329,32 +329,31 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
       x, y: 2.6, w, h: 4.0, fontSize: 14, color: C.text, paraSpaceAfter: 7, valign: 'top',
     });
   };
-  col(M, 4.3, '15', 'funksional talab', [
+  col(M, 4.3, '19', 'funksional talab', [
     'Kirish: e-pochta kodi yoki Google',
     'Profil va faol sessiyalar',
     'Shaxsiy va guruh chatlari',
     'Javob, tahrirlash, o‘chirish, qidiruv',
     'Rasm, video va fayllar',
     '“Yozmoqda”, o‘qildi, onlayn holat',
-    '24 soatlik hikoyalar',
+    'Reaksiyalar, bloklash, 24 soatlik lavhalar',
+    'Forum: postlar, obunalar, top lenta',
+    'Desktop bildirishnomalar',
     'Yorug‘ / qorong‘i mavzu, mobil ko‘rinish',
     'Lotin↔kirill, tashkilot, maxfiy chat',
   ]);
-  col(5.2, 4.1, '7', 'nofunksional talab', [
+  col(5.2, 4.1, '4', 'nofunksional talab', [
     'Unumdorlik: xabar < 1 soniyada',
-    'Xavfsizlik: HTTPS, xeshlar, huquqlar',
-    'Ishonchlilik: avtomatik qayta ulanish',
-    'Kengaytiriluvchanlik: holatsiz API',
-    'Qo‘llab-quvvatlanuvchanlik',
+    'Xavfsizlik: HTTPS, xeshlar, chastota cheklovi',
+    'Ishonchlilik va kengaytiriluvchanlik',
     'Ko‘chiriluvchanlik: Docker',
-    'Qulaylik: o‘zbek tilidagi interfeys',
   ]);
   const ax = 9.5, aw = W - M - ax;
   card(s, ax, 1.5, aw, 5.1, C.ink);
   text(s, 'Tizim aktorlari', { x: ax + 0.3, y: 1.75, w: aw - 0.6, h: 0.45, fontSize: 18, bold: true, color: C.white });
   const actors = [
     ['user', 'Mehmon', 'kirish, ro‘yxatdan o‘tish'],
-    ['users', 'Foydalanuvchi', 'chatlar, xabarlar, hikoyalar'],
+    ['users', 'Foydalanuvchi', 'chatlar, forum, lavhalar, reaksiyalar'],
     ['crown', 'Guruh egasi', 'a’zolar va rollarni boshqarish'],
   ];
   actors.forEach(([ic, h, d], i) => {
@@ -364,7 +363,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     text(s, d, { x: ax + 1.1, y: y + 0.32, w: aw - 1.3, h: 0.6, fontSize: 13, color: C.tint3, valign: 'top' });
   });
   s.addNotes(
-    'Tahlil asosida tizimga 12 ta funksional va 7 guruh nofunksional talab qo‘yildi. Funksional talablar — bu foydalanuvchi ko‘radigan imkoniyatlar: kirish, chatlar, xabarlar, media fayllar, real vaqt belgilari va hikoyalar. Nofunksional talablar esa tizim sifatini belgilaydi: masalan, xabar bir soniyadan kam vaqtda yetib borishi, barcha kodlar va tokenlar xesh ko‘rinishida saqlanishi, tizim Docker’da istalgan serverga ko‘chirilishi. Tizimda uchta aktor bor: mehmon, ro‘yxatdan o‘tgan foydalanuvchi va guruh egasi. Ularning to‘liq use-case diagrammasi diplom ishining ikkinchi bobida keltirilgan.',
+    'Tahlil asosida tizimga 19 ta funksional va 4 guruh nofunksional talab qo‘yildi. Funksional talablar — bu foydalanuvchi ko‘radigan imkoniyatlar: kirish, chatlar, xabarlar, media fayllar, real vaqt belgilari va hikoyalar. Nofunksional talablar esa tizim sifatini belgilaydi: masalan, xabar bir soniyadan kam vaqtda yetib borishi, barcha kodlar va tokenlar xesh ko‘rinishida saqlanishi, tizim Docker’da istalgan serverga ko‘chirilishi. Tizimda uchta aktor bor: mehmon, ro‘yxatdan o‘tgan foydalanuvchi va guruh egasi. Ularning to‘liq use-case diagrammasi diplom ishining ikkinchi bobida keltirilgan.',
   );
 }
 
@@ -431,11 +430,11 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 // ───────────────────────────────────────── 9. Ma'lumotlar bazasi
 {
   const s = contentSlide(9, 'Ma’lumotlar bazasini loyihalash');
-  framed(s, '2-4-er-users-chats.png', M, 1.5, 8.5, 5.1, { valign: 'top', align: 'left' });
+  framed(s, '2-15-er-forum.png', M, 1.5, 8.5, 5.1, { valign: 'top', align: 'left' });
   const sx = 9.5, sw = W - M - sx;
   const stats = [
-    ['10', 'sxema', 'identity, messaging, organizations …'],
-    ['36', 'jadval', 'kelajakdagi kanallar va botlar uchun ham'],
+    ['11', 'sxema', 'identity, messaging, forum, organizations …'],
+    ['43', 'jadval', 'kelajakdagi kanallar va botlar uchun ham'],
     ['Keyset', 'kursorli sahifalash', 'beforeId + limit (1–100), totalCount siz'],
   ];
   stats.forEach(([big, label, desc], i) => {
@@ -446,7 +445,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     text(s, desc, { x: sx + 0.25, y: y + 1.08, w: sw - 0.5, h: 0.35, fontSize: 11, color: C.muted });
   });
   s.addNotes(
-    'Ma’lumotlar bazasi PostgreSQL’da 10 ta sxemaga guruhlangan 36 ta jadvaldan iborat. Ekranda foydalanuvchilar, sessiyalar, chatlar va guruhlar qismining ER-diagrammasi ko‘rsatilgan. Barcha vaqt qiymatlari UTC’da saqlanadi. Xabarlar va chatlar ro‘yxati uchun sahifa raqamli emas, kursorli sahifalash qo‘llanilgan: klient oxirgi ko‘rgan xabar identifikatorini yuboradi va server undan oldingi xabarlarni indeks bo‘yicha tez qaytaradi. Bu usul chatga yangi xabarlar qo‘shilayotganda ham xabarlar takrorlanmasligini yoki tushib qolmasligini ta’minlaydi.',
+    'Ma’lumotlar bazasi PostgreSQL’da 11 ta sxemaga guruhlangan 43 ta jadvaldan iborat. Ekranda forum qismining ER-diagrammasi ko‘rsatilgan: javob, repost va iqtibos bitta posts jadvalida saqlanadi, hisoblagichlar esa postning o‘zida turadi. Barcha vaqt qiymatlari UTC’da saqlanadi. Xabarlar va chatlar ro‘yxati uchun sahifa raqamli emas, kursorli sahifalash qo‘llanilgan: klient oxirgi ko‘rgan xabar identifikatorini yuboradi va server undan oldingi xabarlarni indeks bo‘yicha tez qaytaradi. Bu usul chatga yangi xabarlar qo‘shilayotganda ham xabarlar takrorlanmasligini yoki tushib qolmasligini ta’minlaydi.',
   );
 }
 
@@ -498,7 +497,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 
 // ───────────────────────────────────────── 12. O'ziga xos imkoniyatlar
 {
-  const s = contentSlide(12, '“Milliy chat”ning o‘ziga xos imkoniyatlari');
+  const s = contentSlide(12, '“Milliy” xabarchining o‘ziga xos imkoniyatlari');
   const cards = [
     ['languages', 'Lotin ↔ Kirill', ['Har kim xabarni o‘zi tanlagan yozuvda ko‘radi', 'Xabar bazada asl holida qoladi', 'Qidiruv yozuvga bog‘liq emas']],
     ['building-2', 'Tashkilot rejimi', ['Tashkilot = e-pochta domeni', '“tuit.uz ✓” belgisi, yopiq domen guruhi', 'Gmail va boshqalar faqat taklif havolasi orqali']],
@@ -520,7 +519,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     x: M + 0.85, y: 5.95, w: CW - 1.1, h: 0.75, fontSize: 15, color: C.ink, valign: 'middle',
   });
   s.addNotes(
-    'Endi “Milliy chat”ni oddiy messenjerdan ajratib turadigan uchta imkoniyat haqida. Birinchisi — lotin va kirill yozuvlari o‘rtasida avtomatik o‘girish: har bir foydalanuvchi xabarlarni o‘zi tanlagan yozuvda ko‘radi. Ikkinchisi — tashkilot rejimi: e-pochta domeni tashkilot sifatida qabul qilinadi va uning xodimlari yopiq guruhga avtomatik qo‘shiladi. Uchinchisi — uchdan-uchgacha shifrlangan maxfiy chatlar, ularning mazmunini serverning o‘zi ham o‘qiy olmaydi. Birinchi ikkisi tahlil qilingan xorijiy messenjerlarning birortasida yo‘q.',
+    'Endi “Milliy” xabarchini oddiy messenjerdan ajratib turadigan uchta imkoniyat haqida. Birinchisi — lotin va kirill yozuvlari o‘rtasida avtomatik o‘girish: har bir foydalanuvchi xabarlarni o‘zi tanlagan yozuvda ko‘radi. Ikkinchisi — tashkilot rejimi: e-pochta domeni tashkilot sifatida qabul qilinadi va uning xodimlari yopiq guruhga avtomatik qo‘shiladi. Uchinchisi — uchdan-uchgacha shifrlangan maxfiy chatlar, ularning mazmunini serverning o‘zi ham o‘qiy olmaydi. Birinchi ikkisi tahlil qilingan xorijiy messenjerlarning birortasida yo‘q.',
   );
 }
 
@@ -634,7 +633,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   const b = framed(s, '3-07-image-viewer.jpg', rx, a.y + a.h + 0.25, rw, 2.4);
   pill(s, 'Rasmni ko‘rish', b, 1.7);
   s.addNotes(
-    'Bu shaxsiy chat oynasi. Chap tomonda chatlar ro‘yxati: oxirgi xabar, vaqt va o‘qilmagan xabarlar soni ko‘rinadi. Tepada hikoyalar paneli joylashgan. Suhbatdosh yozayotganda sarlavhada “yozmoqda” yozuvi chiqadi, o‘qilgan xabarlar ikkita belgi bilan ko‘rsatiladi. Xabarga javob berish, o‘z xabarini tahrirlash va o‘chirish, rasm, video va fayl yuborish mumkin. O‘ng tomonda javob berish va rasmni to‘liq ekranda ko‘rish oynalari ko‘rsatilgan.',
+    'Bu shaxsiy chat oynasi. Chap tomonda chatlar ro‘yxati: oxirgi xabar, vaqt va o‘qilmagan xabarlar soni ko‘rinadi. Tepada lavhalar paneli joylashgan. Suhbatdosh yozayotganda sarlavhada “yozmoqda” yozuvi chiqadi, o‘qilgan xabarlar ikkita belgi bilan ko‘rsatiladi. Xabarga javob berish, o‘z xabarini tahrirlash va o‘chirish, rasm, video va fayl yuborish mumkin. O‘ng tomonda javob berish va rasmni to‘liq ekranda ko‘rish oynalari ko‘rsatilgan.',
   );
 }
 
@@ -657,15 +656,15 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   );
 }
 
-// ───────────────────────────────────────── 15. Qidiruv, hikoyalar, profil
+// ───────────────────────────────────────── 15. Reaksiyalar, lavhalar, bloklash
 {
-  const s = contentSlide(19, 'Qidiruv, hikoyalar va profil');
-  // Same height for all three; the story and profile screens are cropped to their content (the rest is backdrop).
+  const s = contentSlide(19, 'Reaksiyalar, lavhalar va bloklash');
+  // Same height for all three; desktop screenshots are cropped to the part that shows the feature.
   const ih = 3.9, gap = 0.4;
   const items = [
-    ['search', '3-09-message-search.jpg', undefined, 'Xabarlarni qidirish', 'Matn bo‘yicha qidirish va topilgan xabar kontekstiga o‘tish'],
-    ['circle-play', '3-11-story-viewer.jpg', [0.335, 0.03, 0.33, 0.95], 'Hikoyalar', '24 soat ko‘rinadi, kim ko‘rgani ma’lum'],
-    ['user-pen', '3-12-profile-editor.jpg', [0, 0.012, 0.278, 0.61], 'Profil', 'Ism, username, bio, rasm va faol qurilmalar'],
+    ['smile-plus', '3-30-reactions.jpg', [0.28, 0.08, 0.34, 0.54], 'Reaksiyalar', 'Oltita emoji, real vaqtda barcha a’zolarda'],
+    ['circle-play', '3-11-story-viewer.jpg', [0.335, 0.03, 0.33, 0.95], 'Lavhalar', '24 soat, faqat obunalarniki'],
+    ['ban', '3-32-notification-setting.jpg', [0.335, 0.43, 0.33, 0.45], 'Bloklash', 'Ikki tomon ham yoza olmaydi; profilda ro‘yxati va bildirishnomalar'],
   ];
   let x = M;
   items.forEach(([ic, f, crop, h, d]) => {
@@ -677,13 +676,37 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     x += w + gap;
   });
   s.addNotes(
-    'Dasturda Telegram foydalanuvchilariga tanish bo‘lgan boshqa imkoniyatlar ham bor. Chat ichida xabarlarni matn bo‘yicha qidirish mumkin, topilgan natija bosilganda chat o‘sha xabar atrofiga o‘tadi. Hikoyalar 24 soat davomida ko‘rinadi va muallif ularni kim ko‘rganini biladi. Profil oynasida ism, username, bio va rasmni o‘zgartirish, shuningdek faol qurilmalar ro‘yxatini ko‘rish mumkin.',
+    'Keyingi bosqichda messenjerga uchta imkoniyat qo‘shildi. Birinchisi — xabarga reaksiya: oltita emojidan birini tanlash mumkin, natija chatning barcha a’zolarida real vaqtda ko‘rinadi. Ikkinchisi — lavhalar, ya’ni stories: ular 24 soat ko‘rinadi va endi faqat foydalanuvchi obuna bo‘lgan odamlarniki chiqadi. Uchinchisi — bloklash: bloklash o‘rnatilgandan keyin ikki tomon ham bir-biriga yoza olmaydi, onlayn holat yashiriladi, forum va lavhalarda ham bir-birini ko‘rmaydi.',
+  );
+}
+
+// ───────────────────────────────────────── 15b. Forum
+{
+  const s = contentSlide(20, 'Forum: ochiq fikr almashish');
+  const ih = 4.95;
+  const a = framed(s, '3-34-forum-top.jpg', M, 1.5, 10, ih, { crop: [0.26, 0, 0.42, 1], align: 'left' });
+  const b = framed(s, '3-35-forum-thread.jpg', a.x + a.w + 0.3, 1.5, 10, ih, { crop: [0.26, 0, 0.42, 1], align: 'left' });
+  pill(s, 'Top lenta', a, 1.25);
+  pill(s, 'Muhokama', b, 1.3);
+  const tx = b.x + b.w + 0.45, tw = W - M - tx;
+  text(s, [
+    { text: '280 belgigacha post, 4 ta rasm yoki video', options: { bullet: true, breakLine: true } },
+    { text: 'Javob, repost, iqtibos, layk, obuna', options: { bullet: true, breakLine: true } },
+    { text: 'ForumHub: hisoblagichlar va bildirishnomalar real vaqtda', options: { bullet: true, breakLine: true } },
+    { text: 'Spamga qarshi: soatiga 10 ta muhokama, daqiqasiga 5 ta javob', options: { bullet: true } },
+  ], { x: tx, y: 1.5, w: tw, h: 3.0, fontSize: 14, color: C.text, paraSpaceAfter: 8, valign: 'top' });
+  card(s, tx, 4.65, tw, 1.8, C.ink);
+  text(s, 'Top lenta reytingi', { x: tx + 0.25, y: 4.75, w: tw - 0.5, h: 0.4, fontSize: 14, bold: true, color: C.white });
+  text(s, 'S = (L + 2R + 3P + 0,01V) / (t + 2)^1,5', { x: tx + 0.25, y: 5.2, w: tw - 0.5, h: 0.5, fontSize: 15, bold: true, color: C.tint2 });
+  text(s, 'L — layk, R — javob, P — repost, V — ko‘rish, t — yoshi (soat)', { x: tx + 0.25, y: 5.72, w: tw - 0.5, h: 0.6, fontSize: 11, color: C.tint3, valign: 'top' });
+  s.addNotes(
+    'Foydalanuvchilar ochiq fikr almashishi uchun forum yaratildi. Unda 280 belgigacha post yozish, rasm yoki video biriktirish, javob berish, repost qilish, iqtibos keltirish va layk bosish mumkin. Kimga obuna bo‘linsa, uning postlari “Obunalar” lentasida chiqadi. “Top” lentada postlar reyting bo‘yicha tartiblanadi: javob va repost laykdan og‘irroq hisoblanadi, vaqt o‘tishi bilan esa reyting pasayadi, shuning uchun lenta doim yangilanib turadi. Hisoblagichlar va bildirishnomalar ForumHub orqali real vaqtda keladi, spamga qarshi esa chastota cheklovlari qo‘yilgan.',
   );
 }
 
 // ───────────────────────────────────────── 16. Moslashuvchan dizayn
 {
-  const s = contentSlide(20, 'Qorong‘i mavzu va mobil ko‘rinish');
+  const s = contentSlide(21, 'Qorong‘i mavzu va mobil ko‘rinish');
   const dark = framed(s, '3-16-dark-theme.jpg', M, 1.5, 7.3, 4.6, { align: 'left' });
   pill(s, 'Qorong‘i mavzu', dark, 1.9);
   const pw = (W - M - (dark.x + dark.w + 0.4) - 0.3) / 2;
@@ -702,10 +725,10 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 
 // ───────────────────────────────────────── 17. Joylashtirish va testlash
 {
-  const s = contentSlide(21, 'Joylashtirish va testlash');
+  const s = contentSlide(22, 'Joylashtirish va testlash');
   const stats = [
-    ['73', 'REST API endpointi'],
-    ['536', 'unit test: 307 server + 229 klient'],
+    ['104', 'REST API endpointi'],
+    ['720', 'unit test: 425 server + 295 klient'],
     ['43', 'API integratsion tekshiruvi'],
     ['Docker', 'Render bulutida ishlaydi'],
   ];
@@ -720,27 +743,27 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   terminal(s, [
     ['PS> dotnet test', '9CDCFE'],
     ['Passed!  Failed: 0', '4ADE80'],
-    ['Passed: 307, Total: 307', '4ADE80'],
+    ['Passed: 425, Total: 425', '4ADE80'],
     ['', 'D4D4D4'],
     ['PS> ng test --watch=false', '9CDCFE'],
-    ['Test Files  12 passed', '4ADE80'],
-    ['Tests      229 passed', '4ADE80'],
+    ['Test Files  20 passed', '4ADE80'],
+    ['Tests      295 passed', '4ADE80'],
   ], box.x, box.y, box.w, box.h, 15);
   text(s, [
     { text: 'Ko‘p bosqichli Docker obrazi: SDK’da yig‘ish, yengil ASP.NET runtime’da ishga tushirish', options: { bullet: true, breakLine: true } },
     { text: 'GitHub’ga push qilinganda Render obrazni avtomatik qayta yig‘adi', options: { bullet: true, breakLine: true } },
     { text: 'Maxfiy kalitlar kodda emas, muhit o‘zgaruvchilarida', options: { bullet: true, breakLine: true } },
-    { text: 'xUnit va Vitest: transliteratsiya, tashkilotlar, maxfiy chat protokoli, guruhlar, xavfsizlik', options: { bullet: true, breakLine: true } },
+    { text: 'xUnit va Vitest: transliteratsiya, forum, maxfiy chat protokoli, tashkilotlar, reaksiya va bloklash', options: { bullet: true, breakLine: true } },
     { text: 'Swagger UI orqali API hujjatlari va qo‘lda sinov', options: { bullet: true } },
   ], { x: M, y: 3.3, w: box.x - M - 0.4, h: 3.4, fontSize: 15, color: C.text, paraSpaceAfter: 9, valign: 'top' });
   s.addNotes(
-    'Server 73 ta REST endpoint va SignalR habidan iborat. U ko‘p bosqichli Docker obraziga yig‘iladi va Render bulut platformasida ishlaydi. GitHub’ga yangi kod yuborilganda obraz avtomatik qayta yig‘iladi, maxfiy kalitlar esa muhit o‘zgaruvchilarida saqlanadi. Dasturning to‘g‘riligi 536 ta unit test bilan tekshirildi: serverda 307 ta, klientda 229 ta, ularning barchasi muvaffaqiyatli o‘tdi. Eng ko‘p test transliteratsiya va maxfiy chat protokoliga to‘g‘ri keladi. Bundan tashqari, API darajasida 43 ta integratsion tekshiruv va qo‘lda sinov ssenariylari o‘tkazildi.',
+    'Server 104 ta REST endpoint va ikkita SignalR habidan iborat. U ko‘p bosqichli Docker obraziga yig‘iladi va Render bulut platformasida ishlaydi. GitHub’ga yangi kod yuborilganda obraz avtomatik qayta yig‘iladi, maxfiy kalitlar esa muhit o‘zgaruvchilarida saqlanadi. Dasturning to‘g‘riligi 720 ta unit test bilan tekshirildi: serverda 425 ta, klientda 295 ta, ularning barchasi muvaffaqiyatli o‘tdi. Eng ko‘p test transliteratsiya, forum va maxfiy chat protokoliga to‘g‘ri keladi. Bundan tashqari, API darajasida 43 ta integratsion tekshiruv va qo‘lda sinov ssenariylari o‘tkazildi.',
   );
 }
 
 // ───────────────────────────────────────── 18. HFX
 {
-  const s = contentSlide(22, 'Hayot faoliyati xavfsizligi');
+  const s = contentSlide(23, 'Hayot faoliyati xavfsizligi');
   // Both drawings are dense, so they get captions underneath instead of pills over them.
   const a = framed(s, '4-1-workstation.png', M, 1.45, 5.4, 3.25, { align: 'left' });
   const b = framed(s, '4-3-evacuation-plan.png', a.x + a.w + 0.4, 1.45, W - M - (a.x + a.w + 0.4), 3.25, { align: 'right' });
@@ -748,10 +771,10 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     text(s, label, { x: box.x, y: box.y + box.h + 0.08, w: box.w, h: 0.3, fontSize: 12, italic: true, color: C.muted, align: 'center' });
   }
   const stats = [
-    ['armchair', '5 ish joyi', 'xona 6 × 6 × 3 m'],
-    ['lightbulb', '421 lk', '12 ta LED panel (me’yor 400 lk)'],
-    ['wind', '150 m³/soat', 'toza havo, 5 xodim uchun'],
-    ['door-open', '≈ 50 soniya', 'hisobiy evakuatsiya vaqti'],
+    ['armchair', '6 m² / 20 m³', 'bitta ish joyiga eng kam maydon va hajm'],
+    ['lightbulb', '300–500 lk', 'stol yuzasining yoritilganligi'],
+    ['door-open', '≥ 2 chiqish', 'har bir qavatda evakuatsiya uchun'],
+    ['flame', 'OU-3 / OU-5', 'kompyuter xonalari uchun o‘t o‘chirgich'],
   ];
   const cw = (CW - 3 * 0.3) / 4;
   stats.forEach(([ic, big, label], i) => {
@@ -762,17 +785,17 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     text(s, label, { x: x + 0.85, y: 5.92, w: cw - 0.95, h: 0.6, fontSize: 12, color: C.muted, valign: 'top' });
   });
   s.addNotes(
-    'Hayot faoliyati xavfsizligi bo‘limida ikki masala ko‘rib chiqildi. Birinchisi — dasturchining ergonomik ish joyi. Stol, stul va monitorning to‘g‘ri o‘lchamlari keltirildi va 6 ga 6 metrli xona uchun hisob-kitob qilindi: xonaga 5 ta ish joyi joylashadi, 12 ta LED panel 421 lyuks yoritilganlik beradi, bu me’yordagi 400 lyuksdan yuqori. Havo almashinuvi soatiga 150 kub metr. Ikkinchi masala — evakuatsiya. IT-ofis qavati uchun evakuatsiya reja-sxemasi ishlab chiqildi, hisobiy evakuatsiya vaqti taxminan 50 soniya chiqdi. Yong‘in sodir bo‘lganda xodimlarning harakatlar tartibi ham belgilandi.',
+    'Hayot faoliyati xavfsizligi bo‘limida ikki masala ko‘rib chiqildi. Birinchisi — dasturchining ergonomik ish joyi. Stol, stul va monitorning to‘g‘ri o‘lchamlari, mikroiqlim, yoritilganlik va shovqin me’yorlari keltirildi: bitta ish joyiga kamida 6 kvadrat metr maydon va 20 kub metr hajm, stol yuzasida 300–500 lyuks yoritilganlik kerak. Ikkinchi masala — evakuatsiya. IT-ofis qavati uchun evakuatsiya reja-sxemasi ishlab chiqildi, yong‘in sinflari va o‘t o‘chirish vositalari tanlandi. Yong‘in sodir bo‘lganda xodimlarning harakatlar tartibi ham belgilandi.',
   );
 }
 
 // ───────────────────────────────────────── 19. Xulosa
 {
-  const s = contentSlide(23, 'Xulosa va istiqbollar');
+  const s = contentSlide(24, 'Xulosa va istiqbollar');
   const results = [
     'Messenjerlar va real vaqt texnologiyalari tahlil qilindi, SignalR tanlandi',
-    'Clean Architecture, 36 jadval, 73 endpoint, 536 ta test',
-    'Chatlar, guruhlar, media, hikoyalar — real vaqtda',
+    'Clean Architecture, 43 jadval, 104 endpoint, 720 ta test',
+    'Chatlar, guruhlar, reaksiyalar, lavhalar, forum — real vaqtda',
     'Lotin↔kirill ko‘rinish va yozuvdan qat’i nazar qidiruv',
     'Tashkilot rejimi: domen orqali tasdiq, yopiq guruhlar',
     'Maxfiy chatlar: E2E, oldinga maxfiylik, kalit izi',
@@ -791,7 +814,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     ['phone', 'WebRTC ovozli va video qo‘ng‘iroqlar'],
     ['badge-check', 'OneID orqali shaxsni tasdiqlash'],
     ['bot', 'Kanallar va botlar platformasi'],
-    ['bell', 'Push-bildirishnomalar'],
+    ['bell', 'Ilova yopiq bo‘lganda ham push-bildirishnomalar'],
     ['smartphone', 'Android va iOS ilovalari'],
     ['trending-up', 'Redis bilan gorizontal kengaytirish'],
   ];
@@ -801,7 +824,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     text(s, t, { x: px + 1.0, y, w: pw - 1.2, h: 0.48, fontSize: 15, color: C.tint2, valign: 'middle' });
   });
   s.addNotes(
-    'Xulosa qilib aytganda, ishda qo‘yilgan barcha vazifalar bajarildi. Mavjud yechimlar tahlil qilindi, tizim loyihalandi, parolsiz autentifikatsiyaga ega, real vaqtda ishlaydigan messenjer yaratildi va bulutga joylashtirildi. “Milliy chat”ni tashkilotlar, ta’lim muassasalari va davlat idoralari o‘z serverlarida ichki aloqa vositasi sifatida qo‘llashi mumkin. Messenjerning o‘ziga xos uchta imkoniyati — lotin va kirill yozuvlari o‘rtasida o‘girish, tashkilot rejimi va maxfiy chatlar — uni xorijiy analoglardan ajratib turadi. Kelajakda OneID orqali shaxsni davlat darajasida tasdiqlash, ovozli va video qo‘ng‘iroqlar, kanallar va botlar hamda mobil ilovalarni qo‘shish rejalashtirilgan. Ma’lumotlar bazasi sxemasida bu imkoniyatlar uchun joy oldindan ajratilgan.',
+    'Xulosa qilib aytganda, diplom loyihasida qo‘yilgan barcha vazifalar bajarildi. Mavjud yechimlar tahlil qilindi, tizim loyihalandi, parolsiz autentifikatsiyaga ega, real vaqtda ishlaydigan messenjer yaratildi va bulutga joylashtirildi. “Milliy” xabarchini tashkilotlar, ta’lim muassasalari va davlat idoralari o‘z serverlarida ichki aloqa vositasi sifatida qo‘llashi mumkin. Messenjerning o‘ziga xos uchta imkoniyati — lotin va kirill yozuvlari o‘rtasida o‘girish, tashkilot rejimi va maxfiy chatlar — uni xorijiy analoglardan ajratib turadi. Kelajakda OneID orqali shaxsni davlat darajasida tasdiqlash, ovozli va video qo‘ng‘iroqlar, kanallar va botlar hamda mobil ilovalarni qo‘shish rejalashtirilgan. Ma’lumotlar bazasi sxemasida bu imkoniyatlar uchun joy oldindan ajratilgan.',
   );
 }
 

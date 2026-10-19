@@ -1,4 +1,4 @@
-// Formatting helpers for the diploma document (TATU BMI format):
+// Formatting helpers for the diploma document (TATU diplom loyihasi talablari):
 // A4, Times New Roman 14pt, 1.5 line spacing, 1.25 cm first-line indent, justified text.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -27,6 +27,21 @@ export const FONT = 'Times New Roman';
 export const SIZE = 28; // half-points → 14pt
 export const LINE = 360; // 1.5 line spacing
 export const INDENT = 709; // 1.25 cm
+/**
+ * Per-figure layout overrides written by tools/fit-pages.mjs, keyed by figure number ("2.7"):
+ *   scale — shrink factor for the picture, after — how many following body paragraphs move above it.
+ */
+const LAYOUT_FILE = path.join(ROOT, 'data', 'layout.json');
+export const layout = fs.existsSync(LAYOUT_FILE) ? JSON.parse(fs.readFileSync(LAYOUT_FILE, 'utf8')) : {};
+const scaleOf = (number) => layout[number]?.scale ?? 1;
+
+/** Marks a figure's first and last element so build.mjs can move paragraphs around it. */
+const tagFigure = (number, items) => {
+  items[0].__figure = number;
+  items[items.length - 1].__figureEnd = number;
+  return items;
+};
+
 /** Usable text width: A4 (11906) − left 1701 − right 851 twips. */
 export const TEXT_WIDTH = 11906 - 1701 - 851;
 
@@ -53,13 +68,16 @@ export function runs(text, base = {}) {
 
 /** Body paragraph. */
 export const p = (text, opts = {}) =>
-  new Paragraph({
-    children: runs(text),
-    alignment: opts.align ?? AlignmentType.JUSTIFIED,
-    indent: { firstLine: opts.noIndent ? 0 : INDENT },
-    spacing: { line: LINE, after: 0 },
-    keepNext: opts.keepNext,
-  });
+  Object.assign(
+    new Paragraph({
+      children: runs(text),
+      alignment: opts.align ?? AlignmentType.JUSTIFIED,
+      indent: { firstLine: opts.noIndent ? 0 : INDENT },
+      spacing: { line: LINE, after: 0 },
+      keepNext: opts.keepNext,
+    }),
+    { __body: true },
+  );
 
 /** Centered formula with its number "(4.1)" at the right margin. */
 export const formula = (text, number) =>
@@ -85,10 +103,10 @@ export const h1 = (text) =>
     children: [new TextRun({ text: text.toUpperCase(), bold: true })],
   });
 
-/** Section heading (1.1 …). */
-export const h2 = (text) =>
+/** Section heading (1.1 …). `{ toc: false }` keeps the look but leaves it out of the table of contents. */
+export const h2 = (text, opts = {}) =>
   new Paragraph({
-    heading: HeadingLevel.HEADING_2,
+    heading: opts.toc === false ? undefined : HeadingLevel.HEADING_2,
     alignment: AlignmentType.CENTER,
     keepNext: true,
     spacing: { line: LINE, before: 240, after: 120 },
@@ -186,21 +204,23 @@ function imageSize(buf) {
 
 /**
  * Figure with caption below: "2.1-rasm. Title".
- * `widthCm` defaults to the full text width; height follows the aspect ratio.
+ * `widthCm` defaults to the full text width; height follows the aspect ratio and is capped so the
+ * figure, its caption and a few lines of text fit on one portrait page (no half-empty pages).
  */
-export function figure(file, number, title, widthCm = 15.5, maxHeightCm = 20) {
+export function figure(file, number, title, widthCm = 15.5, maxHeightCm = 16) {
   const full = path.join(ROOT, 'rasmlar', file);
   if (!fs.existsSync(full)) return placeholder(`${number}-rasm. ${title}`, `Rasm fayli topilmadi: ${file}`);
   const data = fs.readFileSync(full);
   const { w, h } = imageSize(data);
   const pxPerCm = 37.8;
-  let width = widthCm * pxPerCm;
+  const scale = scaleOf(number);
+  let width = widthCm * scale * pxPerCm;
   let height = (width * h) / w;
-  if (height > maxHeightCm * pxPerCm) {
-    height = maxHeightCm * pxPerCm;
+  if (height > maxHeightCm * scale * pxPerCm) {
+    height = maxHeightCm * scale * pxPerCm;
     width = (height * w) / h;
   }
-  return [
+  return tagFigure(number, [
     new Paragraph({
       alignment: AlignmentType.CENTER,
       keepNext: true,
@@ -214,17 +234,8 @@ export function figure(file, number, title, widthCm = 15.5, maxHeightCm = 20) {
       ],
     }),
     caption(`${number}-rasm. ${title}`),
-  ];
+  ]);
 }
-
-/**
- * Wide figure placed on its own landscape page (build.mjs turns the marker into a section).
- * Landscape text area is about 25 × 17 cm.
- */
-export const landscapeFigure = (file, number, title, widthCm = 24) => ({
-  __landscape: true,
-  children: figure(file, number, title, widthCm, 14.5),
-});
 
 const noBorder = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
 
@@ -235,7 +246,7 @@ const noBorder = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
 export function figurePair(items, number, title) {
   const half = Math.floor(TEXT_WIDTH / 2);
   const pxPerCm = 37.8;
-  const widthCm = 8;
+  const widthCm = 8 * scaleOf(number);
   const cells = items.map(([file, label], i) => {
     const data = fs.readFileSync(path.join(ROOT, 'rasmlar', file));
     const { w, h } = imageSize(data);
@@ -266,7 +277,7 @@ export function figurePair(items, number, title) {
       ],
     });
   });
-  return [
+  return tagFigure(number, [
     new Table({
       width: { size: TEXT_WIDTH, type: WidthType.DXA },
       columnWidths: [half, TEXT_WIDTH - half],
@@ -274,7 +285,7 @@ export function figurePair(items, number, title) {
       rows: [new TableRow({ cantSplit: true, children: cells })],
     }),
     caption(`${number}-rasm. ${title}`),
-  ];
+  ]);
 }
 
 /** Visible placeholder box for content that still has to be supplied. */

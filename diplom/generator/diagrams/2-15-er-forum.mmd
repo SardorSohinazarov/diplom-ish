@@ -1,0 +1,63 @@
+erDiagram
+  USERS {
+    int Id PK
+    string Username
+  }
+  POSTS {
+    int Id PK
+    int AuthorId FK
+    text Text "280 belgigacha"
+    int ParentPostId FK "javob"
+    int RootPostId FK "muhokama ildizi"
+    int RepostOfId FK "repost"
+    int QuotedPostId FK "iqtibos"
+    int LikeCount "hisoblagichlar"
+    int ViewCount
+    float HotScore "top lenta"
+    timestamptz CreatedAt
+  }
+  POST_MEDIA {
+    int Id PK
+    int PostId FK
+    int FileId FK
+    int Type "1-rasm, 2-video"
+    int Order
+  }
+  POST_LIKES {
+    int Id PK
+    int PostId FK
+    int UserId FK
+  }
+  POST_VIEWS {
+    int Id PK
+    int PostId FK
+    int UserId FK
+    timestamptz ViewedAt
+  }
+  POST_REPORTS {
+    int Id PK
+    int PostId FK
+    int ReporterId FK
+    string Reason
+  }
+  FOLLOWS {
+    int Id PK
+    int FollowerId FK
+    int FollowingId FK
+  }
+  FORUM_NOTIFICATIONS {
+    int Id PK
+    int UserId FK
+    int ActorId FK
+    int Type "5 xil hodisa"
+    int PostId FK
+    timestamptz ReadAt
+  }
+  USERS ||--o{ POSTS : "yozgan"
+  POSTS |o--o{ POSTS : "javob / repost / iqtibos"
+  POSTS ||--o{ POST_MEDIA : "media"
+  POSTS ||--o{ POST_LIKES : "layklar"
+  POSTS ||--o{ POST_VIEWS : "ko'rishlar"
+  POSTS ||--o{ POST_REPORTS : "shikoyatlar"
+  USERS ||--o{ FOLLOWS : "obunalari"
+  USERS ||--o{ FORUM_NOTIFICATIONS : "bildirishnomalari"

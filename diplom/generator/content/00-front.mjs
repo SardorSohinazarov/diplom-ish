@@ -11,7 +11,7 @@ import {
 } from 'docx';
 import { FONT, TEXT_WIDTH, blank, center, line, pageBreak, runs } from '../lib.mjs';
 
-export const TOPIC = 'Real vaqtda xabar almashish imkonini beruvchi “Milliy chat” dasturini ishlab chiqish';
+export const TOPIC = 'Real vaqtda xabar almashish imkonini beruvchi “Milliy” xabarchi ishlab chiqish';
 const BLANK = '__________________';
 
 const none = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
@@ -93,7 +93,7 @@ export const titlePage = () => [
   line('___________ Raximov N.O.', { align: AlignmentType.RIGHT }),
   line('«____» ______________ 2026-yil', { align: AlignmentType.RIGHT }),
   ...blank(3),
-  center('BITIRUV MALAKAVIY ISHI', { bold: true, size: 36 }),
+  center('DIPLOM LOYIHASI', { bold: true, size: 36 }),
   ...blank(1),
   center(`Mavzu: ${TOPIC}`, { bold: true, size: 32 }),
   ...blank(4),
@@ -116,7 +116,6 @@ export const titlePage = () => [
 export const assignmentPages = () => [
   pageBreak(),
   ...header(),
-  ...blank(1),
   line('Fakultet: Dasturiy injiniring'),
   line('Kafedra: Axborot texnologiyalarining dasturiy ta’minoti'),
   line('Ta’lim yo‘nalishi: 60610600 – Dasturiy injiniring'),
@@ -127,24 +126,24 @@ export const assignmentPages = () => [
   line('«____» ______________ 2026-yil', { align: AlignmentType.RIGHT }),
   ...blank(1),
   center('315-21 DIo‘ guruh talabasi Sohinazarov Sardorbek O‘rinboy o‘g‘lining', { bold: true }),
-  center('bitiruv malakaviy ishiga', {}),
+  center('diplom loyihasiga', {}),
   center('T O P S H I R I Q', { bold: true, size: 32, before: 120, after: 120 }),
-  line(`1. BMI mavzusi: ${TOPIC}.`, { line: 320 }),
-  line('2. BMI tasdiqlangan buyruq: «____» __________ 2026-yil № __________.', { line: 320 }),
-  line('3. BMIni himoyaga topshirish muddati: __________________.', { line: 320 }),
+  line(`1. Diplom loyihasi mavzusi: ${TOPIC}.`, { line: 300 }),
+  line('2. Mavzuni tasdiqlagan buyruq: «____» __________ 2026-yil № __________.', { line: 300 }),
+  line('3. Diplom loyihasini himoyaga topshirish muddati: __________________.', { line: 300 }),
   line(
-    '4. BMIning boshlang‘ich ma’lumotlari: mavjud messenjerlar (Telegram, WhatsApp, Signal) tahlili, real vaqtda xabar almashish texnologiyalari, .NET 8, ASP.NET Core, PostgreSQL, SignalR va Angular texnologiyalariga oid adabiyotlar hamda amaliyot materiallari.',
-    { line: 320, align: AlignmentType.JUSTIFIED },
+    '4. Diplom loyihasining boshlang‘ich ma’lumotlari: mavjud messenjerlar (Telegram, WhatsApp, Signal) tahlili, real vaqtda xabar almashish texnologiyalari, .NET 8, ASP.NET Core, PostgreSQL, SignalR va Angular texnologiyalariga oid adabiyotlar hamda amaliyot materiallari.',
+    { line: 300, align: AlignmentType.JUSTIFIED },
   ),
   line(
     '5. Hisob-tushuntirish yozuvining mazmuni: sohaning tahlili va masalaning qo‘yilishi, tizim arxitekturasi va ma’lumotlar bazasini loyihalash, server va klient qismlarini ishlab chiqish, xavfsizlik choralari, foydalanish yo‘riqnomasi, hayot faoliyati xavfsizligi, xulosa.',
-    { line: 320, align: AlignmentType.JUSTIFIED },
+    { line: 300, align: AlignmentType.JUSTIFIED },
   ),
   line(
     '6. Grafik materiallar ro‘yxati: tizim arxitekturasi, ER-diagramma, UML (use-case, sequence) diagrammalari, dastur interfeysi skrinshotlari va PowerPoint taqdimoti.',
-    { line: 320, align: AlignmentType.JUSTIFIED },
+    { line: 300, align: AlignmentType.JUSTIFIED },
   ),
-  line('7. Topshiriq berilgan sana: __________________.', { line: 320, after: 200 }),
+  line('7. Topshiriq berilgan sana: __________________.', { line: 300, after: 120 }),
   layoutTable(
     [
       ['Rahbar:', `${BLANK}\n(imzo)`, 'Y.Sh. Yuldoshev'],
@@ -152,7 +151,7 @@ export const assignmentPages = () => [
     ],
     [4, 4, 3],
   ),
-  line('8. BMIning alohida bo‘limlari bo‘yicha maslahatchilar:', { line: 360, after: 120, pageBreakBefore: true }),
+  line('8. Diplom loyihasining alohida bo‘limlari bo‘yicha maslahatchilar:', { line: 360, after: 120, pageBreakBefore: true }),
   gridTable(
     ['№', 'Bo‘lim nomi', 'Maslahatchi', 'Topshiriq berdi', 'Topshiriq oldi'],
     [
@@ -162,9 +161,9 @@ export const assignmentPages = () => [
     [1, 5, 4, 3, 3],
   ),
   ...blank(1),
-  line('9. BMIni bajarish bo‘yicha kalendar grafik:', { line: 360, after: 120 }),
+  line('9. Diplom loyihasini bajarish bo‘yicha kalendar grafik:', { line: 360, after: 120 }),
   gridTable(
-    ['№', 'Malakaviy ish bo‘limlari', 'Bajarish muddati', 'Rahbar imzosi'],
+    ['№', 'Diplom loyihasi bo‘limlari', 'Bajarish muddati', 'Rahbar imzosi'],
     [
       ['1', 'Kirish, masalaning qo‘yilishi', '', ''],
       ['2', 'Soha tahlili, mavjud messenjerlarni o‘rganish', '', ''],
@@ -180,7 +179,7 @@ export const assignmentPages = () => [
   ...blank(2),
   layoutTable(
     [
-      ['Bitiruv malakaviy ish rahbari:', `${BLANK}\n(imzo)`, 'Y.Sh. Yuldoshev'],
+      ['Diplom loyihasi rahbari:', `${BLANK}\n(imzo)`, 'Y.Sh. Yuldoshev'],
       ['Bitiruvchi:', `${BLANK}\n(imzo)`, 'S.O. Sohinazarov'],
     ],
     [4, 4, 3],

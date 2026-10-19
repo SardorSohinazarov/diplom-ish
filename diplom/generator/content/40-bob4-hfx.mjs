@@ -2,12 +2,12 @@
 // Topics given by the HFX consultant (S. Abdullayeva):
 //   1) Dasturchining ergonomik ish joyini tashkil etish;
 //   2) Evakuatsiya tadbirlarini rejalashtirish hamda avariya va yong‘inlar sodir bo‘lganda xodimlarning harakatlari.
-import { bullets, figure, formula, h1, h2, h3, numbered, p, ps, table } from '../lib.mjs';
+import { bullets, figure, h1, h2, h3, numbered, p, ps, table } from '../lib.mjs';
 
 export const chapter4 = () => [
   h1('IV-bob. Hayot faoliyati xavfsizligi'),
   p(
-    'Ushbu bobda “Milliy chat”ni yaratgan dasturchilar jamoasining mehnat sharoitlari hayot faoliyati xavfsizligi [21] nuqtai nazaridan tahlil qilinadi. Loyihadagi ishning deyarli barchasi — server va klient kodini yozish, testlarni ishga tushirish, xabar almashishni bir nechta brauzerda sinash — kompyuter oldida bajariladi, shu bois birinchi navbatda ish joyining ergonomikasi ko‘rib chiqiladi. Ikkinchi masala — jamoa joylashgan ofisda yong‘in yoki boshqa avariya yuz berganda odamlarni xavfsiz chiqarib yuborish rejasini tuzish.',
+    'Ushbu bobda “Milliy” xabarchini yaratgan dasturchilar jamoasining mehnat sharoitlari hayot faoliyati xavfsizligi [21] nuqtai nazaridan tahlil qilinadi. Loyihadagi ishning deyarli barchasi — server va klient kodini yozish, testlarni ishga tushirish, xabar almashishni bir nechta brauzerda sinash — kompyuter oldida bajariladi, shu bois birinchi navbatda ish joyining ergonomikasi ko‘rib chiqiladi. Ikkinchi masala — jamoa joylashgan ofisda yong‘in yoki boshqa avariya yuz berganda odamlarni xavfsiz chiqarib yuborish rejasini tuzish.',
   ),
 
   // ───────────────────────────────── 4.1
@@ -25,7 +25,7 @@ export const chapter4 = () => [
     '**asabiy zo‘riqish** — reliz muddatlari, server ishdan chiqqanda uni tezda tiklash zarurati va tungi navbatchiliklar.',
   ]),
   p(
-    'Ish joyiga qo‘yiladigan talablar Mehnat kodeksi, “Mehnatni muhofaza qilish to‘g‘risida”gi Qonun, sanitariya qoidalari hamda ISO 9241-5, GOST 12.2.032-78, GOST 12.1.005-88 va KMK 2.01.05-98 standartlari bilan belgilanadi [3, 4, 34, 36, 37, 39].',
+    'Ish joyiga qo‘yiladigan talablar Mehnat kodeksi, “Mehnatni muhofaza qilish to‘g‘risida”gi Qonun, sanitariya qoidalari hamda ISO 9241-5, GOST 12.2.032-78, GOST 12.1.005-88 va KMK 2.01.05-98 standartlari bilan belgilanadi [3, 4].',
   ),
 
   h3('Ish xonasiga qo‘yiladigan talablar.'),
@@ -58,12 +58,12 @@ export const chapter4 = () => [
   ),
   ...figure('4-1-workstation.png', '4.1', 'Kompyuterda ishlovchi xodimning to‘g‘ri gavda holati va ish joyining asosiy o‘lchamlari', 15.5),
   p(
-    'To‘g‘ri gavda holatining asosiy qoidasi — “to‘g‘ri burchaklar”: tirsaklar 90–100°, son-chanoq bo‘g‘imlari 90–110° va tizzalar taxminan 90° bukiladi, oyoqlar polga to‘liq tiraladi, bel suyanchiqqa tayanadi, bilaklar klaviatura ustida to‘g‘ri tutiladi. Ikki monitor bilan ishlaganda asosiysi ro‘parada, ikkinchisi yonida bir xil masofada joylashtiriladi, noutbuk ekrani esa tagliklar bilan ko‘z sathiga ko‘tariladi. Dasturiy interfeys ham ergonomik bo‘lishi kerak (ISO 9241-110): “Milliy chat”dagi yetarli kontrast, qorong‘i mavzu va moslashuvchan maket foydalanuvchilarning ko‘z charchog‘ini kamaytiradi.',
+    'To‘g‘ri gavda holatining asosiy qoidasi — “to‘g‘ri burchaklar”: tirsaklar 90–100°, son-chanoq bo‘g‘imlari 90–110° va tizzalar taxminan 90° bukiladi, oyoqlar polga to‘liq tiraladi, bel suyanchiqqa tayanadi, bilaklar klaviatura ustida to‘g‘ri tutiladi. Ikki monitor bilan ishlaganda asosiysi ro‘parada, ikkinchisi yonida bir xil masofada joylashtiriladi, noutbuk ekrani esa tagliklar bilan ko‘z sathiga ko‘tariladi. Dasturiy interfeys ham ergonomik bo‘lishi kerak (ISO 9241-110): “Milliy” xabarchidagi yetarli kontrast, qorong‘i mavzu va moslashuvchan maket foydalanuvchilarning ko‘z charchog‘ini kamaytiradi.',
   ),
 
   h3('Mikroiqlim, yoritish va shovqin.'),
   p(
-    'Energiya sarfi bo‘yicha dasturchi ishi o‘tirib bajariladigan yengil ishlar qatoriga — Ia toifasiga kiradi [37]: bunda organizm 139 W dan ko‘p energiya sarflamaydi. Shu toifa uchun belgilangan harorat, namlik, yoritilganlik va shovqin chegaralari 4.2-jadvalda jamlangan.',
+    'Energiya sarfi bo‘yicha dasturchi ishi o‘tirib bajariladigan yengil ishlar qatoriga — Ia toifasiga kiradi: bunda organizm 139 W dan ko‘p energiya sarflamaydi. Shu toifa uchun belgilangan harorat, namlik, yoritilganlik va shovqin chegaralari 4.2-jadvalda jamlangan.',
   ),
   ...table(
     '4.2',
@@ -84,52 +84,11 @@ export const chapter4 = () => [
     'Umumiy yoritish uchun miltillamaydigan, 4000–5000 K rang haroratli diffuzorli LED yoritgichlar monitorlar bilan parallel qatorlarda joylashtiriladi. Shovqinni kamaytirish uchun printerlar alohida joyga chiqariladi, ochiq ofisda tovush yutuvchi panellar o‘rnatiladi, server uskunalari esa alohida xonada joylashtiriladi.',
   ),
 
-  h3('Ish xonasining sun’iy yoritilishini hisoblash.'),
-  ...ps(
-    'Misol sifatida dasturchilar bo‘limi uchun o‘lchamlari A × B × H = 6 × 6 × 3 m bo‘lgan xonani ko‘rib chiqamiz. Xonaning maydoni S = 36 m², hajmi V = 108 m³. Bitta ish joyiga kamida 6 m² maydon va 20 m³ hajm to‘g‘ri kelishi kerakligidan xonaga joylashtirish mumkin bo‘lgan ish joylari soni:',
-  ),
-  formula('~n~_{max} = min(~S~ / 6; ~V~ / 20) = min(36 / 6; 108 / 20) = min(6; 5,4) = 5', '4.1'),
-  p(
-    'Demak, xonaga 5 ta ish joyi sig‘adi. Endi shu xona uchun nechta yoritgich kerakligini aniqlaymiz. Hisob yorug‘lik oqimidan foydalanish koeffitsiyenti usulida bajariladi [39]: u yoritgichlar chiqargan yorug‘likning qancha qismi ish yuzasiga yetib kelishini xonaning shakli va devorlar rangiga qarab hisobga oladi. Buning uchun avval xona indeksi topiladi:',
-  ),
-  formula('~i~ = ~A~·~B~ / (~h~·(~A~ + ~B~)),', '4.2'),
-  p(
-    'bu yerda ~h~ — yoritgichdan ish yuzasigacha bo‘lgan balandlik. Panellar shiftga o‘rnatiladi, stol yuzasi esa poldan 0,8 m balandlikda, shuning uchun ~h~ = 3,0 − 0,8 = 2,2 m va ~i~ = 36 / (2,2 · 12) ≈ 1,36. Shift oq (yorug‘likni qaytarish koeffitsiyenti 70 %), devorlar och rangli (50 %), pol esa to‘qroq (30 %) deb olinsa, LED panellar uchun jadvaldan η ≈ 0,54 topiladi. Yoritgichlar soni quyidagicha hisoblanadi:',
-    { noIndent: true },
-  ),
-  formula('~N~ = ~E~_{n}·~S~·~K~_{z}·~z~ / (Φ·η),', '4.3'),
-  p(
-    'bu yerda ~E~_{n} = 400 lk — kompyuterli ish joyi uchun me’yoriy yoritilganlik; ~K~_{z} = 1,4 — vaqt o‘tishi bilan panellar changlanib, yorug‘ligi pasayishini hisobga oluvchi zaxira koeffitsiyenti; ~z~ = 1,1 — yorug‘lik xona bo‘ylab bir tekis tarqalmasligini hisobga oluvchi koeffitsiyent; Φ = 3600 lm — 600 × 600 mm o‘lchamli, 36 W quvvatli bitta LED panelning yorug‘lik oqimi. Qiymatlarni qo‘ysak:',
-    { noIndent: true },
-  ),
-  formula('~N~ = 400 · 36 · 1,4 · 1,1 / (3600 · 0,54) = 22 176 / 1944 ≈ 11,4', '4.4'),
-  p(
-    'Yoritgichlar soni butun songa yaxlitlanadi va simmetrik joylashuv uchun ~N~ = 12 qabul qilinadi (4 ta ustun × 3 ta qator). Haqiqiy o‘rtacha yoritilganlik quyidagiga teng:',
-  ),
-  formula('~E~_{h} = ~N~·Φ·η / (~S~·~K~_{z}·~z~) = 12 · 3600 · 0,54 / (36 · 1,4 · 1,1) ≈ 421 lk', '4.5'),
-  p(
-    'Haqiqiy yoritilganlik me’yordan 5 % ga yuqori. Bu ruxsat etilgan −10…+20 % oralig‘ida. Yoritish tizimining umumiy quvvati 12 · 36 = 432 W, solishtirma quvvati 12 W/m². Yoritgichlar va ish joylarining joylashuvi 4.2-rasmda ko‘rsatilgan.',
-  ),
-  ...figure('4-2-lighting-plan.png', '4.2', 'Dasturchilar xonasida yoritgichlar va ish joylarining joylashuv sxemasi', 14),
-  p(
-    'Xonani shamollatish uchun zarur havo miqdori bitta xodimga to‘g‘ri keladigan hajmga bog‘liq. Bu hajm 20–40 m³ bo‘lganda (bizda 108 / 5 = 21,6 m³) har bir xodimga soatiga kamida 30 m³ toza havo berilishi kerak:',
-  ),
-  formula('~L~ = ~n~·~L~_{1} = 5 · 30 = 150 m³/soat;   ~K~ = ~L~ / ~V~ = 150 / 108 ≈ 1,4 soat^{−1}', '4.6'),
-  p(
-    'Demak, xonada havo soatiga kamida 1,4 marta almashishi kerak. Buni tabiiy shamollatish yetarli bo‘lmaganda kichik quvvatli so‘ruvchi-beruvchi ventilyatsiya yoki rekuperatorli konditsioner ta’minlaydi.',
-  ),
-
-  h3('Mehnat va dam olish rejimi, elektr xavfsizligi.'),
-  ...ps(
-    'Kompyuterda uzluksiz ish 2 soatdan oshmasligi, har 45–60 daqiqada 5–10 daqiqalik tanaffus qilinishi tavsiya etiladi; tanaffusda ekrandan uzoqlashib, yengil mashqlar bajariladi. Ko‘z charchog‘ini kamaytirish uchun “20-20-20” qoidasi qo‘llanadi: har 20 daqiqada 20 soniya davomida 6 m uzoqlikdagi narsaga qaraladi. Ish beruvchi xodimlarni davriy tibbiy ko‘rik va yo‘riqnomadan o‘tkazadi, bu talablar masofadan ishlaganda ham amal qiladi.',
-    'Barcha jihozlar yerga ulash kontaktli rozetkalarga ulanadi, kabellar kanallarda yotqiziladi. Uzaytirgichlarni ketma-ket ulash, shikastlangan kabellardan foydalanish va jihoz korpusini ochish taqiqlanadi, server uskunalari esa UPS orqali ulanadi.',
-  ),
-
   // ───────────────────────────────── 4.2
   h2('4.2. Evakuatsiya tadbirlarini rejalashtirish hamda avariya va yong‘inlar sodir bo‘lganda xodimlarning harakatlari'),
   ...ps(
     'Ofis uchun favqulodda vaziyat — odamlar hayoti yoki sog‘lig‘iga xavf tug‘diradigan va odatiy ish tartibini buzadigan har qanday hodisa. Dasturchilar ofisida bular, avvalo, yong‘in va zilzila (Toshkent seysmik faol hududda joylashgan), shuningdek elektr ta’minotidagi avariya, quvur yorilishi va gaz sizishidir. Bu vaziyatlarning deyarli barchasida odamlarni saqlab qolishning eng ishonchli yo‘li ularni binodan tez va tartib bilan chiqarishdir.',
-    'Asosiy talablar “Favqulodda vaziyatlarda aholini va hududlarni muhofaza qilish to‘g‘risida”gi, “Yong‘in xavfsizligi to‘g‘risida”gi qonunlar va GOST 12.1.004-91 standarti bilan belgilanadi [5, 6, 38].',
+    'Asosiy talablar “Favqulodda vaziyatlarda aholini va hududlarni muhofaza qilish to‘g‘risida”gi, “Yong‘in xavfsizligi to‘g‘risida”gi qonunlar va GOST 12.1.004-91 standarti bilan belgilanadi [5, 6].',
   ),
 
   h3('IT-ofisda yong‘in chiqish sabablari va o‘t o‘chirish vositalari.'),
@@ -161,13 +120,13 @@ export const chapter4 = () => [
   ...bullets([
     'har bir qavatda kamida ikkita, bir-biridan uzoqda joylashgan evakuatsiya chiqishi;',
     'yo‘laklar kengligi kamida 1–1,2 m, eshiklar kamida 0,8 m; eshiklar chiqish tomonga va ichkaridan kalitsiz ochiladi; yo‘l va zinalarni to‘sib qo‘yish taqiqlanadi;',
-    'avariya yoritishi, ISO 7010 bo‘yicha yashil “Favqulodda chiqish” belgilari [35], yong‘in signalizatsiyasi va ovozli xabardor qilish tizimi;',
+    'avariya yoritishi, ISO 7010 bo‘yicha yashil “Favqulodda chiqish” belgilari, yong‘in signalizatsiyasi va ovozli xabardor qilish tizimi;',
     'har bir qavatda fotolyuminessent materialdan tayyorlangan evakuatsiya reja-sxemalari.',
   ]),
   p(
-    'Reja-sxemada qavat rejasi, “Siz shu yerdasiz” belgisi, asosiy (yashil yaxlit) va zaxira (yashil punktir) yo‘llar, chiqishlar, o‘t o‘chirgichlar va xabarlagichlar ko‘rsatiladi. Namunaviy IT-ofis 3-qavatining reja-sxemasi 4.3-rasmda keltirilgan.',
+    'Reja-sxemada qavat rejasi, “Siz shu yerdasiz” belgisi, asosiy (yashil yaxlit) va zaxira (yashil punktir) yo‘llar, chiqishlar, o‘t o‘chirgichlar va xabarlagichlar ko‘rsatiladi. Namunaviy IT-ofis 3-qavatining reja-sxemasi 4.2-rasmda keltirilgan.',
   ),
-  ...figure('4-3-evacuation-plan.png', '4.3', 'IT-kompaniya ofisi 3-qavatining evakuatsiya reja-sxemasi (namuna)', 16),
+  ...figure('4-3-evacuation-plan.png', '4.2', 'IT-kompaniya ofisi 3-qavatining evakuatsiya reja-sxemasi (namuna)', 16),
   p('Tashkiliy tadbirlar:'),
   ...bullets([
     'rahbar buyrug‘i bilan yong‘in xavfsizligi uchun mas’ul shaxs va har bir qavat bo‘yicha evakuatsiya mas’ullari tayinlanadi;',
@@ -176,72 +135,9 @@ export const chapter4 = () => [
     'o‘t o‘chirish vositalari, signalizatsiya va avariya yoritishining sozligi muntazam tekshiriladi.',
   ]),
 
-  h3('Evakuatsiya vaqtini hisoblash.'),
-  ...ps(
-    'Reja-sxemadagi yo‘llar amalda yetarlimi, ya’ni 45 kishi qavatni qancha vaqtda tark etadi va biror eshik oldida tiqilinch yuzaga kelmaydimi — buni hisob bilan tekshiramiz. Buning uchun GOST 12.1.004-91 da berilgan odamlar oqimi parametrlaridan foydalaniladi [38]. Chiqish yo‘li kengligi va undan o‘tadigan odamlar soni o‘zgarmaydigan bo‘laklarga (uchastkalarga) bo‘linadi va har biri uchun oqim zichligi topiladi:',
-  ),
-  formula('~D~_{i} = ~N~_{i}·~f~ / (~l~_{i}·δ_{i}),', '4.7'),
-  p(
-    'bu yerda ~N~_{i} — uchastkadan o‘tadigan odamlar soni; ~f~ = 0,1 m² — bitta odam egallaydigan yuza (katta yoshli, yozgi kiyimda); ~l~_{i} va δ_{i} — uchastkaning uzunligi va kengligi, m. Zichlik qanchalik katta bo‘lsa, odamlar shunchalik sekin yuradi: tezlik ~v~_{i} va oqim intensivligi ~q~_{i} 4.4-jadvaldan olinadi. Har bir uchastkani bosib o‘tish vaqti va umumiy vaqt:',
-    { noIndent: true },
-  ),
-  formula('~t~_{i} = ~l~_{i} / ~v~_{i};   ~t~_{h} = ~t~_{1} + ~t~_{2} + … + ~t~_{n}', '4.8'),
-  p(
-    'Eshiklar va yo‘l torayadigan joylarda tirbandlik bor-yo‘qligi oqim intensivligi orqali tekshiriladi:',
-  ),
-  formula('~q~_{e} = ~q~_{i}·δ_{i} / δ_{e} ≤ ~q~_{max},', '4.9'),
-  p(
-    'bu yerda δ_{e} — eshik kengligi; ~q~_{max} = 19,6 m/min — eshikdan o‘tishdagi oqim intensivligining eng katta qiymati. Bu shart bajarilsa, eshik oldida odamlar to‘planib qolmaydi.',
-    { noIndent: true },
-  ),
-  ...table(
-    '4.4',
-    'Odamlar oqimining harakat parametrlari (GOST 12.1.004-91 bo‘yicha, parcha)',
-    ['Oqim zichligi D, m²/m²', 'Gorizontal yo‘l: v, m/min', 'Gorizontal yo‘l: q, m/min', 'Eshik: q, m/min', 'Zinadan pastga: v, m/min', 'Zinadan pastga: q, m/min'],
-    [
-      ['0,01', '100', '1,0', '1,0', '100', '1,0'],
-      ['0,05', '100', '5,0', '5,0', '100', '5,0'],
-      ['0,10', '80', '8,0', '8,7', '95', '9,5'],
-      ['0,20', '60', '12,0', '13,4', '68', '13,6'],
-      ['0,30', '47', '14,1', '16,5', '52', '15,6'],
-      ['0,40', '40', '16,0', '18,4', '40', '16,0'],
-      ['0,50', '33', '16,5', '19,6', '31', '15,5'],
-    ],
-    [2.2, 2, 2, 1.7, 2, 2],
-  ),
-  ...ps(
-    '4.3-rasmdagi qavat uchun hisoblashni bajaramiz. Qavatda 45 nafar xodim ishlaydi. Eng og‘ir holat ko‘rib chiqiladi: 2-zina yong‘in tufayli to‘sib qo‘yilgan va barcha xodimlar asosiy (1-) zina orqali chiqadi. Hisobiy yo‘l dasturchilar bo‘limining eng uzoq ish joyidan boshlanadi va to‘rtta uchastkadan iborat:',
-  ),
-  ...numbered([
-    'dasturchilar bo‘limi ichidagi o‘tish joyi: ~l~_{1} = 12 m, δ_{1} = 1,5 m, ~N~_{1} = 20 kishi;',
-    'yo‘lak: bo‘lim eshigidan zinagacha ~l~_{2} = 17 m, δ_{2} = 2,0 m, ~N~_{2} = 45 kishi;',
-    '3-qavatdan 1-qavatgacha zina marshlari va maydonchalari: ~l~_{3} = 2 · 10 = 20 m, δ_{3} = 1,35 m, ~N~_{3} = 45 kishi;',
-    '1-qavat vestibyulidan tashqi chiqishgacha: ~l~_{4} = 15 m, δ_{4} = 3,0 m, ~N~_{4} = 45 kishi.',
-  ]),
-  p(
-    'Masalan, birinchi uchastka uchun ~D~_{1} = 20 · 0,1 / (12 · 1,5) ≈ 0,11. 4.4-jadvaldagi qiymatlar orasida chiziqli interpolyatsiya qilib ~v~_{1} ≈ 78 m/min va ~q~_{1} ≈ 8,4 m/min topiladi, ~t~_{1} = 12 / 78 ≈ 0,15 min. Qolgan uchastkalar ham xuddi shunday hisoblanadi. Natijalar 4.5-jadvalda keltirilgan.',
-  ),
-  ...table(
-    '4.5',
-    'Evakuatsiya vaqtini hisoblash natijalari',
-    ['Uchastka', 'l, m', 'δ, m', 'N, kishi', 'D, m²/m²', 'v, m/min', 't, min'],
-    [
-      ['1. Bo‘lim ichidagi o‘tish joyi', '12', '1,5', '20', '0,11', '78', '0,15'],
-      ['2. Yo‘lak', '17', '2,0', '45', '0,13', '74', '0,23'],
-      ['3. Zina (pastga)', '20', '1,35', '45', '0,17', '77', '0,26'],
-      ['4. Vestibyul', '15', '3,0', '45', '0,10', '80', '0,19'],
-      ['Jami hisobiy evakuatsiya vaqti t_{h}', '', '', '', '', '', '**0,83**'],
-    ],
-    [4.4, 1, 1, 1.2, 1.5, 1.4, 1.2],
-  ),
-  ...ps(
-    'Eshiklarda tirbandlik yo‘qligini (4.9) formula bilan tekshiramiz. Bo‘lim eshigi (δ = 1,2 m): ~q~ = 8,4 · 1,5 / 1,2 ≈ 10,5 m/min. Zinaga kirish eshigi (δ = 1,2 m): ~q~ = 9,3 · 2,0 / 1,2 ≈ 15,5 m/min. Tashqi eshik (δ = 1,5 m): ~q~ = 8,0 · 3,0 / 1,5 = 16,0 m/min. Barcha qiymatlar ~q~_{max} = 19,6 m/min dan kichik, ya’ni odamlar oqimi to‘xtovsiz harakatlanadi.',
-    'Demak, hisobiy evakuatsiya vaqti ~t~_{h} ≈ 0,83 min (taxminan 50 soniya), evakuatsiya boshlanishidagi 1 daqiqalik kechikish bilan esa qavatdan to‘liq chiqish taxminan 2 daqiqa oladi. Bu vaqt yong‘in xavfli omillari evakuatsiya yo‘llarida kritik qiymatga yetish vaqtidan kichik bo‘lishi shart. Eng tor joy zina bo‘lgani uchun zinaga olib boradigan eshiklar o‘zi yopiladigan, lekin qulflanmagan bo‘lishi, zina maydonchalarida esa buyum saqlanmasligi kerak.',
-  ),
-
   h3('Yong‘in sodir bo‘lganda xodimlarning harakatlari.'),
   p(
-    'Yong‘in paytida eng katta xavf — vahima va noto‘g‘ri harakatlar. Shu sababli har bir xodim quyidagi tartibni oldindan bilishi kerak (4.4-rasm):',
+    'Yong‘in paytida eng katta xavf — vahima va noto‘g‘ri harakatlar. Shu sababli har bir xodim quyidagi tartibni oldindan bilishi kerak (4.3-rasm):',
   ),
   ...numbered([
     'Olov, tutun yoki kuyish hidini birinchi sezgan xodim xabarlagich tugmasini bosadi va 101 (yoki 112) raqamiga qo‘ng‘iroq qilib, bino manzili, qavati, nima yonayotgani va ichkarida odamlar borligini aytadi. Shundan so‘ng qavat mas’uliga xabar beriladi.',
@@ -251,10 +147,11 @@ export const chapter4 = () => [
     'Yo‘lakni tutun qoplagan bo‘lsa, pastroq engashib yuriladi, chunki toza havo pol yaqinida qoladi; nafas ho‘l mato orqali olinadi.',
     'Bino tashqarisidagi yig‘ilish joyida qavat mas’uli xodimlarni ro‘yxat bo‘yicha tekshiradi va yetib kelmaganlar haqida darhol o‘t o‘chiruvchilarga aytadi. Ular ruxsat bermaguncha hech kim binoga qaytmaydi.',
   ]),
-  ...figure('4-4-fire-actions.png', '4.4', 'Yong‘in sodir bo‘lganda xodimlarning harakatlar algoritmi', 11, 17),
   p(
     'Qavat mas’uli odamlarni chiqarishni boshqaradi, ventilyatsiya va konditsionerlarni o‘chirtiradi, chunki ular tutunni boshqa xonalarga haydaydi, va yetib kelgan o‘t o‘chirish bo‘linmasiga vaziyatni tushuntiradi. Kimningdir kiyimi yonib ketsa, u yugurmasligi kerak — harakat olovni kuchaytiradi; yerga yotib dumalash yoki ustiga qalin mato yopish kerak. Kuygan joy 10–20 daqiqa salqin oqar suv ostida ushlanadi, tutundan zaharlangan odam toza havoga chiqariladi va 103 raqamiga qo‘ng‘iroq qilinadi.',
   ),
+
+  ...figure('4-4-fire-actions.png', '4.3', 'Yong‘in sodir bo‘lganda xodimlarning harakatlar algoritmi', 11, 14),
 
   h3('Boshqa avariyalarda xodimlarning harakatlari.'),
   ...bullets([
@@ -264,11 +161,11 @@ export const chapter4 = () => [
     '**Gaz hidi sezilsa** — chiroq va boshqa elektr kalitlari yoqilmaydi ham, o‘chirilmaydi ham (uchqun portlashga sabab bo‘lishi mumkin), olov yoqilmaydi; derazalar ochiladi, odamlar chiqariladi va 104 ga xabar beriladi.',
   ]),
   p(
-    'Xodimlarni tezkor xabardor qilish uchun korporativ aloqa vositalaridan ham foydalanish mumkin. Masalan, “Milliy chat”dagi tashkilotning domen guruhi orqali evakuatsiya haqidagi xabar va yig‘ilish joyi bir necha soniyada barcha xodimlarning telefon va kompyuterlariga yetkaziladi, xodimlar esa xavfsiz joyga yetib kelganini javob bilan tasdiqlaydi. Bu vosita signalizatsiya va ovozli xabardor qilish tizimini to‘ldiradi va ayniqsa masofadan ishlayotgan xodimlar uchun foydali.',
+    'Xodimlarni tezkor xabardor qilish uchun korporativ aloqa vositalaridan ham foydalanish mumkin. Masalan, “Milliy” xabarchidagi tashkilotning domen guruhi orqali evakuatsiya haqidagi xabar va yig‘ilish joyi bir necha soniyada barcha xodimlarning telefon va kompyuterlariga yetkaziladi, xodimlar esa xavfsiz joyga yetib kelganini javob bilan tasdiqlaydi. Bu vosita signalizatsiya va ovozli xabardor qilish tizimini to‘ldiradi va ayniqsa masofadan ishlayotgan xodimlar uchun foydali.',
   ),
 
-  h2('4-bob bo‘yicha xulosa'),
+  h2('4-bob bo‘yicha xulosa', { toc: false }),
   p(
-    'Bobda “Milliy chat” jamoasi misolida dasturchi mehnatining asosiy xavfli omillari — ko‘z charchashi, uzoq o‘tirish, takroriy harakatlar va asabiy zo‘riqish aniqlandi va ularni kamaytiradigan ergonomik talablar keltirildi. 6 × 6 m o‘lchamli xona uchun hisoblar unga 5 ta ish joyi sig‘ishini, me’yoriy yoritilganlikni 12 ta 36 W li LED panel ta’minlashini (421 lk) va havo soatiga 150 m³ hajmda almashishi kerakligini ko‘rsatdi. Ikkinchi bo‘limda ofisda yong‘in chiqish sabablari va o‘chirish vositalari tahlil qilinib, namunaviy qavat uchun evakuatsiya reja-sxemasi tuzildi. Hisob 45 kishi qavatni taxminan 0,83 daqiqada tark etishini va eshiklarda tiqilinch bo‘lmasligini ko‘rsatdi. Yong‘in, zilzila va boshqa avariyalarda xodimlarning harakatlari aniq tartib sifatida berildi.',
+    'Bobda “Milliy” xabarchi jamoasi misolida dasturchi mehnatining asosiy xavfli omillari — ko‘z charchashi, uzoq o‘tirish, takroriy harakatlar va asabiy zo‘riqish aniqlandi va ularni kamaytiradigan ergonomik talablar keltirildi. Ish xonasiga, mikroiqlim, yoritilganlik va shovqinga qo‘yiladigan me’yorlar jamlandi. Ikkinchi bo‘limda ofisda yong‘in chiqish sabablari va o‘chirish vositalari tahlil qilinib, namunaviy qavat uchun evakuatsiya reja-sxemasi tuzildi. Yong‘in, zilzila va boshqa avariyalarda xodimlarning harakatlari aniq tartib sifatida berildi.',
   ),
 ];

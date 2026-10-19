@@ -1,0 +1,37 @@
+erDiagram
+  CHATS {
+    int Id PK
+  }
+  USERS {
+    int Id PK
+  }
+  MESSAGES {
+    int Id PK
+    int ChatId FK
+    int SenderId FK
+    text TextContent
+    int ReplyToMessageId FK
+    int ServiceAction "xizmat xabari turi"
+    timestamptz SentAt
+    timestamptz EditedAt
+    timestamptz DeletedAt
+  }
+  REACTIONS {
+    int Id PK
+    int MessageId FK
+    int UserId FK
+    string Emoji "10 belgigacha"
+    timestamptz ReactedAt
+  }
+  MESSAGE_VIEWS {
+    int Id PK
+    int MessageId FK
+    int UserId FK
+    timestamptz ViewedAt
+  }
+  CHATS ||--o{ MESSAGES : "xabarlari"
+  USERS ||--o{ MESSAGES : "yuborgan"
+  MESSAGES |o--o{ MESSAGES : "javob"
+  MESSAGES ||--o{ REACTIONS : "reaksiyalar"
+  MESSAGES ||--o{ MESSAGE_VIEWS : "ko'rishlar"
+  USERS ||--o{ MESSAGE_VIEWS : "ko'rgan"
