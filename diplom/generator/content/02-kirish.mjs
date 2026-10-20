@@ -42,6 +42,6 @@ export const introduction = () => [
   ),
   h3('6. Diplom loyiha tuzilishi va hajmi.'),
   p(
-    'Diplom loyihasi kirish, to‘rt bob, xulosa, foydalanilgan adabiyotlar ro‘yxati va ilovalardan iborat. I bobda mavjud messenjerlar va real vaqtda aloqa texnologiyalari tahlil qilinib, vazifa qo‘yilgan. II bob tizimni loyihalashga, III bob dasturni yaratish, sinash va undan foydalanishga, IV bob hayot faoliyati xavfsizligiga bag‘ishlangan. Diplom loyihasi 91 betdan iborat bo‘lib, unda 41 ta rasm, 17 ta jadval, 1 ta formula, 52 ta adabiyot va 5 ta ilova bor.',
+    'Diplom loyihasi kirish, to‘rt bob, xulosa, foydalanilgan adabiyotlar ro‘yxati va ilovalardan iborat. I bobda mavjud messenjerlar va real vaqtda aloqa texnologiyalari tahlil qilinib, vazifa qo‘yilgan. II bob tizimni loyihalashga, III bob dasturni yaratish, sinash va undan foydalanishga, IV bob hayot faoliyati xavfsizligiga bag‘ishlangan. Diplom loyihasi 94 betdan iborat bo‘lib, unda 41 ta rasm, 17 ta jadval, 1 ta formula, 54 ta adabiyot va 5 ta ilova bor.',
   ),
 ];

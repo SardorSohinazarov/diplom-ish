@@ -31,8 +31,9 @@ cd diplom/generator && npm ci
 ## Qolgan ishlar
 
 1–3. ✅ **Bajarildi (2026-10-20):** Xulosa qisqartirildi va oxirgi betga sig'di. Kirishda hajm 91 bet deb yozildi. 91 betning hammasi ko'z bilan tekshirildi.
-4. **Hajm.** Rahbar ~100 bet so'ragan, hozir 91 bet. Kerak bo'lsa, III bobni yangi imkoniyatlar bilan to'ldirish mumkin: sekin internetga moslashuv (rasm siqish, 360p video, outbox), delta sync, kesh.
-5. **Nofunksional talablar** (taklif qilingan, hali qo'shilmagan): moslik (brauzerlar, 375 px), mavjudlik va zaxira nusxa, sekin internet (3G'da ochilish vaqti), foydalanish qulayligi (kontrast, klaviatura), qonunga moslik, monitoring, OWASP Top 10. Yuklama bo'yicha raqamlarni faqat haqiqiy sinovdan keyin yozish kerak (RTM taqrizida ham yuklama sinovlari tavsiya qilingan).
+4–5. ✅ **Bajarildi (2026-10-20):** III bobga (3.2) “Sekin internetga moslashuv” bo'limi qo'shildi. Unda kodda haqiqatda bor narsalar yozildi: service worker, IndexedDB kesh, outbox, delta sync, rasm siqish, xira nusxa, 360p video, MessagePack, ishlash tezligini o'lchash. 1.3'ga qo'shimcha nofunksional talablar qo'shildi. Diplom 94 bet bo'ldi. Diqqat: rahbarning 5-izohida nofunksional talablarni qisqartirish so'ralgan edi, endi esa ular biroz ko'paydi.
+8. ✅ **Humo manbalari** to'ldirildi: Kursiv Media (ishga tushirish sanasi — 2023-yil yanvar) va App Store tavsifi (200 ming kishilik guruh, 2 GB gacha fayl). Adabiyotlar 54 ta. 2024–2026-yillar bo'yicha yangi xabar topilmadi.
+9. **Joylashtirish to'g'risidagi ma'lumot eskirgan.** Diplomda (3.3 va taqdimotda) dastur Render'da ishlaydi deb yozilgan. Kodda esa endi VPS'ga deploy qilinadi: Docker Compose, Caddy, GitHub Actions (qales.uz). Matnni moslash kerak.
+10. **Testlar soni eskirgan bo'lishi mumkin.** Diplomda 425 ta server va 295 ta klient testi deyilgan, lekin keyin yangi testlar qo'shilgan (outbox, delta sync, 360p, MessagePack). `dotnet test` va `ng test` bilan qayta sanab, 3.6-jadval, 3.21-rasm, xulosa va taqdimotni yangilash kerak.
 6. **Klient interfeysida “Hikoya” → “Lavha”.** Diplomda “Lavhalar” deyilgan, interfeysda hali “Hikoya” turibdi. Skrinshotlar ko'rsatiladigan bo'lsa, buni moslash kerak.
 7. **Eski taqdimotlar.** `diplom/Milliy chat — BMI himoyasi*.pptx` qo'lda tayyorlangan eski fayllar, ularda HFX hisoblari va eski ma'lumotlar qolgan. Asosiy taqdimot — `Taqdimot_Sohinazarov_Sardor.pptx`.
-8. **Humo ma'lumotlari** faqat Kun.uz (2023) maqolasiga asoslangan. Rahbar yangiroq manba so'rasa, uni yangilash kerak.

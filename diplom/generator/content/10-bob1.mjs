@@ -30,7 +30,7 @@ export const chapter1 = () => [
   ),
   h3('Humo.'),
   p(
-    'Humo — davlat tashkilotlari xodimlari uchun yaratilgan mahalliy messenjer. Uni UNICON-SOFT kompaniyasi ishlab chiqqan, kompaniya ulushining bir qismi Raqamli texnologiyalar vazirligi tizimidagi korxonaga tegishli. Humo Telegram’ning ochiq kodi asosida qilingan, shuning uchun tashqi ko‘rinishi va sozlamalari Telegram’nikiga juda o‘xshaydi. Ishlab chiquvchilarning aytishicha, bu xodimlar yangi dasturga tezroq o‘rganishi uchun qilingan. Messenjer pullik: har bir xodim uchun oyiga 25 200 so‘m obuna to‘lovi belgilangan. 2023-yil boshida uning 22 mingdan ortiq rasmiy foydalanuvchisi bo‘lgan. Vazirlik talabiga ko‘ra, serverlari O‘zbekistonda joylashishi kerak [52].',
+    'Humo — davlat tashkilotlari xodimlari uchun yaratilgan mahalliy messenjer. Uni UNICON-SOFT kompaniyasi ishlab chiqqan, kompaniya ulushining bir qismi Raqamli texnologiyalar vazirligi tizimidagi korxonaga tegishli. Humo Telegram’ning ochiq kodi asosida qilingan, shuning uchun tashqi ko‘rinishi va sozlamalari Telegram’nikiga juda o‘xshaydi. Ishlab chiquvchilarning aytishicha, bu xodimlar yangi dasturga tezroq o‘rganishi uchun qilingan. Messenjer 2023-yil yanvarida ishga tushirilgan [53]. Ilovalar do‘konidagi tavsifga ko‘ra, unda 200 ming kishilik guruhlar va 2 GB gacha fayllar qo‘llab-quvvatlanadi [54]. Messenjer pullik: har bir xodim uchun oyiga 25 200 so‘m obuna to‘lovi belgilangan. 2023-yil boshida uning 22 mingdan ortiq rasmiy foydalanuvchisi bo‘lgan. Vazirlik talabiga ko‘ra, serverlari O‘zbekistonda joylashishi kerak [52].',
   ),
   p(
     'Humo ma’lumotlarni mamlakat ichida saqlash masalasini qisman hal qiladi. Ammo u yopiq, pullik va faqat davlat xodimlari uchun mo‘ljallangan. Universitet, xususiy kompaniya yoki oddiy fuqaro undan foydalana olmaydi. Messenjerlarning taqqoslanishi 1.1-jadvalda keltirilgan.',
@@ -45,7 +45,7 @@ export const chapter1 = () => [
       ['Narxi', 'Bepul', 'Bepul', 'Bepul', 'Bepul', 'Oyiga 25 200 so‘m', 'Bepul'],
       ['Ro‘yxatdan o‘tish', 'Telefon raqami', 'Telefon raqami', 'Telefon raqami', 'Telefon raqami', '—', 'E-pochta kodi, Google'],
       ['To‘liq shifrlash', 'Faqat maxfiy chatlarda', 'Hamma chatlarda', 'Hamma chatlarda', 'Yo‘q', 'Bor (ishlab chiquvchi ma’lumoti)', 'Maxfiy chatlarda'],
-      ['Guruh hajmi', '200 000', '1024', '1000', '500', '—', '200'],
+      ['Guruh hajmi', '200 000', '1024', '1000', '500', '200 000', '200'],
       ['Kanallar, botlar', 'Bor', 'Kanallar bor', 'Yo‘q', 'Bor', '—', 'Kelajakda'],
       ['Lavhalar (stories)', 'Bor', 'Bor (Status)', 'Bor', 'Bor', '—', 'Bor'],
       ['Ochiq lenta (postlar)', 'Kanallar orqali', 'Kanallar orqali', 'Yo‘q', 'Bor (Moments)', '—', 'Forum'],
@@ -153,6 +153,9 @@ export const chapter1 = () => [
   h3('Nofunksional talablar.'),
   p(
     'Tizim tez ishlashi kerak: xabarlar ro‘yxati qismlab yuklanadi, ma’lumotlar bazasidagi so‘rovlar tezlashtiriladi, yangi xabar qabul qiluvchiga 1 soniyadan kam vaqtda yetib boradi. Xavfsizlik uchun barcha aloqa shifrlangan HTTPS orqali o‘tadi, kirish kodlari va tokenlar bazada ochiq holda saqlanmaydi, bir manzildan keladigan so‘rovlar soni cheklanadi. Tizim ishonchli bo‘lishi kerak: xatolar bir joyda ushlanadi, uzilgan aloqa avtomatik tiklanadi, kod esa keyin kengaytirish oson bo‘ladigan qatlamlarga ajratiladi [10, 11]. Tizimni istalgan serverga oson ko‘chirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalaniladi.',
+  ),
+  p(
+    'Bundan tashqari, tizim quyidagi talablarga javob beradi. Moslik va qulaylik: ilova zamonaviy brauzerlarda va kengligi 375 pikseldan boshlab barcha ekranlarda ishlaydi, matn va fon o‘rtasida yetarli kontrast bo‘ladi, yorug‘ va qorong‘i ko‘rinish tanlanadi. Sekin internet: ilova 3G va uzilib turadigan aloqada ham ishlaydi, internetsiz yozilgan xabarlar yo‘qolmaydi, rasm va videolar yengil ko‘rinishda uzatiladi. Qonunga moslik: shaxsga doir ma’lumotlar O‘zbekiston hududidagi serverda saqlanadi, foydalanuvchidan faqat zarur ma’lumot so‘raladi [1]. Kuzatuv: har bir xato vaqti va so‘rov raqami bilan jurnalga yoziladi, sahifa ochilish tezligi o‘lchab boriladi. Himoya OWASP Top 10 ro‘yxatidagi asosiy xavflarni hisobga oladi [39].',
   ),
 
   h3('Keyingi bosqich talablari.'),
