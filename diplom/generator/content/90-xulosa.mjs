@@ -18,7 +18,7 @@ export const conclusion = () => [
     'Hayot faoliyati xavfsizligi bo‘limida dasturchining ish joyiga qo‘yiladigan talablar keltirildi, ofis qavati uchun evakuatsiya reja-sxemasi tuzildi va avariyalarda xodimlar nima qilishi kerakligi belgilandi.',
   ]),
   ...ps(
-    'Dasturning asosiy afzalligi shundaki, uni istalgan tashkilot o‘z serverida ishga tushirib, yozishmalarini to‘liq o‘z nazoratida saqlay oladi. Diplom loyihasi davomida real vaqtda ishlaydigan tizimni loyihalash, xavfsiz kirish va uchdan-uchgacha shifrlashni amalda qo‘llash tajribasi orttirildi.',
+    'Dasturning asosiy afzalligi shundaki, uni istalgan tashkilot o‘z serverida ishga tushirib, yozishmalarini to‘liq o‘z nazoratida saqlay oladi.',
     'Dasturni rivojlantirishning keyingi bosqichi rejalashtirildi. Birinchi navbatda sun’iy intellekt yordamchisi qo‘shiladi: u yozishmaning qisqacha mazmunini chiqaradi, javob variantlarini taklif qiladi, ovozli xabarni matnga aylantiradi, tarjima qiladi, imloni tuzatadi va spamni aniqlaydi. Xabarchi ichida bozor yaratiladi: foydalanuvchilar do‘kon ochib savdo qiladi, kompaniyalar o‘rtasida esa auksion va tenderlar o‘tkaziladi. Tenderlarning shaffofligi va shartnomalarning ishonchliligi blokcheyn texnologiyasi bilan ta’minlanadi. Shuningdek, ovozli xabarlar va qo‘ng‘iroqlar, kanallar va botlar, OneID orqali shaxsni tasdiqlash hamda mobil ilovalar rejaga kiritilgan.',
   ),
 ];

@@ -30,10 +30,8 @@ cd diplom/generator && npm ci
 
 ## Qolgan ishlar
 
-1. **81-betdagi osilib qolgan qator.** Umumiy Xulosaning oxirgi 2 qatori alohida betga tushib qolgan. `content/90-xulosa.mjs` dagi oxirgi ikki paragrafni biroz qisqartirish kerak, masalan “Diplom loyihasi davomida … tajribasi orttirildi” jumlasini olib tashlash.
-2. **Kirishdagi hajm raqamlari.** `content/02-kirish.mjs` da hali “87 betdan” deb yozilgan, hozir esa diplom 92 bet. Xulosa tuzatilgandan keyin qayta sanab yangilash kerak. Qolgan raqamlar: 41 rasm, 17 jadval, 1 formula, 52 adabiyot, 5 ilova (yangi rasm yoki jadval qo'shilmagan).
-3. **Barcha betlarni ko'z bilan tekshirish:** bo'sh qolgan betlar, sig'magan rasmlar. Annotatsiya bitta betda qolishi kerak.
-4. **Hajm.** Rahbar ~100 bet so'ragan, hozir 92 bet. Kerak bo'lsa, III bobni yangi imkoniyatlar bilan to'ldirish mumkin: sekin internetga moslashuv (rasm siqish, 360p video, outbox), delta sync, kesh.
+1–3. ✅ **Bajarildi (2026-10-20):** Xulosa qisqartirildi va oxirgi betga sig'di. Kirishda hajm 91 bet deb yozildi. 91 betning hammasi ko'z bilan tekshirildi.
+4. **Hajm.** Rahbar ~100 bet so'ragan, hozir 91 bet. Kerak bo'lsa, III bobni yangi imkoniyatlar bilan to'ldirish mumkin: sekin internetga moslashuv (rasm siqish, 360p video, outbox), delta sync, kesh.
 5. **Nofunksional talablar** (taklif qilingan, hali qo'shilmagan): moslik (brauzerlar, 375 px), mavjudlik va zaxira nusxa, sekin internet (3G'da ochilish vaqti), foydalanish qulayligi (kontrast, klaviatura), qonunga moslik, monitoring, OWASP Top 10. Yuklama bo'yicha raqamlarni faqat haqiqiy sinovdan keyin yozish kerak (RTM taqrizida ham yuklama sinovlari tavsiya qilingan).
 6. **Klient interfeysida “Hikoya” → “Lavha”.** Diplomda “Lavhalar” deyilgan, interfeysda hali “Hikoya” turibdi. Skrinshotlar ko'rsatiladigan bo'lsa, buni moslash kerak.
 7. **Eski taqdimotlar.** `diplom/Milliy chat — BMI himoyasi*.pptx` qo'lda tayyorlangan eski fayllar, ularda HFX hisoblari va eski ma'lumotlar qolgan. Asosiy taqdimot — `Taqdimot_Sohinazarov_Sardor.pptx`.
