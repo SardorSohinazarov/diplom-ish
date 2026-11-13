@@ -9,7 +9,7 @@ export const chapter2 = () => [
   ...ps(
     'Texnologiyalarni tanlashda bir necha talab qo‘yildi. Ular server va brauzer o‘rtasida ikki tomonlama jonli aloqani qo‘llashi, tez ishlashi va tayyor xavfsizlik vositalariga ega bo‘lishi kerak edi. Shuningdek, ular ommabop, ochiq litsenziyali va serverga oson joylashtiriladigan bo‘lishi lozim edi.',
     'Server qismi .NET muhitida yozildi [15, 17, 22]. U Windows’da ham, Linux’da ham ishlaydi va mustaqil sinovlarda eng tez veb-platformalar qatoriga kiradi. Muqobil sifatida Node.js va Spring Boot ham ko‘rib chiqildi. Hal qiluvchi omil SignalR kutubxonasi bo‘ldi: u .NET tarkibiga kiradi va jonli aloqa uchun kerak bo‘lgan hamma narsani qo‘shimcha kutubxonalarsiz beradi. Ma’lumotlar PostgreSQL bazasida saqlanadi. Bu ishonchli, bepul va murakkab so‘rovlarni yaxshi bajaradigan baza. Dastur u bilan Entity Framework orqali ishlaydi: jadvallar bilan oddiy C# obyektlari kabi ishlash mumkin, SQL so‘rovlarini qo‘lda yozish shart emas [16, 18].',
-    'Brauzerdagi qism Angular’da yozildi [24, 43]. Angular sahifalar orasida o‘tish, formalar va server bilan aloqa uchun hamma vositani bitta to‘plamda beradi. U TypeScript tilida yoziladi. Bu til C# ga o‘xshash bo‘lgani uchun server va brauzer kodi bir xil uslubda yozildi. Dasturni serverga joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi, dastur Render bulut xizmatida ishga tushirildi. Tanlangan texnologiyalar 2.1-jadvalda keltirilgan.',
+    'Brauzerdagi qism Angular’da yozildi [24, 43]. Angular sahifalar orasida o‘tish, formalar va server bilan aloqa uchun hamma vositani bitta to‘plamda beradi. U TypeScript tilida yoziladi. Bu til C# ga o‘xshash bo‘lgani uchun server va brauzer kodi bir xil uslubda yozildi. Dasturni serverga joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi, dastur VPS serverda ishga tushirildi. Tanlangan texnologiyalar 2.1-jadvalda keltirilgan.',
   ),
   ...table(
     '2.1',
@@ -28,7 +28,7 @@ export const chapter2 = () => [
       ['Klient', 'Angular, TypeScript, RxJS', '22, 6.0, 7.8', 'SPA freymvork, tiplashtirilgan til, reaktiv oqimlar'],
       ['Klient', '@microsoft/signalr', '10.0', 'Brauzerdagi SignalR klienti'],
       ['Klient', 'Web Crypto API, IndexedDB', 'brauzer', 'Maxfiy chatlarda shifrlash va kalitlarni qurilmada saqlash'],
-      ['Infratuzilma', 'Docker, Render, Git/GitHub', '—', 'Konteynerlash, joylashtirish, versiyalar nazorati'],
+      ['Infratuzilma', 'Docker, Docker Compose, Caddy, GitHub Actions, Git/GitHub', '—', 'Konteynerlash, VPS serverga joylashtirish, HTTPS, avtomatik yangilash, versiyalar nazorati'],
     ],
     [2.2, 4, 1.8, 5],
   ),

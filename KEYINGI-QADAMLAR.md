@@ -1,4 +1,4 @@
-# Keyingi qadamlar (2026-10-19 holati)
+# Keyingi qadamlar (2026-11-14 holati)
 
 > Boshqa kompyuterda davom ettirish uchun. Asosiy branch: `master`.
 > Avvalgi rejalar: [REJA-RTM-taqriz.md](REJA-RTM-taqriz.md), umumiy yo'riqnoma: [DAVOM-ETTIRISH.md](DAVOM-ETTIRISH.md).
@@ -33,7 +33,6 @@ cd diplom/generator && npm ci
 1–3. ✅ **Bajarildi (2026-10-20):** Xulosa qisqartirildi va oxirgi betga sig'di. Kirishda hajm 91 bet deb yozildi. 91 betning hammasi ko'z bilan tekshirildi.
 4–5. ✅ **Bajarildi (2026-10-20):** III bobga (3.2) “Sekin internetga moslashuv” bo'limi qo'shildi. Unda kodda haqiqatda bor narsalar yozildi: service worker, IndexedDB kesh, outbox, delta sync, rasm siqish, xira nusxa, 360p video, MessagePack, ishlash tezligini o'lchash. 1.3'ga qo'shimcha nofunksional talablar qo'shildi. Diplom 94 bet bo'ldi. Diqqat: rahbarning 5-izohida nofunksional talablarni qisqartirish so'ralgan edi, endi esa ular biroz ko'paydi.
 8. ✅ **Humo manbalari** to'ldirildi: Kursiv Media (ishga tushirish sanasi — 2023-yil yanvar) va App Store tavsifi (200 ming kishilik guruh, 2 GB gacha fayl). Adabiyotlar 54 ta. 2024–2026-yillar bo'yicha yangi xabar topilmadi.
-9. **Joylashtirish to'g'risidagi ma'lumot eskirgan.** Diplomda (3.3 va taqdimotda) dastur Render'da ishlaydi deb yozilgan. Kodda esa endi VPS'ga deploy qilinadi: Docker Compose, Caddy, GitHub Actions (qales.uz). Matnni moslash kerak.
-10. **Testlar soni eskirgan bo'lishi mumkin.** Diplomda 425 ta server va 295 ta klient testi deyilgan, lekin keyin yangi testlar qo'shilgan (outbox, delta sync, 360p, MessagePack). `dotnet test` va `ng test` bilan qayta sanab, 3.6-jadval, 3.21-rasm, xulosa va taqdimotni yangilash kerak.
+9–10. ✅ **Bajarildi (2026-11-14):** Render o'rniga haqiqiy joylashtirish yozildi: VPS, Docker Compose (API, web, PostgreSQL), Caddy (HTTPS, qales.uz), GitHub Actions (testlar → GHCR → VPS). Bu 3.3, 2.1-jadval, 2.1, 3-bob xulosasi, umumiy xulosa va taqdimotga tegishli. Testlar qayta sanaldi: server 457 ta (3.6-jadvalga yangi qator qo'shildi: sekin internet, 8 ta sinf, 32 ta test), klient 35 ta faylda 353 ta, jami 810 ta. 3.21-rasm qayta chizildi. Diplom 95 bet. Server testlari bu kompyuterda `DOTNET_ROLL_FORWARD=Major` bilan .NET 10 da ishga tushirildi (ASP.NET Core 8 runtime o'rnatilmagan). Hali qolgan narsa: `tools/seed.mjs` dagi namunaviy chat xabarlarida "Render" so'zi bor, shuning uchun skrinshotlarda ham u ko'rinadi. Skrinshotlar qayta olinsa, buni almashtirish kerak.
 6. **Klient interfeysida “Hikoya” → “Lavha”.** Diplomda “Lavhalar” deyilgan, interfeysda hali “Hikoya” turibdi. Skrinshotlar ko'rsatiladigan bo'lsa, buni moslash kerak.
 7. **Eski taqdimotlar.** `diplom/Milliy chat — BMI himoyasi*.pptx` qo'lda tayyorlangan eski fayllar, ularda HFX hisoblari va eski ma'lumotlar qolgan. Asosiy taqdimot — `Taqdimot_Sohinazarov_Sardor.pptx`.

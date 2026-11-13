@@ -417,7 +417,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   const cols = [
     ['server', 'Server qismi', ['.NET muhiti', 'SignalR — real vaqt', 'Entity Framework — baza bilan ishlash', 'PostgreSQL — ma’lumotlar bazasi', 'Redis — onlayn holat']],
     ['monitor', 'Klient qismi', ['Angular', 'TypeScript', 'SignalR klienti', 'Google orqali kirish', 'O‘z dizayn tizimi', 'Web Crypto API — maxfiy chatlar']],
-    ['container', 'Infratuzilma', ['Docker — konteynerlash', 'Render bulut xizmati', 'Pochta — kirish kodlari', 'ClamAV — antivirus', 'Rasm va video ishlovi', 'Git va GitHub']],
+    ['container', 'Infratuzilma', ['Docker — konteynerlash', 'VPS server, Caddy — HTTPS', 'Pochta — kirish kodlari', 'ClamAV — antivirus', 'Rasm va video ishlovi', 'GitHub Actions — avtomatik yangilash']],
   ];
   const cw = (CW - 2 * 0.35) / 3;
   cols.forEach(([ic, head, items], i) => {
@@ -432,7 +432,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   s.addImage({ path: icon('check', C.ok), x: M, y: 6.23, w: 0.34, h: 0.34 });
   text(s, 'Barcha texnologiyalar ochiq kodli va bepul — litsenziya xarajati yo‘q.', { x: M + 0.5, y: 6.15, w: CW - 0.5, h: 0.5, fontSize: 15, color: C.ink, valign: 'middle' });
   s.addNotes(
-    'Server qismi .NET muhitida yozilgan, ma’lumotlar bazasi bilan Entity Framework orqali ishlanadi, baza sifatida PostgreSQL tanlangan. Xabarlar SignalR orqali real vaqtda yetkaziladi. Brauzer qismi Angular’da yozilgan. Dasturni joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi, dastur Render bulut xizmatida ishlaydi. Pochta kirish kodlarini yuboradi, ClamAV antivirusi esa yuklangan fayllarni tekshiradi. Barcha texnologiyalar ochiq kodli va bepul.',
+    'Server qismi .NET muhitida yozilgan, ma’lumotlar bazasi bilan Entity Framework orqali ishlanadi, baza sifatida PostgreSQL tanlangan. Xabarlar SignalR orqali real vaqtda yetkaziladi. Brauzer qismi Angular’da yozilgan. Dasturni joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi, dastur VPS serverda ishlaydi, GitHub Actions uni avtomatik yangilaydi. Pochta kirish kodlarini yuboradi, ClamAV antivirusi esa yuklangan fayllarni tekshiradi. Barcha texnologiyalar ochiq kodli va bepul.',
   );
 }
 
@@ -772,9 +772,9 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   const s = contentSlide(22, 'Joylashtirish va testlash');
   const stats = [
     ['104', 'REST API endpointi'],
-    ['720', 'unit test: 425 server + 295 klient'],
+    ['810', 'unit test: 457 server + 353 klient'],
     ['43', 'API integratsion tekshiruvi'],
-    ['Docker', 'Render bulutida ishlaydi'],
+    ['Docker', 'VPS serverda ishlaydi'],
   ];
   const cw = (CW - 3 * 0.3) / 4;
   stats.forEach(([big, label], i) => {
@@ -787,21 +787,21 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   terminal(s, [
     ['PS> dotnet test', '9CDCFE'],
     ['Passed!  Failed: 0', '4ADE80'],
-    ['Passed: 425, Total: 425', '4ADE80'],
+    ['Passed: 457, Total: 457', '4ADE80'],
     ['', 'D4D4D4'],
     ['PS> ng test --watch=false', '9CDCFE'],
-    ['Test Files  20 passed', '4ADE80'],
-    ['Tests      295 passed', '4ADE80'],
+    ['Test Files  35 passed', '4ADE80'],
+    ['Tests      353 passed', '4ADE80'],
   ], box.x, box.y, box.w, box.h, 15);
   text(s, [
     { text: 'Konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi', options: { bullet: true, breakLine: true } },
-    { text: 'GitHub’ga push qilinganda Render obrazni avtomatik qayta yig‘adi', options: { bullet: true, breakLine: true } },
+    { text: 'GitHub’ga push qilinganda GitHub Actions testlarni o‘tkazib, VPS’ni avtomatik yangilaydi', options: { bullet: true, breakLine: true } },
     { text: 'Maxfiy kalitlar kodda emas, muhit o‘zgaruvchilarida', options: { bullet: true, breakLine: true } },
     { text: 'xUnit va Vitest: transliteratsiya, forum, maxfiy chat protokoli, tashkilotlar, reaksiya va bloklash', options: { bullet: true, breakLine: true } },
     { text: 'Swagger UI orqali API hujjatlari va qo‘lda sinov', options: { bullet: true } },
   ], { x: M, y: 3.3, w: box.x - M - 0.4, h: 3.4, fontSize: 15, color: C.text, paraSpaceAfter: 9, valign: 'top' });
   s.addNotes(
-    'Server 104 ta API manzil va ikkita jonli aloqa markazidan iborat. Dasturni joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi, dastur Render bulut xizmatida ishlaydi. GitHub’ga yangi kod yuklanganda dastur avtomatik yangilanadi, maxfiy kalitlar esa kodda emas, server sozlamalarida saqlanadi. Dastur 720 ta avtomatik test bilan tekshirildi: serverda 425 ta, brauzer qismida 295 ta, hammasi muvaffaqiyatli o‘tdi. Bundan tashqari, 43 ta qo‘shimcha tekshiruv va qo‘lda sinovlar o‘tkazildi.',
+    'Server 104 ta API manzil va ikkita jonli aloqa markazidan iborat. Dasturni joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi, dastur VPS serverda ishlaydi. GitHub’ga yangi kod yuklanganda GitHub Actions avval testlarni o‘tkazadi, keyin dasturni avtomatik yangilaydi, maxfiy kalitlar esa kodda emas, server sozlamalarida saqlanadi. Dastur 810 ta avtomatik test bilan tekshirildi: serverda 457 ta, brauzer qismida 353 ta, hammasi muvaffaqiyatli o‘tdi. Bundan tashqari, 43 ta qo‘shimcha tekshiruv va qo‘lda sinovlar o‘tkazildi.',
   );
 }
 
@@ -838,7 +838,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   const s = contentSlide(24, 'Xulosa va istiqbollar');
   const results = [
     'Beshta messenjer, jumladan Humo tahlil qilindi, SignalR tanlandi',
-    '43 jadval, 104 API manzil, 720 ta test',
+    '43 jadval, 104 API manzil, 810 ta test',
     'Chatlar, guruhlar, reaksiyalar, lavhalar, forum — real vaqtda',
     'Lotin↔kirill ko‘rinish va ikkala yozuvda qidiruv',
     'Tashkilot rejimi va maxfiy chatlar',

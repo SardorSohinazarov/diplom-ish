@@ -86,7 +86,7 @@ export const chapter1 = () => [
     'sekin internetda ham ishlaydi. Rasmlar yuborishdan oldin siqiladi, videolar yengil nusxada beriladi, internet uzilganda yozilgan xabarlar navbatda turadi va aloqa tiklanishi bilan yuboriladi;',
     'xavfsizlik. Foydalanuvchi qaysi qurilmalardan kirilganini ko‘radi va begonasini chiqarib yuboradi, keraksiz odamni bloklaydi, yuklangan fayllar antivirus bilan tekshiriladi, kodlar va tokenlar bazada ochiq holda saqlanmaydi;',
     'kengaytirish oson. Foydalanuvchilar ko‘paysa, bir vaqtda bir nechta server ishga tushirish mumkin. Docker tufayli tizimni istalgan serverga tez ko‘chirish mumkin;',
-    'ishonchlilik. Tizim 700 dan ortiq avtomatik test va qo‘lda o‘tkazilgan sinovlar bilan tekshirilgan.',
+    'ishonchlilik. Tizim 800 dan ortiq avtomatik test va qo‘lda o‘tkazilgan sinovlar bilan tekshirilgan.',
   ]),
 
   // ───────────────────────────────── 1.2
