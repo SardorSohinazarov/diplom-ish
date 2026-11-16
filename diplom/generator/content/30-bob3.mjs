@@ -4,7 +4,7 @@ export const chapter3 = () => [
   h1('III bob. “Milliy” xabarchini ishlab chiqish'),
 
   // ───────────────────────────────── 3.1
-  h2('III.1. Server qismini ishlab chiqish'),
+  h2('3.1. Server qismini ishlab chiqish'),
   h3('Server tuzilmasi va REST API.'),
   ...ps(
     'Server dasturi to‘rt qismdan (Domain, Application, Infrastructure, API) va testlar loyihasidan iborat. Dastur ishga tushadigan asosiy fayl — Program.cs juda qisqa [31]. U faqat har bir so‘rov qanday tartibda ishlanishini belgilaydi: avval xatolar ushlanadi, so‘ng xavfsizlik sozlamalari qo‘llanadi, foydalanuvchi kimligi va huquqi tekshiriladi, keyin so‘rov kerakli joyga yo‘naltiriladi. Har bir imkoniyatning sozlamalari alohida faylga ajratilgan. Shuning uchun yangi imkoniyat qo‘shilganda bu fayl o‘zgarmaydi: forum, reaksiyalar va bloklash ham mavjud kodga tegmasdan qo‘shildi.',
@@ -223,7 +223,7 @@ export const chapter3 = () => [
   ...figure('3-28-db-secret-messages.png', '3.12', 'secret_messages jadvali: serverda faqat yetkazilmagan shifrlangan blob saqlanadi', 16),
 
   // ───────────────────────────────── 3.2
-  h2('III.2. Klient qismi va foydalanuvchi imkoniyatlari'),
+  h2('3.2. Klient qismi va foydalanuvchi imkoniyatlari'),
   h3('Klient ilovasining tuzilishi.'),
   ...ps(
     'Brauzerdagi ilova Angular komponentlaridan tashkil topgan [32]. Unda 41 ta komponent va 92 ta TypeScript fayl bor. Ilovada to‘rtta asosiy sahifa bor: kirish (/auth), chatlar (/chat), forum (/forum) va taklif havolasi orqali qo‘shilish (/join). Forum ichida lenta, post muhokamasi, foydalanuvchi profili va bildirishnomalar sahifalari joylashgan. Chat va forum sahifalarini faqat tizimga kirgan odam ochadi, kirish sahifasini esa faqat hali kirmagan odam ko‘radi. Har bir sahifaning kodi faqat kerak bo‘lganda yuklanadi. Masalan, forumga kirmagan foydalanuvchining brauzeriga forum kodi umuman yuklanmaydi.',
@@ -297,7 +297,7 @@ export const chapter3 = () => [
   ),
 
   // ───────────────────────────────── 3.3
-  h2('III.3. Joylashtirish, testlash va foydalanish yo‘riqnomasi'),
+  h2('3.3. Joylashtirish, testlash va foydalanish yo‘riqnomasi'),
   h3('Joylashtirish.'),
   p(
     'Dasturni serverga joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi [34]. Konteyner dasturni unga kerak bo‘lgan hamma narsa bilan birga bitta paketga joylaydi, shuning uchun dastur istalgan serverda bir xil ishlaydi. Tayyor konteynerda faqat ishlaydigan dastur bo‘ladi, uning manba kodi bo‘lmaydi. Dastur VPS serverda ishlaydi va qales.uz manzilida ochiladi. Serverda uchta konteyner bor: server qismi, brauzer qismi va PostgreSQL bazasi. Ular Docker Compose yordamida birga boshqariladi. Baza tashqi tarmoqqa ochilmagan, unga faqat server qismi ulanadi. Foydalanuvchidan kelgan so‘rovlarni Caddy veb-serveri qabul qiladi: u HTTPS sertifikatini o‘zi oladi va so‘rovni kerakli konteynerga uzatadi. GitHub’ga yangi kod yuklanganda GitHub Actions avval barcha testlarni ishga tushiradi. Testlar o‘tsa, yangi konteyner yig‘iladi va serverda faqat o‘zgargan qism yangilanadi. Testlardan biri o‘tmasa, yangilanish to‘xtaydi va eski versiya ishlashda davom etadi. Yangilangandan keyin server qismi ishlayotgani maxsus manzil (/health) orqali tekshiriladi. Bazaga ulanish ma’lumotlari va maxfiy kalitlar kodda emas, server sozlamalarida saqlanadi. Dasturni yangi kompyuterda ishga tushirish uchun namunaviy sozlamalar fayli bor: uni nusxalab, ma’lumotlar bazasini tayyorlash kifoya.',
@@ -437,7 +437,7 @@ export const chapter3 = () => [
     'Maxfiy chat faqat u ochilgan qurilmada ishlaydi. Boshqa qurilmadan bu yozishmalarni ko‘rib bo‘lmaydi.',
   ]),
 
-  h2('III.4. Amaliy joriy etish va rivojlantirish istiqbollari'),
+  h2('3.4. Amaliy joriy etish va rivojlantirish istiqbollari'),
   h3('Amaliy joriy etish.'),
   ...ps(
     'Bitiruv malakaviy ishida yaratilgan chat texnologiyasi real loyihada ham qo‘llanildi. Uning asosida Elektron kooperatsiya portali uchun chat moduli ishlab chiqildi. Bu portal kompaniyalarning o‘zaro hamkorligi uchun mo‘ljallangan, chat moduli esa kompaniyalarga portalning o‘zida bir-biri bilan yozishish imkonini beradi.',

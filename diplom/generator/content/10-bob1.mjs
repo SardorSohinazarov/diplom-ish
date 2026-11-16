@@ -4,7 +4,7 @@ export const chapter1 = () => [
   h1('I bob. Zamonaviy messenjerlar va milliy messenjer yaratish zaruriyati'),
 
   // ───────────────────────────────── 1.1
-  h2('I.1. Messenjerlarning rivojlanishi va mavjud messenjerlar tahlili'),
+  h2('1.1. Messenjerlarning rivojlanishi va mavjud messenjerlar tahlili'),
   ...ps(
     'Messenjer (ingl. instant messenger) — Internet orqali matn, ovoz, video va fayllarni deyarli bir zumda yetkazadigan dastur. Elektron pochtadan farqi shundaki, messenjerda muloqot jonli suhbatga o‘xshaydi: xabar darhol yetib boradi, yozgan odam esa suhbatdoshi onlayn ekanini, xabarni o‘qiganini yoki javob yozayotganini ko‘rib turadi.',
     'Birinchi ommaviy chat tizimi 1988-yilda paydo bo‘lgan IRC edi. 1996-yilda chiqqan ICQ “kontaktlar ro‘yxati” va “onlayn” tushunchalarini ommalashtirdi. 1999-yilda boshlangan Jabber loyihasi esa XMPP nomli ochiq standartga asos bo‘ldi. Smartfonlar tarqalgach, 2009-yilda WhatsApp foydalanuvchini telefon raqami orqali tanishni joriy qildi va messenjerni SMS’ning bepul o‘rinbosariga aylantirdi. 2013-yilda chiqqan Telegram yozishmalarni serverda saqlab, ularni istalgan qurilmadan ochish imkonini berdi. 2014-yilda paydo bo‘lgan Signal esa kuchli shifrlash usulini taklif qildi, keyinchalik bu usulni WhatsApp ham qabul qildi [15, 36].',
@@ -90,7 +90,7 @@ export const chapter1 = () => [
   ]),
 
   // ───────────────────────────────── 1.2
-  h2('I.2. Axborot xavfsizligi va real vaqtda aloqa texnologiyalari'),
+  h2('1.2. Axborot xavfsizligi va real vaqtda aloqa texnologiyalari'),
   h3('Ma’lumotlar lokalizatsiyasi.'),
   ...ps(
     'Messenjer odam haqidagi eng shaxsiy ma’lumotlarni saqlaydi: yozishmalar, fayllar, kontaktlar, kim bilan qachon gaplashgani, qaysi qurilma va qaysi manzildan kirgani. Xorijiy messenjerdan foydalanganda bu ma’lumotlar bir necha xavf ostida qoladi.',
@@ -124,7 +124,7 @@ export const chapter1 = () => [
   ),
 
   // ───────────────────────────────── 1.3
-  h2('I.3. Masalaning qo‘yilishi'),
+  h2('1.3. Masalaning qo‘yilishi'),
   p(
     'Tahlil natijasida quyidagi vazifa qo‘yildi: Telegram namunasida brauzerda ishlaydigan, ma’lumotlarni o‘z serverida saqlaydigan va xabarlarni real vaqtda yetkazadigan “Milliy” xabarchini yaratish. Tizimdan uch toifadagi foydalanuvchi foydalanadi: hali tizimga kirmagan **mehmon**, ro‘yxatdan o‘tgan **foydalanuvchi** va guruhni boshqaradigan **guruh administratori**.',
   ),

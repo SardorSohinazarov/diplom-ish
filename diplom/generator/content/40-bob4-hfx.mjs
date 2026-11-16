@@ -11,7 +11,7 @@ export const chapter4 = () => [
   ),
 
   // ───────────────────────────────── 4.1
-  h2('IV.1. Dasturchining ergonomik ish joyini tashkil etish'),
+  h2('4.1. Dasturchining ergonomik ish joyini tashkil etish'),
   ...ps(
     'Ergonomika talablarining mohiyati shundaki, xodim jihozga moslashmasligi, aksincha, stol, stul va monitor xodimning bo‘yi va tana tuzilishiga qarab sozlanishi kerak. Dasturchi uchun bu ayniqsa muhim: uning ishi jismonan yengil ko‘rinsa-da, soatlab bir holatda qimirlamay o‘tirish va ekrandagi mayda matnga diqqatni jamlashni talab qiladi. Bunday yuklama bir kunda sezilmaydi, lekin oylar davomida to‘planib, sog‘liqqa ta’sir qiladi.',
     'Messenjer ishlab chiqish jarayonining xususiyatlaridan kelib chiqib, quyidagi xavfli va zararli omillarni ajratish mumkin:',
@@ -85,7 +85,7 @@ export const chapter4 = () => [
   ),
 
   // ───────────────────────────────── 4.2
-  h2('IV.2. Evakuatsiya tadbirlarini rejalashtirish hamda avariya va yong‘inlar sodir bo‘lganda xodimlarning harakatlari'),
+  h2('4.2. Evakuatsiya tadbirlarini rejalashtirish hamda avariya va yong‘inlar sodir bo‘lganda xodimlarning harakatlari'),
   ...ps(
     'Ofis uchun favqulodda vaziyat — odamlar hayoti yoki sog‘lig‘iga xavf tug‘diradigan va odatiy ish tartibini buzadigan har qanday hodisa. Dasturchilar ofisida bular, avvalo, yong‘in va zilzila (Toshkent seysmik faol hududda joylashgan), shuningdek elektr ta’minotidagi avariya, quvur yorilishi va gaz sizishidir. Bu vaziyatlarning deyarli barchasida odamlarni saqlab qolishning eng ishonchli yo‘li ularni binodan tez va tartib bilan chiqarishdir.',
     'Asosiy talablar mehnatni muhofaza qilish to‘g‘risidagi qonun hujjatlari va GOST 12.1.004-91 standarti bilan belgilanadi [3].',

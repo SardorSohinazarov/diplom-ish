@@ -4,7 +4,7 @@ export const chapter2 = () => [
   h1('II bob. “Milliy” xabarchini loyihalash'),
 
   // ───────────────────────────────── 2.1
-  h2('II.1. Texnologiyalar tanlovi va tizim arxitekturasi'),
+  h2('2.1. Texnologiyalar tanlovi va tizim arxitekturasi'),
   h3('Texnologiyalarni tanlash.'),
   ...ps(
     'Texnologiyalarni tanlashda bir necha talab qo‘yildi. Ular server va brauzer o‘rtasida ikki tomonlama jonli aloqani qo‘llashi, tez ishlashi va tayyor xavfsizlik vositalariga ega bo‘lishi kerak edi. Shuningdek, ular ommabop, ochiq litsenziyali va serverga oson joylashtiriladigan bo‘lishi lozim edi.',
@@ -53,7 +53,7 @@ export const chapter2 = () => [
   ),
 
   // ───────────────────────────────── 2.2
-  h2('II.2. Ma’lumotlar bazasi va UML modellari'),
+  h2('2.2. Ma’lumotlar bazasi va UML modellari'),
   h3('Ma’lumotlar bazasini loyihalash.'),
   p(
     'Ma’lumotlar bazasi “avval kod” (code-first) usulida loyihalandi. Ya’ni avval dasturda obyektlar yoziladi, bazadagi jadvallar esa ular asosida avtomatik yaratiladi. Baza tuzilishidagi har bir o‘zgarish alohida qadam (migratsiya) sifatida saqlanadi, shuning uchun bazani istalgan paytda kerakli holatga keltirish mumkin [30]. Bazada 43 ta jadval bor, ular vazifasiga qarab o‘n bitta guruhga (sxemaga) ajratilgan [33] (2.2-jadval). Jadvallarning bir qismi kelgusidagi imkoniyatlar uchun oldindan tayyorlab qo‘yilgan: kanallar, qo‘ng‘iroqlar, stikerlar, botlar va so‘rovnomalar.',
@@ -144,7 +144,7 @@ export const chapter2 = () => [
   ...figure('2-14-organization-join.png', '2.11', 'Foydalanuvchini tashkilotga va uning domen guruhiga qo‘shish algoritmi', 16, 8),
 
   // ───────────────────────────────── 2.3
-  h2('II.3. Xavfsizlik va maxfiy chatlar protokoli'),
+  h2('2.3. Xavfsizlik va maxfiy chatlar protokoli'),
   h3('Xavfsizlikni loyihalash.'),
   ...ps(
     'Tizimda parol yo‘q, shuning uchun parolni o‘g‘irlash yoki taxmin qilish xavfi ham yo‘q. Bir martalik kodlar bazada kuchli xeshlash usuli (PBKDF2) bilan saqlanadi [19, 20]. Google orqali kirishda server Google bergan tasdiqning haqiqiyligini va muddatini tekshiradi.',
