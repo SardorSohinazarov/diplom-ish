@@ -53,8 +53,11 @@ if (only && !parts.some(([key]) => key === only)) {
   process.exit(1);
 }
 
+// 1–4-betlar (titul, topshiriq, mazmunnoma) raqamsiz, ko'rinadigan raqam mundarijadan (5-bet) boshlanadi.
+const UNNUMBERED = new Set(['annotatsiya']);
+const pre = [];
 const main = [];
-for (const [key, build] of parts) if (!only || key === only) main.push(...(await build()));
+for (const [key, build] of parts) if (!only || key === only) (UNNUMBERED.has(key) ? pre : main).push(...(await build()));
 moveParagraphsAboveFigures(main);
 if (process.env.FIGURE_REPORT) fs.writeFileSync(process.env.FIGURE_REPORT, JSON.stringify(figureReport(main)));
 
@@ -136,9 +139,11 @@ const doc = new Document({
   },
   numbering: numberingConfig,
   sections: [
-    // Title and assignment pages: counted, but no visible page number.
-    ...(only ? [] : [{ properties: { page }, children: [...titlePage(), ...assignmentPages()] }]),
-    { properties: { page }, footers, children: main },
+    // Titul, topshiriq va mazmunnoma: sanaladi, lekin raqami ko'rinmaydi.
+    ...((only ? pre : [...titlePage(), ...assignmentPages(), ...pre]).length
+      ? [{ properties: { page }, children: only ? pre : [...titlePage(), ...assignmentPages(), ...pre] }]
+      : []),
+    ...(main.length ? [{ properties: { page }, footers, children: main }] : []),
   ],
 });
 

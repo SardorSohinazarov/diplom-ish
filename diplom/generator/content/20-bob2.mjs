@@ -1,15 +1,15 @@
-import { bullets, figure, h1, h2, h3, p, ps, table } from '../lib.mjs';
+import { bullets, figure, figureRow, h1, h2, h3, p, ps, table } from '../lib.mjs';
 
 export const chapter2 = () => [
-  h1('II-bob. “Milliy” xabarchini loyihalash'),
+  h1('II bob. “Milliy” xabarchini loyihalash'),
 
   // ───────────────────────────────── 2.1
-  h2('2.1. Texnologiyalar tanlovi va tizim arxitekturasi'),
+  h2('II.1. Texnologiyalar tanlovi va tizim arxitekturasi'),
   h3('Texnologiyalarni tanlash.'),
   ...ps(
     'Texnologiyalarni tanlashda bir necha talab qo‘yildi. Ular server va brauzer o‘rtasida ikki tomonlama jonli aloqani qo‘llashi, tez ishlashi va tayyor xavfsizlik vositalariga ega bo‘lishi kerak edi. Shuningdek, ular ommabop, ochiq litsenziyali va serverga oson joylashtiriladigan bo‘lishi lozim edi.',
-    'Server qismi .NET muhitida yozildi [15, 17, 22]. U Windows’da ham, Linux’da ham ishlaydi va mustaqil sinovlarda eng tez veb-platformalar qatoriga kiradi. Muqobil sifatida Node.js va Spring Boot ham ko‘rib chiqildi. Hal qiluvchi omil SignalR kutubxonasi bo‘ldi: u .NET tarkibiga kiradi va jonli aloqa uchun kerak bo‘lgan hamma narsani qo‘shimcha kutubxonalarsiz beradi. Ma’lumotlar PostgreSQL bazasida saqlanadi. Bu ishonchli, bepul va murakkab so‘rovlarni yaxshi bajaradigan baza. Dastur u bilan Entity Framework orqali ishlaydi: jadvallar bilan oddiy C# obyektlari kabi ishlash mumkin, SQL so‘rovlarini qo‘lda yozish shart emas [16, 18].',
-    'Brauzerdagi qism Angular’da yozildi [24, 43]. Angular sahifalar orasida o‘tish, formalar va server bilan aloqa uchun hamma vositani bitta to‘plamda beradi. U TypeScript tilida yoziladi. Bu til C# ga o‘xshash bo‘lgani uchun server va brauzer kodi bir xil uslubda yozildi. Dasturni serverga joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi, dastur VPS serverda ishga tushirildi. Tanlangan texnologiyalar 2.1-jadvalda keltirilgan.',
+    'Server qismi .NET muhitida yozildi [7, 9, 12]. U Windows’da ham, Linux’da ham ishlaydi va mustaqil sinovlarda eng tez veb-platformalar qatoriga kiradi. Muqobil sifatida Node.js va Spring Boot ham ko‘rib chiqildi. Hal qiluvchi omil SignalR kutubxonasi bo‘ldi: u .NET tarkibiga kiradi va jonli aloqa uchun kerak bo‘lgan hamma narsani qo‘shimcha kutubxonalarsiz beradi. Ma’lumotlar PostgreSQL bazasida saqlanadi. Bu ishonchli, bepul va murakkab so‘rovlarni yaxshi bajaradigan baza. Dastur u bilan Entity Framework orqali ishlaydi: jadvallar bilan oddiy C# obyektlari kabi ishlash mumkin, SQL so‘rovlarini qo‘lda yozish shart emas [8, 10].',
+    'Brauzerdagi qism Angular’da yozildi [13, 32]. Angular sahifalar orasida o‘tish, formalar va server bilan aloqa uchun hamma vositani bitta to‘plamda beradi. U TypeScript tilida yoziladi. Bu til C# ga o‘xshash bo‘lgani uchun server va brauzer kodi bir xil uslubda yozildi. Dasturni serverga joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi, dastur VPS serverda ishga tushirildi. Tanlangan texnologiyalar 2.1-jadvalda keltirilgan.',
   ),
   ...table(
     '2.1',
@@ -36,27 +36,27 @@ export const chapter2 = () => [
   h3('Tizim arxitekturasi.'),
   ...ps(
     '“Milliy” xabarchi ikki qismdan iborat: foydalanuvchi brauzerida ishlaydigan ilova va server (2.1-rasm). Ular ikki xil yo‘l bilan aloqa qiladi. Foydalanuvchi biror amal bajarganda, masalan, xabar yuborganda, profilini o‘zgartirganda yoki guruh yaratganda, brauzer serverga oddiy so‘rov yuboradi (REST API). Server esa yangi xabar, “o‘qildi” belgisi, “yozmoqda” holati kabi hodisalarni doimiy ochiq SignalR ulanishi orqali darhol yetkazadi. Tizim uchta tashqi xizmatdan ham foydalanadi: pochta serveri kirish kodlarini yuboradi, Google hisob orqali kirishni tasdiqlaydi, ClamAV antivirusi esa yuklangan fayllarni tekshiradi.',
-    'Server foydalanuvchi haqidagi vaqtinchalik ma’lumotni o‘z xotirasida saqlamaydi. Kirishlar haqidagi yozuvlar bazada, foydalanuvchining kimligi esa har bir so‘rov bilan keladigan tokenda turadi. Shu sababli kerak bo‘lganda bir vaqtda bir nechta server ishga tushirish mumkin. Bunda faqat onlayn holat va jonli ulanishlarni Redis orqali umumlashtirish kifoya [12].',
+    'Server foydalanuvchi haqidagi vaqtinchalik ma’lumotni o‘z xotirasida saqlamaydi. Kirishlar haqidagi yozuvlar bazada, foydalanuvchining kimligi esa har bir so‘rov bilan keladigan tokenda turadi. Shu sababli kerak bo‘lganda bir vaqtda bir nechta server ishga tushirish mumkin. Bunda faqat onlayn holat va jonli ulanishlarni Redis orqali umumlashtirish kifoya [6].',
   ),
   ...figure('2-2-deployment.png', '2.1', 'Tizimning umumiy arxitekturasi va joylashtirish sxemasi', 16.5),
   ...ps(
-    'Server kodi Robert Martin taklif qilgan Clean Architecture (“toza arxitektura”) tamoyillari asosida to‘rt qismga bo‘lingan (2.2-rasm). Asosiy qoida oddiy: ichki qismlar tashqi qismlar haqida hech narsa bilmaydi. Natijada dasturning asosiy qoidalari bazani yoki boshqa texnologiyani almashtirganda o‘zgarmaydi va ularni alohida sinash mumkin [10].',
+    'Server kodi Robert Martin taklif qilgan Clean Architecture (“toza arxitektura”) tamoyillari asosida to‘rt qismga bo‘lingan (2.2-rasm). Asosiy qoida oddiy: ichki qismlar tashqi qismlar haqida hech narsa bilmaydi. Natijada dasturning asosiy qoidalari bazani yoki boshqa texnologiyani almashtirganda o‘zgarmaydi va ularni alohida sinash mumkin [5].',
   ),
   ...figure('2-1-clean-architecture.png', '2.2', 'Server qismining Clean Architecture qatlamlari', 15.5),
   ...ps(
-    'Eng ichki qism — Domain. Unda dasturning asosiy tushunchalari tasvirlangan: foydalanuvchi, chat, xabar, reaksiya, lavha, post, tashkilot, maxfiy chat va boshqalar. Lotin–kirill o‘girish algoritmi ham shu yerda. Bu qism boshqa hech qaysi qismga bog‘liq emas [14].',
+    'Eng ichki qism — Domain. Unda dasturning asosiy tushunchalari tasvirlangan: foydalanuvchi, chat, xabar, reaksiya, lavha, post, tashkilot, maxfiy chat va boshqalar. Lotin–kirill o‘girish algoritmi ham shu yerda. Bu qism boshqa hech qaysi qismga bog‘liq emas [5].',
     'Ikkinchi qism — Application. U foydalanuvchi bajaradigan amallarni bajaradi: xabar yuborish, guruh yaratish, forumda post yozish va hokazo. Kod vazifalar bo‘yicha guruhlangan: chatlar, guruhlar, xabarlar, bloklash, forum, tashkilotlar, maxfiy chatlar. Bu qism ma’lumot bazaga qanday yozilishini yoki xat qanday yuborilishini bilmaydi, faqat “saqla”, “xat yubor” kabi buyruqlarni beradi.',
-    'Uchinchi qism — Infrastructure. U bu buyruqlarni amalda bajaradi: ma’lumotlar bazasi bilan ishlaydi [13], kodlar va tokenlarni xeshlaydi, pochta yuboradi, fayllarni antivirusda tekshiradi, rasm va videolarni qayta ishlaydi, fonda ishlaydigan vazifalarni bajaradi.',
+    'Uchinchi qism — Infrastructure. U bu buyruqlarni amalda bajaradi: ma’lumotlar bazasi bilan ishlaydi [5], kodlar va tokenlarni xeshlaydi, pochta yuboradi, fayllarni antivirusda tekshiradi, rasm va videolarni qayta ishlaydi, fonda ishlaydigan vazifalarni bajaradi.',
     'To‘rtinchi, eng tashqi qism — API. U brauzerdan keladigan so‘rovlarni qabul qiladi va ikkita jonli aloqa markazini boshqaradi: biri chatlar uchun (ChatHub), ikkinchisi forum uchun (ForumHub).',
     'Bu bo‘linishning foydasini bitta misolda ko‘rish mumkin. Xabar saqlangach, Application qismi faqat “chat a’zolariga xabar ber” buyrug‘ini beradi. Xabar SignalR orqali qanday yetkazilishini esa API qismi hal qiladi. Bundan tashqari, bildirishnoma xabar bazaga muvaffaqiyatli yozilgandan keyingina yuboriladi. Shuning uchun foydalanuvchi hech qachon saqlanmay qolgan xabar haqida bildirishnoma olmaydi.',
     'Brauzerdagi Angular ilovasi ham qismlarga bo‘lingan. core papkasida tizimga kirish, tokenni yangilash va sahifalarga ruxsat berish bilan bog‘liq kod joylashgan. features/chat papkasida chat bilan ishlaydigan kod bor: bir xizmat serverga so‘rov yuboradi, ikkinchisi jonli ulanishni boshqaradi. Maxfiy chatlarning shifrlash kodi alohida modulga ajratilgan. shared papkasida esa lotin–kirill o‘girish va interfeysning umumiy elementlari turadi. Barcha ranglar bir joyda belgilangani uchun yorug‘ va qorong‘i ko‘rinish o‘rtasida o‘tish oson.',
   ),
 
   // ───────────────────────────────── 2.2
-  h2('2.2. Ma’lumotlar bazasi va UML modellari'),
+  h2('II.2. Ma’lumotlar bazasi va UML modellari'),
   h3('Ma’lumotlar bazasini loyihalash.'),
   p(
-    'Ma’lumotlar bazasi “avval kod” (code-first) usulida loyihalandi. Ya’ni avval dasturda obyektlar yoziladi, bazadagi jadvallar esa ular asosida avtomatik yaratiladi. Baza tuzilishidagi har bir o‘zgarish alohida qadam (migratsiya) sifatida saqlanadi, shuning uchun bazani istalgan paytda kerakli holatga keltirish mumkin [41]. Bazada 43 ta jadval bor, ular vazifasiga qarab o‘n bitta guruhga (sxemaga) ajratilgan [44] (2.2-jadval). Jadvallarning bir qismi kelgusidagi imkoniyatlar uchun oldindan tayyorlab qo‘yilgan: kanallar, qo‘ng‘iroqlar, stikerlar, botlar va so‘rovnomalar.',
+    'Ma’lumotlar bazasi “avval kod” (code-first) usulida loyihalandi. Ya’ni avval dasturda obyektlar yoziladi, bazadagi jadvallar esa ular asosida avtomatik yaratiladi. Baza tuzilishidagi har bir o‘zgarish alohida qadam (migratsiya) sifatida saqlanadi, shuning uchun bazani istalgan paytda kerakli holatga keltirish mumkin [30]. Bazada 43 ta jadval bor, ular vazifasiga qarab o‘n bitta guruhga (sxemaga) ajratilgan [33] (2.2-jadval). Jadvallarning bir qismi kelgusidagi imkoniyatlar uchun oldindan tayyorlab qo‘yilgan: kanallar, qo‘ng‘iroqlar, stikerlar, botlar va so‘rovnomalar.',
   ),
   ...table(
     '2.2',
@@ -92,7 +92,7 @@ export const chapter2 = () => [
   h3('Loyihalash qarorlari.'),
   ...ps(
     'Bazani loyihalashda bir nechta muhim qaror qabul qilindi. Barcha vaqtlar yagona jahon vaqtida (UTC) saqlanadi va faqat foydalanuvchi ekranida uning mahalliy vaqtiga o‘giriladi. O‘chirilgan chat va xabarlar bazadan darhol yo‘qolmaydi, balki “o‘chirilgan” deb belgilanadi va so‘rovlarda avtomatik ravishda chiqarib tashlanadi. Guruhda har bir a’zo nechta xabarni o‘qimagani alohida hisoblanadi. Fayllarning o‘zi diskda, bazada esa faqat ular haqidagi ma’lumot saqlanadi. Bitta fayl xabarga biriktirma, profil rasmi, lavha yoki forum posti sifatida qayta ishlatilishi mumkin. Tez-tez qidiriladigan ustunlar, masalan e-pochta va foydalanuvchi nomi uchun indekslar qo‘yilgan.',
-    'Chatlar ro‘yxati va xabarlar tarixini yuklash uchun kursorli sahifalash tanlandi. Oddiy usulda dastur “51-xabardan boshlab 50 tasini ber” deb so‘raydi. Lekin bu orada yangi xabar kelsa, ro‘yxat siljiydi va bitta xabar ikki marta ko‘rinadi. Bundan tashqari, tarix uzaygan sari bunday so‘rov sekinlashadi. Kursorli usulda esa dastur “shu xabardan oldingi 50 tasini ber” deb so‘raydi. Server bitta ortiqcha xabar o‘qib, yana xabar bor-yo‘qligini ham aytadi. Bu usulda so‘rov tezligi tarix qanchalik uzunligiga bog‘liq emas [12].',
+    'Chatlar ro‘yxati va xabarlar tarixini yuklash uchun kursorli sahifalash tanlandi. Oddiy usulda dastur “51-xabardan boshlab 50 tasini ber” deb so‘raydi. Lekin bu orada yangi xabar kelsa, ro‘yxat siljiydi va bitta xabar ikki marta ko‘rinadi. Bundan tashqari, tarix uzaygan sari bunday so‘rov sekinlashadi. Kursorli usulda esa dastur “shu xabardan oldingi 50 tasini ber” deb so‘raydi. Server bitta ortiqcha xabar o‘qib, yana xabar bor-yo‘qligini ham aytadi. Bu usulda so‘rov tezligi tarix qanchalik uzunligiga bog‘liq emas [6].',
   ),
   p(
     'Forum jadvallari alohida forum sxemasida joylashgan (2.6-rasm). Post, unga javob, repost va iqtibos bitta posts jadvalida saqlanadi va qaysi postga bog‘langani bilan farqlanadi. Har bir javobda muhokama boshlangan birinchi postga havola bor, shuning uchun butun muhokamani bitta so‘rov bilan o‘qish mumkin. Layklar, javoblar, repostlar va ko‘rishlar soni postning o‘zida saqlanadi. Shu tufayli lentani ko‘rsatishda har bir post uchun bu sonlarni qayta sanash shart emas. Postning “mashhurlik bahosi” ham shu yerda saqlanadi va top lentadagi tartibni belgilaydi.',
@@ -107,7 +107,7 @@ export const chapter2 = () => [
   ),
   h3('Tizimning UML modellari.'),
   p(
-    'Tizim nimalar qila olishi va asosiy jarayonlar UML diagrammalari bilan tasvirlandi [20]. Tizimdan uch toifadagi foydalanuvchi foydalanadi. Mehmon faqat ro‘yxatdan o‘tishi yoki tizimga kirishi mumkin. Foydalanuvchi profilini boshqaradi, yozishadi, fayl va lavhalar almashadi, xabarlarga munosabat bildiradi, forumda yozadi, guruh va maxfiy chat ochadi, keraksiz odamni bloklaydi. Guruh administratori yoki egasi bularning hammasini qila oladi, bundan tashqari guruh a’zolari, sozlamalari va taklif havolasini boshqaradi (2.8-rasm). Guruhdagi huquqlar 2.3-jadvalda keltirilgan. Huquqlar serverda tekshiriladi, interfeys esa foydalanuvchiga ruxsat berilmagan tugmalarni umuman ko‘rsatmaydi.',
+    'Tizim nimalar qila olishi va asosiy jarayonlar UML diagrammalari bilan tasvirlandi. Tizimdan uch toifadagi foydalanuvchi foydalanadi. Mehmon faqat ro‘yxatdan o‘tishi yoki tizimga kirishi mumkin. Foydalanuvchi profilini boshqaradi, yozishadi, fayl va lavhalar almashadi, xabarlarga munosabat bildiradi, forumda yozadi, guruh va maxfiy chat ochadi, keraksiz odamni bloklaydi. Guruh administratori yoki egasi bularning hammasini qila oladi, bundan tashqari guruh a’zolari, sozlamalari va taklif havolasini boshqaradi (2.8-rasm). Guruhdagi huquqlar 2.3-jadvalda keltirilgan. Huquqlar serverda tekshiriladi, interfeys esa foydalanuvchiga ruxsat berilmagan tugmalarni umuman ko‘rsatmaydi.',
   ),
   ...table(
     '2.3',
@@ -144,11 +144,11 @@ export const chapter2 = () => [
   ...figure('2-14-organization-join.png', '2.11', 'Foydalanuvchini tashkilotga va uning domen guruhiga qo‘shish algoritmi', 16, 8),
 
   // ───────────────────────────────── 2.3
-  h2('2.3. Xavfsizlik va maxfiy chatlar protokoli'),
+  h2('II.3. Xavfsizlik va maxfiy chatlar protokoli'),
   h3('Xavfsizlikni loyihalash.'),
   ...ps(
-    'Tizimda parol yo‘q, shuning uchun parolni o‘g‘irlash yoki taxmin qilish xavfi ham yo‘q. Bir martalik kodlar bazada kuchli xeshlash usuli (PBKDF2) bilan saqlanadi [30, 31]. Google orqali kirishda server Google bergan tasdiqning haqiqiyligini va muddatini tekshiradi.',
-    'Tizimga kirgandan keyin foydalanuvchiga ikkita token beriladi. Birinchisi 15 daqiqa amal qiladi va har bir so‘rov bilan yuboriladi [29]. Ikkinchisi 30 kun amal qiladi va faqat birinchisining muddati tugaganda uni yangilash uchun ishlatiladi. Ikkinchi token brauzerning himoyalangan joyida saqlanadi, u yerdan saytdagi skriptlar uni o‘qiy olmaydi. Bazaga uning faqat xeshi yoziladi va u har safar ishlatilganda yangisiga almashtiriladi. Har bir kirish alohida sessiya hisoblanadi, shuning uchun foydalanuvchi begona qurilmani masofadan chiqarib yuborishi mumkin. Biror chat bilan bog‘liq har bir so‘rovda server foydalanuvchi haqiqatan shu chat a’zosi ekanini tekshiradi. Asosiy xavflar va ulardan himoya choralari 2.4-jadvalda keltirilgan [39].',
+    'Tizimda parol yo‘q, shuning uchun parolni o‘g‘irlash yoki taxmin qilish xavfi ham yo‘q. Bir martalik kodlar bazada kuchli xeshlash usuli (PBKDF2) bilan saqlanadi [19, 20]. Google orqali kirishda server Google bergan tasdiqning haqiqiyligini va muddatini tekshiradi.',
+    'Tizimga kirgandan keyin foydalanuvchiga ikkita token beriladi. Birinchisi 15 daqiqa amal qiladi va har bir so‘rov bilan yuboriladi [18]. Ikkinchisi 30 kun amal qiladi va faqat birinchisining muddati tugaganda uni yangilash uchun ishlatiladi. Ikkinchi token brauzerning himoyalangan joyida saqlanadi, u yerdan saytdagi skriptlar uni o‘qiy olmaydi. Bazaga uning faqat xeshi yoziladi va u har safar ishlatilganda yangisiga almashtiriladi. Har bir kirish alohida sessiya hisoblanadi, shuning uchun foydalanuvchi begona qurilmani masofadan chiqarib yuborishi mumkin. Biror chat bilan bog‘liq har bir so‘rovda server foydalanuvchi haqiqatan shu chat a’zosi ekanini tekshiradi. Asosiy xavflar va ulardan himoya choralari 2.4-jadvalda keltirilgan [28].',
   ),
   ...table(
     '2.4',
@@ -158,7 +158,7 @@ export const chapter2 = () => [
       ['Kodni tanlab topish (brute-force)', 'Kod 10 daqiqa amal qiladi, 5 tagacha urinish; kod so‘rash chastotasi e-pochta va IP bo‘yicha cheklangan'],
       ['Ma’lumotlar bazasining sizib chiqishi', 'Kodlar PBKDF2, refresh tokenlar HMAC-SHA256 xeshi ko‘rinishida saqlanadi; parollar yo‘q'],
       ['Tokenning o‘g‘irlanishi', 'Access token 15 daqiqa; refresh token HttpOnly cookie’da va rotatsiya qilinadi; sessiyani yakunlash mumkin'],
-      ['XSS va CSRF', 'Angular ma’lumotlarni ekranlaydi; qat’iy CSP [37]; refresh cookie SameSite=Strict'],
+      ['XSS va CSRF', 'Angular ma’lumotlarni ekranlaydi; qat’iy CSP [26]; refresh cookie SameSite=Strict'],
       ['Begona chatga kirish', 'Har bir REST va hab chaqiruvida a’zolik tekshiruvi; guruhda rolga asoslangan ruxsatlar'],
       ['Zararli fayl, spam', 'Tarkib bo‘yicha format tekshiruvi, rasmni qayta kodlash, ClamAV; forumda chastota cheklovi, shikoyat va bloklash'],
       ['Server yoki baza buzilishi', 'Maxfiy chatlarda uchdan-uchgacha shifrlash: serverda faqat ochiq kalitlar va shifrlangan bloblar'],
@@ -168,8 +168,8 @@ export const chapter2 = () => [
 
   h3('Maxfiy chatlar kriptografik protokoli.'),
   ...ps(
-    'Oddiy chatlarda xabarlar serverga shifrlangan kanal orqali keladi, lekin serverda ochiq saqlanadi. Bu yozishmalarni barcha qurilmalarda ko‘rish, qidirish va lotin–kirillga o‘girish imkonini beradi. Ammo ba’zi yozishmalarni hatto server buzilsa yoki baza o‘g‘irlansa ham hech kim o‘qiy olmasligi kerak. Shu maqsadda maxfiy chatlar loyihalandi. Ularda xabar jo‘natuvchining brauzerida shifrlanadi va faqat qabul qiluvchining brauzerida ochiladi. Bu uchdan-uchgacha shifrlash deyiladi. Server xabarni yetkazadi, lekin uning mazmunini bilmaydi. U faqat kim kimga, qachon va qancha hajmda yozganini ko‘radi [19].',
-    'Signal va WhatsApp’da maxfiy yozishma foydalanuvchining barcha qurilmalarida ishlaydi, lekin buning uchun har bir qurilma kalitlarini alohida boshqarish kerak. Bu ancha murakkab, shuning uchun Telegram’dagi kabi oddiyroq yo‘l tanlandi: maxfiy chat ikki aniq qurilma o‘rtasida ochiladi. Shifrlash algoritmlarini o‘zi yozish xavfli, chunki eng kichik xato ham himoyani yo‘qqa chiqaradi. Shuning uchun faqat brauzerning o‘ziga o‘rnatilgan, sinovdan o‘tgan Web Crypto API vositalaridan foydalanildi [36] (2.5-jadval). Yopiq kalitlar shunday yaratiladiki, sahifadagi kod ular bilan shifrlay oladi, lekin kalitning o‘zini o‘qib ololmaydi.',
+    'Oddiy chatlarda xabarlar serverga shifrlangan kanal orqali keladi, lekin serverda ochiq saqlanadi. Bu yozishmalarni barcha qurilmalarda ko‘rish, qidirish va lotin–kirillga o‘girish imkonini beradi. Ammo ba’zi yozishmalarni hatto server buzilsa yoki baza o‘g‘irlansa ham hech kim o‘qiy olmasligi kerak. Shu maqsadda maxfiy chatlar loyihalandi. Ularda xabar jo‘natuvchining brauzerida shifrlanadi va faqat qabul qiluvchining brauzerida ochiladi. Bu uchdan-uchgacha shifrlash deyiladi. Server xabarni yetkazadi, lekin uning mazmunini bilmaydi. U faqat kim kimga, qachon va qancha hajmda yozganini ko‘radi [11].',
+    'Signal va WhatsApp’da maxfiy yozishma foydalanuvchining barcha qurilmalarida ishlaydi, lekin buning uchun har bir qurilma kalitlarini alohida boshqarish kerak. Bu ancha murakkab, shuning uchun Telegram’dagi kabi oddiyroq yo‘l tanlandi: maxfiy chat ikki aniq qurilma o‘rtasida ochiladi. Shifrlash algoritmlarini o‘zi yozish xavfli, chunki eng kichik xato ham himoyani yo‘qqa chiqaradi. Shuning uchun faqat brauzerning o‘ziga o‘rnatilgan, sinovdan o‘tgan Web Crypto API vositalaridan foydalanildi [25] (2.5-jadval). Yopiq kalitlar shunday yaratiladiki, sahifadagi kod ular bilan shifrlay oladi, lekin kalitning o‘zini o‘qib ololmaydi.',
   ),
   ...table(
     '2.5',
@@ -185,20 +185,20 @@ export const chapter2 = () => [
     [2.6, 2.6, 8],
   ),
   ...ps(
-    '**Kalit almashish.** Maxfiy chatni boshlagan odamning brauzeri o‘zaro bog‘langan ikkita kalit yaratadi: yopiq va ochiq [32]. Serverga faqat ochiq kalit yuboriladi (2.12-rasm). Suhbatdosh taklifni qaysi qurilmada qabul qilsa, chat o‘sha qurilmaga bog‘lanadi va u ham o‘z ochiq kalitini yuboradi. Shundan keyin ikkala brauzer bir-biriga hech narsa yubormasdan bir xil umumiy maxfiy kalitni hisoblab chiqadi. Serverda faqat ikkita ochiq kalit bo‘ladi, ulardan umumiy kalitni topish esa amalda imkonsiz.',
-    '**Har bir xabar uchun yangi kalit.** Umumiy kalitdan har bir yo‘nalish uchun alohida kalitlar zanjiri hosil qilinadi [33] (2.13-rasm). Har bir xabar o‘zining alohida kaliti bilan shifrlanadi: MK = HMAC(CK, 0x01), keyingi zanjir kaliti esa CK′ = HMAC(CK, 0x02) [31]. Ishlatilgan kalit darhol o‘chiriladi. Shu tufayli joriy kalit o‘g‘irlansa ham, oldingi xabarlarni ochib bo‘lmaydi. Xabar AES-256-GCM algoritmi bilan shifrlanadi [34]. Shifrlashda chat raqami, yo‘nalish va xabarning tartib raqami ham hisobga olinadi. Shuning uchun kimdir xabarni boshqa chatga ko‘chirsa yoki xabarlar o‘rnini almashtirsa, bu darhol aniqlanadi.',
-  ),
-  ...figure('2-12-secret-handshake.png', '2.12', 'Maxfiy chatni ochish va shifrlangan xabar yetkazish ketma-ketlik diagrammasi', 13, 15),
-  ...ps(
+    '**Kalit almashish.** Maxfiy chatni boshlagan odamning brauzeri o‘zaro bog‘langan ikkita kalit yaratadi: yopiq va ochiq [21]. Serverga faqat ochiq kalit yuboriladi (2.12-rasm). Suhbatdosh taklifni qaysi qurilmada qabul qilsa, chat o‘sha qurilmaga bog‘lanadi va u ham o‘z ochiq kalitini yuboradi. Shundan keyin ikkala brauzer bir-biriga hech narsa yubormasdan bir xil umumiy maxfiy kalitni hisoblab chiqadi. Serverda faqat ikkita ochiq kalit bo‘ladi, ulardan umumiy kalitni topish esa amalda imkonsiz.',
+    '**Har bir xabar uchun yangi kalit.** Umumiy kalitdan har bir yo‘nalish uchun alohida kalitlar zanjiri hosil qilinadi [22] (2.13-rasm). Har bir xabar o‘zining alohida kaliti bilan shifrlanadi: MK = HMAC(CK, 0x01), keyingi zanjir kaliti esa CK′ = HMAC(CK, 0x02) [20]. Ishlatilgan kalit darhol o‘chiriladi. Shu tufayli joriy kalit o‘g‘irlansa ham, oldingi xabarlarni ochib bo‘lmaydi. Xabar AES-256-GCM algoritmi bilan shifrlanadi [23]. Shifrlashda chat raqami, yo‘nalish va xabarning tartib raqami ham hisobga olinadi. Shuning uchun kimdir xabarni boshqa chatga ko‘chirsa yoki xabarlar o‘rnini almashtirsa, bu darhol aniqlanadi.',
     '**Yetkazish.** Server shifrlangan xabarni faqat vaqtincha saqlab, qabul qiluvchiga yetkazadi. Qabul qiluvchi “oldim” deb javob bergach, server xabarni o‘chiradi. Yetkazilmagan xabarlar 7 kundan keyin o‘chiriladi. Har bir xabarning tartib raqami bor, shuning uchun eski xabarni qayta yuborib aldab bo‘lmaydi. Xabarlar tartibsiz kelsa, 200 tagacha o‘tkazib yuborilgan kalit vaqtincha saqlab turiladi. Xabarni belgilangan vaqtdan keyin o‘chirish va tarixni tozalash buyruqlari ham shifrlangan holda yuboriladi.',
   ),
-  ...figure('2-13-ratchet.png', '2.13', 'Maxfiy chatda kalitlarni chiqarish va xabar kalitlari zanjiri', 13, 16),
+  ...figureRow([
+    ['2-12-secret-handshake.png', '2.12', 'Maxfiy chatni ochish va shifrlangan xabar yetkazish ketma-ketlik diagrammasi'],
+    ['2-13-ratchet.png', '2.13', 'Maxfiy chatda kalitlarni chiqarish va xabar kalitlari zanjiri'],
+  ], 11.5),
   ...ps(
-    '**Fayllar va kalit izi.** Fayl brauzerning o‘zida alohida tasodifiy kalit bilan shifrlanib, so‘ng serverga yuklanadi. Bu kalit va fayl nomi esa maxfiy xabar ichida yuboriladi. Ikkala tomonning ekranida “kalit izi” ko‘rsatiladi: ochiq kalitlardan hisoblangan 8 ta emoji va raqamlar [35]. Suhbatdoshlar bu belgilarni, masalan, yuzma-yuz uchrashganda solishtirishi mumkin. Agar server o‘rtada turib kalitlarni almashtirgan bo‘lsa, ikki tomondagi belgilar farq qiladi.',
-    '**Cheklovlar.** Bu protokol Signal’dagi to‘liq protokol emas [27, 38]. Suhbat davomida kalitlar qaytadan kelishilmaydi, shuning uchun qurilma bir marta buzilsa, keyingi xabarlar ham xavf ostida qoladi. Kim kimga yozgani serverga ko‘rinadi. Maxfiy chat faqat bitta qurilmada ishlaydi. Shifrlash kodini brauzerga serverning o‘zi yuboradi. Bu xavf qat’iy xavfsizlik sozlamalari bilan kamaytirilgan, uni butunlay yo‘qotish uchun esa alohida mobil ilova kerak bo‘ladi.',
+    '**Fayllar va kalit izi.** Fayl brauzerning o‘zida alohida tasodifiy kalit bilan shifrlanib, so‘ng serverga yuklanadi. Bu kalit va fayl nomi esa maxfiy xabar ichida yuboriladi. Ikkala tomonning ekranida “kalit izi” ko‘rsatiladi: ochiq kalitlardan hisoblangan 8 ta emoji va raqamlar [24]. Suhbatdoshlar bu belgilarni, masalan, yuzma-yuz uchrashganda solishtirishi mumkin. Agar server o‘rtada turib kalitlarni almashtirgan bo‘lsa, ikki tomondagi belgilar farq qiladi.',
+    '**Cheklovlar.** Bu protokol Signal’dagi to‘liq protokol emas [16, 27]. Suhbat davomida kalitlar qaytadan kelishilmaydi, shuning uchun qurilma bir marta buzilsa, keyingi xabarlar ham xavf ostida qoladi. Kim kimga yozgani serverga ko‘rinadi. Maxfiy chat faqat bitta qurilmada ishlaydi. Shifrlash kodini brauzerga serverning o‘zi yuboradi. Bu xavf qat’iy xavfsizlik sozlamalari bilan kamaytirilgan, uni butunlay yo‘qotish uchun esa alohida mobil ilova kerak bo‘ladi.',
   ),
 
-  h2('2-bob bo‘yicha xulosa', { toc: false }),
+  h2('II bob bo‘yicha xulosa'),
   p(
     'Ikkinchi bobda “Milliy” xabarchi loyihalandi. Server .NET muhitida, Entity Framework asosida, brauzer qismi esa Angular’da ishlaydigan qilib loyihalandi. Server kodi to‘rt qismga bo‘lindi, bazada 43 ta jadval loyihalandi. UML diagrammalarida kirish, xabar yuborish va tashkilotga qo‘shilish jarayonlari tasvirlandi. Tizimda parol yo‘q, kodlar va tokenlar xeshlangan holda saqlanadi. Maxfiy chatlar uchun brauzerning o‘z shifrlash vositalari asosida protokol ishlab chiqildi.',
   ),

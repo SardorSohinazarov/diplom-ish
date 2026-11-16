@@ -3,7 +3,7 @@ import { bullets, h1, p, ps } from '../lib.mjs';
 export const conclusion = () => [
   h1('Xulosa'),
   p(
-    'Diplom loyihasi natijasi — foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan va xabarlarni real vaqtda yetkazadigan “Milliy” xabarchi. U hozir bulut serverida ishlab turibdi. Kirishda qo‘yilgan vazifalar bo‘yicha quyidagi natijalarga erishildi:',
+    'Bitiruv malakaviy ishi natijasi — foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan va xabarlarni real vaqtda yetkazadigan “Milliy” xabarchi. U hozir bulut serverida ishlab turibdi. Kirishda qo‘yilgan vazifalar bo‘yicha quyidagi natijalarga erishildi:',
   ),
   ...bullets([
     'Telegram, WhatsApp, Signal, WeChat va mahalliy Humo messenjerlari solishtirildi. Xorijiy messenjerlar ma’lumotlarni chet elda saqlaydi, Humo esa pullik va faqat davlat xodimlari uchun. Hech biri o‘zbek tilining ikki yozuvini hisobga olmaydi. Xabarlarni jonli yetkazish uchun SignalR tanlandi: u eng tez usul bilan ishlaydi, u ishlamasa esa boshqa usulga o‘zi o‘tadi.',
@@ -14,7 +14,7 @@ export const conclusion = () => [
     'Ochiq fikr almashish uchun forum yaratildi. Unda qisqa postlar, javoblar, ulashish, iqtibos, layk, obunalar va jonli bildirishnomalar bor. Top lentada postlar mashhurligi va yoshiga qarab tartiblanadi, spamga qarshi esa cheklovlar va shikoyatlar qo‘llanadi.',
     'Uchta o‘ziga xos imkoniyat amalga oshirildi. Kirillda yozilgan xabarni lotinda o‘qish mumkin va aksincha, qidiruv esa ikkala yozuvda ham topadi. Tashkilot pochtasi bilan kirgan odam o‘z tashkilotining yopiq guruhiga avtomatik qo‘shiladi. Maxfiy chatda xabarni faqat ikki suhbatdosh o‘qiy oladi, server esa uning mazmunini bilmaydi.',
     'Dasturni joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi, dastur VPS serverda ishlaydi. Dastur to‘g‘ri ishlashi 810 ta avtomatik test, 43 ta qo‘shimcha tekshiruv va qo‘lda o‘tkazilgan sinovlar bilan tasdiqlandi.',
-    'Diplom loyihasida yaratilgan chat texnologiyasi amaliyotda qo‘llanildi: uning asosida Elektron kooperatsiya portalida kompaniyalar o‘rtasidagi chat moduli ishlab chiqildi.',
+    'Bitiruv malakaviy ishida yaratilgan chat texnologiyasi amaliyotda qo‘llanildi: uning asosida Elektron kooperatsiya portalida kompaniyalar o‘rtasidagi chat moduli ishlab chiqildi.',
     'Hayot faoliyati xavfsizligi bo‘limida dasturchining ish joyiga qo‘yiladigan talablar keltirildi, ofis qavati uchun evakuatsiya reja-sxemasi tuzildi va avariyalarda xodimlar nima qilishi kerakligi belgilandi.',
   ]),
   ...ps(

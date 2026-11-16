@@ -81,69 +81,68 @@ function gridTable(headers, rows, weights) {
 
 const header = () => [
   center('O‘ZBEKISTON RESPUBLIKASI RAQAMLI TEXNOLOGIYALAR VAZIRLIGI', { bold: true }),
-  center('MUHAMMAD AL-XORAZMIY NOMIDAGI', { bold: true }),
-  center('TOSHKENT AXBOROT TEXNOLOGIYALARI UNIVERSITETI', { bold: true }),
+  center('MUHAMMAD AL-XORAZMIY NOMIDAGI TOSHKENT AXBOROT TEXNOLOGIYALARI UNIVERSITETI', { bold: true }),
 ];
+
+const KAFEDRA = 'Tizimli va amaliy dasturlashtirish';
 
 export const titlePage = () => [
   ...header(),
   ...blank(2),
-  line('Himoyaga ruxsat', { align: AlignmentType.RIGHT, bold: true }),
-  line('“ATDT” kafedra mudiri', { align: AlignmentType.RIGHT }),
-  line('___________ Raximov N.O.', { align: AlignmentType.RIGHT }),
-  line('«____» ______________ 2026-yil', { align: AlignmentType.RIGHT }),
+  line('Himoyaga ruxsat', { align: AlignmentType.RIGHT }),
+  line(`“${KAFEDRA}”`, { align: AlignmentType.RIGHT }),
+  line('kafedra mudiri', { align: AlignmentType.RIGHT }),
+  line('___________ K.F. Kerimov', { align: AlignmentType.RIGHT }),
+  line('«____» ______________ 2026 yil', { align: AlignmentType.RIGHT }),
   ...blank(3),
-  center('DIPLOM LOYIHASI', { bold: true, size: 36 }),
-  ...blank(1),
-  center(`Mavzu: ${TOPIC}`, { bold: true, size: 32 }),
+  center('BITIRUV MALAKAVIY ISH', { bold: true, size: 32 }),
+  center(`“${TOPIC}”`, { bold: true }),
   ...blank(4),
   layoutTable(
     [
-      ['Bitiruvchi (315-21 DIo‘ guruh)', `${BLANK}\n(imzo)`, 'S.O. Sohinazarov'],
+      ['Bitiruvchi', `${BLANK}
+(imzo)`, 'S.O. Sohinazarov'],
       ['', '', ''],
-      ['Ilmiy rahbar', `${BLANK}\n(imzo)`, 'Y.Sh. Yuldoshev'],
+      ['Ilmiy rahbar', `${BLANK}
+(imzo)`, 'Y.Sh. Yuldoshev'],
       ['', '', ''],
-      ['Taqrizchi', `${BLANK}\n(imzo)`, BLANK],
-      ['', '', ''],
-      ['HFX bo‘yicha maslahatchi', `${BLANK}\n(imzo)`, 'S. Abdullayeva'],
+      ['HFX bo‘yicha maslahatchi', `${BLANK}
+(imzo)`, 'S. Abdullayeva'],
     ],
     [4, 4, 3],
   ),
-  ...blank(3),
-  center('Toshkent – 2026', { bold: true }),
+  ...blank(5),
+  center('TOSHKENT – 2026', { bold: true }),
 ];
 
 export const assignmentPages = () => [
   pageBreak(),
   ...header(),
-  line('Fakultet: Dasturiy injiniring'),
-  line('Kafedra: Axborot texnologiyalarining dasturiy ta’minoti'),
-  line('Ta’lim yo‘nalishi: 60610600 – Dasturiy injiniring'),
-  ...blank(1),
-  line('TASDIQLAYMAN', { align: AlignmentType.RIGHT, bold: true }),
-  line('“ATDT” kafedra mudiri', { align: AlignmentType.RIGHT }),
-  line('___________ Raximov N.O.', { align: AlignmentType.RIGHT }),
-  line('«____» ______________ 2026-yil', { align: AlignmentType.RIGHT }),
-  ...blank(1),
-  center('315-21 DIo‘ guruh talabasi Sohinazarov Sardorbek O‘rinboy o‘g‘lining', { bold: true }),
-  center('diplom loyihasiga', {}),
-  center('T O P S H I R I Q', { bold: true, size: 32, before: 120, after: 120 }),
-  line(`1. Diplom loyihasi mavzusi: ${TOPIC}.`, { line: 300 }),
-  line('2. Mavzuni tasdiqlagan buyruq: «____» __________ 2026-yil № __________.', { line: 300 }),
-  line('3. Diplom loyihasini himoyaga topshirish muddati: __________________.', { line: 300 }),
+  line('Fakultet: “Dasturiy injiniring”'),
+  line(`Kafedra: “${KAFEDRA}”`),
+  line('Yo‘nalish (mutaxassislik): “60610600 – Dasturiy injiniring”', { after: 120 }),
+  line('«TASDIQLAYMAN»', { align: AlignmentType.RIGHT }),
+  line('kafedra mudiri: Kerimov K.F.', { align: AlignmentType.RIGHT }),
+  line('«_____» _______________ 2026 y.', { align: AlignmentType.RIGHT, after: 120 }),
+  center('Sohinazarov Sardorbek O‘rinboy o‘g‘li', { bold: true }),
+  center('Bitiruv malakaviy ishiga', { bold: true }),
+  center('T O P S H I R I Q', { bold: true, size: 32, before: 60, after: 60 }),
+  line(`**1. Ish mavzusi:** “${TOPIC}”.`, { line: 360, align: AlignmentType.JUSTIFIED }),
+  line('**2. BMI tasdiqlangan buyrug‘i:** 19.02.2025 yil. № 185-17 - sonli buyruq.', { line: 360, align: AlignmentType.JUSTIFIED }),
+  line('**3. Ishni himoyaga topshirish muddati:** 20.10.2025 yil.', { line: 360, align: AlignmentType.JUSTIFIED }),
   line(
-    '4. Diplom loyihasining boshlang‘ich ma’lumotlari: mavjud messenjerlar (Telegram, WhatsApp, Signal, WeChat, Humo) tahlili, real vaqtda xabar almashish texnologiyalari, .NET muhiti, Entity Framework, SignalR va Angular texnologiyalariga oid adabiyotlar hamda amaliyot materiallari.',
-    { line: 300, align: AlignmentType.JUSTIFIED },
+    '**4. Ishga oid dastlabki ma’lumotlar:** mavjud messenjerlar (Telegram, WhatsApp, Signal, WeChat, Humo) tahlili, real vaqtda xabar almashish texnologiyalari, .NET muhiti, Entity Framework, SignalR va Angular texnologiyalariga oid adabiyotlar hamda amaliyot materiallari.',
+    { line: 360, align: AlignmentType.JUSTIFIED },
   ),
   line(
-    '5. Hisob-tushuntirish yozuvining mazmuni: sohaning tahlili va masalaning qo‘yilishi, tizim arxitekturasi va ma’lumotlar bazasini loyihalash, server va klient qismlarini ishlab chiqish, xavfsizlik choralari, foydalanish yo‘riqnomasi, hayot faoliyati xavfsizligi, xulosa.',
-    { line: 300, align: AlignmentType.JUSTIFIED },
+    '**5. Hisoblash-tushuntirish yozuvlarining mazmuni (ishlab chiqiladigan masalalar ro‘yxati):** sohaning tahlili va masalaning qo‘yilishi, tizim arxitekturasi va ma’lumotlar bazasini loyihalash, server va klient qismlarini ishlab chiqish, xavfsizlik choralari, foydalanish yo‘riqnomasi, hayot faoliyati xavfsizligi, xulosa.',
+    { line: 360, align: AlignmentType.JUSTIFIED },
   ),
   line(
-    '6. Grafik materiallar ro‘yxati: tizim arxitekturasi, ER-diagramma, UML (use-case, sequence) diagrammalari, dastur interfeysi skrinshotlari va PowerPoint taqdimoti.',
-    { line: 300, align: AlignmentType.JUSTIFIED },
+    '**6. Grafik materiallar ro‘yxati:** tizim arxitekturasi, ER-diagramma, UML (use-case, sequence) diagrammalari, dastur interfeysi skrinshotlari va PowerPoint taqdimoti.',
+    { line: 360, align: AlignmentType.JUSTIFIED },
   ),
-  line('7. Topshiriq berilgan sana: __________________.', { line: 300, after: 120 }),
+  line('**7. Topshiriq berilgan sana:** 20.02.2025 yil.', { line: 360, after: 120 }),
   layoutTable(
     [
       ['Rahbar:', `${BLANK}\n(imzo)`, 'Y.Sh. Yuldoshev'],
@@ -151,7 +150,7 @@ export const assignmentPages = () => [
     ],
     [4, 4, 3],
   ),
-  line('8. Diplom loyihasining alohida bo‘limlari bo‘yicha maslahatchilar:', { line: 360, after: 120, pageBreakBefore: true }),
+  line('8. Bitiruv malakaviy ishining alohida bo‘limlari bo‘yicha maslahatchilar:', { line: 360, after: 120, pageBreakBefore: true }),
   gridTable(
     ['№', 'Bo‘lim nomi', 'Maslahatchi', 'Topshiriq berdi', 'Topshiriq oldi'],
     [
@@ -161,9 +160,9 @@ export const assignmentPages = () => [
     [1, 5, 4, 3, 3],
   ),
   ...blank(1),
-  line('9. Diplom loyihasini bajarish bo‘yicha kalendar grafik:', { line: 360, after: 120 }),
+  line('9. Bitiruv malakaviy ishini bajarish bo‘yicha kalendar grafik:', { line: 360, after: 120 }),
   gridTable(
-    ['№', 'Diplom loyihasi bo‘limlari', 'Bajarish muddati', 'Rahbar imzosi'],
+    ['№', 'Bitiruv malakaviy ishi bo‘limlari', 'Bajarish muddati', 'Rahbar imzosi'],
     [
       ['1', 'Kirish, masalaning qo‘yilishi', '', ''],
       ['2', 'Soha tahlili, mavjud messenjerlarni o‘rganish', '', ''],
@@ -179,7 +178,7 @@ export const assignmentPages = () => [
   ...blank(2),
   layoutTable(
     [
-      ['Diplom loyihasi rahbari:', `${BLANK}\n(imzo)`, 'Y.Sh. Yuldoshev'],
+      ['Ilmiy rahbar:', `${BLANK}\n(imzo)`, 'Y.Sh. Yuldoshev'],
       ['Bitiruvchi:', `${BLANK}\n(imzo)`, 'S.O. Sohinazarov'],
     ],
     [4, 4, 3],

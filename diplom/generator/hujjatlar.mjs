@@ -58,23 +58,23 @@ const supervisor = () => [
   center('RAQAMLI TEXNOLOGIYALAR VAZIRLIGI', { bold: true }),
   ...university,
   p(
-    `${DIRECTION} yo‘nalishi 315-21 DIo‘ guruhi talabasi ${STUDENT} tomonidan yozilgan “${TOPIC}” mavzusidagi diplom loyihasiga`,
+    `${DIRECTION} yo‘nalishi 315-21 DIo‘ guruhi talabasi ${STUDENT} tomonidan yozilgan “${TOPIC}” mavzusidagi bitiruv malakaviy ishiga`,
   ),
   center('Ilmiy rahbar xulosasi', { bold: true, line: LINE, after: 120 }),
   p(
-    'Ushbu diplom loyihasi foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan, shaxsiy va guruh yozishmalarida xabarlarni real vaqtda yetkazadigan “Milliy” xabarchini ishlab chiqishga bag‘ishlangan. Muallif to‘liq ishlaydigan veb-ilova yaratgan. Uning chat texnologiyasi Elektron kooperatsiya portalida kompaniyalar o‘rtasidagi chat modulini yaratishda qo‘llanilgan.',
+    'Ushbu bitiruv malakaviy ishi foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan, shaxsiy va guruh yozishmalarida xabarlarni real vaqtda yetkazadigan “Milliy” xabarchini ishlab chiqishga bag‘ishlangan. Muallif to‘liq ishlaydigan veb-ilova yaratgan. Uning chat texnologiyasi Elektron kooperatsiya portalida kompaniyalar o‘rtasidagi chat modulini yaratishda qo‘llanilgan.',
   ),
   p(
     'Tizim tuzilishi, ma’lumotlar bazasi va foydalanuvchi rollari UML diagrammalar bilan ifodalangan. Server .NET muhitida, Entity Framework asosida, brauzer qismi esa Angular’da yozilgan, xabarlar SignalR orqali yetkaziladi. Lotin–kirill o‘girish, tashkilot rejimi, maxfiy chatlar, xabarlarga reaksiyalar, bloklash va forum amalga oshirilgan. Dasturni joylashtirish uchun Docker’dan foydalanilgan, dastur testlar bilan sinalgan.',
   ),
   p(
-    'Diplom loyihasi to‘rtta bobdan iborat bo‘lib, loyihaning nazariy, texnik va amaliy jihatlari bosqichma-bosqich yoritilgan. Talaba mustaqillik va tashabbuskorlik namoyon etgan, kalendar grafikka rioya qilgan.',
+    'Bitiruv malakaviy ishi to‘rtta bobdan iborat bo‘lib, loyihaning nazariy, texnik va amaliy jihatlari bosqichma-bosqich yoritilgan. Talaba mustaqillik va tashabbuskorlik namoyon etgan, kalendar grafikka rioya qilgan.',
   ),
   p(
     `Mazmun va talablarga mosligi nuqtai nazaridan, muallif **${STUDENT}**, **${DIRECTION}** yo‘nalishi bo‘yicha **bakalavr** darajasini olishga **loyiq** deb hisoblayman.`,
   ),
   ...blank(1),
-  signature(`Ilmiy rahbar:\n“Axborot texnologiyalarining dasturiy ta’minoti” kafedrasi dotsenti, t.f.f.d.`, 'Y.Sh. Yuldoshev'),
+  signature(`Ilmiy rahbar:\n“Tizimli va amaliy dasturlashtirish” kafedrasi dotsenti, t.f.f.d.`, 'Y.Sh. Yuldoshev'),
 ];
 
 const page = {

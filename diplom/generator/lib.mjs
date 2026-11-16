@@ -6,8 +6,10 @@ import { fileURLToPath } from 'node:url';
 import {
   AlignmentType,
   BorderStyle,
+  Bookmark,
   HeadingLevel,
   ImageRun,
+  InternalHyperlink,
   LevelFormat,
   PageBreak,
   Paragraph,
@@ -49,7 +51,33 @@ export const TEXT_WIDTH = 11906 - 1701 - 851;
  * Parses **bold**, ~italic~, _{subscript} and ^{superscript} inline markup into TextRuns.
  * (Not "_italic_": underscores are used for blank signature lines.)
  */
+// Matndagi adabiyot havolalari: [5], [17, 29], [3–5]. Har bir raqam ro'yxatdagi manbaga (ref<n> xatcho'pi) bog'lanadi.
+const CITATION = /\[(\d{1,2}(?:\s*[,–-]\s*\d{1,2})*)\]/g;
+const refAnchor = (n) => `ref${n}`;
+
 export function runs(text, base = {}) {
+  // undefined qiymatlar **qalin** belgisini bekor qilmasin
+  base = Object.fromEntries(Object.entries(base).filter(([, v]) => v !== undefined));
+  const parts = [];
+  let last = 0;
+  for (const m of text.matchAll(CITATION)) {
+    if (m.index > last) parts.push(...markupRuns(text.slice(last, m.index), base));
+    parts.push(new TextRun({ text: '[', ...base }));
+    for (const piece of m[1].split(/(\d+)/).filter(Boolean)) {
+      parts.push(
+        /^\d+$/.test(piece)
+          ? new InternalHyperlink({ anchor: refAnchor(piece), children: [new TextRun({ text: piece, ...base })] })
+          : new TextRun({ text: piece, ...base }),
+      );
+    }
+    parts.push(new TextRun({ text: ']', ...base }));
+    last = m.index + m[0].length;
+  }
+  if (last < text.length) parts.push(...markupRuns(text.slice(last), base));
+  return parts;
+}
+
+function markupRuns(text, base) {
   const parts = [];
   const re = /(\*\*[^*]+\*\*|~[^~]+~|_\{[^}]+\}|\^\{[^}]+\})/g;
   let last = 0;
@@ -168,17 +196,19 @@ let numberedListIndex = 0;
  * Numbered list; every call restarts at 1 unless a shared `reference`
  * (e.g. 'refs' for the bibliography) is passed to continue one sequence.
  */
+let refCount = 0;
 export const numbered = (items, sharedReference) => {
   const reference = sharedReference ?? `num${numberedListIndex++ % 40}`;
-  return items.map(
-    (t) =>
-      new Paragraph({
-        numbering: { reference, level: 0 },
-        alignment: AlignmentType.JUSTIFIED,
-        spacing: { line: LINE, after: 0 },
-        children: runs(t),
-      }),
-  );
+  return items.map((t) => {
+    const children = runs(t);
+    return new Paragraph({
+      numbering: { reference, level: 0 },
+      alignment: AlignmentType.JUSTIFIED,
+      spacing: { line: LINE, after: 0 },
+      // Adabiyotlar ro'yxatidagi har bir manbaga xatcho'p: matndagi [n] shu yerga olib keladi.
+      children: reference === 'refs' ? [new Bookmark({ id: refAnchor(++refCount), children })] : children,
+    });
+  });
 };
 
 const caption = (text, opts = {}) =>
@@ -238,6 +268,55 @@ export function figure(file, number, title, widthCm = 15.5, maxHeightCm = 16) {
 }
 
 const noBorder = { style: BorderStyle.NONE, size: 0, color: 'FFFFFF' };
+
+/**
+ * Ikkita alohida rasm yonma-yon, har birining o'z sarlavhasi bilan (baland va ensiz diagrammalar uchun:
+ * ketma-ket qo'yilsa, har biri betning pastini bo'sh qoldiradi).
+ *   figureRow([['a.png', '2.12', 'Sarlavha'], ['b.png', '2.13', 'Sarlavha']], 15)
+ */
+export function figureRow(items, maxHeightCm = 15) {
+  const half = Math.floor(TEXT_WIDTH / 2);
+  const pxPerCm = 37.8;
+  const cells = items.map(([file, number, title]) => {
+    const data = fs.readFileSync(path.join(ROOT, 'rasmlar', file));
+    const { w, h } = imageSize(data);
+    let width = 6.8 * pxPerCm;
+    let height = (width * h) / w;
+    if (height > maxHeightCm * pxPerCm) {
+      height = maxHeightCm * pxPerCm;
+      width = (height * w) / h;
+    }
+    return new TableCell({
+      width: { size: half, type: WidthType.DXA },
+      verticalAlign: VerticalAlign.BOTTOM,
+      borders: { top: noBorder, bottom: noBorder, left: noBorder, right: noBorder },
+      margins: { left: 60, right: 60 },
+      children: [
+        new Paragraph({
+          alignment: AlignmentType.CENTER,
+          keepNext: true,
+          spacing: { before: 120, after: 0, line: 240 },
+          children: [
+            new ImageRun({
+              type: file.endsWith('.png') ? 'png' : 'jpg',
+              data,
+              transformation: { width: Math.round(width), height: Math.round(height) },
+            }),
+          ],
+        }),
+        caption(`${number}-rasm. ${title}`, { after: 120 }),
+      ],
+    });
+  });
+  return tagFigure(items[0][1], [
+    new Table({
+      width: { size: TEXT_WIDTH, type: WidthType.DXA },
+      columnWidths: [half, TEXT_WIDTH - half],
+      borders: { top: noBorder, bottom: noBorder, left: noBorder, right: noBorder, insideHorizontal: noBorder, insideVertical: noBorder },
+      rows: [new TableRow({ cantSplit: true, children: cells })],
+    }),
+  ]);
+}
 
 /**
  * Two images side by side with "a) …" / "b) …" sub-captions and one shared caption below:

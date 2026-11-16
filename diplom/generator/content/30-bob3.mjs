@@ -1,13 +1,13 @@
 import { bullets, figure, figurePair, formula, h1, h2, h3, numbered, p, ps, table } from '../lib.mjs';
 
 export const chapter3 = () => [
-  h1('III-bob. “Milliy” xabarchini ishlab chiqish'),
+  h1('III bob. “Milliy” xabarchini ishlab chiqish'),
 
   // ───────────────────────────────── 3.1
-  h2('3.1. Server qismini ishlab chiqish'),
+  h2('III.1. Server qismini ishlab chiqish'),
   h3('Server tuzilmasi va REST API.'),
   ...ps(
-    'Server dasturi to‘rt qismdan (Domain, Application, Infrastructure, API) va testlar loyihasidan iborat. Dastur ishga tushadigan asosiy fayl — Program.cs juda qisqa [42]. U faqat har bir so‘rov qanday tartibda ishlanishini belgilaydi: avval xatolar ushlanadi, so‘ng xavfsizlik sozlamalari qo‘llanadi, foydalanuvchi kimligi va huquqi tekshiriladi, keyin so‘rov kerakli joyga yo‘naltiriladi. Har bir imkoniyatning sozlamalari alohida faylga ajratilgan. Shuning uchun yangi imkoniyat qo‘shilganda bu fayl o‘zgarmaydi: forum, reaksiyalar va bloklash ham mavjud kodga tegmasdan qo‘shildi.',
+    'Server dasturi to‘rt qismdan (Domain, Application, Infrastructure, API) va testlar loyihasidan iborat. Dastur ishga tushadigan asosiy fayl — Program.cs juda qisqa [31]. U faqat har bir so‘rov qanday tartibda ishlanishini belgilaydi: avval xatolar ushlanadi, so‘ng xavfsizlik sozlamalari qo‘llanadi, foydalanuvchi kimligi va huquqi tekshiriladi, keyin so‘rov kerakli joyga yo‘naltiriladi. Har bir imkoniyatning sozlamalari alohida faylga ajratilgan. Shuning uchun yangi imkoniyat qo‘shilganda bu fayl o‘zgarmaydi: forum, reaksiyalar va bloklash ham mavjud kodga tegmasdan qo‘shildi.',
     'Server 17 ta controller orqali 104 ta API manzilni (endpoint) taqdim etadi (3.1-jadval). Manzillar REST qoidalariga ko‘ra nomlangan: manzil nima bilan ishlanayotganini, so‘rov turi esa nima qilinayotganini bildiradi. Masalan, xabarga reaksiya qo‘yish uchun “PUT /api/chats/{chatId}/messages/{messageId}/reaction” manziliga so‘rov yuboriladi, uni olib tashlash uchun esa xuddi shu manzilga “DELETE” so‘rovi yuboriladi. Bu yerda PUT tanlangani bejiz emas. Bitta foydalanuvchi bitta xabarga faqat bitta reaksiya qo‘ya oladi, shuning uchun so‘rov yangi yozuv qo‘shmaydi, balki holatni o‘rnatadi. U ikki marta yuborilsa ham natija o‘zgarmaydi.',
   ),
   ...table(
@@ -32,14 +32,14 @@ export const chapter3 = () => [
     [4.2, 3.6, 1.1, 6.2],
   ),
   ...ps(
-    'API’ning hujjatlari Swagger yordamida avtomatik yaratiladi. Unda har bir manzilni brauzerning o‘zidan sinab ko‘rish mumkin (3.1-rasm). Server barcha javoblarni bir xil ko‘rinishda qaytaradi, xato xabarlari esa o‘zbek tilida yozilgan. Brauzerdan kelgan ma’lumotlar qayta ishlanishidan oldin tekshiriladi [48]. Kutilmagan xato yuz bersa, uning tafsilotlari jurnalga yoziladi, foydalanuvchiga esa ichki ma’lumotlarsiz qisqa xabar qaytariladi.',
-    'Ro‘yxat qaytaradigan barcha manzillarda kursorli sahifalash ishlatiladi. Chatda minglab xabar bo‘lishi mumkin, ularni bir yo‘la yuklash sahifani sekinlashtiradi. Shuning uchun xabarlar qismlab yuklanadi: avval eng oxirgilari, foydalanuvchi yuqoriga aylantirganda esa undan oldingilari. Server har safar qaysi xabarda to‘xtaganini eslab qoladi va keyingi qismni o‘sha joydan beradi. Bu usulning afzalligi shundaki, ro‘yxat qanchalik uzun bo‘lmasin, har bir qism bir xil tezlikda yuklanadi. Bazadan faqat kerakli ustunlar o‘qiladi [16, 41]. Bu usul barcha ro‘yxatlar uchun bitta umumiy funksiya sifatida yozilgan. Forumning top lentasida postlar vaqt bo‘yicha emas, mashhurlik bo‘yicha tartiblangani uchun u yerda to‘xtalgan joy ikki qiymat bilan eslab qolinadi: oxirgi postning mashhurlik bahosi va raqami.',
+    'API’ning hujjatlari Swagger yordamida avtomatik yaratiladi. Unda har bir manzilni brauzerning o‘zidan sinab ko‘rish mumkin (3.1-rasm). Server barcha javoblarni bir xil ko‘rinishda qaytaradi, xato xabarlari esa o‘zbek tilida yozilgan. Brauzerdan kelgan ma’lumotlar qayta ishlanishidan oldin tekshiriladi [37]. Kutilmagan xato yuz bersa, uning tafsilotlari jurnalga yoziladi, foydalanuvchiga esa ichki ma’lumotlarsiz qisqa xabar qaytariladi.',
+    'Ro‘yxat qaytaradigan barcha manzillarda kursorli sahifalash ishlatiladi. Chatda minglab xabar bo‘lishi mumkin, ularni bir yo‘la yuklash sahifani sekinlashtiradi. Shuning uchun xabarlar qismlab yuklanadi: avval eng oxirgilari, foydalanuvchi yuqoriga aylantirganda esa undan oldingilari. Server har safar qaysi xabarda to‘xtaganini eslab qoladi va keyingi qismni o‘sha joydan beradi. Bu usulning afzalligi shundaki, ro‘yxat qanchalik uzun bo‘lmasin, har bir qism bir xil tezlikda yuklanadi. Bazadan faqat kerakli ustunlar o‘qiladi [8, 30]. Bu usul barcha ro‘yxatlar uchun bitta umumiy funksiya sifatida yozilgan. Forumning top lentasida postlar vaqt bo‘yicha emas, mashhurlik bo‘yicha tartiblangani uchun u yerda to‘xtalgan joy ikki qiymat bilan eslab qolinadi: oxirgi postning mashhurlik bahosi va raqami.',
   ),
   ...figure('3-04-swagger.jpg', '3.1', 'Swagger UI: server API hujjatlari', 14),
 
   h3('Real vaqtda xabar almashish.'),
   p(
-    'Jonli aloqa ikkita SignalR markazi (hab) orqali ishlaydi [40]. ChatHub chatlar uchun mo‘ljallangan: brauzer unda to‘rtta funksiyani chaqira oladi, server esa brauzerga o‘n besh xil hodisa yuboradi. ForumHub esa forumdagi yangiliklarni yetkazadi (3.2-jadval). Ular ikkiga ajratilgan, chunki forumni ochmagan foydalanuvchiga forum yangiliklarini yuborish ortiqcha. ChatHub’ga ulangan har bir qurilma ikki guruhga qo‘shiladi. Birinchi guruh foydalanuvchining barcha qurilmalarini birlashtiradi. Ikkinchi guruhda faqat shu qurilma bo‘ladi, u maxfiy chat hodisalarini faqat chat ochilgan qurilmaga yetkazish uchun kerak.',
+    'Jonli aloqa ikkita SignalR markazi (hab) orqali ishlaydi [29]. ChatHub chatlar uchun mo‘ljallangan: brauzer unda to‘rtta funksiyani chaqira oladi, server esa brauzerga o‘n besh xil hodisa yuboradi. ForumHub esa forumdagi yangiliklarni yetkazadi (3.2-jadval). Ular ikkiga ajratilgan, chunki forumni ochmagan foydalanuvchiga forum yangiliklarini yuborish ortiqcha. ChatHub’ga ulangan har bir qurilma ikki guruhga qo‘shiladi. Birinchi guruh foydalanuvchining barcha qurilmalarini birlashtiradi. Ikkinchi guruhda faqat shu qurilma bo‘ladi, u maxfiy chat hodisalarini faqat chat ochilgan qurilmaga yetkazish uchun kerak.',
   ),
   ...table(
     '3.2',
@@ -147,7 +147,7 @@ export const chapter3 = () => [
   h3('Lotin–kirill transliteratsiyasi va qidiruv.'),
   ...ps(
     'Xabar bazada doim qanday yozilgan bo‘lsa, shunday saqlanadi. Boshqa yozuvga o‘girish faqat ekranga chiqarishda, foydalanuvchining brauzerida bajariladi. Shu tufayli bitta xabarni bir kishi lotinda, boshqasi kirillda o‘qiydi. Foydalanuvchining yozuv sozlamasi serverda saqlanadi va uning barcha qurilmalarida amal qiladi. Yozuv almashtirilganda xabarlar sahifani yangilamasdan qayta chiziladi. Bu sozlama forum postlariga ham ta’sir qiladi.',
-    'O‘girish algoritmi o‘zbek lotin alifbosi va imlo qoidalariga asoslangan [8, 9]. U serverda C# tilida yozilgan, brauzerda esa uning TypeScript’dagi aynan nusxasi ishlaydi. Ikkalasi bir xil ishlashini tekshirish uchun 80 ta kirill–lotin juftlikdan iborat umumiy test to‘plami tuzilgan. Kirilldan lotinga o‘girish ancha oson, chunki deyarli har bir harfning bitta mosi bor. Teskari yo‘nalishda esa harf so‘zning qayerida turganiga qarab har xil o‘giriladi (3.5-jadval). Algoritm matnni bir marta boshidan oxirigacha o‘qib chiqadi. Har bir harf uchun avval maxsus qoidalar tekshiriladi, masalan, harf so‘z boshidami yoki unlidan keyinmi. Mos qoida bo‘lmasa, oddiy moslik jadvali ishlatiladi. Shuning uchun matn qancha uzun bo‘lsa, o‘girish vaqti ham shunga mutanosib oshadi.',
+    'O‘girish algoritmi o‘zbek lotin alifbosi va imlo qoidalariga asoslangan. U serverda C# tilida yozilgan, brauzerda esa uning TypeScript’dagi aynan nusxasi ishlaydi. Ikkalasi bir xil ishlashini tekshirish uchun 80 ta kirill–lotin juftlikdan iborat umumiy test to‘plami tuzilgan. Kirilldan lotinga o‘girish ancha oson, chunki deyarli har bir harfning bitta mosi bor. Teskari yo‘nalishda esa harf so‘zning qayerida turganiga qarab har xil o‘giriladi (3.5-jadval). Algoritm matnni bir marta boshidan oxirigacha o‘qib chiqadi. Har bir harf uchun avval maxsus qoidalar tekshiriladi, masalan, harf so‘z boshidami yoki unlidan keyinmi. Mos qoida bo‘lmasa, oddiy moslik jadvali ishlatiladi. Shuning uchun matn qancha uzun bo‘lsa, o‘girish vaqti ham shunga mutanosib oshadi.',
   ),
   ...table(
     '3.5',
@@ -177,7 +177,7 @@ export const chapter3 = () => [
     'Bitta suhbatning turli yozuv sozlamalarida ko‘rinishi',
   ),
   ...ps(
-    'Qidiruv ham yozuvga bog‘liq emas: “rahmat” deb qidirilsa, “Раҳмат” deb yozilgan xabar ham topiladi. Buning uchun har bir xabar yozilganda yoki tahrirlanganda uning qidiruv uchun nusxasi saqlanadi: lotinga o‘girilgan, kichik harflarga keltirilgan, tutuq belgilari bir xil ko‘rinishga keltirilgan matn. Qidiruv so‘zi ham xuddi shu tarzda o‘zgartiriladi va shu nusxalar orasidan qidiriladi [44]. Bu imkoniyat qo‘shilishidan oldin yozilgan eski xabarlarning nusxalari fonda, 500 tadan to‘ldirib chiqildi. Bazadagi natija 3.9-rasmda ko‘rsatilgan.',
+    'Qidiruv ham yozuvga bog‘liq emas: “rahmat” deb qidirilsa, “Раҳмат” deb yozilgan xabar ham topiladi. Buning uchun har bir xabar yozilganda yoki tahrirlanganda uning qidiruv uchun nusxasi saqlanadi: lotinga o‘girilgan, kichik harflarga keltirilgan, tutuq belgilari bir xil ko‘rinishga keltirilgan matn. Qidiruv so‘zi ham xuddi shu tarzda o‘zgartiriladi va shu nusxalar orasidan qidiriladi [33]. Bu imkoniyat qo‘shilishidan oldin yozilgan eski xabarlarning nusxalari fonda, 500 tadan to‘ldirib chiqildi. Bazadagi natija 3.9-rasmda ko‘rsatilgan.',
   ),
   ...figure('3-29-db-search-text.png', '3.9', 'messages jadvali: asl matn (TextContent) va qidiruv kaliti (SearchText)', 16),
 
@@ -208,7 +208,7 @@ export const chapter3 = () => [
   ...ps(
     'Maxfiy chat bilan bog‘liq har bir so‘rov qaysi qurilmadan kelgani aniqlanadi. Server bu qurilmaning sessiyasi hali faol ekanini har safar tekshiradi. Chat ochilmagan boshqa qurilmadan kelgan so‘rovga server “topilmadi” deb javob beradi.',
     'Shifrlangan xabar kelganda server uni ochmaydi, faqat ko‘rinishi to‘g‘riligini va hajmi 32 KB dan oshmasligini tekshiradi. Keyin xabarning tartib raqami tekshiriladi: u shu tomondan kelgan oxirgi xabar raqamidan katta bo‘lishi kerak. Kichik yoki teng raqamli xabar takroriy deb rad etiladi. Bir xil xabar bir vaqtda ikki marta kelsa, uni baza ham qabul qilmaydi. Shundan keyingina xabar saqlanadi va faqat qabul qiluvchining chat ochilgan qurilmasiga yuboriladi. Qabul qiluvchi “oldim” deb javob bergach, server xabarni o‘chiradi. Har soatda fonda muddati o‘tgan so‘rovlar, xabarlar va fayllar tozalanadi.',
-    'Brauzerdagi shifrlash kodi alohida modulga ajratilgan va Angular’ga bog‘liq emas [50], uning asosiy qismi ilovalarda keltirilgan. Har bir xabar yuborilishidan oldin yangi kalit holati xabar bilan birga brauzer xotirasiga yoziladi. Shu sababli sahifa to‘satdan yopilsa ham bitta kalit ikki marta ishlatilmaydi. Xabarlar qurilmadagi navbat orqali qat’iy tartibda yuboriladi.',
+    'Brauzerdagi shifrlash kodi alohida modulga ajratilgan va Angular’ga bog‘liq emas [39], uning asosiy qismi ilovalarda keltirilgan. Har bir xabar yuborilishidan oldin yangi kalit holati xabar bilan birga brauzer xotirasiga yoziladi. Shu sababli sahifa to‘satdan yopilsa ham bitta kalit ikki marta ishlatilmaydi. Xabarlar qurilmadagi navbat orqali qat’iy tartibda yuboriladi.',
     'Keyinchalik maxfiy chatlarga ham “o‘qildi” belgisi (✓✓) qo‘shildi. Oddiy chatdagi usul bu yerda ishlamaydi, chunki server xabarlarni ko‘rmaydi. Shuning uchun “o‘qildi” xabari ham oddiy xabar kabi shifrlanadi va ichida “shu raqamgacha o‘qildi” degan ma’lumotni olib boradi. Bu xabarni brauzer faqat chat ekranda ochiq turganda yuboradi. Server uni boshqa xabarlardan ajrata olmaydi va kim nimani qachon o‘qiganini bilmaydi. Shuning uchun bu imkoniyat uchun serverda hech narsa o‘zgartirilmadi. Maxfiy chat oynasida qulf belgisi, taymer va kalit izini tekshirish tugmalari bor (3.11-rasm).',
     'Server xabar mazmunini bilmasligi amalda ham tekshirildi. Suhbatdosh oflayn bo‘lgan paytda yuborilgan xabar bazada faqat ma’nosiz belgilar ko‘rinishida turadi, yetkazilgan xabarlar esa serverdan butunlay o‘chirilgan (3.12-rasm).',
   ),
@@ -223,10 +223,10 @@ export const chapter3 = () => [
   ...figure('3-28-db-secret-messages.png', '3.12', 'secret_messages jadvali: serverda faqat yetkazilmagan shifrlangan blob saqlanadi', 16),
 
   // ───────────────────────────────── 3.2
-  h2('3.2. Klient qismi va foydalanuvchi imkoniyatlari'),
+  h2('III.2. Klient qismi va foydalanuvchi imkoniyatlari'),
   h3('Klient ilovasining tuzilishi.'),
   ...ps(
-    'Brauzerdagi ilova Angular komponentlaridan tashkil topgan [43]. Unda 41 ta komponent va 92 ta TypeScript fayl bor. Ilovada to‘rtta asosiy sahifa bor: kirish (/auth), chatlar (/chat), forum (/forum) va taklif havolasi orqali qo‘shilish (/join). Forum ichida lenta, post muhokamasi, foydalanuvchi profili va bildirishnomalar sahifalari joylashgan. Chat va forum sahifalarini faqat tizimga kirgan odam ochadi, kirish sahifasini esa faqat hali kirmagan odam ko‘radi. Har bir sahifaning kodi faqat kerak bo‘lganda yuklanadi. Masalan, forumga kirmagan foydalanuvchining brauzeriga forum kodi umuman yuklanmaydi.',
+    'Brauzerdagi ilova Angular komponentlaridan tashkil topgan [32]. Unda 41 ta komponent va 92 ta TypeScript fayl bor. Ilovada to‘rtta asosiy sahifa bor: kirish (/auth), chatlar (/chat), forum (/forum) va taklif havolasi orqali qo‘shilish (/join). Forum ichida lenta, post muhokamasi, foydalanuvchi profili va bildirishnomalar sahifalari joylashgan. Chat va forum sahifalarini faqat tizimga kirgan odam ochadi, kirish sahifasini esa faqat hali kirmagan odam ko‘radi. Har bir sahifaning kodi faqat kerak bo‘lganda yuklanadi. Masalan, forumga kirmagan foydalanuvchining brauzeriga forum kodi umuman yuklanmaydi.',
     'Ilovadagi ma’lumotlar, ya’ni chatlar ro‘yxati, xabarlar, reaksiyalar va “yozmoqda” holati Angular signallari yordamida saqlanadi. Signal o‘zgarganda ekranning unga bog‘liq qismi avtomatik yangilanadi. “6 a’zo, 2 onlayn” kabi qiymatlar ham shu ma’lumotlardan avtomatik hisoblanadi. Serverdan javob kelganda ham, jonli hodisa kelganda ham ma’lumot bir xil yo‘l bilan yangilanadi. Masalan, reaksiya o‘zgargani haqida hodisa kelsa, ilova kerakli xabarni topib, reaksiyalarini serverdan kelgan yangi ma’lumot bilan almashtiradi. Bu funksiya alohida testlar bilan tekshirilgan.',
   ),
   ...figurePair(
@@ -297,14 +297,14 @@ export const chapter3 = () => [
   ),
 
   // ───────────────────────────────── 3.3
-  h2('3.3. Joylashtirish, testlash va foydalanish yo‘riqnomasi'),
+  h2('III.3. Joylashtirish, testlash va foydalanish yo‘riqnomasi'),
   h3('Joylashtirish.'),
   p(
-    'Dasturni serverga joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi [45]. Konteyner dasturni unga kerak bo‘lgan hamma narsa bilan birga bitta paketga joylaydi, shuning uchun dastur istalgan serverda bir xil ishlaydi. Tayyor konteynerda faqat ishlaydigan dastur bo‘ladi, uning manba kodi bo‘lmaydi. Dastur VPS serverda ishlaydi va qales.uz manzilida ochiladi. Serverda uchta konteyner bor: server qismi, brauzer qismi va PostgreSQL bazasi. Ular Docker Compose yordamida birga boshqariladi. Baza tashqi tarmoqqa ochilmagan, unga faqat server qismi ulanadi. Foydalanuvchidan kelgan so‘rovlarni Caddy veb-serveri qabul qiladi: u HTTPS sertifikatini o‘zi oladi va so‘rovni kerakli konteynerga uzatadi. GitHub’ga yangi kod yuklanganda GitHub Actions avval barcha testlarni ishga tushiradi. Testlar o‘tsa, yangi konteyner yig‘iladi va serverda faqat o‘zgargan qism yangilanadi. Testlardan biri o‘tmasa, yangilanish to‘xtaydi va eski versiya ishlashda davom etadi. Yangilangandan keyin server qismi ishlayotgani maxsus manzil (/health) orqali tekshiriladi. Bazaga ulanish ma’lumotlari va maxfiy kalitlar kodda emas, server sozlamalarida saqlanadi. Dasturni yangi kompyuterda ishga tushirish uchun namunaviy sozlamalar fayli bor: uni nusxalab, ma’lumotlar bazasini tayyorlash kifoya.',
+    'Dasturni serverga joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi [34]. Konteyner dasturni unga kerak bo‘lgan hamma narsa bilan birga bitta paketga joylaydi, shuning uchun dastur istalgan serverda bir xil ishlaydi. Tayyor konteynerda faqat ishlaydigan dastur bo‘ladi, uning manba kodi bo‘lmaydi. Dastur VPS serverda ishlaydi va qales.uz manzilida ochiladi. Serverda uchta konteyner bor: server qismi, brauzer qismi va PostgreSQL bazasi. Ular Docker Compose yordamida birga boshqariladi. Baza tashqi tarmoqqa ochilmagan, unga faqat server qismi ulanadi. Foydalanuvchidan kelgan so‘rovlarni Caddy veb-serveri qabul qiladi: u HTTPS sertifikatini o‘zi oladi va so‘rovni kerakli konteynerga uzatadi. GitHub’ga yangi kod yuklanganda GitHub Actions avval barcha testlarni ishga tushiradi. Testlar o‘tsa, yangi konteyner yig‘iladi va serverda faqat o‘zgargan qism yangilanadi. Testlardan biri o‘tmasa, yangilanish to‘xtaydi va eski versiya ishlashda davom etadi. Yangilangandan keyin server qismi ishlayotgani maxsus manzil (/health) orqali tekshiriladi. Bazaga ulanish ma’lumotlari va maxfiy kalitlar kodda emas, server sozlamalarida saqlanadi. Dasturni yangi kompyuterda ishga tushirish uchun namunaviy sozlamalar fayli bor: uni nusxalab, ma’lumotlar bazasini tayyorlash kifoya.',
   ),
   h3('Testlash.'),
   ...ps(
-    'Dasturning asosiy mantig‘i avtomatik testlar bilan tekshirildi [49]. Testlarda baza va pochta kabi tashqi qismlar o‘rniga ularning soxta nusxalari ishlatildi. Vaqtga bog‘liq qismlar, masalan lavhalarning 24 soati, top lenta bahosi va forum cheklovlari, “to‘xtatilgan soat” bilan sinaldi. Serverda 457 ta, brauzer qismida 35 ta faylda 353 ta test yozildi [51]. Brauzer testlari lotin–kirill o‘girish server bilan bir xil ishlashini, shifrlash va kalitlar zanjirini, soxta xabarlar rad etilishini, reaksiyalar to‘g‘ri yangilanishini va bildirishnoma qachon chiqishini tekshiradi. Barcha testlar muvaffaqiyatli o‘tdi (3.21-rasm). Server testlarining tarkibi 3.6-jadvalda keltirilgan.',
+    'Dasturning asosiy mantig‘i avtomatik testlar bilan tekshirildi [38]. Testlarda baza va pochta kabi tashqi qismlar o‘rniga ularning soxta nusxalari ishlatildi. Vaqtga bog‘liq qismlar, masalan lavhalarning 24 soati, top lenta bahosi va forum cheklovlari, “to‘xtatilgan soat” bilan sinaldi. Serverda 457 ta, brauzer qismida 35 ta faylda 353 ta test yozildi [40]. Brauzer testlari lotin–kirill o‘girish server bilan bir xil ishlashini, shifrlash va kalitlar zanjirini, soxta xabarlar rad etilishini, reaksiyalar to‘g‘ri yangilanishini va bildirishnoma qachon chiqishini tekshiradi. Barcha testlar muvaffaqiyatli o‘tdi (3.21-rasm). Server testlarining tarkibi 3.6-jadvalda keltirilgan.',
   ),
   ...figure('3-19-unit-tests.png', '3.21', 'Server (dotnet test) va klient (ng test) testlarini bajarish natijasi', 15.5),
   ...table(
@@ -325,7 +325,7 @@ export const chapter3 = () => [
     [4.2, 1.1, 7.4, 1.6],
   ),
   p(
-    'Bundan tashqari, guruh chatlari uchun 43 ta tekshiruvdan iborat avtomatik ssenariy yozildi va barchasi muvaffaqiyatli o‘tdi. Maxfiy chatlar ikki alohida brauzerda, haqiqiy server bilan sinaldi. Diplom loyihasidagi barcha skrinshotlar ham haqiqiy tizimdan avtomatik olingan: bir skript sinov bazasini namunaviy ma’lumotlar bilan to‘ldiradi, ikkinchisi brauzerni boshqarib, kerakli ekranlarni suratga oladi. Qo‘lda o‘tkazilgan asosiy sinovlar 3.7-jadvalda keltirilgan.',
+    'Bundan tashqari, guruh chatlari uchun 43 ta tekshiruvdan iborat avtomatik ssenariy yozildi va barchasi muvaffaqiyatli o‘tdi. Maxfiy chatlar ikki alohida brauzerda, haqiqiy server bilan sinaldi. Bitiruv malakaviy ishidagi barcha skrinshotlar ham haqiqiy tizimdan avtomatik olingan: bir skript sinov bazasini namunaviy ma’lumotlar bilan to‘ldiradi, ikkinchisi brauzerni boshqarib, kerakli ekranlarni suratga oladi. Qo‘lda o‘tkazilgan asosiy sinovlar 3.7-jadvalda keltirilgan.',
   ),
   ...table(
     '3.7',
@@ -351,8 +351,15 @@ export const chapter3 = () => [
 
   h3('Foydalanish yo‘riqnomasi.'),
   p(
-    '**Tizimga kirish.** Kirish sahifasida e-pochta manzili yoziladi yoki Google hisobi tanlanadi, so‘ng pochtaga kelgan 6 xonali kod kiritiladi (3.22-rasm). Manzil birinchi marta ishlatilayotgan bo‘lsa, ism, familiya va foydalanuvchi nomi kiritilib, profil yaratiladi. Tashkilot pochtasi bilan kirilganda foydalanuvchi tashkilotning yopiq guruhiga avtomatik qo‘shiladi.',
+    'Dastur brauzerda ishlaydi va o‘rnatishni talab qilmaydi: uni ochish uchun brauzerda qales.uz manzilini yozish kifoya. Quyida asosiy amallar qadamma-qadam keltirilgan. Qo‘shtirnoq ichida interfeysdagi tugma va bo‘limlarning aynan nomi berilgan.',
   ),
+  p('**1. Tizimga kirish.**'),
+  ...numbered([
+    'Kirish sahifasidagi “Email” maydoniga e-pochta manzili yoziladi va “Kod olish” tugmasi bosiladi. Google hisobi bilan kirish uchun “yoki” yozuvidan pastdagi Google tugmasi bosiladi.',
+    'Pochtaga kelgan 6 xonali kod “Tasdiqlash kodi” maydoniga kiritiladi va “Kirish” tugmasi bosiladi (3.22-rasm).',
+    'Manzil birinchi marta ishlatilayotgan bo‘lsa, “Profil yarating” oynasi ochiladi. Unda ism, familiya (ixtiyoriy) va foydalanuvchi nomi (username) kiritiladi va “Boshlash” tugmasi bosiladi.',
+    'Tashkilot pochtasi bilan kirilgan bo‘lsa, foydalanuvchi tashkilotning yopiq guruhiga avtomatik qo‘shiladi. Buning uchun alohida amal bajarish shart emas.',
+  ]),
   ...figurePair(
     [
       ['3-01-login.jpg', 'kirish sahifasi'],
@@ -361,9 +368,14 @@ export const chapter3 = () => [
     '3.22',
     'Tizimga kirish',
   ),
-  p(
-    '**Xabar almashish.** Chap paneldagi qidiruv maydoniga ism yoki foydalanuvchi nomi yozilib, suhbatdosh tanlanadi. Xabar pastdagi maydonga yoziladi va Enter tugmasi bilan yuboriladi, qisqich tugmasi orqali fayl biriktiriladi. Sichqoncha xabar ustiga olib borilganda reaksiya qo‘yish, javob berish, tahrirlash va o‘chirish tugmalari chiqadi. Sarlavhadagi qidiruv tugmasi chat ichidan xabar qidiradi. Topilgan xabar bosilganda chat o‘sha joyga aylantiriladi (3.23-rasm). Keraksiz suhbatdoshni chat menyusidagi “Bloklash” bandi orqali bloklash mumkin.',
-  ),
+  p('**2. Xabar almashish.**'),
+  ...numbered([
+    'Chap paneldagi qidiruv maydoniga ism yoki foydalanuvchi nomi yoziladi va ro‘yxatdan suhbatdosh tanlanadi.',
+    'Xabar pastdagi maydonga yoziladi va Enter tugmasi bilan yuboriladi. Rasm, video yoki fayl yuborish uchun qisqich belgili “Fayl biriktirish” tugmasi bosiladi.',
+    'Sichqoncha xabar ustiga olib borilganda reaksiya qo‘yish, “Javob berish”, “Tahrirlash” va o‘chirish tugmalari chiqadi.',
+    'Chat ichidan xabar qidirish uchun sarlavhadagi qidiruv tugmasi bosiladi. Topilgan xabar bosilganda chat o‘sha joyga aylantiriladi (3.23-rasm).',
+    'Suhbatdoshni bloklash uchun sarlavhadagi menyudan “Bloklash” bandi tanlanadi. Xuddi shu joyda “Blokdan chiqarish”, “Chatni tozalash” va “Chatni o‘chirish” bandlari ham bor.',
+  ]),
   ...figurePair(
     [
       ['3-06-reply.jpg', 'xabarga javob yozish'],
@@ -372,9 +384,14 @@ export const chapter3 = () => [
     '3.23',
     'Xabar almashish',
   ),
-  p(
-    '**Profil va sozlamalar.** Profil oynasida ism, foydalanuvchi nomi va rasm o‘zgartiriladi, yorug‘ yoki qorong‘i ko‘rinish tanlanadi. “Yozuv” bo‘limida xabarlar qaysi yozuvda ko‘rsatilishi tanlanadi: “Asl holida”, “Lotin” yoki “Кирилл” (3.24-rasm). Shu oynada kompyuter bildirishnomalari yoqiladi, bloklanganlar ro‘yxati ko‘riladi, “Qurilmalar” bo‘limida esa begona qurilmani hisobdan chiqarish mumkin.',
-  ),
+  p('**3. Profil va sozlamalar.**'),
+  ...numbered([
+    'Chatlar ro‘yxati tepasidagi “Profil” tugmasi bosiladi. Ochilgan oynada oy yoki quyosh belgisi orqali tungi yoki kunduzgi rejim tanlanadi.',
+    'Tahrirlash tugmasi bosilib, ism, foydalanuvchi nomi va rasm o‘zgartiriladi.',
+    '“Yozuv” bo‘limida xabarlar qaysi yozuvda ko‘rsatilishi tanlanadi: “Asl holida”, “Lotin” yoki “Кирилл” (3.24-rasm).',
+    '“Bildirishnomalar” bo‘limida kompyuter bildirishnomalari yoqiladi, “Bloklanganlar” bo‘limida esa bloklangan foydalanuvchilar ro‘yxati ko‘riladi (3.20-rasm).',
+    '“Qurilmalar” bo‘limida hisobga kirilgan qurilmalar ko‘rinadi. Begona qurilma shu yerdan hisobdan chiqariladi. Tizimdan chiqish uchun “Chiqish” tugmasi bosiladi.',
+  ]),
   ...figurePair(
     [
       ['3-12-profile-editor.jpg', 'profilni tahrirlash'],
@@ -383,9 +400,12 @@ export const chapter3 = () => [
     '3.24',
     'Profil oynasi',
   ),
-  p(
-    '**Guruh yaratish.** Chatlar ro‘yxati tepasidagi “Yangi guruh” tugmasi bosiladi va qidiruv orqali a’zolar tanlanadi. So‘ng “Keyingi” tugmasi bosilib, guruh nomi, tavsifi va rasmi kiritiladi (3.25-rasm). Guruh sarlavhasi bosilganda ma’lumot paneli ochiladi (3.4-rasm). Ega va administratorlar shu yerda a’zolarni boshqaradi va taklif havolasini yaratadi.',
-  ),
+  p('**4. Guruh yaratish.**'),
+  ...numbered([
+    'Chatlar ro‘yxati tepasidagi “Yangi guruh” tugmasi bosiladi va qidiruv orqali a’zolar belgilanadi.',
+    '“Keyingi” tugmasi bosilib, guruh nomi, tavsifi va rasmi kiritiladi, so‘ng “Yaratish” tugmasi bosiladi (3.25-rasm).',
+    'Guruh sarlavhasi bosilganda ma’lumot paneli ochiladi (3.4-rasm). Guruh egasi va administratorlar shu yerda a’zolarni boshqaradi va “Taklif havolasi”ni yaratadi. Yangi a’zo qo‘shish uchun menyudagi “A’zo qo‘shish” bandi ishlatiladi.',
+  ]),
   ...figurePair(
     [
       ['3-14-group-create-members.jpg', 'a’zolarni tanlash'],
@@ -394,15 +414,33 @@ export const chapter3 = () => [
     '3.25',
     'Yangi guruh yaratish',
   ),
-  ...ps(
-    '**Forum.** Forumga “Forum” tugmasi orqali o‘tiladi. Post yozish uchun lenta tepasidagi maydonga matn yoziladi, rasm tugmasi orqali rasm yoki video qo‘shiladi va “Joylash” bosiladi. Muallif ismi bosilganda uning profili ochiladi, u yerda “Obuna bo‘lish” tugmasi bor. “Repost” tugmasi bosilganda postni shunchaki ulashish yoki unga iqtibos keltirish mumkin.',
-    '**Lavhalar.** Lavha joylash uchun chatlar ro‘yxati tepasidagi o‘z rasmi bosiladi va rasm yoki video tanlanadi. Obuna bo‘lingan odamlarning lavhalari shu qatorda chiqadi, ko‘rilmaganlari rangli halqa bilan belgilanadi.',
-    '**Maxfiy chat.** Shaxsiy chat menyusidan “Maxfiy chat boshlash” tanlanadi. Suhbatdosh taklifni qabul qilgach, kalit izini yuzma-yuz solishtirish, xabarlarni o‘chirish taymerini o‘rnatish va shifrlangan fayl yuborish mumkin. Maxfiy chat faqat u ochilgan qurilmada ishlaydi.',
-  ),
+  p('**5. Forum.**'),
+  ...numbered([
+    'Chatlar ro‘yxati tepasidagi “Forum” tugmasi bosiladi (3.14-rasm).',
+    'Post yozish uchun lenta tepasidagi maydonga matn yoziladi, rasm tugmasi orqali rasm yoki video qo‘shiladi va “Joylash” tugmasi bosiladi (3.17-rasm).',
+    'Postga javob yozish uchun post bosiladi va muhokama oynasida javob yoziladi (3.16-rasm).',
+    'Postni ulashish uchun “Repost qilish” tanlanadi, o‘z fikri bilan ulashish uchun esa “Iqtibos keltirish” tanlanadi.',
+    'Muallif ismi bosilganda uning profili ochiladi. U yerdagi “Obuna bo‘lish” tugmasi orqali muallifning postlari “Obunalar” lentasiga qo‘shiladi (3.19-rasm).',
+  ]),
+  p('**6. Lavhalar.**'),
+  ...numbered([
+    'Chatlar ro‘yxati tepasidagi lavhalar qatorida o‘z rasmi (“Hikoya qo‘shish”) bosiladi va rasm yoki video tanlanadi.',
+    'Obuna bo‘lingan odamlarning lavhalari shu qatorda chiqadi. Hali ko‘rilmaganlari rangli halqa bilan belgilanadi. Lavha bosilganda ko‘rish oynasi ochiladi (3.5-rasm).',
+    'Lavha 24 soatdan keyin lentadan avtomatik yo‘qoladi.',
+  ]),
+  p('**7. Maxfiy chat.**'),
+  ...numbered([
+    'Shaxsiy chat sarlavhasidagi menyudan “Maxfiy chat boshlash” bandi tanlanadi.',
+    'Suhbatdosh taklifni qabul qilgach, chat “Maxfiy chatlar” ro‘yxatida qulf belgisi bilan chiqadi.',
+    'Kalit belgilari (emoji va raqamlar) suhbatdosh bilan, masalan, yuzma-yuz solishtiriladi. Ular bir xil bo‘lsa, suhbat xavfsiz (3.11-rasm).',
+    'Sarlavhadagi “O‘z-o‘zini o‘chirish taymeri” orqali xabarlar qancha vaqtdan keyin o‘chishi belgilanadi.',
+    'Maxfiy chat faqat u ochilgan qurilmada ishlaydi. Boshqa qurilmadan bu yozishmalarni ko‘rib bo‘lmaydi.',
+  ]),
 
+  h2('III.4. Amaliy joriy etish va rivojlantirish istiqbollari'),
   h3('Amaliy joriy etish.'),
   ...ps(
-    'Diplom loyihasida yaratilgan chat texnologiyasi real loyihada ham qo‘llanildi. Uning asosida Elektron kooperatsiya portali uchun chat moduli ishlab chiqildi. Bu portal kompaniyalarning o‘zaro hamkorligi uchun mo‘ljallangan, chat moduli esa kompaniyalarga portalning o‘zida bir-biri bilan yozishish imkonini beradi.',
+    'Bitiruv malakaviy ishida yaratilgan chat texnologiyasi real loyihada ham qo‘llanildi. Uning asosida Elektron kooperatsiya portali uchun chat moduli ishlab chiqildi. Bu portal kompaniyalarning o‘zaro hamkorligi uchun mo‘ljallangan, chat moduli esa kompaniyalarga portalning o‘zida bir-biri bilan yozishish imkonini beradi.',
     'Modulda “Milliy” xabarchining asosiy qismlari qayta ishlatildi: xabarlarni jonli yetkazish, xabarlar va chatlar bilan ishlash qoidalari, fayl yuborish va o‘qilganlik belgilari. Portalga moslashtirish uchun suhbat ishtirokchisi sifatida alohida odam emas, kompaniya olindi, tizimga kirish esa portalning o‘z hisoblari orqali amalga oshirildi. Bu tajriba “Milliy” xabarchining yadrosini boshqa axborot tizimlariga alohida modul sifatida qo‘shish mumkinligini amalda ko‘rsatdi.',
   ),
 
@@ -418,7 +456,7 @@ export const chapter3 = () => [
     '**Boshqa yo‘nalishlar.** OneID orqali shaxsni davlat darajasida tasdiqlash, ilova yopiq bo‘lganda ham keladigan bildirishnomalar, maxfiy chatlarni bir nechta qurilmada ishlatish, forum uchun moderatorlar paneli hamda Android va iOS uchun mobil ilovalar ham rejaga kiritilgan.',
   ),
 
-  h2('3-bob bo‘yicha xulosa', { toc: false }),
+  h2('III bob bo‘yicha xulosa'),
   p(
     'Uchinchi bobda “Milliy” xabarchining dasturi yaratildi. Serverda 17 ta controller va 104 ta API manzil, xabarlarni qismlab yuklash, chat va forum uchun ikkita jonli aloqa markazi, onlayn holatni kuzatish, fayllarni xavfsiz qabul qilish, guruhlar va lavhalar amalga oshirildi. Keyingi bosqichda xabarlarga reaksiya, foydalanuvchini bloklash, top lentaga ega forum va kompyuter bildirishnomalari qo‘shildi. Ular mavjud tuzilmani o‘zgartirmasdan qo‘shildi. Tizimning uchta o‘ziga xos imkoniyati amalga oshirildi: lotin–kirill o‘girish va ikkala yozuvda qidiruv, ish e-pochtasi orqali tashkilot rejimi hamda “o‘qildi” belgisi bor maxfiy chatlar. Dasturni joylashtirish uchun konteynerlash texnologiyalaridan biri — Docker’dan foydalanildi, dastur VPS serverda ishlaydi va GitHub Actions orqali avtomatik yangilanadi. Tizim 457 ta server, 353 ta brauzer testi, 43 ta avtomatik tekshiruv va qo‘lda o‘tkazilgan sinovlar bilan tekshirildi. Chat texnologiyasi Elektron kooperatsiya portalida kompaniyalar o‘rtasidagi chat modulini yaratishda qo‘llanildi. Keyingi bosqich uchun sun’iy intellekt, bozor va tenderlar hamda blokcheyn yo‘nalishlari belgilandi.',
   ),

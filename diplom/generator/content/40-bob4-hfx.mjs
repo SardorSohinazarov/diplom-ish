@@ -5,13 +5,13 @@
 import { bullets, figure, h1, h2, h3, numbered, p, ps, table } from '../lib.mjs';
 
 export const chapter4 = () => [
-  h1('IV-bob. Hayot faoliyati xavfsizligi'),
+  h1('IV bob. Hayot faoliyati xavfsizligi'),
   p(
-    'Ushbu bobda “Milliy” xabarchini yaratgan dasturchilarning mehnat sharoitlari hayot faoliyati xavfsizligi nuqtai nazaridan ko‘rib chiqiladi [21]. Loyihadagi deyarli butun ish kompyuter oldida bajariladi: kod yozish, testlarni ishga tushirish, xabar almashishni bir nechta brauzerda sinash. Shuning uchun avval ish joyining qulayligi va sog‘liqqa zarar yetkazmasligi, ya’ni ergonomikasi ko‘rib chiqiladi. Ikkinchi masala — ofisda yong‘in yoki boshqa avariya yuz berganda odamlarni xavfsiz olib chiqish rejasini tuzish.',
+    'Ushbu bobda “Milliy” xabarchini yaratgan dasturchilarning mehnat sharoitlari hayot faoliyati xavfsizligi nuqtai nazaridan ko‘rib chiqiladi [2, 3]. Loyihadagi deyarli butun ish kompyuter oldida bajariladi: kod yozish, testlarni ishga tushirish, xabar almashishni bir nechta brauzerda sinash. Shuning uchun avval ish joyining qulayligi va sog‘liqqa zarar yetkazmasligi, ya’ni ergonomikasi ko‘rib chiqiladi. Ikkinchi masala — ofisda yong‘in yoki boshqa avariya yuz berganda odamlarni xavfsiz olib chiqish rejasini tuzish.',
   ),
 
   // ───────────────────────────────── 4.1
-  h2('4.1. Dasturchining ergonomik ish joyini tashkil etish'),
+  h2('IV.1. Dasturchining ergonomik ish joyini tashkil etish'),
   ...ps(
     'Ergonomika talablarining mohiyati shundaki, xodim jihozga moslashmasligi, aksincha, stol, stul va monitor xodimning bo‘yi va tana tuzilishiga qarab sozlanishi kerak. Dasturchi uchun bu ayniqsa muhim: uning ishi jismonan yengil ko‘rinsa-da, soatlab bir holatda qimirlamay o‘tirish va ekrandagi mayda matnga diqqatni jamlashni talab qiladi. Bunday yuklama bir kunda sezilmaydi, lekin oylar davomida to‘planib, sog‘liqqa ta’sir qiladi.',
     'Messenjer ishlab chiqish jarayonining xususiyatlaridan kelib chiqib, quyidagi xavfli va zararli omillarni ajratish mumkin:',
@@ -25,7 +25,7 @@ export const chapter4 = () => [
     'asabiy zo‘riqish. Ishni muddatida topshirish, server ishdan chiqqanda uni tezda tiklash va tungi navbatchiliklar ruhiy toliqtiradi.',
   ]),
   p(
-    'Ish joyiga qo‘yiladigan talablar Mehnat kodeksi, “Mehnatni muhofaza qilish to‘g‘risida”gi Qonun, sanitariya qoidalari hamda ISO 9241-5, GOST 12.2.032-78, GOST 12.1.005-88 va KMK 2.01.05-98 standartlari bilan belgilanadi [3, 4].',
+    'Ish joyiga qo‘yiladigan talablar Mehnat kodeksi, “Mehnatni muhofaza qilish to‘g‘risida”gi Qonun, sanitariya qoidalari hamda ISO 9241-5, GOST 12.2.032-78, GOST 12.1.005-88 va KMK 2.01.05-98 standartlari bilan belgilanadi [2, 3].',
   ),
 
   h3('Ish xonasiga qo‘yiladigan talablar.'),
@@ -85,10 +85,10 @@ export const chapter4 = () => [
   ),
 
   // ───────────────────────────────── 4.2
-  h2('4.2. Evakuatsiya tadbirlarini rejalashtirish hamda avariya va yong‘inlar sodir bo‘lganda xodimlarning harakatlari'),
+  h2('IV.2. Evakuatsiya tadbirlarini rejalashtirish hamda avariya va yong‘inlar sodir bo‘lganda xodimlarning harakatlari'),
   ...ps(
     'Ofis uchun favqulodda vaziyat — odamlar hayoti yoki sog‘lig‘iga xavf tug‘diradigan va odatiy ish tartibini buzadigan har qanday hodisa. Dasturchilar ofisida bular, avvalo, yong‘in va zilzila (Toshkent seysmik faol hududda joylashgan), shuningdek elektr ta’minotidagi avariya, quvur yorilishi va gaz sizishidir. Bu vaziyatlarning deyarli barchasida odamlarni saqlab qolishning eng ishonchli yo‘li ularni binodan tez va tartib bilan chiqarishdir.',
-    'Asosiy talablar “Favqulodda vaziyatlarda aholini va hududlarni muhofaza qilish to‘g‘risida”gi, “Yong‘in xavfsizligi to‘g‘risida”gi qonunlar va GOST 12.1.004-91 standarti bilan belgilanadi [5, 6].',
+    'Asosiy talablar mehnatni muhofaza qilish to‘g‘risidagi qonun hujjatlari va GOST 12.1.004-91 standarti bilan belgilanadi [3].',
   ),
 
   h3('IT-ofisda yong‘in chiqish sabablari va o‘t o‘chirish vositalari.'),
@@ -164,7 +164,7 @@ export const chapter4 = () => [
     'Xodimlarni tezkor xabardor qilish uchun korporativ aloqa vositalaridan ham foydalanish mumkin. Masalan, “Milliy” xabarchidagi tashkilotning domen guruhi orqali evakuatsiya haqidagi xabar va yig‘ilish joyi bir necha soniyada barcha xodimlarning telefon va kompyuterlariga yetkaziladi, xodimlar esa xavfsiz joyga yetib kelganini javob bilan tasdiqlaydi. Bu vosita signalizatsiya va ovozli xabardor qilish tizimini to‘ldiradi va ayniqsa masofadan ishlayotgan xodimlar uchun foydali.',
   ),
 
-  h2('4-bob bo‘yicha xulosa', { toc: false }),
+  h2('IV bob bo‘yicha xulosa'),
   p(
     'Bobda dasturchi mehnatidagi asosiy xavflar aniqlandi: ko‘z charchashi, uzoq o‘tirish, qo‘lning bir xil harakatlari va asabiy zo‘riqish. Ularni kamaytirish uchun ish joyiga qo‘yiladigan talablar keltirildi, xona harorati, yoritilishi va shovqini uchun me’yorlar jamlandi. Ikkinchi bo‘limda ofisda yong‘in chiqish sabablari va o‘chirish vositalari ko‘rib chiqildi, namunaviy qavat uchun evakuatsiya reja-sxemasi tuzildi. Yong‘in, zilzila va boshqa avariyalarda xodimlar nima qilishi kerakligi aniq tartib sifatida berildi.',
   ),

@@ -155,7 +155,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
   text(s, [
     { text: 'O‘ZBEKISTON RESPUBLIKASI RAQAMLI TEXNOLOGIYALAR VAZIRLIGI', options: { breakLine: true } },
     { text: 'MUHAMMAD AL-XORAZMIY NOMIDAGI TOSHKENT AXBOROT TEXNOLOGIYALARI UNIVERSITETI', options: { breakLine: true } },
-    { text: '“Axborot texnologiyalarining dasturiy ta’minoti” kafedrasi' },
+    { text: '“Tizimli va amaliy dasturlashtirish” kafedrasi' },
   ], { x: M, y: 0.35, w: CW, h: 0.95, fontSize: 13, color: C.tint3, align: 'center', lineSpacingMultiple: 1.15 });
 
   text(s, 'BITIRUV MALAKAVIY ISHI', { x: M, y: 1.95, w: 6.6, h: 0.4, fontSize: 16, bold: true, color: C.tint4, charSpacing: 3 });
@@ -175,7 +175,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
 
   text(s, 'Toshkent – 2026', { x: M, y: 6.75, w: CW, h: 0.4, fontSize: 14, bold: true, color: C.tint3, align: 'center' });
   s.addNotes(
-    'Assalomu alaykum, hurmatli komissiya a’zolari! Mening ismim Sohinazarov Sardorbek. Diplom loyihamning mavzusi — real vaqtda xabar almashish imkonini beruvchi “Milliy” xabarchini ishlab chiqish. Ish doirasida Telegramga o‘xshash, foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan veb-messenjer loyihalandi va to‘liq ishlaydigan holatga keltirildi. Ekranning o‘ng tomonida dasturning haqiqiy interfeysi ko‘rsatilgan.',
+    'Assalomu alaykum, hurmatli komissiya a’zolari! Mening ismim Sohinazarov Sardorbek. Bitiruv malakaviy ishimning mavzusi — real vaqtda xabar almashish imkonini beruvchi “Milliy” xabarchini ishlab chiqish. Ish doirasida Telegramga o‘xshash, foydalanuvchi ma’lumotlarini o‘z serverida saqlaydigan veb-messenjer loyihalandi va to‘liq ishlaydigan holatga keltirildi. Ekranning o‘ng tomonida dasturning haqiqiy interfeysi ko‘rsatilgan.',
   );
 }
 
@@ -407,7 +407,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     text(s, d, { x: ax + 1.1, y: y + 0.32, w: aw - 1.3, h: 0.6, fontSize: 13, color: C.tint3, valign: 'top' });
   });
   s.addNotes(
-    'Tahlil asosida tizimga 19 ta funksional va 4 guruh nofunksional talab qo‘yildi. Funksional talablar — bu foydalanuvchi ko‘radigan imkoniyatlar: kirish, chatlar, xabarlar, media fayllar, real vaqt belgilari va hikoyalar. Nofunksional talablar esa tizim sifatini belgilaydi: masalan, xabar bir soniyadan kam vaqtda yetib borishi, barcha kodlar va tokenlar xesh ko‘rinishida saqlanishi, tizim Docker’da istalgan serverga ko‘chirilishi. Tizimda uchta aktor bor: mehmon, ro‘yxatdan o‘tgan foydalanuvchi va guruh egasi. Ularning to‘liq use-case diagrammasi diplom ishining ikkinchi bobida keltirilgan.',
+    'Tahlil asosida tizimga 19 ta funksional va 4 guruh nofunksional talab qo‘yildi. Funksional talablar — bu foydalanuvchi ko‘radigan imkoniyatlar: kirish, chatlar, xabarlar, media fayllar, real vaqt belgilari va hikoyalar. Nofunksional talablar esa tizim sifatini belgilaydi: masalan, xabar bir soniyadan kam vaqtda yetib borishi, barcha kodlar va tokenlar xesh ko‘rinishida saqlanishi, tizim Docker’da istalgan serverga ko‘chirilishi. Tizimda uchta aktor bor: mehmon, ro‘yxatdan o‘tgan foydalanuvchi va guruh egasi. Ularning to‘liq use-case diagrammasi bitiruv malakaviy ishining ikkinchi bobida keltirilgan.',
   );
 }
 
@@ -868,7 +868,7 @@ const cell = (t, o = {}) => ({ text: t, options: { fontFace: F, fontSize: 13, co
     text(s, t, { x: px + 1.0, y, w: pw - 1.2, h: 0.48, fontSize: 15, color: C.tint2, valign: 'middle' });
   });
   s.addNotes(
-    'Xulosa qilib aytganda, diplom loyihasida qo‘yilgan barcha vazifalar bajarildi. Mavjud messenjerlar, jumladan Humo tahlil qilindi, tizim loyihalandi, parolsiz kirishga ega, real vaqtda ishlaydigan messenjer yaratildi va bulutga joylashtirildi. Chat texnologiyasi Elektron kooperatsiya portalida kompaniyalar o‘rtasidagi chat modulini yaratishda qo‘llanildi. “Milliy” xabarchini tashkilotlar, universitetlar va davlat idoralari o‘z serverlarida ichki aloqa vositasi sifatida ishlatishi mumkin. Keyingi bosqichda sun’iy intellekt yordamchisi qo‘shiladi: u yozishmaning qisqacha mazmunini chiqaradi, tarjima qiladi va spamni aniqlaydi. Xabarchi ichida bozor yaratiladi, kompaniyalar o‘rtasida auksion va tenderlar o‘tkaziladi, ularning shaffofligini esa blokcheyn ta’minlaydi. Shuningdek, qo‘ng‘iroqlar, kanallar va botlar, OneID va mobil ilovalar rejalashtirilgan.',
+    'Xulosa qilib aytganda, bitiruv malakaviy ishida qo‘yilgan barcha vazifalar bajarildi. Mavjud messenjerlar, jumladan Humo tahlil qilindi, tizim loyihalandi, parolsiz kirishga ega, real vaqtda ishlaydigan messenjer yaratildi va bulutga joylashtirildi. Chat texnologiyasi Elektron kooperatsiya portalida kompaniyalar o‘rtasidagi chat modulini yaratishda qo‘llanildi. “Milliy” xabarchini tashkilotlar, universitetlar va davlat idoralari o‘z serverlarida ichki aloqa vositasi sifatida ishlatishi mumkin. Keyingi bosqichda sun’iy intellekt yordamchisi qo‘shiladi: u yozishmaning qisqacha mazmunini chiqaradi, tarjima qiladi va spamni aniqlaydi. Xabarchi ichida bozor yaratiladi, kompaniyalar o‘rtasida auksion va tenderlar o‘tkaziladi, ularning shaffofligini esa blokcheyn ta’minlaydi. Shuningdek, qo‘ng‘iroqlar, kanallar va botlar, OneID va mobil ilovalar rejalashtirilgan.',
   );
 }
 
