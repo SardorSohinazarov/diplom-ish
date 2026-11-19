@@ -7,7 +7,7 @@ import pptxgen from 'pptxgenjs';
 import { ROOT } from './lib.mjs';
 import { renderIcons } from './tools/icons.mjs';
 
-const OUT = path.join(ROOT, '..', 'Himoya_taqdimoti_Sohinazarov_Sardor.pptx');
+const OUT = process.env.OUT ?? path.join(ROOT, '..', 'Himoya_taqdimoti_Sohinazarov_Sardor.pptx');
 const TOPIC = 'Real vaqtda xabar almashish imkonini beruvchi “Milliy” xabarchi ishlab chiqish';
 const TOTAL = 18;
 
@@ -175,9 +175,8 @@ const bulletList = (items) => items.map((t, i) => ({ text: t, options: { bullet:
     { text: 'Ilmiy rahbar:  ', options: { color: C.tint4 } },
     { text: 'dots. Y.Sh. Yuldoshev', options: { bold: true } },
   ], { x: M, y: 5.05, w: 6.6, h: 0.9, fontSize: 16, color: C.white, lineSpacingMultiple: 1.4 });
-  const shot = fit('3-05-private-chat.jpg', 5.3, 3.4);
-  s.addImage({ path: pic('3-05-private-chat.jpg'), x: W - M - shot.w, y: 1.95, w: shot.w, h: shot.h,
-    shadow: { type: 'outer', color: '000000', opacity: 0.35, blur: 14, offset: 4, angle: 90 } });
+  // Conversation only (no chat list), so the messages stay legible on a projector.
+  framed(s, '3-05-private-chat.jpg', W - M - 5.1, 1.95, 5.1, 3.9, { align: 'right', crop: [0.225, 0, 0.775, 0.66] });
   text(s, 'Toshkent – 2026', { x: M, y: 6.75, w: CW, h: 0.4, fontSize: 14, bold: true, color: C.tint3, align: 'center' });
   s.addNotes(
     '[≈15 soniya] Assalomu alaykum, hurmatli komissiya a’zolari! Men Sohinazarov Sardorbekman. Bitiruv malakaviy ishimning mavzusi — real vaqtda xabar almashish imkonini beruvchi “Milliy” xabarchini ishlab chiqish.',
@@ -271,7 +270,7 @@ const bulletList = (items) => items.map((t, i) => ({ text: t, options: { bullet:
 // ───────────────────────────────────────── 6. Lotin ↔ Kirill  (≈40 s)
 {
   const s = contentSlide(6, 'Lotin ↔ Kirill: har kim o‘z yozuvida o‘qiydi');
-  const crop = [0.225, 0, 0.775, 0.6];
+  const crop = [0.265, 0.19, 0.375, 0.30]; // the two Cyrillic messages
   const w = (CW - 0.35) / 2;
   const a = framed(s, '3-20-script-original.jpg', M, 1.45, w, 3.6, { crop, align: 'left' });
   const b = framed(s, '3-20-script-latin.jpg', M + w + 0.35, 1.45, w, 3.6, { crop, align: 'right' });
@@ -304,7 +303,7 @@ const bulletList = (items) => items.map((t, i) => ({ text: t, options: { bullet:
     ['link', 'Gmail va boshqalar', 'Faqat admin qo‘shsa yoki taklif havolasi bilan'],
   ];
   steps.forEach(([ic, h, d], i) => iconRow(s, ic, h, d, M, 1.6 + i * 1.22, 4.7, { d: 0.62, headSize: 17, descSize: 14 }));
-  const shot = framed(s, '3-22-organization-group.jpg', M + 5.0, 1.5, CW - 5.0, 5.1, { align: 'right' });
+  const shot = framed(s, '3-22-organization-group.jpg', M + 5.0, 1.5, CW - 5.0, 5.1, { align: 'center', crop: [0.27, 0.14, 0.445, 0.57] });
   pill(s, 'Domen guruhi va taklif havolasi', shot, 3.1);
   s.addNotes(
     '[≈35 soniya] Universitetlarda har bir guruh va kafedra uchun chat ochiladi, a’zolarni esa qo‘lda qo‘shish kerak bo‘ladi va kim kirgani nazorat qilinmaydi. Tashkilot rejimida buning hojati yo‘q: tashkilot — bu pochta domeni. tuit.uz pochtasi bilan birinchi kirgan odam admin bo‘ladi va yopiq guruh o‘zi yaratiladi. Keyingi har bir xodim ism yonida “tuit.uz” belgisini oladi va guruhga avtomatik tushadi. Gmail kabi umumiy pochta egalari esa faqat taklif bilan kira oladi. Tashkilotni oldindan ro‘yxatdan o‘tkazish shart emas.',
@@ -314,25 +313,27 @@ const bulletList = (items) => items.map((t, i) => ({ text: t, options: { bullet:
 // ───────────────────────────────────────── 8. Maxfiy chat  (≈35 s)
 {
   const s = contentSlide(8, 'Maxfiy chat: server ham o‘qiy olmaydi');
-  const shot = framed(s, '3-26-secret-chat.jpg', M, 1.5, 6.4, 5.1, { align: 'left', crop: [0.225, 0, 0.775, 0.93] });
-  const rx = shot.x + shot.w + 0.45, rw = W - M - rx;
+  // Header ("Maxfiy chat · faqat shu qurilmada") and the first two messages, across the full slide width.
+  framed(s, '3-26-secret-chat.jpg', M, 1.45, CW, 3.5, { crop: [0.231, 0, 0.73, 0.335] });
   const steps = [
-    ['Kalitlar faqat qurilmada', 'Serverga faqat ochiq kalit yuboriladi'],
-    ['Har xabarga yangi kalit', 'Eski kalit o‘chadi — eski xabarlar ham himoyada'],
-    ['Kalit izini solishtirish', 'O‘rtada begona yo‘qligini ikkala tomon tekshiradi'],
+    ['Kalitlar faqat qurilmada', 'serverga faqat ochiq kalit boradi'],
+    ['Har xabarga yangi kalit', 'eskisi o‘chadi — eski xabarlar ham himoyada'],
+    ['Kalit izini solishtirish', 'o‘rtada begona yo‘qligi tekshiriladi'],
   ];
+  const cw = (CW - 3 * 0.25) / 4, y = 5.2;
   steps.forEach(([h, d], i) => {
-    const y = 1.55 + i * 1.0;
-    num(s, i + 1, rx, y, 0.5);
-    text(s, h, { x: rx + 0.7, y: y - 0.04, w: rw - 0.7, h: 0.36, fontSize: 17, bold: true, color: C.ink });
-    text(s, d, { x: rx + 0.7, y: y + 0.34, w: rw - 0.7, h: 0.5, fontSize: 14, color: C.muted, valign: 'top' });
+    const x = M + i * (cw + 0.25);
+    card(s, x, y, cw, 1.3, C.tint);
+    num(s, i + 1, x + 0.2, y + 0.2, 0.45);
+    text(s, h, { x: x + 0.8, y: y + 0.12, w: cw - 0.95, h: 0.6, fontSize: 14, bold: true, color: C.ink, valign: 'middle' });
+    text(s, d, { x: x + 0.2, y: y + 0.75, w: cw - 0.35, h: 0.5, fontSize: 12, color: C.muted, valign: 'top' });
   });
-  text(s, 'Bazada qolgan yagona iz — ma’nosiz shifr matn:', { x: rx, y: 4.65, w: rw, h: 0.35, fontSize: 13, bold: true, color: C.ink });
+  const tx = M + 3 * (cw + 0.25);
   terminal(s, [
-    ['Id | Seq | bytes | Ciphertext', 'D4D4D4'],
-    [' 6 |   5 |   183 | AdBp3POJtrxqSydreRLgRu…', '4ADE80'],
-  ], rx, 5.05, rw, 0.85, 12);
-  text(s, 'X25519 · HKDF-SHA-256 · AES-256-GCM (Web Crypto API)', { x: rx, y: 6.1, w: rw, h: 0.35, fontSize: 11, italic: true, color: C.muted });
+    ['bazada:', '9CDCFE'],
+    ['183 bayt  AdBp3POJtrxq…', '4ADE80'],
+    ['ma’nosiz shifr matn', 'D4D4D4'],
+  ], tx, y, cw, 1.3, 12);
   s.addNotes(
     '[≈35 soniya] Maxfiy chatda xabar qurilmaning o‘zida shifrlanadi. Kalitlar faqat ikki suhbatdoshning qurilmasida turadi, serverga faqat ochiq kalit boradi. Har bir xabar yangi kalit bilan shifrlanadi, eskisi o‘chiriladi. Shuning uchun kalit qo‘lga tushsa ham, eski xabarlarni ochib bo‘lmaydi. Pastda ma’lumotlar bazasining o‘zi: u yerda xabar o‘rniga faqat ma’nosiz shifr matn qolgan. (Komissiya so‘rasa: X25519 kalit kelishuvi, HKDF, AES-256-GCM, brauzerning Web Crypto API’si.)',
   );
@@ -396,21 +397,23 @@ const bulletList = (items) => items.map((t, i) => ({ text: t, options: { bullet:
 {
   const s = contentSlide(9, 'Qanday qurilgan: arxitektura va texnologiyalar');
   const dw = 7.2;
-  const layers = [
-    ['Brauzer — Angular', 'REST so‘rovlari + SignalR ulanishi (WebSocket)', C.tint, C.ink],
-    ['API qatlami', 'Controllerlar, ChatHub, ForumHub', C.tint2, C.ink],
-    ['Application', 'Servislar, tekshiruv qoidalari', C.tint3, C.ink],
-    ['Domain', 'Foydalanuvchi, Chat, Xabar, Guruh…', C.tint4, C.ink],
-    ['Infrastructure', 'PostgreSQL · Redis · pochta · antivirus', C.pri, C.white],
-  ];
-  layers.forEach(([name, desc, fill, color], i) => {
-    const y = 1.5 + i * 0.82;
-    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: M, y, w: dw, h: 0.7, rectRadius: 0.1, fill: { color: fill }, line: { type: 'none' } });
+  // Clean Architecture as nested rings: Domain in the core, dependencies point only inwards.
+  const ring = (x, y, w, h, fill, title, sub, color, subColor) => {
+    s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x, y, w, h, rectRadius: 0.2, fill: { color: fill }, line: { type: 'none' } });
     text(s, [
-      { text: name + '   ', options: { bold: true, fontSize: 16 } },
-      { text: desc, options: { fontSize: 13 } },
-    ], { x: M + 0.25, y, w: dw - 0.5, h: 0.7, color, valign: 'middle' });
-  });
+      { text: title + '   ', options: { bold: true, fontSize: 16, color } },
+      { text: sub, options: { fontSize: 12, color: subColor } },
+    ], { x: x + 0.25, y: y + 0.08, w: w - 0.5, h: 0.55, valign: 'middle' });
+  };
+  ring(M, 1.5, dw, 4.05, C.tint, 'API · Infrastructure', 'Controllerlar, ChatHub · PostgreSQL, Redis, pochta', C.ink, C.muted);
+  ring(M + 0.35, 2.2, dw - 0.7, 3.0, C.tint3, 'Application', 'servislar, tekshiruv qoidalari, interfeyslar (portlar)', C.ink, C.text);
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: M + 0.7, y: 2.9, w: dw - 1.4, h: 1.95, rectRadius: 0.2, fill: { color: C.pri }, line: { type: 'none' } });
+  text(s, [
+    { text: 'Domain', options: { bold: true, fontSize: 20, color: C.white, breakLine: true } },
+    { text: 'Foydalanuvchi, Chat, Xabar, Guruh', options: { fontSize: 13, color: C.tint2, breakLine: true } },
+    { text: 'hech qaysi texnologiyaga bog‘liq emas', options: { fontSize: 12, italic: true, color: C.tint3 } },
+  ], { x: M + 0.9, y: 2.9, w: dw - 1.8, h: 1.95, align: 'center', valign: 'middle' });
+  text(s, '→ bog‘liqlik faqat ichkariga', { x: M + 0.35, y: 5.2, w: dw - 0.7, h: 0.32, fontSize: 12, bold: true, color: C.pri, align: 'center', valign: 'middle' });
   const groups = [
     ['Server', '.NET, Entity Framework, PostgreSQL, Redis'],
     ['Brauzer', 'Angular, TypeScript'],
@@ -441,10 +444,10 @@ const bulletList = (items) => items.map((t, i) => ({ text: t, options: { bullet:
   text(s, bulletList([
     'Eng tez usul — WebSocket; ishlamasa o‘zi boshqasiga o‘tadi',
     'Guruhlar, kirish tekshiruvi va qayta ulanish tayyor',
-    'Server 4 qatlamga bo‘lingan: baza almashsa ham asosiy qoidalar o‘zgarmaydi',
+    'Clean Architecture: Domain markazda — baza yoki texnologiya almashsa ham o‘zgarmaydi',
   ]), { x: px + 0.3, y: 3.3, w: pw - 0.6, h: 3.2, fontSize: 14, color: C.text, paraSpaceAfter: 10, valign: 'top' });
   s.addNotes(
-    '[≈45 soniya] Tizim ikki qismdan iborat. Brauzer qismi Angular’da, server .NET’da yozilgan, ma’lumotlar PostgreSQL’da, onlayn holat Redis’da saqlanadi. Xabarlarni jonli yetkazish uchun beshta texnologiya solishtirilib, SignalR tanlandi: u eng tez usul — WebSocket bilan ishlaydi, u ishlamaydigan tarmoqda esa o‘zi boshqa usulga o‘tadi. Server to‘rt qatlamga bo‘lingan — Clean Architecture, shuning uchun baza yoki texnologiya almashsa ham dasturning asosiy qoidalari o‘zgarmaydi. Bazada 11 guruhga ajratilgan 43 ta jadval bor.',
+    '[≈45 soniya] Tizim ikki qismdan iborat. Brauzer qismi Angular’da, server .NET’da yozilgan, ma’lumotlar PostgreSQL’da, onlayn holat Redis’da saqlanadi. Xabarlarni jonli yetkazish uchun beshta texnologiya solishtirilib, SignalR tanlandi: u eng tez usul — WebSocket bilan ishlaydi, u ishlamaydigan tarmoqda esa o‘zi boshqa usulga o‘tadi. Server Clean Architecture asosida qurilgan: markazda Domain — foydalanuvchi, chat, xabar kabi asosiy tushunchalar, uning atrofida Application — biznes-qoidalar, tashqi qatlamda esa API va Infrastructure — baza, Redis, pochta. Bog‘liqlik faqat ichkariga yo‘nalgan, shuning uchun baza yoki texnologiya almashsa ham dasturning asosiy qoidalari o‘zgarmaydi. Bazada 11 guruhga ajratilgan 43 ta jadval bor.',
   );
 }
 
@@ -466,9 +469,7 @@ const bulletList = (items) => items.map((t, i) => ({ text: t, options: { bullet:
     num(s, i + 1, M, y, 0.55, C.pri);
     text(s, t, { x: M + 0.8, y, w: 6.0, h: 0.55, fontSize: 18, color: C.white, valign: 'middle' });
   });
-  const shot = fit('3-16-dark-theme.jpg', 5.2, 4.6);
-  s.addImage({ path: pic('3-16-dark-theme.jpg'), x: W - M - shot.w, y: 1.85, w: shot.w, h: shot.h,
-    shadow: { type: 'outer', color: '000000', opacity: 0.35, blur: 14, offset: 4, angle: 90 } });
+  framed(s, '3-16-dark-theme.jpg', W - M - 5.4, 1.85, 5.4, 4.6, { align: 'right', valign: 'middle', crop: [0.225, 0, 0.42, 0.62] });
   text(s, `${pres.slides.length} / ${TOTAL}`, { x: W - M - 2, y: 6.98, w: 2, h: 0.3, fontSize: 10, color: C.tint4, align: 'right' });
   s.addNotes(
     '[1,5–2 daqiqa] Endi dasturni jonli ko‘rsataman. (Oldindan ikki brauzer oynasida ikki xil foydalanuvchi bilan kirib qo‘ying.) 1) Bir oynadan xabar yozaman — ikkinchisida shu zahoti chiqadi, yozayotganda “yozmoqda” ko‘rinadi, o‘qilganda ikki belgi chiqadi. 2) Sozlamada yozuvni lotinga almashtiraman — kirillcha xabarlar lotinda ko‘rinadi. 3) Lotincha so‘z bilan qidiraman — kirillcha xabar topiladi. 4) Vaqt bo‘lsa, maxfiy chat va forumni ko‘rsataman. ZAXIRA: internet uzilsa, oldindan yozib olingan videoni qo‘ying.',
@@ -672,7 +673,7 @@ function node(s, x, y, w, h, title, sub, { fill = C.tint, color = C.ink, subColo
   const s = contentSlide(11, 'Dastur ishlab turibdi va sinovdan o‘tgan');
   const stats = [
     ['810', 'avtomatik test: 457 server + 353 brauzer', true],
-    ['0', 'muvaffaqiyatsiz test'],
+    ['100%', 'testlar muvaffaqiyatli o‘tdi'],
     ['104', 'API manzil'],
     ['43', 'qo‘shimcha API tekshiruvi'],
   ];
@@ -702,27 +703,21 @@ function node(s, x, y, w, h, title, sub, { fill = C.tint, color = C.ink, subColo
 // ───────────────────────────────────────── 12. Amaliyotga joriy etish  (≈30 s)
 {
   const s = contentSlide(12, 'Amaliyotga joriy etildi: Elektron kooperatsiya portali');
-  const lx = M, lw = 4.6;
-  card(s, lx, 1.6, lw, 3.7, C.ink);
-  badge(s, 'sparkles', lx + 0.35, 1.9, 0.65, C.pri);
-  text(s, '“Milliy” yadrosi', { x: lx + 1.2, y: 1.92, w: lw - 1.4, h: 0.6, fontSize: 20, bold: true, color: C.white, valign: 'middle' });
-  text(s, bulletList(['Xabarlarni jonli yetkazish', 'Chat va xabar qoidalari', 'Fayl yuborish', 'O‘qilganlik belgilari']), {
-    x: lx + 0.35, y: 2.85, w: lw - 0.7, h: 2.3, fontSize: 19, color: C.tint2, paraSpaceAfter: 10, valign: 'top',
-  });
-  s.addShape(pres.shapes.RIGHT_ARROW, { x: lx + lw + 0.25, y: 3.05, w: 1.0, h: 0.8, fill: { color: C.pri }, line: { type: 'none' } });
-  const rx = lx + lw + 1.5, rw = W - M - rx;
-  card(s, rx, 1.6, rw, 3.7, C.tint);
-  badge(s, 'building-2', rx + 0.35, 1.9, 0.65, C.pri);
-  text(s, 'Elektron kooperatsiya portali', { x: rx + 1.2, y: 1.92, w: rw - 1.4, h: 0.6, fontSize: 20, bold: true, color: C.ink, valign: 'middle' });
-  text(s, bulletList([
-    'Kompaniyalar portalning o‘zida bir-biri bilan yozishadi',
-    'Suhbat ishtirokchisi — odam emas, kompaniya',
-    'Kirish — portalning o‘z hisoblari orqali',
-  ]), { x: rx + 0.35, y: 2.85, w: rw - 0.7, h: 2.3, fontSize: 19, color: C.text, paraSpaceAfter: 10, valign: 'top' });
-  card(s, M, 5.6, CW, 0.9, C.tint2);
-  s.addImage({ path: icon('check', C.ok), x: M + 0.3, y: 5.87, w: 0.36, h: 0.36 });
-  text(s, 'Natija: “Milliy” yadrosini boshqa axborot tizimlariga alohida modul sifatida qo‘shish mumkinligi amalda isbotlandi.', {
-    x: M + 0.85, y: 5.6, w: CW - 1.1, h: 0.9, fontSize: 17, bold: true, color: C.ink, valign: 'middle',
+  // Cropped to the chat area: the top bar (account balance) and an older message with a phone number stay out.
+  const shot = framed(s, '3-40-cooperation-portal-chat.png', M, 1.4, CW, 3.95, { crop: [0, 0.343, 0.99, 0.598] });
+  pill(s, 'Portaldagi kompaniyalar o‘rtasidagi chat', shot, 3.6);
+  const items = [
+    ['sparkles', 'Qayta ishlatildi', 'jonli yetkazish, chat qoidalari, fayl, o‘qildi ✓✓'],
+    ['building-2', 'Ishtirokchi — kompaniya', 'odam emas, MCHJ bir-biri bilan yozishadi'],
+    ['key-round', 'Kirish — portal hisobi', 'alohida ro‘yxatdan o‘tish shart emas'],
+  ];
+  const cw = (CW - 2 * 0.3) / 3, y = shot.y + shot.h + 0.25;
+  items.forEach(([ic, h, d], i) => {
+    const x = M + i * (cw + 0.3);
+    card(s, x, y, cw, 1.1, i === 0 ? C.ink : C.tint);
+    badge(s, ic, x + 0.2, y + 0.25, 0.55, C.pri);
+    text(s, h, { x: x + 0.95, y: y + 0.14, w: cw - 1.1, h: 0.4, fontSize: 15, bold: true, color: i === 0 ? C.white : C.ink, valign: 'middle' });
+    text(s, d, { x: x + 0.95, y: y + 0.54, w: cw - 1.1, h: 0.5, fontSize: 12, color: i === 0 ? C.tint2 : C.text, valign: 'top' });
   });
   s.addNotes(
     '[≈30 soniya] Ish faqat nazariy emas — u amaliyotga joriy etildi. “Milliy” xabarchining yadrosi — jonli yetkazish, chat qoidalari, fayl yuborish va o‘qilganlik belgilari — Elektron kooperatsiya portalida kompaniyalar o‘rtasidagi chat modulini yaratishda qayta ishlatildi. Bu yerda suhbat ishtirokchisi alohida odam emas, kompaniya, kirish esa portalning o‘z hisoblari orqali. Bu tajriba “Milliy” yadrosini istalgan axborot tizimiga modul sifatida qo‘shish mumkinligini ko‘rsatdi. (Joriy etish dalolatnomasi bo‘lsa, shu yerda tilga oling.)',
@@ -764,7 +759,7 @@ function node(s, x, y, w, h, title, sub, { fill = C.tint, color = C.ink, subColo
     'Talablar, arxitektura va 43 jadvalli baza loyihalandi',
     'Parolsiz xavfsiz kirish va maxfiy chat yaratildi',
     'Lotin↔kirill, tashkilot rejimi va forum ishlab chiqildi',
-    'VPS’ga joylashtirildi, 810 test, portalga joriy etildi',
+    'VPS’ga joylashtirildi, sinovdan o‘tdi va portalga joriy etildi',
   ];
   text(s, 'Vazifalar bajarildi', { x: M, y: 1.45, w: 6.5, h: 0.45, fontSize: 20, bold: true, color: C.ink });
   results.forEach((t, i) => {
@@ -788,7 +783,7 @@ function node(s, x, y, w, h, title, sub, { fill = C.tint, color = C.ink, subColo
     text(s, t, { x: px + 1.05, y: y - 0.08, w: pw - 1.25, h: 0.7, fontSize: 15, color: C.tint2, valign: 'middle' });
   });
   s.addNotes(
-    '[≈40 soniya] Xulosa qilib aytganda, qo‘yilgan beshta vazifaning barchasi bajarildi: tahlil, loyihalash, xavfsizlik, o‘zbekcha imkoniyatlar va forum, joylashtirish va joriy etish. Ma’lumotlari o‘z serverida saqlanadigan, real vaqtda ishlaydigan messenjer yaratildi va hozir serverda ishlab turibdi. Unda boshqa messenjerlarda yo‘q imkoniyatlar bor: lotin va kirill, tashkilot rejimi va maxfiy chat. Dastur 810 ta test bilan tekshirilgan va Elektron kooperatsiya portaliga joriy etilgan. Istalgan universitet yoki kompaniya uni o‘z serverida ishga tushirib, yozishmalarini to‘liq o‘z nazoratida saqlay oladi. Keyingi bosqichda xabarlar message broker va workerlar orqali yetkaziladi, oflayn foydalanuvchiga push bildirishnoma boradi; shuningdek sun’iy intellekt yordamchisi, qo‘ng‘iroqlar, OneID va mobil ilovalar qo‘shiladi.',
+    '[≈40 soniya] Xulosa qilib aytganda, qo‘yilgan beshta vazifaning barchasi bajarildi: tahlil, loyihalash, xavfsizlik, o‘zbekcha imkoniyatlar va forum, joylashtirish va joriy etish. Ma’lumotlari o‘z serverida saqlanadigan, real vaqtda ishlaydigan messenjer yaratildi va hozir serverda ishlab turibdi. Unda boshqa messenjerlarda yo‘q imkoniyatlar bor: lotin va kirill, tashkilot rejimi va maxfiy chat. Dastur avtomatik testlardan to‘liq o‘tgan va Elektron kooperatsiya portaliga joriy etilgan. Istalgan universitet yoki kompaniya uni o‘z serverida ishga tushirib, yozishmalarini to‘liq o‘z nazoratida saqlay oladi. Keyingi bosqichda xabarlar message broker va workerlar orqali yetkaziladi, oflayn foydalanuvchiga push bildirishnoma boradi; shuningdek sun’iy intellekt yordamchisi, qo‘ng‘iroqlar, OneID va mobil ilovalar qo‘shiladi.',
   );
 }
 
@@ -913,7 +908,7 @@ const zebra = (i) => ({ color: i % 2 ? C.white : 'F9FAFB' });
 
 // Z4. Testlar
 {
-  const s = backupSlide('Avtomatik testlar tarkibi: 810 / 810 o‘tdi');
+  const s = backupSlide('Avtomatik testlar: modullar bo‘yicha tarkibi');
   const rows = [
     ['Lotin↔kirill va qidiruv kaliti', '167', '80 juftlik ikkala yo‘nalishda, kontekst qoidalari, himoyalangan qismlar'],
     ['Forum (6 sinf)', '79', 'Post, javob, iqtibos, cheklovlar, shikoyat, top lenta, obunalar'],
@@ -983,7 +978,7 @@ let qaN = 0;
 /** Question slide: the question as title, a one-line short answer, then four supporting points. */
 function qaSlide(question, short, points, notes) {
   qaN += 1;
-  const s = backupSlide(`Savol ${qaN}: «${question}»`);
+  const s = backupSlide(`Savol ${qaN}: “${question}”`);
   card(s, M, 1.45, CW, 1.0, C.ink);
   badge(s, 'check', M + 0.25, 1.65, 0.6, C.pri);
   text(s, [
@@ -1002,14 +997,14 @@ function qaSlide(question, short, points, notes) {
 }
 
 qaSlide('Telegramdan farqi nima?',
-  'Telegram — xorijiy xizmat. «Milliy»ni tashkilot o‘z serverida ishga tushiradi va u o‘zbek tiliga moslashgan.',
+  'Telegram — xorijiy xizmat. “Milliy”ni tashkilot o‘z serverida ishga tushiradi va u o‘zbek tiliga moslashgan.',
   [
-    ['database', 'Ma’lumotlar o‘z serveringizda', 'Telegram serverlari chet elda. «Milliy»ni universitet yoki kompaniya o‘zi o‘rnatadi va nazorat qiladi.'],
+    ['database', 'Ma’lumotlar o‘z serveringizda', 'Telegram serverlari chet elda. “Milliy”ni universitet yoki kompaniya o‘zi o‘rnatadi va nazorat qiladi.'],
     ['languages', 'Lotin ↔ kirill', 'Telegramda yo‘q: har kim o‘z yozuvida o‘qiydi, qidiruv ikkala yozuvda topadi.'],
     ['building-2', 'Tashkilot rejimi', 'Ish e-pochtasi orqali tashkilotning yopiq guruhiga avtomatik a’zolik.'],
     ['mail', 'Telefon raqami shart emas', 'Kirish e-pochta kodi yoki Google orqali; parol umuman yo‘q.'],
   ],
-  'Telegram qulay, lekin u xorijiy kompaniya xizmati: ma’lumotlar chet eldagi serverlarda, qoidalarni ham kompaniya belgilaydi. «Milliy»ni esa istalgan tashkilot o‘z serveriga o‘rnatadi. Bundan tashqari Telegramda o‘zbek tilining ikki yozuvi hisobga olinmaydi va odamning qaysi tashkilotdan ekanini tasdiqlash yo‘q. Agar «Telegramda ham maxfiy chat bor-ku» deyishsa: ha, lekin u faqat mobil ilovalarda, veb va Desktop versiyada yo‘q; bizda esa brauzerning o‘zida ishlaydi.',
+  'Telegram qulay, lekin u xorijiy kompaniya xizmati: ma’lumotlar chet eldagi serverlarda, qoidalarni ham kompaniya belgilaydi. “Milliy”ni esa istalgan tashkilot o‘z serveriga o‘rnatadi. Bundan tashqari Telegramda o‘zbek tilining ikki yozuvi hisobga olinmaydi va odamning qaysi tashkilotdan ekanini tasdiqlash yo‘q. Agar “Telegramda ham maxfiy chat bor-ku” deyishsa: ha, lekin u faqat mobil ilovalarda, veb va Desktop versiyada yo‘q; bizda esa brauzerning o‘zida ishlaydi.',
 );
 
 qaSlide('Nega SignalR?',
