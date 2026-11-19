@@ -796,12 +796,24 @@ function node(s, x, y, w, h, title, sub, { fill = C.tint, color = C.ink, subColo
 {
   const s = pres.addSlide();
   s.background = { color: C.ink };
-  badge(s, 'check', W / 2 - 0.5, 1.6, 1.0, C.pri);
-  text(s, 'E’tiboringiz uchun rahmat!', { x: M, y: 2.9, w: CW, h: 1.0, fontSize: 44, bold: true, color: C.white, align: 'center', valign: 'middle' });
-  text(s, 'Savollaringizga javob berishga tayyorman', { x: M, y: 3.95, w: CW, h: 0.5, fontSize: 20, color: C.tint3, align: 'center' });
-  text(s, 'S.O. Sohinazarov', { x: M, y: 5.3, w: CW, h: 0.4, fontSize: 16, bold: true, color: C.white, align: 'center' });
-  text(s, 'Toshkent – 2026', { x: M, y: 5.75, w: CW, h: 0.4, fontSize: 14, color: C.tint4, align: 'center' });
-  s.addNotes('E’tiboringiz uchun rahmat! Savollaringiz bo‘lsa, javob berishga tayyorman.');
+  const lw = 7.6;
+  badge(s, 'check', M, 1.7, 1.0, C.pri);
+  text(s, 'E’tiboringiz uchun rahmat!', { x: M, y: 2.9, w: lw, h: 1.0, fontSize: 42, bold: true, color: C.white, valign: 'middle' });
+  text(s, 'Savollaringizga javob berishga tayyorman', { x: M, y: 3.95, w: lw, h: 0.5, fontSize: 20, color: C.tint3 });
+  text(s, 'S.O. Sohinazarov', { x: M, y: 5.3, w: lw, h: 0.4, fontSize: 16, bold: true, color: C.white });
+  text(s, 'Toshkent – 2026', { x: M, y: 5.75, w: lw, h: 0.4, fontSize: 14, color: C.tint4 });
+  // QR to the running app, on a white card so phones can scan it from the projector.
+  const qrFile = path.join(ROOT, 'slides-cache', 'qr-qales.png');
+  const { default: QRCode } = await import('qrcode');
+  await QRCode.toFile(qrFile, 'https://www.qales.uz', { width: 600, margin: 1, color: { dark: '#1E1B4B', light: '#FFFFFF' } });
+  const qd = 3.4, qx = W - M - qd - 0.3, qy = 1.55;
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: qx - 0.3, y: qy - 0.3, w: qd + 0.6, h: qd + 1.25, rectRadius: 0.15, fill: { color: C.white }, line: { type: 'none' } });
+  s.addImage({ path: qrFile, x: qx, y: qy, w: qd, h: qd });
+  text(s, [
+    { text: 'www.qales.uz', options: { bold: true, fontSize: 20, color: C.ink, breakLine: true } },
+    { text: 'dastur ishlab turibdi — sinab ko‘ring', options: { fontSize: 12, color: C.muted } },
+  ], { x: qx - 0.3, y: qy + qd + 0.05, w: qd + 0.6, h: 0.85, align: 'center', valign: 'middle' });
+  s.addNotes('E’tiboringiz uchun rahmat! Dastur www.qales.uz manzilida ishlab turibdi — QR-kod orqali telefoningizda ochib ko‘rishingiz mumkin. Savollaringiz bo‘lsa, javob berishga tayyorman.');
 }
 
 await pres.writeFile({ fileName: OUT });
