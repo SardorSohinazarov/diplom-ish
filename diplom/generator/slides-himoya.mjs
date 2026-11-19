@@ -9,7 +9,7 @@ import { renderIcons } from './tools/icons.mjs';
 
 const OUT = path.join(ROOT, '..', 'Himoya_taqdimoti_Sohinazarov_Sardor.pptx');
 const TOPIC = 'Real vaqtda xabar almashish imkonini beruvchi “Milliy” xabarchi ishlab chiqish';
-const TOTAL = 17;
+const TOTAL = 18;
 
 // Palette taken from the application itself (indigo accent of the chat UI).
 const C = {
@@ -335,6 +335,60 @@ const bulletList = (items) => items.map((t, i) => ({ text: t, options: { bullet:
   text(s, 'X25519 · HKDF-SHA-256 · AES-256-GCM (Web Crypto API)', { x: rx, y: 6.1, w: rw, h: 0.35, fontSize: 11, italic: true, color: C.muted });
   s.addNotes(
     '[≈35 soniya] Maxfiy chatda xabar qurilmaning o‘zida shifrlanadi. Kalitlar faqat ikki suhbatdoshning qurilmasida turadi, serverga faqat ochiq kalit boradi. Har bir xabar yangi kalit bilan shifrlanadi, eskisi o‘chiriladi. Shuning uchun kalit qo‘lga tushsa ham, eski xabarlarni ochib bo‘lmaydi. Pastda ma’lumotlar bazasining o‘zi: u yerda xabar o‘rniga faqat ma’nosiz shifr matn qolgan. (Komissiya so‘rasa: X25519 kalit kelishuvi, HKDF, AES-256-GCM, brauzerning Web Crypto API’si.)',
+  );
+}
+
+// ───────────────────────────────────────── Maxfiy chat qanday ishlaydi  (≈45 s)
+{
+  const s = contentSlide(0, 'Maxfiy chat qanday ishlaydi');
+  const lanes = [
+    ['Ali qurilmasi', 2.1, C.ink, C.white],
+    ['Server', 6.65, C.tint3, C.ink],
+    ['Vali qurilmasi', 11.2, C.ink, C.white],
+  ];
+  const sw = 2.8, mw = 2.5;
+  lanes.forEach(([t, cx, fill, color]) => {
+    s.addShape(pres.shapes.LINE, { x: cx, y: 1.95, w: 0, h: 3.9, line: { color: C.tint4, width: 1, dashType: 'dash' } });
+    node(s, cx - (cx === 6.65 ? mw : sw) / 2, 1.4, cx === 6.65 ? mw : sw, 0.55, t, null, { fill, color, size: 15 });
+  });
+  const A = 2.1, S = 6.65, V = 11.2;
+  const side = (cx, y, title, sub, h = 0.55) => node(s, cx - sw / 2, y, sw, h, title, sub, { fill: C.tint2, size: 12 });
+  const mid = (y, title, sub, h = 0.55) => node(s, S - mw / 2, y, mw, h, title, sub, { fill: C.white, size: 12 });
+  const msg = (x1, x2, y, label, color = C.pri) => {
+    arrow(s, x1, y, x2, y, color);
+    text(s, label, { x: Math.min(x1, x2), y: y - 0.27, w: Math.abs(x2 - x1), h: 0.25, fontSize: 10, bold: true, color, align: 'center' });
+  };
+
+  // 1. key pairs
+  side(A, 2.15, 'Kalit jufti yaratadi', 'X25519: yopiq + ochiq');
+  side(V, 2.15, 'Kalit jufti yaratadi', 'X25519: yopiq + ochiq');
+  // 2. public keys only
+  mid(2.85, 'Faqat ochiq kalitlar', 'A va B saqlanadi', 0.62);
+  msg(A + sw / 2, S - mw / 2, 3.03, 'ochiq kalit A');
+  msg(S + mw / 2, V - sw / 2, 3.03, 'A');
+  msg(V - sw / 2, S + mw / 2, 3.33, 'ochiq kalit B');
+  msg(S - mw / 2, A + sw / 2, 3.33, 'B');
+  // 3. shared secret
+  side(A, 3.7, 'Umumiy sir → 2 zanjir kaliti', 'DH + HKDF, tarmoqdan o‘tmaydi');
+  side(V, 3.7, 'Umumiy sir → 2 zanjir kaliti', 'DH + HKDF, tarmoqdan o‘tmaydi');
+  // 4. message
+  side(A, 4.45, 'Har xabarga yangi kalit', 'HMAC zanjiri + AES-256-GCM');
+  mid(4.45, 'Vaqtincha ushlab turadi', 'mazmunni bilmaydi');
+  msg(A + sw / 2, S - mw / 2, 4.73, 'shifr matn + seq');
+  msg(S + mw / 2, V - sw / 2, 4.73, 'shifr matn');
+  side(V, 4.45, 'Ochadi, kalitni o‘chiradi', 'takroriy seq — rad etiladi');
+  // 5. ack
+  mid(5.2, 'Shifr matnni o‘chiradi', null, 0.45);
+  msg(V - sw / 2, S + mw / 2, 5.42, 'qabul qilindi (ack)', C.ok);
+
+  card(s, M, 6.0, CW, 0.7, C.ink);
+  badge(s, 'fingerprint', M + 0.25, 6.08, 0.54, C.pri);
+  text(s, [
+    { text: 'Kalit izi: ', options: { bold: true, color: C.white } },
+    { text: 'SHA-256(A, B) → 8 ta emoji va raqam. Ikkalasi solishtiradi: server kalitni almashtirgan bo‘lsa, belgilar farq qiladi.', options: { color: C.tint2 } },
+  ], { x: M + 1.0, y: 6.0, w: CW - 1.25, h: 0.7, fontSize: 14, valign: 'middle' });
+  s.addNotes(
+    '[≈45 soniya] Maxfiy chat qanday ishlashini ko‘rsataman. 1) Ali va Valining brauzerlari har biri o‘z kalit juftini yaratadi — yopiq va ochiq. 2) Serverga faqat ochiq kalitlar boradi, server ularni bir-biriga uzatadi. 3) Har bir tomon o‘z yopiq kaliti va suhbatdoshning ochiq kalitidan bir xil umumiy sirni hisoblaydi — bu Diffi–Xellman usuli. Umumiy sir tarmoq orqali hech qachon o‘tmaydi, undan har bir yo‘nalish uchun kalitlar zanjiri olinadi. 4) Har bir xabar uchun zanjirdan yangi kalit olinadi, ishlatilgan kalit o‘chiriladi — shuning uchun kalit o‘g‘irlansa ham eski xabarlarni ochib bo‘lmaydi. Xabar AES-256-GCM bilan shifrlanadi, unga chat, yo‘nalish va tartib raqami bog‘lanadi: xabarni ko‘chirib yoki takrorlab yuborib bo‘lmaydi. Server shifr matnni faqat vaqtincha ushlab turadi va Vali qabul qilgach o‘chiradi. 5) Va nihoyat, o‘rtada begona yo‘qligini tekshirish uchun ikkala tomonda ochiq kalitlardan hisoblangan kalit izi — 8 ta emoji — ko‘rsatiladi, ularni solishtirish kifoya.',
   );
 }
 
