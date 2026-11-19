@@ -816,5 +816,256 @@ function node(s, x, y, w, h, title, sub, { fill = C.tint, color = C.ink, subColo
   s.addNotes('E’tiboringiz uchun rahmat! Dastur www.qales.uz manzilida ishlab turibdi — QR-kod orqali telefoningizda ochib ko‘rishingiz mumkin. Savollaringiz bo‘lsa, javob berishga tayyorman.');
 }
 
+// ═════════════════════════════════════════ ZAXIRA SLAYDLAR — shown only when the commission asks
+const BACKUP_TOTAL = 11;
+let backupN = 0;
+/** Backup slide: same look as content slides, but tagged “ZAXIRA” and numbered separately. */
+function backupSlide(title) {
+  const s = pres.addSlide();
+  backupN += 1;
+  s.background = { color: C.white };
+  text(s, title, { x: M, y: 0.4, w: CW - 1.6, h: 0.8, fontSize: 28, bold: true, color: C.ink, valign: 'middle' });
+  s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: W - M - 1.4, y: 0.62, w: 1.4, h: 0.36, rectRadius: 0.18, fill: { color: C.tint2 }, line: { type: 'none' } });
+  text(s, 'ZAXIRA', { x: W - M - 1.4, y: 0.62, w: 1.4, h: 0.36, fontSize: 12, bold: true, color: C.pri, align: 'center', valign: 'middle', charSpacing: 2 });
+  text(s, TOPIC, { x: M, y: 6.98, w: 8, h: 0.3, fontSize: 10, color: C.muted });
+  text(s, `Zaxira ${backupN} / ${BACKUP_TOTAL}`, { x: W - M - 2, y: 6.98, w: 2, h: 0.3, fontSize: 10, color: C.muted, align: 'right' });
+  return s;
+}
+const headRow = (cols, size = 13) => cols.map((h) => cell(h, { bold: true, color: C.white, fill: { color: C.ink }, fontSize: size }));
+const zebra = (i) => ({ color: i % 2 ? C.white : 'F9FAFB' });
+
+// Z1. Ma'lumotlar bazasi
+{
+  const s = backupSlide('Ma’lumotlar bazasi: 11 sxema, 43 jadval');
+  const rows = [
+    ['identity', 'users, contacts, blocked_users', 'Foydalanuvchilar va aloqalar'],
+    ['security', 'sessions, email_verification_codes, two_factor_auth', 'Sessiyalar, bir martalik kodlar'],
+    ['chat', 'chats, chat_members, groups, channels, channel_subscribers, secret_chats', 'Chatlar, a’zolik va rollar, maxfiy chatlar'],
+    ['messaging', 'messages, attachments, message_views, reactions, polls, poll_options, poll_votes, secret_messages, secret_files', 'Xabarlar, biriktirmalar, o‘qilganlik, reaksiyalar, shifrlangan xabarlar'],
+    ['organizations', 'organizations, organization_members', 'Tashkilotlar (e-pochta domenlari)'],
+    ['storage', 'files, photos, stickers, sticker_sets', 'Fayllar, rasmlar, stikerlar'],
+    ['story', 'stories, story_views', 'Lavhalar va ko‘rishlar'],
+    ['forum', 'posts, post_media, post_likes, post_views, post_reports, follows, forum_notifications', 'Postlar, layklar, obunalar, bildirishnomalar'],
+    ['personal', 'folders, folder_chats, saved_messages, subscriptions', 'Papkalar, saqlangan xabarlar'],
+    ['call', 'calls, call_participants', 'Qo‘ng‘iroqlar (kelajak uchun)'],
+    ['bot', 'bots', 'Botlar (kelajak uchun)'],
+  ];
+  s.addTable([
+    headRow(['Sxema', 'Jadvallar', 'Vazifasi']),
+    ...rows.map(([a, b, c], i) => [
+      cell(a, { bold: true, color: C.pri, fontSize: 12, fill: zebra(i) }),
+      cell(b, { fontFace: 'Consolas', fontSize: 10, fill: zebra(i) }),
+      cell(c, { fontSize: 11, fill: zebra(i) }),
+    ]),
+  ], { x: M, y: 1.4, w: CW, colW: [1.7, 6.3, CW - 8.0], rowH: 0.44, border: { type: 'solid', color: C.line, pt: 0.75 } });
+  s.addNotes('Baza PostgreSQL’da, 11 sxemaga ajratilgan 43 ta jadval. Kanallar, qo‘ng‘iroqlar va botlar uchun jadvallar kelgusi imkoniyatlar uchun oldindan tayyorlangan. Barcha vaqtlar UTC’da saqlanadi, xabarlar ro‘yxati kursorli sahifalash bilan indeks bo‘yicha o‘qiladi.');
+}
+
+// Z2. Token hayot sikli
+{
+  const s = backupSlide('Kirish va tokenlar hayot sikli');
+  const steps = [
+    ['E-pochtaga 6 xonali kod', 'Bazada faqat PBKDF2 xeshi; parol umuman yo‘q'],
+    ['Yoki Google hisobi', 'Google ID tokeni serverda tekshiriladi'],
+    ['JWT access token — 15 daqiqa', 'Har bir API so‘rovi va SignalR ulanishida tekshiriladi'],
+    ['Refresh token — 30 kun, rotatsiya', 'HttpOnly cookie’da, bazada HMAC xeshi; har safar almashadi'],
+    ['Qurilmalar bo‘yicha sessiyalar', 'Begona qurilmani chiqarib yuborish mumkin'],
+  ];
+  steps.forEach(([h, d], i) => {
+    const y = 1.55 + i * 1.0;
+    num(s, i + 1, M, y, 0.5);
+    text(s, h, { x: M + 0.7, y: y - 0.04, w: 5.6, h: 0.35, fontSize: 16, bold: true, color: C.ink });
+    text(s, d, { x: M + 0.7, y: y + 0.32, w: 5.6, h: 0.5, fontSize: 13, color: C.muted, valign: 'top' });
+  });
+  framed(s, '2-10-token-lifecycle.png', 7.3, 1.5, W - M - 7.3, 5.1);
+  s.addNotes('Kirish parolsiz: pochtaga kod yoki Google. Kirgach 15 daqiqalik access token va 30 kunlik refresh token beriladi. Refresh token HttpOnly cookie’da, bazada esa uning HMAC xeshi saqlanadi va har yangilanishda almashtiriladi — o‘g‘irlangan eski token qayta ishlatilsa, u rad etiladi.');
+}
+
+// Z3. Real vaqt texnologiyalari
+{
+  const s = backupSlide('Real vaqt texnologiyalarini taqqoslash');
+  const body = [
+    ['Short polling', 'Mijoz → server', 'Yuqori', 'Barchasi'],
+    ['Long polling', 'Mijoz → server', 'O‘rtacha', 'Barchasi'],
+    ['Server-Sent Events', 'Server → mijoz', 'Past', 'Zamonaviy'],
+    ['WebSocket', 'Ikki tomonlama', 'Juda past', 'Zamonaviy'],
+    ['SignalR', 'Ikki tomonlama', 'Juda past', 'Barchasi (fallback)'],
+  ];
+  const sig = body.length - 1;
+  s.addTable([
+    headRow(['Texnologiya', 'Yo‘nalish', 'Kechikish', 'Brauzerlar'], 15),
+    ...body.map((r, ri) => r.map((t, i) => cell(t, {
+      fontSize: 15, bold: ri === sig, color: ri === sig ? C.ink : C.text, align: i ? 'center' : 'left',
+      fill: { color: ri === sig ? C.tint2 : ri % 2 ? 'F9FAFB' : C.white },
+    }))),
+  ], { x: M, y: 1.55, w: 7.6, colW: [2.3, 2.0, 1.5, 1.8], rowH: 0.8, border: { type: 'solid', color: C.line, pt: 0.75 } });
+  const px = 8.6, pw = W - M - px;
+  card(s, px, 1.55, pw, 4.8, C.tint);
+  text(s, 'Nega SignalR?', { x: px + 0.3, y: 1.8, w: pw - 0.6, h: 0.5, fontSize: 20, bold: true, color: C.ink });
+  text(s, bulletList([
+    'WebSocket tezligi; ishlamasa SSE yoki long polling’ga o‘zi o‘tadi',
+    'Hub: server va mijoz bir-birining metodlarini chaqiradi',
+    'Guruhlar, JWT tekshiruvi va qayta ulanish tayyor',
+    '.NET tarkibida; brauzer uchun rasmiy @microsoft/signalr',
+  ]), { x: px + 0.3, y: 2.45, w: pw - 0.6, h: 3.7, fontSize: 15, color: C.text, paraSpaceAfter: 10, valign: 'top' });
+  s.addNotes('Beshta usul solishtirildi. Polling’lar kechikadi va serverni ortiqcha yuklaydi, SSE faqat bir tomonlama. WebSocket eng tez, lekin ayrim tarmoqlarda bloklanadi. SignalR WebSocket bilan ishlaydi, u ishlamasa o‘zi SSE yoki long polling’ga o‘tadi, guruhlar va qayta ulanish esa tayyor holda bor.');
+}
+
+// Z4. Testlar
+{
+  const s = backupSlide('Avtomatik testlar tarkibi: 810 / 810 o‘tdi');
+  const rows = [
+    ['Lotin↔kirill va qidiruv kaliti', '167', '80 juftlik ikkala yo‘nalishda, kontekst qoidalari, himoyalangan qismlar'],
+    ['Forum (6 sinf)', '79', 'Post, javob, iqtibos, cheklovlar, shikoyat, top lenta, obunalar'],
+    ['Tashkilotlar (3 sinf)', '44', 'Domenni ajratish, o‘xshash domenlar, birinchi — admin, taklif havolalari'],
+    ['Maxfiy chat', '39', 'Qurilmaga bog‘lash, takroriy seq rad etiladi, ack, chiqishda yopilish'],
+    ['Reaksiya, bloklash, lavhalar', '30', 'Ruxsat etilgan emoji, bloklangan chatga yozish, faqat obunalar lavhasi'],
+    ['Sekin internetga moslashuv', '32', 'Delta sync, qayta yuborish, xira nusxa, 360p video, kesh'],
+    ['Guruhlar va ruxsatlar', '22', 'Rollar, egalikni o‘tkazish, a’zolar limiti'],
+    ['Xeshlash, sessiyalar va boshqalar', '44', 'PBKDF2, HMAC, kursorli sahifalash, validatsiya'],
+    ['Server jami (xUnit)', '457', ''],
+    ['Brauzer jami (Vitest, 35 fayl)', '353', 'Transliteratsiya, maxfiy chat protokoli, servislar, komponentlar'],
+  ];
+  s.addTable([
+    headRow(['Modul', 'Soni', 'Nima tekshiriladi']),
+    ...rows.map(([a, b, c], i) => {
+      const total = i >= 8;
+      const fill = total ? { color: C.tint2 } : zebra(i);
+      return [
+        cell(a, { bold: true, fontSize: 12, color: C.ink, fill }),
+        cell(b, { bold: true, fontSize: 13, color: C.pri, align: 'center', fill }),
+        cell(c, { fontSize: 12, fill }),
+      ];
+    }),
+  ], { x: M, y: 1.4, w: CW, colW: [3.6, 1.0, CW - 4.6], rowH: 0.46, border: { type: 'solid', color: C.line, pt: 0.75 } });
+  text(s, 'Qo‘shimcha: guruh chatlari uchun 43 ta API tekshiruvi; maxfiy chat ikki brauzerda haqiqiy server bilan sinaldi.', {
+    x: M, y: 6.45, w: CW, h: 0.4, fontSize: 13, italic: true, color: C.muted,
+  });
+  s.addNotes('Serverda 457 ta, brauzerda 353 ta test — hammasi o‘tgan. Eng ko‘p test lotin–kirill o‘girishga yozilgan, chunki bu yerda xato bo‘lsa, foydalanuvchi buni darhol ko‘radi. Baza va pochta testlarda soxta nusxalar bilan almashtirilgan, vaqtga bog‘liq qismlar “to‘xtatilgan soat” bilan sinalgan.');
+}
+
+// Z5. Lotin ↔ kirill qoidalari
+{
+  const s = backupSlide('Lotin ↔ kirill: o‘girish qoidalari misollarda');
+  const rows = [
+    ['ў, қ, ғ, ҳ', 'Қишлоқ хўжалиги', 'Qishloq xo‘jaligi'],
+    ['е so‘z boshida → ye', 'Европа, ер', 'Yevropa, yer'],
+    ['е so‘z ichida → e', 'Тошкент', 'Toshkent'],
+    ['ё, ю, я', 'Ёшлар, Янги йил', 'Yoshlar, Yangi yil'],
+    ['ц unlidan keyin → ts', 'лицей, милиция', 'litsey, militsiya'],
+    ['ц boshqa holatda → s', 'цирк, функция', 'sirk, funksiya'],
+    ['ъ → tutuq belgisi', 'таълим, объект', 'ta’lim, ob’yekt'],
+    ['Katta harflar', 'ЎЗБЕКИСТОН', 'O‘ZBEKISTON'],
+    ['O‘girilmaydi: havola, pochta', 'ali.valiyev@tuit.uz', 'ali.valiyev@tuit.uz'],
+  ];
+  s.addTable([
+    headRow(['Qoida', 'Kirill', 'Lotin'], 14),
+    ...rows.map(([a, b, c], i) => [
+      cell(a, { bold: true, fontSize: 14, color: C.ink, fill: zebra(i) }),
+      cell(b, { fontSize: 15, fill: zebra(i) }),
+      cell(c, { fontSize: 15, color: C.pri, bold: true, fill: zebra(i) }),
+    ]),
+  ], { x: M, y: 1.4, w: 8.6, colW: [3.2, 2.7, 2.7], rowH: 0.5, border: { type: 'solid', color: C.line, pt: 0.75 } });
+  const px = 9.6, pw = W - M - px;
+  card(s, px, 1.4, pw, 5.0, C.ink);
+  text(s, 'Qanday ishlaydi', { x: px + 0.3, y: 1.6, w: pw - 0.6, h: 0.45, fontSize: 18, bold: true, color: C.white });
+  text(s, bulletList([
+    'Xabar bazada asl holida; o‘girish faqat ekranda',
+    'Qidiruv uchun har xabarning lotin, kichik harfli nusxasi saqlanadi',
+    'Bitta 80 juftlik to‘plam C# va TypeScript testlarida bir xil',
+    '1995-yilgi imlo qoidalariga asoslangan',
+  ]), { x: px + 0.3, y: 2.2, w: pw - 0.6, h: 4.0, fontSize: 14, color: C.tint2, paraSpaceAfter: 10, valign: 'top' });
+  s.addNotes('Algoritm 1995-yilgi lotin yozuvi qoidalariga asoslangan va kontekstni hisobga oladi: “е” so‘z boshida “ye”, ichida “e”; “ц” unlidan keyin “ts”, boshqa holatda “s”; qattiq belgi tutuq belgisiga aylanadi. Havola, e-pochta va @username o‘girilmaydi. Bitta 80 juftlik misollar to‘plami server va brauzer testlarida bir xil ishlatiladi.');
+}
+
+// ═════════════════════════════════════════ ZAXIRA: ehtimoliy savollarga javoblar
+let qaN = 0;
+/** Question slide: the question as title, a one-line short answer, then four supporting points. */
+function qaSlide(question, short, points, notes) {
+  qaN += 1;
+  const s = backupSlide(`Savol ${qaN}: «${question}»`);
+  card(s, M, 1.45, CW, 1.0, C.ink);
+  badge(s, 'check', M + 0.25, 1.65, 0.6, C.pri);
+  text(s, [
+    { text: 'Qisqa javob: ', options: { bold: true, color: C.tint4 } },
+    { text: short, options: { color: C.white } },
+  ], { x: M + 1.05, y: 1.45, w: CW - 1.3, h: 1.0, fontSize: 17, valign: 'middle' });
+  const cw = (CW - 0.35) / 2, ch = 1.75;
+  points.forEach(([ic, h, d], i) => {
+    const x = M + (i % 2) * (cw + 0.35), y = 2.75 + Math.floor(i / 2) * (ch + 0.25);
+    card(s, x, y, cw, ch, C.tint);
+    badge(s, ic, x + 0.3, y + 0.3, 0.65);
+    text(s, h, { x: x + 1.2, y: y + 0.25, w: cw - 1.45, h: 0.45, fontSize: 18, bold: true, color: C.ink, valign: 'middle' });
+    text(s, d, { x: x + 1.2, y: y + 0.75, w: cw - 1.45, h: 0.9, fontSize: 14, color: C.text, valign: 'top' });
+  });
+  s.addNotes(notes);
+}
+
+qaSlide('Telegramdan farqi nima?',
+  'Telegram — xorijiy xizmat. «Milliy»ni tashkilot o‘z serverida ishga tushiradi va u o‘zbek tiliga moslashgan.',
+  [
+    ['database', 'Ma’lumotlar o‘z serveringizda', 'Telegram serverlari chet elda. «Milliy»ni universitet yoki kompaniya o‘zi o‘rnatadi va nazorat qiladi.'],
+    ['languages', 'Lotin ↔ kirill', 'Telegramda yo‘q: har kim o‘z yozuvida o‘qiydi, qidiruv ikkala yozuvda topadi.'],
+    ['building-2', 'Tashkilot rejimi', 'Ish e-pochtasi orqali tashkilotning yopiq guruhiga avtomatik a’zolik.'],
+    ['mail', 'Telefon raqami shart emas', 'Kirish e-pochta kodi yoki Google orqali; parol umuman yo‘q.'],
+  ],
+  'Telegram qulay, lekin u xorijiy kompaniya xizmati: ma’lumotlar chet eldagi serverlarda, qoidalarni ham kompaniya belgilaydi. «Milliy»ni esa istalgan tashkilot o‘z serveriga o‘rnatadi. Bundan tashqari Telegramda o‘zbek tilining ikki yozuvi hisobga olinmaydi va odamning qaysi tashkilotdan ekanini tasdiqlash yo‘q. Agar «Telegramda ham maxfiy chat bor-ku» deyishsa: ha, lekin u faqat mobil ilovalarda, veb va Desktop versiyada yo‘q; bizda esa brauzerning o‘zida ishlaydi.',
+);
+
+qaSlide('Nega SignalR?',
+  'Eng tez usul — WebSocket bilan ishlaydi, u ishlamaydigan tarmoqda esa o‘zi boshqa usulga o‘tadi.',
+  [
+    ['zap', 'WebSocket tezligi', 'Ikki tomonlama doimiy ulanish: xabar soniyaning bir qismida yetadi.'],
+    ['link', 'Avtomatik zaxira usul', 'WebSocket bloklansa → Server-Sent Events → long polling.'],
+    ['users', 'Guruhlar tayyor', 'Xabar chatning barcha a’zolariga bitta chaqiruv bilan yuboriladi.'],
+    ['shield-check', 'Xavfsizlik va qayta ulanish', 'Ulanishda JWT tekshiriladi, uzilganda o‘zi qayta ulanadi.'],
+  ],
+  'Beshta usul solishtirildi (batafsil — Zaxira 3). Toza WebSocket ham tez, lekin uni ishlatsak, zaxira usullarni, guruhlarni, qayta ulanishni va autentifikatsiyani o‘zimiz yozishimiz kerak edi. SignalR bularning hammasini .NET tarkibida tayyor beradi va brauzer uchun rasmiy klienti bor.',
+);
+
+qaSlide('Server buzilsa nima bo‘ladi?',
+  'Xabarlar bazada saqlanadi, server o‘zi qayta ishga tushadi; buzib kirilsa ham parol va maxfiy xabarlar qo‘lga tushmaydi.',
+  [
+    ['server', 'Server to‘xtasa', 'Docker konteynerlari o‘zi qayta ishga tushadi (restart, healthcheck).'],
+    ['timer', 'Foydalanuvchi uchun', 'Brauzer 0–2–5–10 soniyada qayta ulanadi va o‘tkazib yuborilgan xabarlarni oladi.'],
+    ['database', 'Xabar yo‘qolmaydi', 'Avval bazaga yoziladi; yuborilmagan xabar qurilmada navbatda turib qayta yuboriladi.'],
+    ['lock', 'Buzib kirilsa', 'Parol yo‘q, kod va tokenlar xesh holida; maxfiy chatlardan faqat shifr matn.'],
+  ],
+  'Ikki holatni ajrataman. Birinchisi — server ishdan chiqsa: konteynerlar avtomatik qayta ishga tushadi, brauzer esa o‘zi qayta ulanib, o‘tkazib yuborilgan xabarlarni oladi. Xabar avval bazaga yozilgani uchun yo‘qolmaydi, internet bo‘lmagan paytda yozilgan xabar esa qurilmada navbatda turadi va keyin yuboriladi. Ikkinchisi — serverga buzib kirilsa: bazada parollar umuman yo‘q, kirish kodlari va tokenlar faqat xesh ko‘rinishida, maxfiy chatlardan esa faqat ma’nosiz shifr matn qoladi. Kelgusida bir nechta server ishlatilsa, bittasi to‘xtaganda qolganlari ishlashda davom etadi.',
+);
+
+qaSlide('Necha foydalanuvchiga chidaydi?',
+  'Aniq son yuklama sinovida o‘lchanadi; arxitektura esa server qo‘shib kengayishga tayyor.',
+  [
+    ['server', 'Holat saqlamaydigan server', 'Foydalanuvchi kimligi tokenda — so‘rovga istalgan server javob beradi.'],
+    ['users', 'Bir nechta server', 'Onlayn holat va jonli ulanishlar Redis orqali umumlashtiriladi.'],
+    ['trending-up', 'Yuk taqsimlovchi', 'WhatsApp kabi: ulanishlar serverlarga bo‘linadi, har biri yuz minglab ulanish.'],
+    ['sparkles', 'Keyingi qadam', 'Message broker va workerlar: yetkazish alohida kengayadi (12-slayd).'],
+  ],
+  'Halol javob: alohida yuklama sinovi — masalan, million ulanish bilan — hali o‘tkazilmagan, shuning uchun aniq son aytmayman. Lekin arxitektura bunga tayyorlab qurilgan: server foydalanuvchi holatini o‘zida saqlamaydi, shuning uchun foydalanuvchi ko‘paysa yangi server qo‘shiladi, serverlar esa Redis orqali bog‘lanadi. Bu WhatsApp ishlatadigan yo‘l. Keyingi bosqichda xabarlarni yetkazish message broker va workerlarga o‘tkaziladi. (Agar o‘zingiz yuklama sinovini o‘tkazgan bo‘lsangiz, shu yerda haqiqiy raqamni ayting.)',
+);
+
+qaSlide('Maxfiy chatda kalit yo‘qolsa nima bo‘ladi?',
+  'Kalit faqat qurilmada — u yo‘qolsa, o‘sha maxfiy chat tarixi ham o‘qilmaydi. Bu xato emas, himoyaning o‘zi.',
+  [
+    ['smartphone', 'Kalit faqat qurilmada', 'Brauzerning IndexedDB’sida, ajratib olinmaydigan CryptoKey sifatida.'],
+    ['ban', 'Qurilma yo‘qolsa yoki chiqilsa', 'Maxfiy chat yopiladi, serverda nusxa yo‘q — yangi maxfiy chat ochiladi.'],
+    ['shield-check', 'Kalit o‘g‘irlansa', 'Har xabarga yangi kalit: oldingi xabarlarni baribir ochib bo‘lmaydi.'],
+    ['fingerprint', 'Server kalitni almashtirsa', 'Kalit izi farq qiladi — foydalanuvchilar buni ko‘radi.'],
+  ],
+  'Maxfiy chatning ma’nosi shuki, kalit faqat ikki suhbatdoshning qurilmasida turadi. Kalit brauzerda shunday saqlanadiki, uni sahifadagi skript ham o‘qib, nusxalab ololmaydi. Shuning uchun qurilma yo‘qolsa yoki foydalanuvchi tizimdan chiqsa, o‘sha maxfiy chat yopiladi va uning tarixini hech kim — server ham — tiklay olmaydi; yangi maxfiy chat ochiladi. Telegram’ning maxfiy chatlari ham xuddi shunday qurilmaga bog‘langan. Kalit o‘g‘irlangan taqdirda ham har bir xabar alohida kalit bilan shifrlangani uchun eski xabarlar himoyada qoladi.',
+);
+
+qaSlide('Nega mobil ilova yo‘q?',
+  'Veb-ilova telefonda to‘liq ishlaydi va bosh ekranga o‘rnatiladi; alohida mobil ilovalar — keyingi bosqich.',
+  [
+    ['monitor-smartphone', 'Moslashuvchan interfeys', 'Telefon, planshet va kompyuter — bitta kod bazasi.'],
+    ['smartphone', 'Ilova kabi o‘rnatiladi (PWA)', 'Manifest va service worker: bosh ekranga qo‘shiladi.'],
+    ['server', 'API tayyor', '104 ta REST manzil va SignalR — mobil ilova shularga ulanadi.'],
+    ['bell', 'Reja', 'Android va iOS ilovalari, FCM / APNs orqali push bildirishnomalar.'],
+  ],
+  'Diplom doirasida asosiy e’tibor server, xavfsizlik va o‘zbekcha imkoniyatlarga qaratildi. Veb-ilova telefonda ham to‘liq ishlaydi va PWA sifatida bosh ekranga o‘rnatiladi, ya’ni foydalanuvchi uchun oddiy ilovaga o‘xshaydi. Server qismi mobil ilovaga ham tayyor: 104 ta REST manzil va SignalR’ning Android va iOS uchun rasmiy klientlari bor. Keyingi bosqichda alohida mobil ilovalar va oflayn foydalanuvchilarga push bildirishnomalar qo‘shiladi.',
+);
+
 await pres.writeFile({ fileName: OUT });
 console.log(`Saved ${OUT}`);
