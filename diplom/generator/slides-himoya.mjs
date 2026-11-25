@@ -9,7 +9,7 @@ import { renderIcons } from './tools/icons.mjs';
 
 const OUT = process.env.OUT ?? path.join(ROOT, '..', 'Himoya_taqdimoti_Sohinazarov_Sardor.pptx');
 const TOPIC = 'Real vaqtda xabar almashish imkonini beruvchi “Milliy” xabarchi ishlab chiqish';
-const TOTAL = 18;
+const TOTAL = 19;
 
 // Palette taken from the application itself (indigo accent of the chat UI).
 const C = {
@@ -721,6 +721,32 @@ function node(s, x, y, w, h, title, sub, { fill = C.tint, color = C.ink, subColo
   });
   s.addNotes(
     '[≈30 soniya] Ish faqat nazariy emas — u amaliyotga joriy etildi. “Milliy” xabarchining yadrosi — jonli yetkazish, chat qoidalari, fayl yuborish va o‘qilganlik belgilari — Elektron kooperatsiya portalida kompaniyalar o‘rtasidagi chat modulini yaratishda qayta ishlatildi. Bu yerda suhbat ishtirokchisi alohida odam emas, kompaniya, kirish esa portalning o‘z hisoblari orqali. Bu tajriba “Milliy” yadrosini istalgan axborot tizimiga modul sifatida qo‘shish mumkinligini ko‘rsatdi. (Joriy etish dalolatnomasi bo‘lsa, shu yerda tilga oling.)',
+  );
+}
+
+// ───────────────────────────────────────── Intellektual mulk: deponentlangan material  (≈20 s)
+// Status line — replace with the certificate number once the Ministry of Justice registers the program.
+const DEPONENT_STATUS = 'EHM uchun dastur sifatida ro‘yxatdan o‘tkazish uchun tayyorlandi (14.11.2026)';
+{
+  const s = contentSlide(0, 'Intellektual mulk: dasturni ro‘yxatdan o‘tkazish');
+  const doc = framed(s, '4-5-deponent-title.png', M, 1.45, 4.0, 5.25, { align: 'left' });
+  pill(s, 'Deponentlangan material', doc, 2.4);
+  const rx = doc.x + doc.w + 0.5, rw = W - M - rx;
+  card(s, rx, 1.45, rw, 1.05, C.ink);
+  badge(s, 'landmark', rx + 0.25, 1.67, 0.6, C.pri);
+  text(s, [
+    { text: 'O‘zbekiston Respublikasi Adliya vazirligi', options: { bold: true, color: C.white, breakLine: true } },
+    { text: DEPONENT_STATUS, options: { color: C.tint2, fontSize: 14 } },
+  ], { x: rx + 1.05, y: 1.45, w: rw - 1.25, h: 1.05, fontSize: 17, valign: 'middle' });
+  const rows = [
+    ['badge-check', 'Dastur nomi', '“Milliy” — real vaqtda xabar almashish imkonini beruvchi veb-messenjer'],
+    ['users', 'Huquq egasi va mualliflar', 'Huquq egasi — S.O. Sohinazarov; jami 6 muallif'],
+    ['file-lock', 'Material: 44 bet', 'Titul va dastur kodidan 17 ta asosiy fayl: server (C#) va veb-klient (TypeScript)'],
+    ['shield-check', 'Ahamiyati', 'Dastur muallifligi rasman qayd etiladi — ish natijasi intellektual mulk sifatida himoyalanadi'],
+  ];
+  rows.forEach(([ic, h, d], i) => iconRow(s, ic, h, d, rx, 2.85 + i * 1.0, rw, { d: 0.6, headSize: 17, descSize: 14 }));
+  s.addNotes(
+    '[≈20 soniya] Dastur intellektual mulk sifatida ham rasmiylashtirilmoqda: Adliya vazirligida EHM uchun dastur sifatida ro‘yxatdan o‘tkazish uchun deponentlangan material tayyorlandi. Unda dastur nomi, huquq egasi va mualliflar, ilova sifatida esa server va veb-klient kodidan 17 ta asosiy fayl bor — jami 44 bet. (Guvohnoma olingan bo‘lsa, raqamini ayting.)',
   );
 }
 
