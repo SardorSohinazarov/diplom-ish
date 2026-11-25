@@ -1,0 +1,8 @@
+# Serverdagi umumiy proxy uchun sayt fayli: /opt/proxy/sites/diplom.caddy
+# Workflow uni o'zi ko'chiradi va proxy'ni qayta yuklaydi:
+#   docker exec proxy-caddy caddy reload --config /etc/caddy/Caddyfile
+# HTTPS sertifikatni Caddy o'zi oladi (DNS'da "diplom" A yozuvi VPS'ga qarashi kerak).
+diplom.qales.uz {
+	encode zstd gzip
+	reverse_proxy diplom-site:80
+}

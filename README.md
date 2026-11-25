@@ -1,7 +1,10 @@
 # 🎓 Diplom loyihasi: g'oyadan himoyagacha
 
-> **Mavzu:** “Milliy” — real vaqtda xabar almashish imkonini beruvchi veb-messenjer
-> **Muallif:** Sohinazarov Sardor · **Kafedra:** ATDT · **Ishlab turgan sayt:** [www.qales.uz](https://www.qales.uz)
+> **Mavzu:** “Real vaqtda xabar almashish imkonini beruvchi “Milliy” xabarchi ishlab chiqish”
+>
+> **Muallif:** Sohinazarov Sardor · **Universitet:** TATU, “Dasturiy injiniring” fakulteti, “Tizimli va amaliy dasturlashtirish” kafedrasi
+>
+> **Ishlab turgan dastur:** [qales.uz](https://qales.uz) · **Diplom sayti:** [diplom.qales.uz](https://diplom.qales.uz)
 >
 > 🏆 **Diplom muvaffaqiyatli himoya qilindi — 92 ball.**
 
@@ -19,14 +22,14 @@ README ikki maqsadda yozilgan:
 | Ko'rsatkich | Qiymat |
 |---|---|
 | **Himoya natijasi** | **92 ball** ✅ |
-| Diplom hajmi | ~95 bet, 4 bob, ilovalar bilan |
+| Diplom hajmi | 94 bet: kirish, 4 bob, xulosa, 5 ta ilova |
 | Adabiyotlar | 31 ta manba |
 | Avtomatik testlar | 810 ta (server 457, klient 353) |
-| Rasmlar | 16 ta diagramma, 40 ga yaqin skrinshot |
-| Himoya taqdimoti | 17 ta asosiy slayd + zaxira slaydlar |
+| Rasmlar va jadvallar | 41 ta rasm (diagramma va skrinshotlar), 17 ta jadval |
+| Himoya taqdimoti | 19 ta asosiy slayd + 11 ta zaxira slayd |
 | Joylashtirish | VPS, Docker Compose, Caddy (HTTPS), GitHub Actions |
 | Amaliy joriy etish | Elektron kooperatsiya portalidagi kompaniyalararo chat |
-| Dastur ro'yxatdan o'tkazilgan | im.adliya.uz (deponentlangan material) |
+| Deponentlash | im.adliya.uz uchun deponentlangan material tayyorlandi |
 
 ---
 
@@ -179,6 +182,7 @@ cd diplom-ish/diplom/generator; npm ci
 | Deponentlangan material | `node deponent.mjs` |
 | To'liq taqdimot | `node slides.mjs` |
 | Himoya taqdimoti | `node slides-himoya.mjs` |
+| Diplom sayti (diplom.qales.uz) | `node site.mjs` → `diplom/sayt/` |
 | Taqdimotni PDF ga | `powershell -File tools/export-slides.ps1 ../Taqdimot_Sohinazarov_Sardor.pptx <png-papka> ../Taqdimot_Sohinazarov_Sardor.pdf` |
 | Betlarni ko'z bilan tekshirish | `node tools/pdf-pages.mjs ...` → `node tools/contact-sheet.mjs ...` |
 
@@ -215,7 +219,7 @@ Rahbar 14 ta izoh berdi ([REJA-rahbar-izohlari.md](REJA-rahbar-izohlari.md)). Ko
 
 ### 11. Taqdimot, video va savol-javob
 
-- **Taqdimot** ([`Himoya_taqdimoti_*.pptx`](diplom/Himoya_taqdimoti_Sohinazarov_Sardor.pptx)): 17 ta asosiy slayd — muammo, maqsad, solishtirish, arxitektura, o'ziga xos imkoniyatlar, jonli namoyish, natijalar, rahmat (QR-kod bilan).
+- **Taqdimot** ([`Himoya_taqdimoti_*.pptx`](diplom/Himoya_taqdimoti_Sohinazarov_Sardor.pptx)): 19 ta asosiy slayd — muammo, maqsad, solishtirish, arxitektura, o'ziga xos imkoniyatlar, jonli namoyish, dasturni ro'yxatdan o'tkazish, natijalar, rahmat (QR-kod bilan).
 - **Zaxira slaydlar** oxirida turadi: kutilgan savollarga tayyor javob (maxfiy chat qanday ishlaydi, nega SignalR, xavfsizlik va h.k.).
 - **Namoyish videosi** ([`Video-ssenariy.md`](diplom/Video-ssenariy.md)): internet uzilsa, jonli namoyish o'rniga ko'rsatiladi. ~75 soniya, ovozsiz, ustidan o'zingiz gapirasiz.
 - Taqdimotni **ovoz chiqarib, vaqt o'lchab** kamida 3 marta mashq qiling (odatda 7–10 daqiqa beriladi).
@@ -245,11 +249,27 @@ Rahbar 14 ta izoh berdi ([REJA-rahbar-izohlari.md](REJA-rahbar-izohlari.md)). Ko
 
 ---
 
+## 🌐 Diplom sayti: diplom.qales.uz
+
+Himoyadan keyin diplom haqidagi ma'lumot internetda topilishi uchun alohida sayt qilindi. Uni Google'dan qidirgan odam ham, ChatGPT yoki Claude kabi AI yordamchilar ham o'qiy oladi.
+
+- Asosiy sahifa o'zbekcha. Unda annotatsiya (3 tilda), maqsad va vazifalar, imkoniyatlar, arxitektura, mundarija, natijalar va savol-javob bor. Inglizcha (`/en/`) va ruscha (`/ru/`) qisqa variantlari ham bor.
+- Bu yo'riqnoma ham saytda turadi: `/yoriqnoma/`.
+- Diplom PDF va himoya taqdimotini saytdan yuklab olish mumkin. Taqriz va rahbar xulosasi saytga qo'yilmagan.
+- Qidiruv tizimlari uchun JSON-LD (Thesis, SoftwareApplication, FAQPage), `sitemap.xml` va `robots.txt` bor.
+- AI yordamchilar uchun `llms.txt` (qisqa mazmun) va `llms-full.txt` (diplomning to'liq matni) bor.
+- Sayt `diplom/generator/site.mjs` bilan yaratiladi. `master`ga push qilinganda GitHub Actions uni yig'adi, Docker image qilib VPS'ga joylaydi ([deploy-site.yml](.github/workflows/deploy-site.yml)).
+
+> 💡 Talabalarga: diplomingiz uchun bitta oddiy sahifa qilib qo'ying, unda annotatsiya, PDF va ishlab turgan dastur havolasi bo'lsin. Ish beruvchi yoki magistratura komissiyasi sizni qidirganda, birinchi bo'lib shu sahifa chiqadi.
+
+---
+
 ## 📁 Repozitoriy tuzilishi
 
 ```text
 diplom-ish/
 ├── README.md                  ← shu fayl
+├── deploy/                    ← diplom.qales.uz uchun Docker va Caddy fayllari
 ├── NationalChat/              ← server kodi (submodule)
 ├── NationalChatClient/        ← veb-klient kodi (submodule)
 ├── diplom/                    ← tayyor hujjatlar (docx, pdf, pptx)
@@ -259,6 +279,7 @@ diplom-ish/
 │       ├── slides*.mjs        ← taqdimotlar
 │       ├── hujjatlar.mjs      ← rahbar xulosasi
 │       ├── deponent.mjs       ← deponentlangan material
+│       ├── site.mjs           ← diplom.qales.uz sayti
 │       ├── content/           ← boblar matni
 │       ├── diagrams/          ← Mermaid/SVG diagrammalar
 │       ├── rasmlar/           ← tayyor rasmlar

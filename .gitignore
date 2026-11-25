@@ -24,3 +24,6 @@ desktop.ini
 
 # build.mjs --only bilan yaratiladigan bitta bobli ko'rinishlar
 diplom/generator/preview/
+
+# site.mjs yaratadigan diplom.qales.uz sayti (CI har safar qayta yig'adi)
+diplom/sayt/
