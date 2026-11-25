@@ -1,9 +1,11 @@
-// Builds the public site diplom.qales.uz into ../sayt (static HTML, no JavaScript):
-//   /            — the diploma in Uzbek (main page)
-//   /en/, /ru/   — short versions in English and Russian
-//   /yoriqnoma/  — README.md as a step-by-step guide for students
+// Builds the diploma pages of qales.uz (static HTML, no JavaScript) into the web client's public/ folder,
+// which the client's own deploy publishes:
+//   /diplom/            — the diploma in Uzbek (main page)
+//   /diplom/en/, /ru/   — short versions in English and Russian
+//   /diplom/yoriqnoma/  — README.md as a step-by-step guide for students
+//   /diplom/files/ (diploma PDF, defence slides), /diplom/img/, /diplom/style.css
 //   /llms.txt, /llms-full.txt — plain-text summaries for AI assistants (llmstxt.org)
-//   robots.txt, sitemap.xml, 404.html, files/ (diploma PDF, defence slides), img/
+//   /robots.txt, /sitemap.xml — for the whole qales.uz
 // Facts and numbers come from the final PDF (Diplom_ishi_Sohinazarov_Sardor.pdf).
 // llms-full.txt needs `pdftotext` (poppler) on PATH.
 // Usage: node site.mjs
@@ -17,10 +19,13 @@ import { ROOT } from './lib.mjs';
 const require = createRequire(import.meta.url);
 const sizeOf = require('image-size').imageSize ?? require('image-size');
 
-const SITE = 'https://diplom.qales.uz';
+const ORIGIN = 'https://qales.uz';
+const B = '/diplom'; // path of the diploma pages on qales.uz
+const SITE = ORIGIN + B;
 const REPO = path.join(ROOT, '..', '..');
 const DIPLOM = path.join(ROOT, '..');
-const OUT = path.join(DIPLOM, 'sayt');
+const PUBLIC = path.join(REPO, 'NationalChatClient', 'public');
+const OUT = path.join(PUBLIC, 'diplom');
 const GITHUB = 'https://github.com/SardorSohinazarov/diplom-ish';
 const APP = 'https://qales.uz';
 const UPDATED = new Date().toISOString().slice(0, 10);
@@ -156,7 +161,7 @@ const FAQ = [
   ['Qanday texnologiyalar ishlatilgan?', 'Server .NET 8 (ASP.NET Core, Entity Framework Core) va PostgreSQL’da, brauzer qismi Angular’da yozilgan. Xabarlar SignalR orqali real vaqtda yetkaziladi. Dastur Docker Compose, Caddy va GitHub Actions yordamida VPS serverga joylashtirilgan.'],
   ['Humo yoki Telegram’dan farqi nimada?', 'Telegram va WhatsApp ma’lumotlarni chet elda saqlaydi. Humo Telegram’ning ochiq kodi asosida qilingan, pullik va faqat davlat xodimlari uchun. “Milliy” esa noldan yozilgan, bepul, istalgan tashkilot o‘z serveriga o‘rnata oladi, lotin–kirill o‘girish, tashkilot rejimi va maxfiy chatlarga ega.'],
   ['Maxfiy chat qanday ishlaydi?', 'Ikki foydalanuvchi brauzeri kalitlar juftini yaratadi va faqat ochiq kalitlarni almashadi. Ulardan umumiy maxfiy kalit hosil qilinadi va xabar brauzerning o‘zida shifrlanadi. Server faqat shifrlangan ma’lumotni uzatadi va mazmunini bilmaydi.'],
-  ['Diplom ishini qayerdan yuklab olsa bo‘ladi?', `To‘liq matn (PDF, ${F.pages} bet) va himoya taqdimoti shu saytning “Yuklab olish” bo‘limida. Diplom qanday tayyorlangani haqidagi yo‘riqnoma esa /yoriqnoma/ sahifasida.`],
+  ['Diplom ishini qayerdan yuklab olsa bo‘ladi?', `To‘liq matn (PDF, ${F.pages} bet) va himoya taqdimoti shu saytning “Yuklab olish” bo‘limida. Diplom qanday tayyorlangani haqidagi yo‘riqnoma esa qales.uz/diplom/yoriqnoma/ sahifasida.`],
 ];
 
 // ───────────────────────────────────────── helpers
@@ -178,18 +183,18 @@ const usedImages = new Set();
 function img(name, alt, { eager = false } = {}) {
   usedImages.add(name);
   const { width, height } = sizeOf(fs.readFileSync(path.join(ROOT, 'rasmlar', name)));
-  return `<img src="/img/${name}" alt="${esc(alt)}" width="${width}" height="${height}"${eager ? '' : ' loading="lazy"'} decoding="async">`;
+  return `<img src="${B}/img/${name}" alt="${esc(alt)}" width="${width}" height="${height}"${eager ? '' : ' loading="lazy"'} decoding="async">`;
 }
 
-const LANGS = { uz: '/', en: '/en/', ru: '/ru/' };
+const LANGS = { uz: `${B}/`, en: `${B}/en/`, ru: `${B}/ru/` };
 const HREFLANG = { uz: 'uz', en: 'en', ru: 'ru' };
 
 function page({ lang, url, title, description, body, jsonld, nav = true, alternates = true }) {
-  const canonical = SITE + url;
+  const canonical = ORIGIN + url;
   const navLabels = {
-    uz: [['#haqida', 'Diplom haqida'], ['#imkoniyatlar', 'Imkoniyatlar'], ['#natijalar', 'Natijalar'], ['/yoriqnoma/', 'Yo‘riqnoma'], ['#yuklab-olish', 'Yuklab olish']],
-    en: [['#about', 'About'], ['#features', 'Features'], ['#download', 'Download'], ['/', 'Full version (Uzbek)']],
-    ru: [['#about', 'О работе'], ['#features', 'Возможности'], ['#download', 'Скачать'], ['/', 'Полная версия (узб.)']],
+    uz: [['#haqida', 'Diplom haqida'], ['#imkoniyatlar', 'Imkoniyatlar'], ['#natijalar', 'Natijalar'], [`${B}/yoriqnoma/`, 'Yo‘riqnoma'], ['#yuklab-olish', 'Yuklab olish']],
+    en: [['#about', 'About'], ['#features', 'Features'], ['#download', 'Download'], [`${B}/`, 'Full version (Uzbek)']],
+    ru: [['#about', 'О работе'], ['#features', 'Возможности'], ['#download', 'Скачать'], [`${B}/`, 'Полная версия (узб.)']],
   }[lang];
   const navHtml = nav
     ? navLabels.map(([href, label]) => `<a href="${href.startsWith('#') && url !== LANGS[lang] ? LANGS[lang] + href : href}"${href === url ? ' aria-current="page"' : ''}>${label}</a>`).join('')
@@ -198,7 +203,7 @@ function page({ lang, url, title, description, body, jsonld, nav = true, alterna
     .map(([l, u]) => `<a href="${u}" hreflang="${l}"${l === lang && url === u ? ' aria-current="true"' : ''}>${l.toUpperCase()}</a>`)
     .join('');
   const alt = alternates
-    ? Object.entries(LANGS).map(([l, u]) => `<link rel="alternate" hreflang="${HREFLANG[l]}" href="${SITE}${u}">`).join('\n') +
+    ? Object.entries(LANGS).map(([l, u]) => `<link rel="alternate" hreflang="${HREFLANG[l]}" href="${ORIGIN}${u}">`).join('\n') +
       `\n<link rel="alternate" hreflang="x-default" href="${SITE}/">`
     : '';
   const ogLocale = { uz: 'uz_UZ', en: 'en_US', ru: 'ru_RU' }[lang];
@@ -206,6 +211,7 @@ function page({ lang, url, title, description, body, jsonld, nav = true, alterna
 <html lang="${lang}">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
@@ -227,7 +233,7 @@ ${alt}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="${B}/style.css">
 <link rel="alternate" type="text/plain" title="LLM summary" href="/llms.txt">
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ''}
 </head>
@@ -243,7 +249,7 @@ ${body}
 </main>
 <footer><div class="wrap">
 <span>© ${F.year} ${esc(F.author)}. ${{ uz: 'Bitiruv malakaviy ishi', en: 'Graduation thesis', ru: 'Выпускная квалификационная работа' }[lang]}, ${{ uz: 'TATU', en: 'TUIT', ru: 'ТУИТ' }[lang]}.</span>
-<span><a href="${APP}">qales.uz</a> · <a href="/yoriqnoma/">${{ uz: 'Yo‘riqnoma', en: 'Guide (Uzbek)', ru: 'Руководство (узб.)' }[lang]}</a> · <a href="/llms.txt">llms.txt</a> · <a href="${GITHUB}">GitHub</a> · ${{ uz: 'Yangilangan', en: 'Updated', ru: 'Обновлено' }[lang]}: ${UPDATED}</span>
+<span><a href="${APP}">qales.uz</a> · <a href="${B}/yoriqnoma/">${{ uz: 'Yo‘riqnoma', en: 'Guide (Uzbek)', ru: 'Руководство (узб.)' }[lang]}</a> · <a href="/llms.txt">llms.txt</a> · <a href="${GITHUB}">GitHub</a> · ${{ uz: 'Yangilangan', en: 'Updated', ru: 'Обновлено' }[lang]}: ${UPDATED}</span>
 </div></footer>
 </body>
 </html>
@@ -309,7 +315,7 @@ function downloads(lang) {
     en: [['Full thesis (in Uzbek)', `PDF, ${F.pages} pages, ${mb(pdf)}`], ['Defence slides (in Uzbek)', `PowerPoint, ${mb(pptx)}`], ['Live application', 'qales.uz — opens in the browser'], ['How the thesis was prepared', 'Guide for students (in Uzbek)']],
     ru: [['Полный текст работы (на узб.)', `PDF, ${F.pages} стр., ${mb(pdf)}`], ['Презентация защиты (на узб.)', `PowerPoint, ${mb(pptx)}`], ['Работающее приложение', 'qales.uz — открывается в браузере'], ['Как готовился диплом', 'Руководство для студентов (на узб.)']],
   }[lang];
-  const hrefs = [`/${FILES.pdf.out}`, `/${FILES.pptx.out}`, APP, '/yoriqnoma/'];
+  const hrefs = [`${B}/${FILES.pdf.out}`, `${B}/${FILES.pptx.out}`, APP, `${B}/yoriqnoma/`];
   return `<div class="downloads">${t.map(([b, s], i) => `<a class="dl" href="${hrefs[i]}"${i < 2 ? ' download' : ''}><b>${b}</b><span>${s}</span></a>`).join('')}</div>`;
 }
 
@@ -326,9 +332,9 @@ function uzPage() {
 <p class="lead">Foydalanuvchi ma’lumotlarini O‘zbekistondagi serverda saqlaydigan, xabarlarni real vaqtda yetkazadigan “Milliy” veb-messenjeri: loyihalash, ishlab chiqish, testlash va joylashtirish.</p>
 <div class="score" role="status">🏆 Himoya natijasi: ${F.score} ball</div>
 <div class="btns">
-<a class="btn primary" href="/${FILES.pdf.out}" download>Diplomni yuklab olish (PDF)</a>
+<a class="btn primary" href="${B}/${FILES.pdf.out}" download>Diplomni yuklab olish (PDF)</a>
 <a class="btn ghost" href="${APP}">Dasturni ochish — qales.uz</a>
-<a class="btn ghost" href="/yoriqnoma/">Diplom qanday tayyorlandi</a>
+<a class="btn ghost" href="${B}/yoriqnoma/">Diplom qanday tayyorlandi</a>
 </div>
 <dl class="meta">
 <div><dt>Muallif</dt><dd>${esc(F.author)}</dd></div>
@@ -433,7 +439,7 @@ ${downloads('uz')}
 `;
   return page({
     lang: 'uz',
-    url: '/',
+    url: `${B}/`,
     title: `“Milliy” xabarchi — diplom ishi | ${F.authorShort}, TATU ${F.year}`,
     description: `Bitiruv malakaviy ishi: “Milliy” real vaqtli veb-messenjeri (.NET, Angular, SignalR). Ma’lumotlar O‘zbekistonda saqlanadi; lotin–kirill o‘girish, tashkilot rejimi, maxfiy chatlar. ${F.pages} bet, ${F.tests} test. Himoya: ${F.score} ball.`,
     body,
@@ -501,7 +507,7 @@ function shortPage(lang) {
 <p class="lead">${esc(T.lead)}</p>
 <p class="muted" lang="uz">“${esc(F.topic)}”</p>
 <div class="score" role="status">🏆 ${T.score}</div>
-<div class="btns"><a class="btn primary" href="/${FILES.pdf.out}" download>${T.pdf}</a><a class="btn ghost" href="${APP}">${T.open}</a></div>
+<div class="btns"><a class="btn primary" href="${B}/${FILES.pdf.out}" download>${T.pdf}</a><a class="btn ghost" href="${APP}">${T.open}</a></div>
 <dl class="meta">${T.meta.map(([d, v]) => `<div><dt>${d}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
 </div></section>
 <section id="about"><div class="wrap">
@@ -533,7 +539,7 @@ function guidePage() {
   md = md.replace(/```mermaid[\s\S]*?```\n?/, '');
   // Files the site serves itself; documents written or signed by other people (review, supervisor's
   // conclusion, the deposited material with co-authors) are named but not linked.
-  const LOCAL = { [`diplom/${FILES.pdf.src}`]: `/${FILES.pdf.out}`, [`diplom/${FILES.pptx.src}`]: `/${FILES.pptx.out}` };
+  const LOCAL = { [`diplom/${FILES.pdf.src}`]: `${B}/${FILES.pdf.out}`, [`diplom/${FILES.pptx.src}`]: `${B}/${FILES.pptx.out}` };
   const UNLINKED = /^diplom\/(Taqriz|Rahbar_xulosasi|Deponentlangan_material)/;
   const html = marked.parse(md, { gfm: true })
     .replace(/<a href="(?!https?:|#|mailto:)([^"]+)">([\s\S]*?)<\/a>/g, (m, href, text) => {
@@ -544,7 +550,7 @@ function guidePage() {
     });
   return page({
     lang: 'uz',
-    url: '/yoriqnoma/',
+    url: `${B}/yoriqnoma/`,
     title: 'Diplom ishi qanday tayyorlanadi va topshiriladi — bosqichma-bosqich yo‘riqnoma',
     description: 'Talabalar uchun amaliy yo‘riqnoma: mavzu tanlashdan himoyagacha 12 bosqich, rahbar izohlari, taqriz, antiplagiat, deponentlash, taqdimot va himoya kuni ro‘yxati. “Milliy” diplom loyihasi tajribasi asosida.',
     body: `<article class="prose">${html}</article>`,
@@ -558,17 +564,6 @@ function guidePage() {
       step: [...md.matchAll(/^### (\d+)\. (.+)$/gm)].map(([, n, name]) => ({ '@type': 'HowToStep', position: Number(n), name })),
     },
   });
-}
-
-function notFound() {
-  return page({
-    lang: 'uz',
-    url: '/404',
-    title: 'Sahifa topilmadi — “Milliy” diplom loyihasi',
-    description: 'Sahifa topilmadi.',
-    alternates: false,
-    body: `<section class="hero"><div class="wrap"><h1>Sahifa topilmadi</h1><p class="lead">Bunday sahifa yo‘q. <a href="/">Bosh sahifaga</a> qayting.</p></div></section>`,
-  }).replace('content="index, follow, max-image-preview:large"', 'content="noindex"');
 }
 
 // ───────────────────────────────────────── text files for AI assistants and crawlers
@@ -593,7 +588,7 @@ Hajm: ${F.pages} bet, ${F.figures} rasm, ${F.tables} jadval, ${F.refs} adabiyot,
 
 - [Diplom ishining to‘liq matni (PDF, o‘zbekcha)](${SITE}/${FILES.pdf.out})
 - [Himoya taqdimoti (PPTX)](${SITE}/${FILES.pptx.out})
-- [Diplomning to‘liq matni, oddiy matn ko‘rinishida](${SITE}/llms-full.txt)
+- [Diplomning to‘liq matni, oddiy matn ko‘rinishida](${ORIGIN}/llms-full.txt)
 
 ## Dastur
 
@@ -658,7 +653,7 @@ ${body.trim()}
 `;
 }
 
-const robots = `# diplom.qales.uz — hamma qidiruv tizimlari va AI yordamchilari uchun ochiq
+const robots = `# qales.uz — hamma qidiruv tizimlari va AI yordamchilari uchun ochiq
 User-agent: *
 Allow: /
 
@@ -692,21 +687,22 @@ Allow: /
 User-agent: YandexBot
 Allow: /
 
-Sitemap: ${SITE}/sitemap.xml
+Sitemap: ${ORIGIN}/sitemap.xml
 `;
 
 function sitemap() {
   const urls = [
-    ['/', '1.0', true],
-    ['/en/', '0.8', true],
-    ['/ru/', '0.8', true],
-    ['/yoriqnoma/', '0.9', false],
-    [`/${FILES.pdf.out}`, '0.7', false],
+    ['/', '0.6', false],
+    [`${B}/`, '1.0', true],
+    [`${B}/en/`, '0.8', true],
+    [`${B}/ru/`, '0.8', true],
+    [`${B}/yoriqnoma/`, '0.9', false],
+    [`${B}/${FILES.pdf.out}`, '0.7', false],
   ];
-  const alts = Object.entries(LANGS).map(([l, u]) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${SITE}${u}"/>`).join('\n');
+  const alts = Object.entries(LANGS).map(([l, u]) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${ORIGIN}${u}"/>`).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
-${urls.map(([u, p, alt]) => `  <url>\n    <loc>${SITE}${u}</loc>\n    <lastmod>${UPDATED}</lastmod>\n    <priority>${p}</priority>\n${alt ? alts + '\n' : ''}  </url>`).join('\n')}
+${urls.map(([u, p, alt]) => `  <url>\n    <loc>${ORIGIN}${u}</loc>\n    <lastmod>${UPDATED}</lastmod>\n    <priority>${p}</priority>\n${alt ? alts + '\n' : ''}  </url>`).join('\n')}
 </urlset>
 `;
 }
@@ -720,19 +716,18 @@ write('index.html', uzPage());
 write('en/index.html', shortPage('en'));
 write('ru/index.html', shortPage('ru'));
 write('yoriqnoma/index.html', guidePage());
-write('404.html', notFound());
-write('llms.txt', llmsTxt());
-write('llms-full.txt', llmsFullTxt());
-write('robots.txt', robots);
-write('sitemap.xml', sitemap());
+
+// Site-wide files live at the root of qales.uz. The favicons are the app's own (public/favicon.*).
+const writeRoot = (name, content) => fs.writeFileSync(path.join(PUBLIC, name), content);
+writeRoot('llms.txt', llmsTxt());
+writeRoot('llms-full.txt', llmsFullTxt());
+writeRoot('robots.txt', robots);
+writeRoot('sitemap.xml', sitemap());
 
 copy(path.join(ROOT, 'site-assets', 'style.css'), 'style.css');
 copy(path.join(ROOT, 'site-assets', 'og.png'), 'img/og.png');
-for (const f of ['favicon.svg', 'favicon.ico', 'apple-touch-icon.png']) {
-  copy(path.join(ROOT, 'site-assets', f), f);
-}
 for (const name of usedImages) copy(path.join(ROOT, 'rasmlar', name), `img/${name}`);
 for (const { src, out } of Object.values(FILES)) copy(path.join(DIPLOM, src), out);
 
 const count = (dir) => fs.readdirSync(dir, { recursive: true }).filter((f) => fs.statSync(path.join(dir, f)).isFile()).length;
-console.log(`Sayt tayyor: ${path.relative(process.cwd(), OUT) || OUT} (${count(OUT)} ta fayl)`);
+console.log(`Diplom sahifalari tayyor: ${path.relative(REPO, OUT)} (${count(OUT)} ta fayl) + robots.txt, sitemap.xml, llms.txt, llms-full.txt`);

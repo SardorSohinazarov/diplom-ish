@@ -1,4 +1,4 @@
-// Renders site-assets/og.png (1200×630), the preview picture shown when diplom.qales.uz is shared.
+// Renders site-assets/og.png (1200×630), the preview picture shown when qales.uz/diplom is shared.
 // Usage: node tools/og-image.mjs
 import fs from 'node:fs';
 import path from 'node:path';
@@ -25,7 +25,7 @@ p { font-size: 25px; line-height: 1.4; color: #e0e7ff; margin: 0; }
 <p>Ma’lumotlarni O‘zbekistonda saqlaydigan real vaqtli veb-messenjer</p>
 <div class="score">🏆 Himoya: 92 ball</div>
 </div>
-<div class="foot">Sardor Sohinazarov · diplom.qales.uz</div>
+<div class="foot">Sardor Sohinazarov · qales.uz/diplom</div>
 <img class="shot" src="data:image/jpeg;base64,${shot}">
 </body></html>`;
 

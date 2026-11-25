@@ -4,7 +4,7 @@
 >
 > **Muallif:** Sohinazarov Sardor · **Universitet:** TATU, “Dasturiy injiniring” fakulteti, “Tizimli va amaliy dasturlashtirish” kafedrasi
 >
-> **Ishlab turgan dastur:** [qales.uz](https://qales.uz) · **Diplom sayti:** [diplom.qales.uz](https://diplom.qales.uz)
+> **Ishlab turgan dastur:** [qales.uz](https://qales.uz) · **Diplom sahifasi:** [qales.uz/diplom](https://qales.uz/diplom/)
 >
 > 🏆 **Diplom muvaffaqiyatli himoya qilindi — 92 ball.**
 
@@ -182,7 +182,7 @@ cd diplom-ish/diplom/generator; npm ci
 | Deponentlangan material | `node deponent.mjs` |
 | To'liq taqdimot | `node slides.mjs` |
 | Himoya taqdimoti | `node slides-himoya.mjs` |
-| Diplom sayti (diplom.qales.uz) | `node site.mjs` → `diplom/sayt/` |
+| Diplom sahifalari (qales.uz/diplom) | `node site.mjs` → `NationalChatClient/public/diplom/` |
 | Taqdimotni PDF ga | `powershell -File tools/export-slides.ps1 ../Taqdimot_Sohinazarov_Sardor.pptx <png-papka> ../Taqdimot_Sohinazarov_Sardor.pdf` |
 | Betlarni ko'z bilan tekshirish | `node tools/pdf-pages.mjs ...` → `node tools/contact-sheet.mjs ...` |
 
@@ -249,16 +249,16 @@ Rahbar 14 ta izoh berdi ([REJA-rahbar-izohlari.md](REJA-rahbar-izohlari.md)). Ko
 
 ---
 
-## 🌐 Diplom sayti: diplom.qales.uz
+## 🌐 Diplom sahifasi: qales.uz/diplom
 
-Himoyadan keyin diplom haqidagi ma'lumot internetda topilishi uchun alohida sayt qilindi. Uni Google'dan qidirgan odam ham, ChatGPT yoki Claude kabi AI yordamchilar ham o'qiy oladi.
+Himoyadan keyin diplom haqidagi ma'lumot internetda topilishi uchun dasturning o'zida, [qales.uz/diplom](https://qales.uz/diplom/) manzilida alohida sahifalar qilindi. Kirish sahifasida “Diplom ishi haqida” tugmasi bor, u hisobi yo'q odamga ham ko'rinadi. Sahifalarni Google'dan qidirgan odam ham, ChatGPT yoki Claude kabi AI yordamchilar ham o'qiy oladi.
 
 - Asosiy sahifa o'zbekcha. Unda annotatsiya (3 tilda), maqsad va vazifalar, imkoniyatlar, arxitektura, mundarija, natijalar va savol-javob bor. Inglizcha (`/en/`) va ruscha (`/ru/`) qisqa variantlari ham bor.
-- Bu yo'riqnoma ham saytda turadi: `/yoriqnoma/`.
-- Diplom PDF va himoya taqdimotini saytdan yuklab olish mumkin. Taqriz va rahbar xulosasi saytga qo'yilmagan.
+- Bu yo'riqnoma ham shu yerda turadi: `/diplom/yoriqnoma/`.
+- Diplom PDF va himoya taqdimotini yuklab olish mumkin. Taqriz va rahbar xulosasi saytga qo'yilmagan.
 - Qidiruv tizimlari uchun JSON-LD (Thesis, SoftwareApplication, FAQPage), `sitemap.xml` va `robots.txt` bor.
-- AI yordamchilar uchun `llms.txt` (qisqa mazmun) va `llms-full.txt` (diplomning to'liq matni) bor.
-- Sayt `diplom/generator/site.mjs` bilan yaratiladi. `master`ga push qilinganda GitHub Actions uni yig'adi, Docker image qilib VPS'ga joylaydi ([deploy-site.yml](.github/workflows/deploy-site.yml)).
+- AI yordamchilar uchun qales.uz ildizida `llms.txt` (qisqa mazmun) va `llms-full.txt` (diplomning to'liq matni) bor.
+- Sahifalar `diplom/generator/site.mjs` bilan yaratiladi va veb-klientning `public/` papkasiga yoziladi. Klient repo'sining `main` branch'iga push qilinganda ular qales.uz bilan birga deploy bo'ladi.
 
 > 💡 Talabalarga: diplomingiz uchun bitta oddiy sahifa qilib qo'ying, unda annotatsiya, PDF va ishlab turgan dastur havolasi bo'lsin. Ish beruvchi yoki magistratura komissiyasi sizni qidirganda, birinchi bo'lib shu sahifa chiqadi.
 
@@ -269,7 +269,6 @@ Himoyadan keyin diplom haqidagi ma'lumot internetda topilishi uchun alohida sayt
 ```text
 diplom-ish/
 ├── README.md                  ← shu fayl
-├── deploy/                    ← diplom.qales.uz uchun Docker va Caddy fayllari
 ├── NationalChat/              ← server kodi (submodule)
 ├── NationalChatClient/        ← veb-klient kodi (submodule)
 ├── diplom/                    ← tayyor hujjatlar (docx, pdf, pptx)
@@ -279,7 +278,7 @@ diplom-ish/
 │       ├── slides*.mjs        ← taqdimotlar
 │       ├── hujjatlar.mjs      ← rahbar xulosasi
 │       ├── deponent.mjs       ← deponentlangan material
-│       ├── site.mjs           ← diplom.qales.uz sayti
+│       ├── site.mjs           ← qales.uz/diplom sahifalari
 │       ├── content/           ← boblar matni
 │       ├── diagrams/          ← Mermaid/SVG diagrammalar
 │       ├── rasmlar/           ← tayyor rasmlar
